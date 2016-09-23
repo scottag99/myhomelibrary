@@ -29,6 +29,12 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'omniauth', '~> 1.3.1'
+gem 'omniauth-auth0', '~> 1.4.1'
+# https://github.com/auth0/ruby-auth0 For API access
+gem 'auth0'
+gem 'bootstrap-sass', '~> 3.3.6'
+
 group :development, :test do
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,0 +1,5 @@
+<tr>
+  <td><%= user['name'] %></td>
+  <td><%= user['email'] %></td>
+  <td><input type=checkbox disabled <%= user['app_metadata']['role'] == 'admin' ? 'checked' : '' %> /></td>
+</tr>

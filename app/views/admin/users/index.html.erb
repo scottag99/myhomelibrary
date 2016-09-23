@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h3 class="panel-title">User Management</h3></div>
+  <div class="panel-body">
+    <p>Users are maintained by Auth0. This page is read-only for MVP.</p>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Is Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+  <%= render :partial => 'user', :collection => @users %>
+    </tbody>
+  </table>
+</div>
