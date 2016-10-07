@@ -27,17 +27,8 @@ The first time you deploy with Vagrant, an OS image is downloaded and provisione
 
 1. Open terminal in same directory of this repo
 1. Execute `vagrant up`. This will download the pre-configured linux VM for VirtualBox and run some initialization scripts.
-1. Some users have seen the following error after running `vagrant up`:
-```
-==> default: Installing nokogiri 1.6.8 with native extensions
-==> default: /tmp/vagrant-shell: line 2: 13699 Killed                  bash -i -c bundler install
-==> default: bash: cannot set terminal process group (13694): Inappropriate ioctl for device
-==> default: bash: no job control in this shell
-==> default: rake aborted!
-```
-Execute `vagrant reload` and the initialization will complete.
 1. In a browser, navigate to http://127.0.0.1:3000/ and the Dream Library splash page should render.
-1. To execute new migrations, gems, or restart the server, run `vagrant reload`.
+1. You are now ready to code. To execute new migrations, gems, or restart the server, run `vagrant reload`.
 
 ##### Helpful commands:
 

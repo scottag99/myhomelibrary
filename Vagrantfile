@@ -31,9 +31,9 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "lazygray/heroku-cedar-14"
 
-  #app.vm.provider "virtualbox" do |vb|
-  #  vb.customize ["modifyvm", :id, "--memory", "4096"]
-  #end
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = 1024
+  end
 
   config.vm.provision :shell, run: "once", privileged: false, inline: $init
   config.vm.provision :shell, run: "always", privileged: false, inline: $deploy
