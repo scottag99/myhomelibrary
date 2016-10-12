@@ -1,11 +1,11 @@
-# Dream Library
+# My Home Library
 Connecting aspiring readers with donors to build a home library of books.
 
 ## Development Environment setup
 
-Dream Library is a Ruby on Rails application deployed to a Heroku pipeline. Rails 5, Ruby 2.3.0, and Postgres 9.4(?) are the current framework versions.
+My Home Library is a Ruby on Rails application deployed to a Heroku pipeline. Rails 5, Ruby 2.3.0, and Postgres 9.4(?) are the current framework versions.
 
-### How to use vagrant to deploy Dream Library for development
+### How to use vagrant to deploy My Home Library for development
 
 First you need to have vagrant installed locally:
 
@@ -17,7 +17,7 @@ Currently, only VirtualBox is configured for deployment. Vagrant can deploy to V
 
 ##### Application
 
-The current Vagrantfile for the Dream Library app will setup an ubuntu VM that is similar to the Heroku stack that the application will run on
+The current Vagrantfile for the My Home Library app will setup an ubuntu VM that is similar to the Heroku stack that the application will run on
 
 Vagrant will also setup port forwards for 3000 to local 3000 for access to remote app server
 
@@ -27,7 +27,7 @@ The first time you deploy with Vagrant, an OS image is downloaded and provisione
 
 1. Open terminal in same directory of this repo
 1. Execute `vagrant up`. This will download the pre-configured linux VM for VirtualBox and run some initialization scripts.
-1. In a browser, navigate to http://127.0.0.1:3000/ and the Dream Library splash page should render.
+1. In a browser, navigate to http://127.0.0.1:3000/ and the My Home Library splash page should render.
 1. You are now ready to code. To execute new migrations, gems, or restart the server, run `vagrant reload`.
 
 ##### Helpful commands:

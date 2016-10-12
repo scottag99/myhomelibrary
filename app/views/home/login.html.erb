@@ -3,7 +3,7 @@
 </div>
 <script src="https://cdn.auth0.com/js/lock/10.2/lock.min.js"></script>
 <script type="text/javascript">
-  var lock = new Auth0Lock('<%= Rails.application.secrets.auth0_client_id %>', 'dreamlibrary.auth0.com', {
+  var lock = new Auth0Lock('<%= Rails.application.secrets.auth0_client_id %>', 'myhomelibrary.auth0.com', {
     container: 'root',
     auth: {
       redirectUrl: window.location.protocol + '//' + window.location.host + '/auth/auth0/callback',
