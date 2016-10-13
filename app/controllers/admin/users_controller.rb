@@ -10,7 +10,7 @@ class Admin::UsersController < Admin::BaseController
     return Auth0Client.new(
       :client_id => Rails.application.secrets.auth0_client_id,
       :token => Rails.application.secrets.auth0_api_token,
-      :domain => "myhomelibrary.auth0.com",
+      :domain => "dreamlibrary.auth0.com",
       :protocols => 'v2',
       :api_version => 2
     )
