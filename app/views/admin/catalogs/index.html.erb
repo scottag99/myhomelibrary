@@ -1,0 +1,20 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h3 class="panel-title">Catalog Management</h3></div>
+  <div class="panel-body">
+    <p>The following catalogs are loaded into the system. Only books from <strong>active</strong> catalogs are displayed in search results.</p>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Active?</th>
+        <th>Source</th>
+        <th>Book Count</th>
+      </tr>
+    </thead>
+    <tbody>
+  <%= render :partial => 'catalog', :collection => @catalogs %>
+    </tbody>
+  </table>
+</div>

@@ -57,3 +57,33 @@ Authentication is handled by Auth0. Metadata on the Auth0 record marks users as 
 ## Running Rails Commands
 
 You can SSH to the Vagrant box if you don't have Rails setup on your local machine and run rails commands from the `/vagrant` directory.
+
+### Generating a model
+
+Specify the the model name and a list of attributes. By default, a string attribute is created but different types can be set by appending `:type_name` to the attribute name. The primary key `id` is automatically created and does not need to be specified.
+
+`rails g model Wishlist reader_name reader_age:integer reader_gender campaign:references`
+
+Here is a list of types:
+
+* integer
+* primary_key
+* decimal
+* float
+* boolean
+* binary
+* string
+* text
+* date
+* time
+* datetime
+* timestamp
+* references (for foreign key references)
+
+### Generating a controller
+
+To quickly add a controller file and folder structure to hold views run:
+
+`rails g controller Wishlists`
+
+The controller that is created will not have any actions defined so it is up to you to add those. Also, the `routes.rb` file should be updated so that requests will map to the controller correctly.

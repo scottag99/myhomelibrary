@@ -1,0 +1,6 @@
+<tr>
+  <td><%= catalog.name %></td>
+  <td><input type=checkbox disabled <%= catalog.active? ? 'checked' : '' %> /></td>
+  <td><%= catalog.source %></td>
+  <td><%= catalog.catalog_entries.count %></td>
+</tr>
