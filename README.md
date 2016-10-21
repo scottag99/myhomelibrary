@@ -54,17 +54,6 @@ The first time you deploy with Vagrant, an OS image is downloaded and provisione
 
 Authentication is handled by Auth0. Metadata on the Auth0 record marks users as Admin or Partner. Before filters on the different area controllers handle verifying access to these areas.
 
-### Payment Form
-
-The donations will be processed by Kimbia. An embeddable form has been created by them to use in the My Home Library application. Four global javascript variables should be set to populate the form. They are:
-
-|Field|Purpose|JS Variable Example
-|---|---|---
-|Semester|Campaign Name|`var Semester = "Fall 2016";`
-|School|Organization Name|`var SchoolName = "Browning Elementary";`
-|Wishlist ID|ID of wish list selected by donor|`var WishlistID = "34";`
-|Donation|Amount of wish list. Donor can change|`var DonationLevel = 100.00;`
-
 ## Running Rails Commands
 
 You can SSH to the Vagrant box if you don't have Rails setup on your local machine and run rails commands from the `/vagrant` directory.

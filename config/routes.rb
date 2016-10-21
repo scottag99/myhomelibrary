@@ -12,4 +12,8 @@ Rails.application.routes.draw do
     root 'home#index'
     resources :users
   end
+
+  namespace :partner do
+    root 'home#index'
+  end
 end
