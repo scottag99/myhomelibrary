@@ -17,4 +17,8 @@ class HomeController < ApplicationController
   def library
     
   end
+
+  def search
+
+  end
 end
