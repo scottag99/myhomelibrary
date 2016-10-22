@@ -18,7 +18,10 @@
 body {
   color: #5a5a5a;
   padding-top: 50px;
-  padding-bottom: 40px;
+}
+nav.main {
+  background: #fff;
+  box-shadow: 0 1px 5px 1px rgba(0,0,0,.2);
 }
 .starter-template {
   padding: 40px 15px;
@@ -34,20 +37,53 @@ body {
 ------------------------- */
 
 .featurette {
-  margin-top: 80px;
-}
-
-.featurette-divider {
-  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+  padding: 80px 0;
+  border-top: 1px solid #eee;
 }
 
 /* Thin out the marketing headings */
 .featurette-heading {
+  margin-left: -1px;
   font-weight: 300;
   line-height: 1;
   letter-spacing: -1px;
 }
+.featurette .btn {
+  box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
+}
 
+.home {
+  margin: 0 -15px;
+}
+
+.home .title {
+  text-align: center;
+}
+.hero-top {
+  background-image: url(/assets/hero-top.png);
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+}
+.hero1 {
+  background-image: url(/assets/hero1.png);
+  background-repeat: no-repeat;
+}
+.hero2 {
+  background-image: url(/assets/hero2.png);
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+}
+.hero-bottom {
+  background-image: url(/assets/hero-bottom.png);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: cover;
+  padding: 120px 0;
+}
+.logo {
+  margin-top: -20px;
+  margin-left: -22px;
+}
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */
@@ -88,3 +124,20 @@ body {
   flex: 1;
   padding-bottom: 100px;
 }
+.table.list-campaigns .campaign-info > tr{
+  padding:30px;
+}
+.table.list-campaigns .campaign-info .edit-wishlist, .table.list-wishlist .list-wishlist-info .edit-wishlist, .table.list-wishlist .list-wishlist-info .delete-wishlist{
+  background:white;
+  border-color:black;
+  padding-top:3px;
+  padding-bottom:3px;
+}
+.wishlist-header .list-wishlist {
+  display:inline-block;
+}
+.wishlist-header .add-wishlist {
+  float:right;
+  margin-top:20px;
+}
+
