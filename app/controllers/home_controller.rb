@@ -13,4 +13,8 @@ class HomeController < ApplicationController
     reset_session
     redirect_to "/"
   end
+
+  def library
+    
+  end
 end
