@@ -15,35 +15,37 @@
 		<td>10222016</td>
 		<td>10222016</td>
 		<td>10222016</td>   
-		<td><a type="button" class="btn btn-secondary edit-wishlist" href="partner/home/wishlist">Wishlist</a></td>
+		<td><%= link_to "Wishlist", "home/wishlist?name=ABCDE" , :class =>'btn btn-secondary edit-wishlist'%></td>
+		
+		<!-- <td><a type="button" name="ABCDDE" class="btn btn-secondary edit-wishlist" href="partner/home/wishlist">Wishlist</a></td> -->
 	 </tr>
 	 <tr class="table row campaign-info">
 	 	<td>ABCDE</td>
 		<td>10222016</td>
 		<td>10222016</td>
 		<td>10222016</td>   
-		<td><a type="button" class="btn btn-secondary edit-wishlist" href="partner/home/wishlist">Wishlist</a></td>
+		<td><%= link_to "Wishlist", "home/wishlist?name=ABCDE" , :class =>'btn btn-secondary edit-wishlist'%></td>
 	 </tr>
 	 <tr class="table row campaign-info">
 	 	<td>ABCDE</td>
 		<td>10222016</td>
 		<td>10222016</td>
 		<td>10222016</td>   
-		<td><a type="button" class="btn btn-secondary edit-wishlist" href="partner/home/wishlist">Wishlist</a></td>
+		<td><%= link_to "Wishlist", "home/wishlist?name=ABCDE" , :class =>'btn btn-secondary edit-wishlist'%></td>
 	 </tr>
 	 <tr class="table row campaign-info">
 	 	<td>ABCDE</td>
 		<td>10222016</td>
 		<td>10222016</td>
 		<td>10222016</td>   
-		<td><a type="button" class="btn btn-secondary edit-wishlist" href="partner/home/wishlist">Wishlist</a></td>
+		<td><%= link_to "Wishlist", "home/wishlist?name=ABCDE" , :class =>'btn btn-secondary edit-wishlist'%></td>
 	 </tr>
 	 <tr class="table row campaign-info">
 	 	<td>ABCDE</td>
 		<td>10222016</td>
 		<td>10222016</td>
 		<td>10222016</td>   
-		<td><a type="button" class="btn btn-secondary edit-wishlist" href="partner/home/wishlist">Wishlist</a></td>
+		<td><%= link_to "Wishlist", "home/wishlist?name=ABCDE" , :class =>'btn btn-secondary edit-wishlist'%></td>
 	 </tr>
 	<% @campaign.each do |c| %>
 	  <tr class="table row campaign-info">
@@ -51,7 +53,8 @@
 		<td><%= c.deadline %></td>
 		<td><%= c.created_at %></td>
 		<td><%= c.updated_at %></td>   
-		<td><a href="partner/home/wishlist" type="button" class="btn btn-secondary edit-wishlist" data-id=<%= c.id %>>Wishlist</a></td>
+		<td><%= link_to "Wishlist", "home/wishlist?name=<%=c.name %>" , :class =>'btn btn-secondary edit-wishlist'%></td>
+		<!-- <td><a href="partner/home/wishlist" type="button" class="btn btn-secondary edit-wishlist" data-id=<%= c.id %>>Wishlist</a></td> -->
 	  </tr>
 	<% end %>
 	</table>
