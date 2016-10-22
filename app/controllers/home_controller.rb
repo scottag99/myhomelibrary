@@ -26,4 +26,8 @@ class HomeController < ApplicationController
     @Semester = params[:Semester]
 
   end
+
+  def search
+
+  end
 end

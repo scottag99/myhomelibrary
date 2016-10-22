@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'home/library'
   get 'home/donate'
+  get 'home/search'
   get 'home/partner'
 
   get  'login', to: 'home#login'

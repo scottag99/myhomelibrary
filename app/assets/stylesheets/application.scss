@@ -145,3 +145,11 @@ nav.main {
   margin-top:20px;
 }
 
+.profile {
+  width: 250px;
+  height: 250px;
+  float: left;
+  margin: 1em;
+  @extend .panel, .panel-default;
+  padding: 0.5em 2em;
+}
