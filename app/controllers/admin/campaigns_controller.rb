@@ -5,7 +5,7 @@ class Admin::CampaignsController < Admin::BaseController
   def update
     @campaign = @organization.campaigns.find(params[:id])
     @campaign.update!(campaign_params)
-    @campaigns = current_organization.campaigns
+    @campaigns = @organization.campaigns
     flash[:success] = "Thank you! Your Campaign is update successfully."
     respond_to do |format|
       format.html { render "index" }
