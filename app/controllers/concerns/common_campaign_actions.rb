@@ -11,6 +11,16 @@ module CommonCampaignActions
 
   def show
     @campaign = @organization.campaigns.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @campaign }
+    end
+  end
+
+  def edit
+    @campaign = @organization.campaigns.find(params[:id])
+
     respond_to do |format|
       format.html
       format.json { render json: @campaign }
