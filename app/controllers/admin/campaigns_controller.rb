@@ -5,7 +5,7 @@ class Admin::CampaignsController < Admin::BaseController
     @campaign = current_organization.campaigns.find(params[:id])
     @campaign.update!(campaign_params)
     respond_to do |format|
-      format.html { render "show" }
+      format.html { render "index" }
       format.json { render json: @campaign }
     end
   end
@@ -21,7 +21,7 @@ class Admin::CampaignsController < Admin::BaseController
   def create
     @campaign = current_organization.campaigns.create!(campaign_params)
     respond_to do |format|
-      format.html { render "show" }
+      format.html { render "index" }
       format.json { render json: @campaign }
     end
   end
