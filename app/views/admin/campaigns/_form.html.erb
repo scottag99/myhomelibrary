@@ -3,14 +3,20 @@
     <div class="form-group">
         <div class="col-md-6">
             <%= f.label :name %><br>
-            <%= f.text_field :name, :class => 'form-control'%>
+            <%= f.text_field :name, :class => 'form-control', :required => true %>
         </div>
     </div>
     
     <div class="form-group">
         <div class="col-md-6">
             <%= f.label :deadline %><br>
-            <%= f.text_field :deadline, :class => 'form-control' %>
+			<div class='input-group date' id='datetimepicker1'>
+			                    <%= f.text_field :deadline, :class => 'form-control', :required => true %>
+			                    <span class="input-group-addon">
+			                        <span class="glyphicon glyphicon-calendar"></span>
+			                    </span>
+			                </div>
+            
         </div>
     </div>
     
@@ -21,5 +27,17 @@
         </div>
     </div>
   </div>
+  <% content_for :foot do %>
+  <script type="text/javascript">
+              $(function () {
+				  var value = $('div.date .form-control').val();
+                  $('#datetimepicker1').datetimepicker();
+				  if ($('div.date .form-control').val() == '' && value != '')
+				  {
+				  	$('div.date .form-control').val(value);
+			  	  }
+              });
+  </script>
+  <% end %>
 <% end %>
 
