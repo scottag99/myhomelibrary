@@ -19,6 +19,9 @@ body {
   color: #5a5a5a;
   padding-top: 50px;
 }
+nav.main {
+  background: #fff;
+}
 .starter-template {
   padding: 40px 15px;
   text-align: center;
@@ -51,6 +54,9 @@ body {
   margin: 0 -15px;
 }
 
+.home .title {
+  text-align: center;
+}
 .hero1 {
   background-image: url(/assets/hero1.png);
   background-repeat: no-repeat;
