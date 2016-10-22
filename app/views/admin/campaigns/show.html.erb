@@ -1,27 +1,37 @@
-<table>
-	<tr>
-		<td>
-			<p>
-				<strong>Name:</strong>
-				<%= @campaign.name %>	
-			</p>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<p>
-				<strong>Deadline:</strong>
-				<%= @campaign.deadline%>
-			</p>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<p>
-				<%= link_to 'View Wishlists', admin_organization_campaign_wishlists_url(@campaign.organization, @campaign)%>
-			</p>
-		</td>
-	</tr>
-</table>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h3 class="panel-title">Campaign:  <%= @campaign.name %></h3></div>
+  <div class="panel-body">
+  <p>Campaign:  <%= @campaign.name %> details.</p>
+  </div>
+  <div style="margin-left: 15px; margin-bottom: 15px;">
+  	<table>
+		<tr>
+			<td>
+				<p>
+					<strong>Name:</strong>
+					<%= @campaign.name %>	
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					<strong>Deadline:</strong>
+					<%= @campaign.deadline%>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					<%= link_to 'View Wishlists', admin_organization_campaign_wishlists_url(@campaign.organization, @campaign)%>
+				</p>
+			</td>
+		</tr>
+	</table>
 
-<%= link_to 'Back', admin_organization_campaigns_url(@campaign.organization)%>
+	<%= link_to 'Back', admin_organization_campaigns_url(@campaign.organization), :class => "btn btn-default"%>
+  </div>
+  
+</div>

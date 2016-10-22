@@ -35,6 +35,7 @@ class Admin::CampaignsController < Admin::BaseController
     @organization.campaigns.delete(params[:id])
     @campaigns = @organization.campaigns
     flash[:success] = "Thank you! Your Campaign is delete successfully."
+
     respond_to do |format|
       format.html { render "index" }
       format.json { render json: @organization.campaigns.all}

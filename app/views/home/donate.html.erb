@@ -1,0 +1,45 @@
+
+
+ <script>
+var Semester = "<%= @Semester %>"; //Campaign name
+var SchoolName = "<%= @schoolname %>"; //Organization name
+var WishlistID = "<%= @wishListID %>"; // org wishlist ID
+var DonationLevel_FEE = "<%= @donationlevel %>"; // org donationlevel
+
+
+
+
+
+
+
+function funcInit(SemesterParam, schoolNameParam, WishlistIDParam,DonationLevel_FEEParam)
+{
+
+  // init the variables to the parameters.
+  Semester = SemesterParam;
+  SchoolName = schoolNameParam;
+  WishlistID = WishlistIDParam;
+  DonationLevel_FEE = DonationLevel_FEEParam;
+}
+
+
+// backend varibles on form to ref.
+//<input type="text" name="SchoolNamew" class="k_text" id="School%20Name_2" value="">
+//<input name="DonationLevel_FEEw" id="DonationLevel_1|0$FEE" type="text" title="Donation" class="k_money" value="$0.00">
+//<input type="text" name="WishlistIDw" class="k_text" id="Wishlist%20ID_1" value="">
+//<input type="text" name="Semesterw" class="k_text" id="Semester_2" value="">
+
+</script>
+
+
+
+<!-- script to populate form tag -->
+<script src="https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrive">
+
+
+funcInit ("Fall 2016","Browning Elementary","34",100.00);
+// <input name="DonationLevel_FEE" id="DonationLevel_FEE"/>
+// <input name ="Semester" id = "Semester"/>
+// <input name = "WishlistID" id="WishlistID"/>
+// <input name = "SchoolName" id = "SchoolName"/>
+</script>

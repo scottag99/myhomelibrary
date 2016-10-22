@@ -1,4 +1,5 @@
 <%= form_for [:admin, @organization], :html => {:class => "form-horizontal"} do |f| %>
+<div style="margin-left:15px;">
 <%= f.label :name, class: "control-label" %><br>
 <div class="form-group">
   <div class="col-md-8">
@@ -22,5 +23,7 @@
 
 <p>
   <%= f.submit "Submit", class: "btn btn-default btn-primary" %>
+  <%= link_to 'Back', admin_organizations_url(), :class => "btn btn-default"%>
 </p>
+</div>
 <% end %>
