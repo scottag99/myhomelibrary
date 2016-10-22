@@ -2,6 +2,6 @@
   <td>
     <a href="/admin/organizations/<%= campaign.organization_id %>/campaigns/<%= campaign.id %>"><%= campaign['name'] %></a>   
   </td>
-  <td><%= campaign.name %></td>
   <td><%= campaign.deadline %></td>
+  <td><%= link_to "Destroy Campaign", admin_organization_campaign_url(campaign.organization, campaign), method: :delete, :class => "btn btn-alert btn-lg" %></td>
 </tr>
