@@ -1,0 +1,23 @@
+<h2 class="featurette-heading">Add a Catalog</h2>
+<%= form_for :catalog, url: admin_catalogs_path do |f| %>
+    <p>
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </p>
+
+    <p>
+      <%= f.label :source %><br>
+      <%= f.text_field :source %>
+    </p>
+    <p>
+      <%= f.file_field :upload %>
+    </p>
+    <p>
+      <%= f.label :active %>
+      <%= check_box :isActive, :activeCheck %>
+    </p>
+
+    <p>
+      <%= f.submit %>
+    </p>
+<% end %>

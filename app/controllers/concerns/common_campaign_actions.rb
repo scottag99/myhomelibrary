@@ -11,6 +11,7 @@ module CommonCampaignActions
 
   def show
     @campaign = @organization.campaigns.find(params[:id])
+
     respond_to do |format|
       format.html
       format.json { render json: @campaign }
@@ -18,7 +19,11 @@ module CommonCampaignActions
   end
 
   def edit
-    @campaign = current_organization.campaigns.find(params[:id])
+    @campaign = @organization.campaigns.find(params[:id])
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/opengive
     respond_to do |format|
       format.html
       format.json { render json: @campaign }

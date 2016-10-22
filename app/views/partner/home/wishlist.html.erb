@@ -1,0 +1,53 @@
+<div class="container-fluid">
+	<div class="wishlist-header">
+		<h3 class="list-wishlist">Wishlists for <%= @campaignName %></h3>
+		<%= link_to "Add Wishlist", "home/wishlist?name=ABCDE" , :class =>'btn btn-info add-wishlist'%>
+	</div>
+	<table class="table list-wishlist">
+		<tr class="table row list-wishlist">
+			<th>Reader Name</th>
+	    	<th>Reader Age</th>
+	    	<th>Reader Gender</th>
+	    	<th>Created at</th>
+	    	<th>Updated at</th>
+	    	<th></th>
+	    	<th></th>
+		</tr>
+		<tr class="table row list-wishlist-info">
+		 	<td>Jason</td>
+			<td>13</td>
+			<td>M</td>
+			<td>10222016</td>   
+			<td>10222016</td> 
+			<td><%= link_to "Edit", "home/wishlist?name=ABCDE" , :class =>'btn btn-secondary edit-wishlist'%></td>  
+			<td><%= link_to "Delete", "home/wishlist?name=ABCDE" , :class =>'btn btn-secondary delete-wishlist'%></td> 
+		</tr>
+		<tr class="table row list-wishlist-info">
+		 	<td>Jason</td>
+			<td>13</td>
+			<td>M</td>
+			<td>10222016</td>   
+			<td>10222016</td> 
+			<td><%= link_to "Edit", "home/wishlist?name=ABCDE" , :class =>'btn btn-secondary edit-wishlist'%></td>  
+			<td><%= link_to "Delete", "home/wishlist?name=ABCDE" , :class =>'btn btn-secondary delete-wishlist'%></td> 
+		</tr>
+		<tr class="table row list-wishlist-info">
+		 	<td>Jason</td>
+			<td>13</td>
+			<td>M</td>
+			<td>10222016</td>   
+			<td>10222016</td> 
+			<td><%= link_to "Edit", "home/wishlist?name=ABCDE" , :class =>'btn btn-secondary edit-wishlist'%></td>  
+			<td><%= link_to "Delete", "home/wishlist?name=ABCDE" , :class =>'btn btn-secondary delete-wishlist'%></td> 
+		</tr>
+		<tr class="table row list-wishlist-info">
+		 	<td>Jason</td>
+			<td>13</td>
+			<td>M</td>
+			<td>10222016</td>   
+			<td>10222016</td> 
+			<td><%= link_to "Edit", "home/wishlist?name=ABCDE" , :class =>'btn btn-secondary edit-wishlist'%></td>  
+			<td><%= link_to "Delete", "home/wishlist?name=ABCDE" , :class =>'btn btn-secondary delete-wishlist'%></td> 
+		</tr>
+	</table>
+</div>

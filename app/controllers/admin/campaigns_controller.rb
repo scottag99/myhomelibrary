@@ -5,7 +5,7 @@ class Admin::CampaignsController < Admin::BaseController
   def update
     @campaign = @organization.campaigns.find(params[:id])
     @campaign.update!(campaign_params)
-    @campaigns = current_organization.campaigns
+    @campaigns = @organization.campaigns
     flash[:success] = "Thank you! Your Campaign is update successfully."
     respond_to do |format|
       format.html { render "index" }
@@ -33,8 +33,9 @@ class Admin::CampaignsController < Admin::BaseController
 
   def destroy
     @organization.campaigns.delete(params[:id])
-    @campaigns = current_organization.campaigns
+    @campaigns = @organization.campaigns
     flash[:success] = "Thank you! Your Campaign is delete successfully."
+
     respond_to do |format|
       format.html { render "index" }
       format.json { render json: @organization.campaigns.all}

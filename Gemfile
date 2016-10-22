@@ -34,6 +34,7 @@ gem 'omniauth-auth0', '~> 1.4.1'
 # https://github.com/auth0/ruby-auth0 For API access
 gem 'auth0'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-datepicker-rails'
 
 group :development, :test do
   gem 'sqlite3'
