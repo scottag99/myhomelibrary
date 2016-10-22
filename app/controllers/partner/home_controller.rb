@@ -7,8 +7,4 @@ class Partner::HomeController < Partner::BaseController
     end
   end
 
-  def wishlist
-  	@campaignName = params[:name]
-  	
-  end
 end

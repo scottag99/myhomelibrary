@@ -1,0 +1,28 @@
+<div class="container-fluid">
+	<div class="wishlist-header">
+		<h3 class="list-wishlist">Wishlist</h3>
+		<%= link_to "Add Wishlist", new_partner_organization_campaign_wishlist_url(:partner, @campaign.organization, @campaign) , :class =>'btn btn-info add-wishlist'%>
+	</div>
+	<table class="table list-wishlist">
+		<tr class="table row list-wishlist">
+			<th>Reader Name</th>
+	    	<th>Reader Age</th>
+	    	<th>Reader Gender</th>
+	    	<th>Created at</th>
+	    	<th>Updated at</th>
+	    	<th></th>
+	    	<th></th>
+		</tr>
+		<% @wishlists.each do |w| %>
+		<tr class="table row list-wishlist-info">
+		 	<td>w.reader_name</td>
+			<td>w.reader_age</td>
+			<td>w.reader_gender</td>
+			<td>w.created_at</td>   
+			<td>w.updated_at</td> 
+			<td><%= link_to "Edit", edit_partner_organization_campaign_wishlist_url(:partner, w.campaign.organization, w.campaign, w) , :class =>'btn btn-secondary edit-wishlist'%></td>  
+			<td><%= link_to "Delete", partner_organization_campaign_wishlist_url(:partner, w.campaign.organization, w.campaign, w), method: delete, :class =>'btn btn-secondary delete-wishlist'%></td> 
+		</tr>
+		<% end %>
+	</table>
+</div>
