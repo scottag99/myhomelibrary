@@ -12,8 +12,9 @@ class Admin::OrganizationsController < Admin::BaseController
   def update
     @organization = Organization.find(params[:id])
     @organization.update!(org_params)
+    @organizations = find_organizations
     respond_to do |format|
-      format.html { render "show" }
+      format.html { render "index" }
       format.json { render json: @organization }
     end
   end
@@ -30,6 +31,8 @@ class Admin::OrganizationsController < Admin::BaseController
 
   def destroy
     Organization.delete(params[:id])
+    @organizations = find_organizations
+    flash[:success] = "Delete successful."
     respond_to do |format|
       format.html { render "index" }
       format.json { render json: Organization.all}

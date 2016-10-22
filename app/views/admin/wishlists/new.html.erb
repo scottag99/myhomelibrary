@@ -1,0 +1,27 @@
+<h2 class="featurette-heading">Add a Wishlist</h2>
+<%= form_for :wishlists, url: admin_organizations_campaigns_wishlists_path, :html => {:class => "form-horizontal"} do |f| %>
+    <%= f.label :reader_name, class: "control-label" %><br>
+    <div class="form-group">
+      <div class="col-md-8">
+        <%= f.text_field :reader_name, class: "form-control" %>
+      </div>
+    </div>
+
+    <%= f.label :reader_age, class: "control-label" %><br>
+    <div class="form-group row">
+      <div class="col-md-8">
+        <%= f.text_field :reader_age, class: "form-control" %>
+      </div>
+    </div>
+
+    <%= f.label :reader_gender, class: "control-label" %><br>
+    <div class="form-group row">
+      <div class="col-md-8">
+        <%= f.text_field :reader_gender, class: "form-control" %>
+      </div>
+    </div>
+
+    <p>
+      <%= f.submit "Submit", class: "btn btn-default btn-primary" %>
+    </p>
+<% end %>
