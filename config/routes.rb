@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'home/library'
   get 'home/partner'
-  
+
+  get 'partner/home/wishlist'
+
   get  'login', to: 'home#login'
   get 'logout', to: 'home#logout'
 
