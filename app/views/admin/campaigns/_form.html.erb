@@ -30,12 +30,7 @@
   <% content_for :foot do %>
   <script type="text/javascript">
               $(function () {
-				  var value = $('div.date .form-control').val();
                   $('#datetimepicker1').datetimepicker();
-				  if ($('div.date .form-control').val() == '' && value != '')
-				  {
-				  	$('div.date .form-control').val(value);
-			  	  }
               });
   </script>
   <% end %>
