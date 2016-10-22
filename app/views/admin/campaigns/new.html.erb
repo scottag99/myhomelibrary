@@ -1,0 +1,15 @@
+<%= form_for :campaign, url: admin_organization_campaigns_path do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+ 
+  <p>
+    <%= f.label :deadline %><br>
+    <%= f.text_field :deadline %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
