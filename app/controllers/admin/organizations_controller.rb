@@ -20,8 +20,10 @@ class Admin::OrganizationsController < Admin::BaseController
 
   def create
     @organization = Organization.create!(org_params)
+    @organizations = find_organizations
+    flash[:success] = "Thank you! Your Organization has been added."
     respond_to do |format|
-      format.html { render "show" }
+      format.html { render "index" }
       format.json { render json: @organization }
     end
   end
