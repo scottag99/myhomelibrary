@@ -1,0 +1,6 @@
+<tr>
+  <td><%= organization['name'] %></td>
+  <td><%= organization['contact_name'] %></td>
+  <td><%= organization['contact_email'] %></td>
+  <td><input type=checkbox disabled <%= user['app_metadata']['role'] == 'admin' ? 'checked' : '' %> /></td>
+</tr>
