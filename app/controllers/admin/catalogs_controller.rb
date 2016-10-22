@@ -1,3 +1,4 @@
+require 'nokogiri'
 class Admin::CatalogsController < Admin::BaseController
   def index
     @catalogs = Catalog.all
@@ -34,6 +35,20 @@ class Admin::CatalogsController < Admin::BaseController
 
   def create
     @catalog = Catalog.create!(catalog_params)
+    uploaded_io = params[:catalog][:upload]
+    doc = File.open(uploaded_io.path) { |f| Nokogiri::XML(f) }
+
+    doc.xpath('//product').each do |elem|
+      b = Book.create({
+        :title => elem.xpath('./name').first.text,
+        :author => elem.xpath('./author').first.text,
+        :description => elem.xpath('./description').first.text,
+        :isbn => elem.xpath('./isbn').first.text.sub('<b>ISBN:</b> ', ''),
+        :level => elem.xpath('./grade').first.text.sub('<b>Grade:</b> ', ''),
+        :cover_image_url => elem.xpath('./coverimage/image').attr('href')
+      })
+    end
+
     respond_to do |format|
       format.html { render "show" }
       format.json { render json: @catalog }
@@ -47,6 +62,7 @@ class Admin::CatalogsController < Admin::BaseController
       format.json { render json: Catalog.all}
     end
   end
+
 private
   def catalog_params
     params.require(:catalog).permit(:name, :source, :active)
