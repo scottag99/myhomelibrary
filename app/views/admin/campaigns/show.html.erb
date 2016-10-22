@@ -1,0 +1,27 @@
+<table>
+	<tr>
+		<td>
+			<p>
+				<strong>Name:</strong>
+				<%= @campaign.name %>	
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p>
+				<strong>Deadline:</strong>
+				<%= @campaign.deadline%>
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p>
+				<%= link_to 'View Wishlists', admin_organization_campaign_wishlists_url(@campaign.organization, @campaign)%>
+			</p>
+		</td>
+	</tr>
+</table>
+
+<%= link_to 'Back', admin_organization_campaigns_url(@campaign.organization)%>
