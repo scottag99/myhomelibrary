@@ -1,7 +1,7 @@
 class SecuredController < ApplicationController
   ALLOWED_ROLES = []
-  before_action :logged_in_using_omniauth?
-  before_action :has_role?
+  #before_action :logged_in_using_omniauth?
+  #before_action :has_role?
 
   private
 

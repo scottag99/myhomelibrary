@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  deadline: 2016-10-21
+  organization: one
+
+two:
+  name: MyString
+  deadline: 2016-10-21
+  organization: two

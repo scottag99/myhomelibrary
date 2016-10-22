@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get "/auth/auth0/callback" => "auth0#callback"
   get "/auth/failure" => "auth0#failure"
 
@@ -11,10 +12,27 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'home#index'
     resources :users
-    resources :catalogs
+    resources :books
+    resources :catalogs do
+      resources :catalog_entries
+    end
+    resources :organizations do
+      resources :campaigns do
+        resources :wishlists do
+          resources :wishlist_entries
+        end
+      end
+    end
   end
 
   namespace :partner do
     root 'home#index'
+    resources :organizations do
+      resources :campaigns do
+        resources :wishlists do
+          resources :wishlist_entries
+        end
+      end
+    end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161021092802) do
+ActiveRecord::Schema.define(version: 20161022052731) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
@@ -24,12 +24,67 @@ ActiveRecord::Schema.define(version: 20161021092802) do
     t.datetime "updated_at",      null: false
   end
 
+  create_table "campaigns", force: :cascade do |t|
+    t.string   "name"
+    t.date     "deadline"
+    t.integer  "organization_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["organization_id"], name: "index_campaigns_on_organization_id"
+  end
+
+  create_table "catalog_entries", force: :cascade do |t|
+    t.integer  "catalog_id"
+    t.integer  "book_id"
+    t.decimal  "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_catalog_entries_on_book_id"
+    t.index ["catalog_id"], name: "index_catalog_entries_on_catalog_id"
+  end
+
   create_table "catalogs", force: :cascade do |t|
     t.string   "name"
     t.boolean  "active"
     t.string   "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "donations", force: :cascade do |t|
+    t.integer  "wishlist_id"
+    t.decimal  "amount"
+    t.string   "confirmation_code"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["wishlist_id"], name: "index_donations_on_wishlist_id"
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string   "name"
+    t.string   "contact_name"
+    t.string   "contact_email"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "wishlist_entries", force: :cascade do |t|
+    t.integer  "wishlist_id"
+    t.integer  "catalog_entry_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["catalog_entry_id"], name: "index_wishlist_entries_on_catalog_entry_id"
+    t.index ["wishlist_id"], name: "index_wishlist_entries_on_wishlist_id"
+  end
+
+  create_table "wishlists", force: :cascade do |t|
+    t.string   "reader_name"
+    t.integer  "reader_age"
+    t.string   "reader_gender"
+    t.integer  "campaign_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["campaign_id"], name: "index_wishlists_on_campaign_id"
   end
 
 end
