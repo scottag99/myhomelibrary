@@ -3,5 +3,8 @@
     <a href="/admin/organizations/<%= campaign.organization_id %>/campaigns/<%= campaign.id %>"><%= campaign['name'] %></a>   
   </td>
   <td><%= campaign.deadline %></td>
-  <td><%= link_to "Destroy Campaign", admin_organization_campaign_url(campaign.organization, campaign), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+  <td>
+    <%= link_to "Destroy Campaign", admin_organization_campaign_url(campaign.organization, campaign), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+    <%= link_to "Update Campaign", edit_admin_organization_campaign_url(campaign.organization, campaign), :class => "btn btn-success" %>
+  </td>
 </tr>
