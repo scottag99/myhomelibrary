@@ -41,6 +41,7 @@ class Admin::CampaignsController < Admin::BaseController
   end
 private
   def current_organization
+
     Organization.find(params[:organization_id])
   end
 
