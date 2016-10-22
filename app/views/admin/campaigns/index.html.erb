@@ -12,7 +12,25 @@
       </tr>
     </thead>
     <tbody>
-  <%= render :partial => 'campaign', :collection => @campaigns %>
+        <%= render :partial => 'campaign', :collection => @campaigns %>
     </tbody>
   </table>
+  <div style="margin-top:20px;">
+    <%= form_for :campaign do |f| %>
+        <p>
+          <%= f.label :Name %><br>
+          <%= f.text_field :Name %>
+        </p>
+      
+        <p>
+          <%= f.label :Deadline %><br>
+          <%= f.text_area :Deadline %>
+        </p>
+      
+        <p>
+          <%= f.submit %>
+        </p>
+    <% end %>
+    <button class="btn btn-primary">Add New Campaign</button>
+  </div>
 </div>
