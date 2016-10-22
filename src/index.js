@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 
+console.log(document.getElementById('react-root'));
+
 ReactDOM.render(
   <App />,
-  document.getElementById('root')
+  document.getElementById('react-root')
 );
