@@ -32,6 +32,7 @@ class Admin::OrganizationsController < Admin::BaseController
   def destroy
     Organization.delete(params[:id])
     @organizations = find_organizations
+    flash[:success] = "Delete successful."
     respond_to do |format|
       format.html { render "index" }
       format.json { render json: Organization.all}

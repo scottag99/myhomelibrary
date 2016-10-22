@@ -16,4 +16,12 @@ module CommonOrganizationActions
       format.json { render json: @organization }
     end
   end
+
+  def edit
+    @organization = find_organization
+    respond_to do |format|
+      format.html
+      format.json { render json: @organization }
+    end
+  end
 end
