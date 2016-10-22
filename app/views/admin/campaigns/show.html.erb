@@ -1,0 +1,11 @@
+<p>
+	<strong>Name:</strong>
+	<%= @campaign.name %>	
+</p>
+
+<p>
+	<strong>Deadline:</strong>
+	<%= @campaign.deadline%>
+</p>
+
+<%= link_to 'Back', admin_organization_campaigns_url(@campaign.organization)%>
