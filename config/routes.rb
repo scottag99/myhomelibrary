@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   get 'home/index'
   root 'home#index'
   get 'home/library'
-  get 'home/donate' 
+  get 'home/donate'
+  get 'home/search'
   get  'login', to: 'home#login'
   get 'logout', to: 'home#logout'
 
