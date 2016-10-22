@@ -76,6 +76,9 @@ body {
   height: 200px;
   margin: 2em;
 }
+.book > img {
+  max-height: 200px;
+}
 .search {
   display: flex;
   flex-direction: column;
