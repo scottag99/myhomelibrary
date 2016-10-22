@@ -1,15 +1,9 @@
-<%= form_for :campaign, url: admin_organization_campaigns_path do |f| %>
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
- 
-  <p>
-    <%= f.label :deadline %><br>
-    <%= f.text_field :deadline %>
-  </p>
- 
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h3 class="panel-title">New Campaign</h3></div>
+  <div class="panel-body">
+    <p>Please filling all fields to create new campaign.</p>
+  </div>
+  <%= render :partial => 'form'%>
+</div>
+
