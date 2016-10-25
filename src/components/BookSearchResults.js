@@ -9,6 +9,8 @@ const Book = ({book, addToWishList}) => (
     <Image src={book.imageUrl} alt="" responsive />
     <h4>{book.name}</h4>
     <span className="text-muted">{book.subname}</span>
+    <span className="text-muted">{book.author}</span>
+    <span className="text-muted">{book.description}</span>
   </a>
 );
 

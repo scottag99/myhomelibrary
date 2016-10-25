@@ -1,2 +1,34 @@
 <div id="react-root"></div>
-<script src="/assets/javascripts/main.js" /></script>
+<script>
+  var current_wishlist = [
+    <% @wishlist.wishlist_entries.each_with_index do |entry,idx| %>
+    <%= ', ' unless idx == 0 %>{
+      id: <%= entry.id %>,
+      catalog_entry_id: <%= entry.catalog_entry.id %>,
+      name: '<%= j entry.catalog_entry.book.title.html_safe %>',
+      subname: '',
+      imageUrl: '<%= entry.catalog_entry.book.cover_image_url %>',
+      author: '<%= j entry.catalog_entry.book.author.html_safe %>',
+      description: '<%= j entry.catalog_entry.book.description.html_safe %>'
+    }
+
+    <% end %>
+  ];
+
+  var all_active_books = [
+    <% CatalogEntry.joins(:catalog).where('catalogs.active' => true).each_with_index do |entry,idx| %>
+    <%= ', ' unless idx == 0 %>{
+      catalog_entry_id: <%= entry.id %>,
+      name: '<%= j entry.book.title.html_safe %>',
+      subname: '',
+      imageUrl: '<%= entry.book.cover_image_url %>',
+      author: '<%= j entry.book.author.html_safe %>',
+      description: '<%= j entry.book.description.html_safe %>'
+    }
+    <% end %>
+  ];
+  var api_add_url = '<%= @add_url %>';
+  var api_delete_url = '<%= @delete_url %>';
+  var back_url = '<%= @back_url %>';
+</script>
+<%= javascript_include_tag 'main', 'data-turbolinks-track': 'reload' %>

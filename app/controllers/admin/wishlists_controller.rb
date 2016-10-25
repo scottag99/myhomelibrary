@@ -1,6 +1,18 @@
 class Admin::WishlistsController < Admin::BaseController
   include CommonWishlistActions
 
+  def edit
+    @wishlist = current_campaign.wishlists.find(params[:id])
+    @add_url = admin_organization_campaign_wishlist_wishlist_entries_url(current_organization, current_campaign, @wishlist)
+    @delete_url = admin_organization_campaign_wishlist_wishlist_entry_url(current_organization, current_campaign, @wishlist, ':id')
+    @back_url = admin_organization_campaign_url(current_organization, current_campaign)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @wishlist }
+    end
+  end
+
   def update
     @wishlist = current_campaign.wishlists.find(params[:id])
     @wishlist.update!(wishlist_params)

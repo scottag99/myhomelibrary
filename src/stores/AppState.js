@@ -5,31 +5,16 @@ class AppState {
   searchTerm = "Books...";
 
   @observable
-  wishlist = [
-  ];
+  wishlist = [];
 
   @observable
-  books = [
-    {
-      id: 1,
-      name: 'A Wild Ride on the Water Cycle',
-      subname: 'A Jake & Alice Adventure',
-      imageUrl: 'http://brightskypress.com/wp-content/book-samples/images/watercycle_web_image.jpg'
-    },
-    {
-      id: 2,
-      name: 'Danielle & The Strawberry Fairies',
-      subname: 'How Strawberries Become Red',
-      imageUrl: 'http://brightskypress.com/wp-content/book-samples/images/daniellestrawfairies_web_image.jpg'
-    },
-    {
-      id: 3,
-      name: 'David & the Mighty Eighth',
-      subname: '',
-      imageUrl: 'http://brightskypress.com/wp-content/book-samples/images/davidmighty8_web_image.jpg'
-    },
-  ];
+  books = [];
 
+  constructor() {
+    this.wishlist = current_wishlist;//current_wishlist is defined on _wishlist.html.erb
+    this.books = all_active_books;//all_active_books is defined on _wishlist.html.erb
+
+  }
   readingLevels = [
     'PreK-G2',
     'G3-G5'
@@ -43,21 +28,38 @@ class AppState {
 
     return this.books
       .filter(book => book.name.toLowerCase().indexOf(term) >= 0)
-      .filter(book => !this.wishlist.find((wish) => wish.id === book.id));
+      .filter(book => !this.wishlist.find((wish) => wish.catalog_entry_id === book.catalog_entry_id));
   }
 
   @action
   addToWishList(book) {
-    if(this.wishlist.find((b) => b.id === book.id)) {
+    if(this.wishlist.find((b) => b.catalog_entry_id === book.catalog_entry_id)) {
       return;
     }
 
-    this.wishlist = this.wishlist.concat(book);
+    $.ajax({
+      url: api_add_url,
+      dataType: 'json',
+      method: 'POST',
+      data: {wishlist_entry: {catalog_entry_id: book.catalog_entry_id}},
+      success: function(data) {
+        book.id = data.id;
+        appState.wishlist = appState.wishlist.concat(book);
+      }
+    });
   }
 
   @action
   removeFromWishList(book) {
-    this.wishlist = this.wishlist.filter(b => b.id !== book.id);
+    $.ajax({
+      url: api_delete_url.replace(':id', book.id),
+      dataType: 'json',
+      method: 'DELETE',
+      success: function(data) {
+        book.id = null;
+        appState.wishlist = appState.wishlist.filter(b => b.catalog_entry_id !== book.catalog_entry_id);
+      }
+    });
   }
 }
 
