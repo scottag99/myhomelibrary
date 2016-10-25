@@ -15,6 +15,19 @@ class HomeController < ApplicationController
   end
 
   def library
-    
+
+  end
+
+  def donate
+
+    @schoolname = params[:schoolname]
+    @wishListID = params[:wishListID]
+    @donationLevel = params[:donationLevel]
+    @Semester = params[:Semester]
+
+  end
+
+  def search
+
   end
 end

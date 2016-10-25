@@ -5,7 +5,7 @@ class Admin::WishlistsController < Admin::BaseController
     @wishlist = current_campaign.wishlists.find(params[:id])
     @wishlist.update!(wishlist_params)
     respond_to do |format|
-      format.html { render "show" }
+      format.html { redirect_to admin_organization_campaign_url(current_organization, current_campaign) }
       format.json { render json: @wishlist }
     end
   end
@@ -21,7 +21,7 @@ class Admin::WishlistsController < Admin::BaseController
   def create
     @wishlist = current_campaign.wishlists.create!(wishlist_params)
     respond_to do |format|
-      format.html { render "show" }
+      format.html { redirect_to admin_organization_campaign_url(current_organization, current_campaign) }
       format.json { render json: @wishlist }
     end
   end
@@ -29,7 +29,7 @@ class Admin::WishlistsController < Admin::BaseController
   def destroy
     current_campaign.wishlists.delete(params[:id])
     respond_to do |format|
-      format.html { render "index" }
+      format.html { redirect_to admin_organization_campaign_url(current_organization, current_campaign) }
       format.json { render json: current_campaign.wishlists.all}
     end
   end

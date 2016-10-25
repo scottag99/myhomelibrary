@@ -1,0 +1,30 @@
+
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h3 class="panel-title">Catalog Detail</h3></div>
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+      <dt>Name</dt>
+      <dd><%= @catalog.name %></dd>
+      <dt>Source</dt>
+      <dd><%= @catalog.source %></dd>
+      <dt>Active</dt>
+      <dd><%= @catalog.active %>
+    </dl>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Level</th>
+        <th>Price</th>
+        <th>ISBN</th>
+      </tr>
+    </thead>
+    <tbody>
+  <%= render :partial => 'catalog_entry', :collection => @catalog.catalog_entries %>
+    </tbody>
+  </table>
+</div>

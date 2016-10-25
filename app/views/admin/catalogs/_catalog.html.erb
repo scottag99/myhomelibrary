@@ -1,6 +1,10 @@
 <tr>
-  <td><%= catalog.name %></td>
+  <td><%= link_to catalog.name, [:admin, catalog] %></td>
   <td><input type=checkbox disabled <%= catalog.active? ? 'checked' : '' %> /></td>
   <td><%= catalog.source %></td>
   <td><%= catalog.catalog_entries.count %></td>
+  <td>
+    <%= link_to "Edit", edit_admin_catalog_url(catalog), class: "btn btn-warning btn-sm" %>
+    <%= link_to "Obliterate", admin_catalog_url(catalog),  method: :delete, class: "btn btn-danger btn-sm", data: {confirm: 'Are you sure?'} %>
+  </td>
 </tr>

@@ -1,8 +1,8 @@
 <div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading"><h3 class="panel-title">Campaign Management</h3></div>
+  <div class="panel-heading"><h3 class="panel-title">Campaigns for <%= @organization.name %></h3></div>
   <div class="panel-body">
-    <p>The following campaigns are associated with this Organization.</p>
+    <p>The following campaigns are associated with <%= @organization.name %>.</p>
   </div>
   <table class="table table-striped">
     <thead>
@@ -17,4 +17,4 @@
     </tbody>
   </table>
 </div>
-<%= link_to 'Add New Campaign <i class="glyphicon glyphicon-plus"></i>'.html_safe, new_admin_organization_campaign_url, :class => "btn btn-primary btn-lg" %>
+<%= link_to '<i class="glyphicon glyphicon-plus"></i> Add New Campaign'.html_safe, new_admin_organization_campaign_url, :class => "btn btn-primary" %>

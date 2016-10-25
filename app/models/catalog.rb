@@ -1,3 +1,3 @@
 class Catalog < ApplicationRecord
-  has_many :catalog_entries
+  has_many :catalog_entries, :dependent => :delete_all
 end
