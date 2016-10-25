@@ -61,21 +61,21 @@ nav.main {
   text-align: center;
 }
 .hero-top {
-  background-image: url(/assets/hero-top.png);
+  background-image: image-url('hero-top.png');
   background-repeat: no-repeat;
   background-position: 100% 100%;
 }
 .hero1 {
-  background-image: url(/assets/hero1.png);
+  background-image: image-url('hero1.png');
   background-repeat: no-repeat;
 }
 .hero2 {
-  background-image: url(/assets/hero2.png);
+  background-image: image-url('hero2.png');
   background-repeat: no-repeat;
   background-position: 100% 0;
 }
 .hero-bottom {
-  background-image: url(/assets/hero-bottom.png);
+  background-image: image-url('hero-bottom.png');
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: cover;
