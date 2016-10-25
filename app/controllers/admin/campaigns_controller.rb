@@ -6,9 +6,9 @@ class Admin::CampaignsController < Admin::BaseController
     @campaign = @organization.campaigns.find(params[:id])
     @campaign.update!(campaign_params)
     @campaigns = @organization.campaigns
-    flash[:success] = "Thank you! Your Campaign is update successfully."
+    flash[:success] = "Thank you! Your Campaign was updated successfully."
     respond_to do |format|
-      format.html { render "index" }
+      format.html { redirect_to admin_organization_url(@organization) }
       format.json { render json: @campaign }
     end
   end
@@ -24,9 +24,9 @@ class Admin::CampaignsController < Admin::BaseController
   def create
     @campaign = @organization.campaigns.create!(campaign_params)
     @campaigns = @organization.campaigns
-    flash[:success] = "Thank you! Your Campaign is added successfully."
+    flash[:success] = "Thank you! Your Campaign was added successfully."
     respond_to do |format|
-      format.html { render "index" }
+      format.html { redirect_to admin_organization_url(@organization) }
       format.json { render json: @campaign }
     end
   end
@@ -34,10 +34,10 @@ class Admin::CampaignsController < Admin::BaseController
   def destroy
     @organization.campaigns.delete(params[:id])
     @campaigns = @organization.campaigns
-    flash[:success] = "Thank you! Your Campaign is delete successfully."
+    flash[:success] = "Thank you! Your Campaign was deleted successfully."
 
     respond_to do |format|
-      format.html { render "index" }
+      format.html { redirect_to admin_organization_url(@organization) }
       format.json { render json: @organization.campaigns.all}
     end
   end

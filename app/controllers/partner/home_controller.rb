@@ -1,9 +1,9 @@
 class Partner::HomeController < Partner::BaseController
   def index
-  	@campaign = Campaign.all
+  	@campaigns = Campaign.all
     respond_to do |format|
-      format.html 
-      format.json { render json: @campaign }
+      format.html
+      format.json { render json: @campaigns }
     end
   end
 

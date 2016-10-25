@@ -1,37 +1,30 @@
 <div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading"><h3 class="panel-title">Campaign:  <%= @campaign.name %></h3></div>
+  <div class="panel-heading"><h3 class="panel-title">Campaign Detail</h3></div>
   <div class="panel-body">
-  <p>Campaign:  <%= @campaign.name %> details.</p>
+    <dl class="dl-horizontal">
+      <dt>Name</dt>
+      <dd><%= @campaign.name %></dd>
+      <dt>Deadline</dt>
+      <dd><%= @campaign.deadline %></dd>
+    </dl>
   </div>
-  <div style="margin-left: 15px; margin-bottom: 15px;">
-  	<table>
-		<tr>
-			<td>
-				<p>
-					<strong>Name:</strong>
-					<%= @campaign.name %>	
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<p>
-					<strong>Deadline:</strong>
-					<%= @campaign.deadline%>
-				</p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<p>
-					<%= link_to 'View Wishlists', admin_organization_campaign_wishlists_url(@campaign.organization, @campaign)%>
-				</p>
-			</td>
-		</tr>
-	</table>
-
-	<%= link_to 'Back', admin_organization_campaigns_url(@campaign.organization), :class => "btn btn-default"%>
-  </div>
-  
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Book Count</th>
+      <th>Wishlist Total</th>
+      <th>Donation Total</th>
+      <th>&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= render :partial => 'wishlist', :collection => @campaign.wishlists %>
+    </tbody>
+  </table>
 </div>
+<%= link_to '<i class="glyphicon glyphicon-plus"></i> New Wishlist'.html_safe, new_admin_organization_campaign_wishlist_url(@campaign.organization, @campaign), :class => "btn btn-primary" %>
+<%= link_to 'Back', admin_organization_url(@campaign.organization), :class => "btn btn-default"%>

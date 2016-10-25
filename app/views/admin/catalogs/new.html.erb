@@ -2,49 +2,7 @@
   <!-- Default panel contents -->
   <div class="panel-heading"><h3 class="panel-title">New Catalog</h3></div>
   <div class="panel-body">
-    <p>Import a new catalog</p>
+    <%= render :partial => 'reference' %>
   </div>
-
-<%= form_for :catalog, url: admin_catalogs_path do |f| %>
-<div class="form-horizontal">
-<div style="margin-left:15px;">
-
-  <%= f.label :name, class: "control-label" %><br>
-  <div class="form-group">
-    <div class="col-md-8">
-      <%= f.text_field :name, class: "form-control" %>
-    </div>
-  </div>
-
-  <%= f.label :source, class: "control-label" %><br>
-  <div class="form-group">
-    <div class="col-md-8">
-      <%= f.text_field :source, class: "form-control" %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="col-md-8">
-      <%= f.file_field :upload %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="col-md-8">
-      <div class="checkbox">
-        <label>
-          <%= check_box :isActive, :activeCheck %>
-          <%= f.label :active %>
-        </label>
-      </div>
-    </div>
-  </div>
-
-  <p>
-    <%= f.submit "Submit", class: "btn btn-default btn-primary" %>
-    <%= link_to 'Back', admin_catalogs_url(), :class => "btn btn-default"%>
-  </p>
-
+  <%= render :partial => 'form'%>
 </div>
-</div>
-<% end %>
