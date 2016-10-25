@@ -1,2 +1,23 @@
 
-List of campaigns
+<div class="container-fluid">
+	<h3>Campaigns</h3>
+	<table class="table list-campaigns">
+	  <tr class="table row list-campaigns">
+	    <th>Name</th>
+	    <th>Deadline</th>
+	    <th>Created at</th>
+	    <th>Updated at</th>
+	    <th></th>
+	    <!-- <th><i class="glyphicon glyphicon-edit"></i></th> -->
+	  </tr>
+	<% @campaigns.each do |c| %>
+	  <tr class="table row campaign-info">
+	    <td><%= c.name %></td>
+		<td><%= c.deadline %></td>
+		<td><%= c.created_at %></td>
+		<td><%= c.updated_at %></td>
+		<td><%= link_to "Wishlist", partner_organization_campaign_wishlists_url(c.organization, c) , :class =>'btn btn-secondary edit-wishlist'%></td>
+	  </tr>
+	<% end %>
+	</table>
+</div>

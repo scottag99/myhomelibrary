@@ -1,0 +1,45 @@
+<%= form_for [:admin, @catalog], html: {class: 'form-horizontal'} do |f| %>
+
+  <div class="form-group">
+    <%= f.label :name, class: "col-md-1 control-label" %>
+    <div class="col-md-4">
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :source, class: "col-md-1 control-label" %>
+    <div class="col-md-4">
+      <%= f.text_field :source, class: "form-control" %>
+    </div>
+  </div>
+
+  <% if @catalog.new_record? %>
+  <div class="form-group">
+    <%= f.label "File", class: "col-md-1 control-label" %>
+    <div class="col-md-4">
+      <%= f.file_field :upload %>
+    </div>
+  </div>
+  <% end %>
+
+  <div class="form-group">
+    <div class="col-md-offset-1 col-md-4">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :active %>
+          Active
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-1 col-md-4">
+      <%= f.submit "Submit", class: "btn btn-default btn-primary" %>
+      <%= link_to 'Back', admin_catalogs_url(), :class => "btn btn-default"%>
+    </div>
+  </div>
+
+
+<% end %>

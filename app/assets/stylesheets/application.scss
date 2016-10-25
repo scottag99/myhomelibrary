@@ -14,6 +14,7 @@
  // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ @import 'bootstrap-datetimepicker';
 
 body {
   color: #5a5a5a;
@@ -112,6 +113,9 @@ nav.main {
   height: 200px;
   margin: 2em;
 }
+.book > img {
+  max-height: 200px;
+}
 .search {
   display: flex;
   flex-direction: column;
@@ -123,4 +127,29 @@ nav.main {
 .search-results {
   flex: 1;
   padding-bottom: 100px;
+}
+.table.list-campaigns .campaign-info > tr{
+  padding:30px;
+}
+.table.list-campaigns .campaign-info .edit-wishlist, .table.list-wishlist .list-wishlist-info .edit-wishlist, .table.list-wishlist .list-wishlist-info .delete-wishlist{
+  background:white;
+  border-color:black;
+  padding-top:3px;
+  padding-bottom:3px;
+}
+.wishlist-header .list-wishlist {
+  display:inline-block;
+}
+.wishlist-header .add-wishlist {
+  float:right;
+  margin-top:20px;
+}
+
+.profile {
+  width: 250px;
+  height: 250px;
+  float: left;
+  margin: 1em;
+  @extend .panel, .panel-default;
+  padding: 0.5em 2em;
 }
