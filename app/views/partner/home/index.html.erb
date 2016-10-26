@@ -1,23 +1,19 @@
-
-<div class="container-fluid">
-	<h3>Campaigns</h3>
-	<table class="table list-campaigns">
-	  <tr class="table row list-campaigns">
-	    <th>Name</th>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h3 class="panel-title">My Campaigns</h3></div>
+  <div class="panel-body">
+    <p>You can manage wishlists for the following campaigns.</p>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+			<th>Name</th>
 	    <th>Deadline</th>
-	    <th>Created at</th>
-	    <th>Updated at</th>
-	    <th></th>
-	    <!-- <th><i class="glyphicon glyphicon-edit"></i></th> -->
-	  </tr>
-	<% @campaigns.each do |c| %>
-	  <tr class="table row campaign-info">
-	    <td><%= c.name %></td>
-		<td><%= c.deadline %></td>
-		<td><%= c.created_at %></td>
-		<td><%= c.updated_at %></td>
-		<td><%= link_to "Wishlist", partner_organization_campaign_wishlists_url(c.organization, c) , :class =>'btn btn-secondary edit-wishlist'%></td>
-	  </tr>
-	<% end %>
-	</table>
+      <th>Wishlists</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= render :partial => 'campaign', :collection => @campaigns %>
+    </tbody>
+  </table>
 </div>

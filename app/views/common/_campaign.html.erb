@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h3 class="panel-title">Campaign Detail</h3></div>
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+      <dt>Name</dt>
+      <dd><%= @campaign.name %></dd>
+      <dt>Deadline</dt>
+      <dd><%= @campaign.deadline %></dd>
+    </dl>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Book Count</th>
+      <th>Wishlist Total</th>
+      <th>Donation Total</th>
+      <th>&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= render :partial => 'wishlist', :collection => @campaign.wishlists %>
+    </tbody>
+  </table>
+</div>

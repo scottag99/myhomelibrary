@@ -1,0 +1,30 @@
+<%= form_for [:partner, @wishlist.campaign.organization, @wishlist.campaign, @wishlist], :html => {:class => "form-horizontal"} do |f| %>
+  <div class="form-group">
+    <%= f.label :reader_name, class: "col-md-1 control-label" %>
+    <div class="col-md-4">
+      <%= f.text_field :reader_name, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :reader_age, class: "col-md-1 control-label" %>
+    <div class="col-md-4">
+      <%= f.text_field :reader_age, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :reader_gender, class: "col-md-1 control-label" %>
+    <div class="col-md-4">
+      <%= f.text_field :reader_gender, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-1 col-md-4">
+      <%= f.submit "Submit", class: "btn btn-default btn-primary" %>
+      <%= link_to 'Back', partner_organization_campaign_url(@wishlist.campaign.organization, @wishlist.campaign), :class => "btn btn-default"%>
+    </div>
+  </div>
+
+<% end %>

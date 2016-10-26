@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   get 'home/library'
   get 'home/donate'
   get 'home/search'
-  get 'home/partner'
 
   get  'login', to: 'home#login'
   get 'logout', to: 'home#logout'

@@ -1,6 +1,18 @@
 class Partner::WishlistsController < Partner::BaseController
   include CommonWishlistActions
 
+  def edit
+    @wishlist = current_campaign.wishlists.find(params[:id])
+    @add_url = partner_organization_campaign_wishlist_wishlist_entries_url(current_organization, current_campaign, @wishlist)
+    @delete_url = partner_organization_campaign_wishlist_wishlist_entry_url(current_organization, current_campaign, @wishlist, ':id')
+    @back_url = partner_organization_campaign_url(current_organization, current_campaign)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @wishlist }
+    end
+  end
+
   def update
     @wishlist = current_campaign.wishlists.find(params[:id])
     @wishlist.update!(wishlist_params)
@@ -21,7 +33,7 @@ class Partner::WishlistsController < Partner::BaseController
   def create
     @wishlist = current_campaign.wishlists.create!(wishlist_params)
     respond_to do |format|
-      format.html { render "show" }
+      format.html { redirect_to partner_organization_campaign_url(current_organization, current_campaign) }
       format.json { render json: @wishlist }
     end
   end
@@ -29,7 +41,7 @@ class Partner::WishlistsController < Partner::BaseController
   def destroy
     current_campaign.wishlists.delete(params[:id])
     respond_to do |format|
-      format.html { render "index" }
+      format.html { redirect_to partner_organization_campaign_url(current_organization, current_campaign) }
       format.json { render json: current_campaign.wishlists.all}
     end
   end
