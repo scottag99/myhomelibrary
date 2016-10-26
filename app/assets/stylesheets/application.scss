@@ -109,13 +109,49 @@ nav.main {
 }
 .book {
   float: left;
-  width: 200px;
+  width: 350px;
   height: 200px;
-  margin: 2em;
+  margin: 2em 2.5em 0 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: hidden;
 }
-.book > img {
-  max-height: 200px;
+.book-title {
+  font-size: 1em;
+  margin: 0;
 }
+.book-author {
+}
+.book-cover {
+  float: left;
+  max-width: 150px;
+  max-height: 150px;
+  margin: 0 1em .25em 0;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 4px #ccc;
+}
+.book-cover:hover {
+  box-shadow: 0 0 4px 1px #69c;
+}
+.book-description {
+  position: relative;
+  height: 10em;
+  overflow: hidden;
+}
+.book:hover .book-description {
+  text-decoration: none;
+}
+.book-description:after {
+  content: "";
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 70%;
+  height: 1em;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+}
+
 .search {
   display: flex;
   flex-direction: column;
