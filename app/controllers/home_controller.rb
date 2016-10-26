@@ -21,13 +21,14 @@ class HomeController < ApplicationController
   def donate
 
     @schoolname = params[:schoolname]
-    @wishListID = params[:wishListID]
-    @donationLevel = params[:donationLevel]
-    @Semester = params[:Semester]
+    @wishListID = params[:wishlist_id]
+    @donationLevel = params[:amount]
+    @Semester = params[:campaign_name]
 
   end
 
   def search
-
+    #Load all current wishlists with at least one book
+    @wishlists = Wishlist.joins(:campaign, :wishlist_entries).where("deadline > ?", [Date.today]).uniq.all
   end
 end

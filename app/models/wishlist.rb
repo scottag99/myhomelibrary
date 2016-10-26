@@ -11,4 +11,13 @@ class Wishlist < ApplicationRecord
   def wishlist_total
     catalog_entries.sum(:price)
   end
+
+  def public_name
+    parts = reader_name.split
+    if parts.count >= 2
+      "#{parts[0]} #{parts[1].slice(0)}."
+    else
+      reader_name
+    end
+  end
 end
