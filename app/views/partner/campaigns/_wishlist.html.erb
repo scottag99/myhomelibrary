@@ -7,6 +7,6 @@
   <td><%= number_to_currency(wishlist.donation_total) %></td>
   <td>
     <%= link_to "Edit", edit_partner_organization_campaign_wishlist_url(wishlist.campaign.organization, wishlist.campaign, wishlist), class: "btn btn-warning btn-sm" %>
-    <%= link_to "Obliterate", partner_organization_campaign_wishlist_url(wishlist.campaign.organization, wishlist.campaign, wishlist),  method: :delete, class: "btn btn-danger btn-sm", data: {confirm: 'Are you sure?'} %>
+    <%= link_to "Delete", partner_organization_campaign_wishlist_url(wishlist.campaign.organization, wishlist.campaign, wishlist),  method: :delete, class: "btn btn-danger btn-sm", data: {confirm: 'Are you sure?'} %>
   </td>
 </tr>

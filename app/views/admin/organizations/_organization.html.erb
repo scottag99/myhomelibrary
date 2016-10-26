@@ -4,7 +4,7 @@
   <td><%= organization.contact_email %></td>
   <td>
     <%= link_to "Edit", edit_admin_organization_url(organization), class: "btn btn-warning btn-sm" %>
-    <%= link_to "Obliterate", admin_organization_url(organization),  method: :delete, class: "btn btn-danger btn-sm", data: {confirm: 'Are you sure?'} %>
+    <%= link_to "Delete", admin_organization_url(organization),  method: :delete, class: "btn btn-danger btn-sm", data: {confirm: 'Are you sure?'} %>
   </td>
 
 </tr>

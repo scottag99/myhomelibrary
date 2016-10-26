@@ -5,6 +5,6 @@
   <td><%= campaign.deadline %></td>
   <td>
     <%= link_to "Edit", edit_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-warning btn-sm" %>
-    <%= link_to "Obliterate", admin_organization_campaign_url(campaign.organization, campaign),  method: :delete, class: "btn btn-danger btn-sm", data: {confirm: 'Are you sure?'} %>
+    <%= link_to "Delete", admin_organization_campaign_url(campaign.organization, campaign),  method: :delete, class: "btn btn-danger btn-sm", data: {confirm: 'Are you sure?'} %>
   </td>
 </tr>
