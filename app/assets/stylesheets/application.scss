@@ -111,13 +111,13 @@ nav.main {
   float: left;
   width: 350px;
   height: 200px;
-  margin: 2em 2.5em 0 0;
+  margin: 2.5em 3em 0 0;
   box-sizing: border-box;
   cursor: pointer;
   overflow: hidden;
 }
 .book-title {
-  font-size: 1em;
+  font-size: 1.2em;
   margin: 0;
 }
 .book-author {
@@ -125,13 +125,9 @@ nav.main {
 .book-cover {
   float: left;
   max-width: 150px;
-  max-height: 150px;
   margin: 0 1em .25em 0;
   border: 1px solid #ccc;
   box-shadow: 1px 1px 4px #ccc;
-}
-.book-cover:hover {
-  box-shadow: 0 0 4px 1px #69c;
 }
 .book-description {
   position: relative;
@@ -148,7 +144,7 @@ nav.main {
   bottom: 0;
   right: 0;
   width: 70%;
-  height: 1em;
+  height: 1.4em;
   background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
 }
 
