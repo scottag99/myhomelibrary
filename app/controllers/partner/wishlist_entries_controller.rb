@@ -1,4 +1,4 @@
-class Admin::WishlistEntriesController < Admin::BaseController
+class Partner::WishlistEntriesController < Partner::BaseController
   include CommonWishlistEntryActions
 
   def update
