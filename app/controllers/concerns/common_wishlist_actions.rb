@@ -17,4 +17,8 @@ module CommonWishlistActions
       format.json { render json: @wishlist }
     end
   end
+
+  def wishlist_params
+    params.require(:wishlist).permit(:reader_name, :reader_age, :reader_gender, :teacher)
+  end
 end

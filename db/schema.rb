@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161022052731) do
+ActiveRecord::Schema.define(version: 20161028161647) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20161022052731) do
     t.integer  "campaign_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "teacher"
     t.index ["campaign_id"], name: "index_wishlists_on_campaign_id"
   end
 

@@ -53,8 +53,4 @@ private
     def current_campaign
       current_organization.campaigns.find(params[:campaign_id])
     end
-
-    def wishlist_params
-      params.require(:wishlist).permit(:reader_name, :reader_age, :reader_gender)
-    end
 end

@@ -6,4 +6,8 @@ module ApplicationHelper
   def partner?
     controller.class.parent == Partner
   end
+
+  def get_namespace
+    controller.class.parent.name.downcase
+  end
 end

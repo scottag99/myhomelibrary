@@ -1,2 +1,4 @@
-<%= render partial: 'common/campaign' %>
-<%= link_to 'Back', '/partner', :class => "btn btn-default"%>
+<p>
+  <%= @campaign.organization.name %> &raquo; <%= link_to 'Campaigns', '/partner', :class => ""%> &raquo; 
+</p>
+<%= render partial: 'common/campaigns/show.html.erb' %>

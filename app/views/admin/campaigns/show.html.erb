@@ -1,2 +1,4 @@
-<%= render partial: 'common/campaign' %>
-<%= link_to 'Back', admin_organization_url(@campaign.organization), :class => "btn btn-default"%>
+<p>
+  <%= link_to 'Campaigns', admin_organization_url(@campaign.organization), :class => ""%> &raquo; <%= @campaign.organization.name %>
+</p>
+<%= render partial: 'common/campaigns/show' %>
