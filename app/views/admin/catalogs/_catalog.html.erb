@@ -4,7 +4,7 @@
   <td><%= catalog.source %></td>
   <td><%= catalog.catalog_entries.count %></td>
   <td>
-    <%= link_to "Edit", edit_admin_catalog_url(catalog), class: "btn btn-warning btn-sm" %>
-    <%= link_to "Delete", admin_catalog_url(catalog),  method: :delete, class: "btn btn-danger btn-sm", data: {confirm: 'Are you sure?'} %>
+    <%= link_to "Edit", edit_admin_catalog_url(catalog), class: "btn btn-warning btn-xs" %>
+    <%= link_to "Delete", admin_catalog_url(catalog),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'This action cannot be undone. Are you sure?'} %>
   </td>
 </tr>

@@ -1,4 +1,6 @@
-<p>
-  <%= @campaign.organization.name %> &raquo; <%= link_to 'Campaigns', '/partner', :class => ""%> &raquo; 
-</p>
+<%= breadcrumb([
+  @campaign.organization.name,
+    {href: '/partner', label: 'Campaigns'}
+  ])
+%>
 <%= render partial: 'common/campaigns/show.html.erb' %>

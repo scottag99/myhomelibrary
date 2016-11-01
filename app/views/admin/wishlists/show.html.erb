@@ -1,41 +1,4 @@
-<div class="panel panel-default">
-  <!-- Default panel contents -->
-  <div class="panel-heading"><h3 class="panel-title">Wishlist Detail</h3></div>
-  <div class="panel-body">
-    <dl class="dl-horizontal">
-      <dt>Reader Name</dt>
-      <dd><%= @wishlist.reader_name %></dd>
-      <dt>Reader Age</dt>
-      <dd><%= @wishlist.reader_age %></dd>
-      <dt>Reader Gender</dt>
-      <dd><%= @wishlist.reader_gender %></dd>
-    </dl>
-  </div>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Level</th>
-        <th>Price</th>
-        <th>ISBN</th>
-      </tr>
-    </thead>
-    <tbody>
-  <%= render :partial => 'admin/catalogs/catalog_entry', :collection => @wishlist.wishlist_entries.collect{|e| e.catalog_entry} %>
-    </tbody>
-  </table>
-
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Donation Amount</th>
-        <th>Code</th>
-      </tr>
-    </thead>
-    <tbody>
-  <%= render :partial => 'donation', :collection => @wishlist.donations %>
-    </tbody>
-  </table>
-</div>
-<%= link_to 'Back', admin_organization_campaign_url(@wishlist.campaign.organization, @wishlist.campaign), :class => "btn btn-default"%>
+<%= breadcrumb([@wishlist.campaign.organization.name,
+  {href: admin_organization_campaign_url(@wishlist.campaign.organization, @wishlist.campaign), label: @wishlist.campaign.name},
+  @wishlist.reader_name]) %>
+<%= render partial: 'common/wishlists/show' %>

@@ -1,4 +1,6 @@
-<p>
-  <%= link_to 'Campaigns', admin_organization_url(@campaign.organization), :class => ""%> &raquo; <%= @campaign.organization.name %>
-</p>
+<%= breadcrumb([
+  @campaign.organization.name,
+    {href: admin_organization_url(@campaign.organization), label: 'Campaigns'}
+  ])
+%>
 <%= render partial: 'common/campaigns/show' %>

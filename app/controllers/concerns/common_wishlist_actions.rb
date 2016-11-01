@@ -18,6 +18,22 @@ module CommonWishlistActions
     end
   end
 
+  def edit
+    @wishlist = current_campaign.wishlists.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json { render json: @wishlist }
+    end
+  end
+
+  def new
+    @wishlist = current_campaign.wishlists.new
+    respond_to do |format|
+      format.html
+      format.json { render json: @wishlist }
+    end
+  end
+private
   def wishlist_params
     params.require(:wishlist).permit(:reader_name, :reader_age, :reader_gender, :teacher)
   end

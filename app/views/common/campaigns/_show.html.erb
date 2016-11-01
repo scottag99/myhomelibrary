@@ -10,21 +10,22 @@
     </dl>
   </div>
 
-  <div class="panel panel-default">
+  <div class="panel panel-default table-condensed">
     <!-- Default panel contents -->
-    <div class="panel-heading">Wishlists <%= link_to '<i class="glyphicon glyphicon-plus"></i> New Wishlist'.html_safe, url_for([:new, get_namespace, @campaign.organization, @campaign, :wishlist]), :class => "btn btn-xs btn-primary" %></div>
+    <div class="panel-heading"><h3 class="panel-title">Wishlists</h3></div>
     <table class="table table-striped table-condensed">
+      <caption><%= link_to '<i class="glyphicon glyphicon-plus"></i> New Wishlist'.html_safe, url_for([:new, get_namespace, @campaign.organization, @campaign, :wishlist]), :class => "btn btn-xs btn-primary" %></caption>
       <thead>
-      <tr>
-        <th>Teacher</th>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Gender</th>
-        <th>Book Count</th>
-        <th>Wishlist Total</th>
-        <th>Donation Total</th>
-        <th>&nbsp;</th>
-      </tr>
+        <tr>
+          <th>Teacher</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Book Count</th>
+          <th>Wishlist Total</th>
+          <th>Donation Total</th>
+          <th>&nbsp;</th>
+        </tr>
       </thead>
       <tfoot>
         <tr>
