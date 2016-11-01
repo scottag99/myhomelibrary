@@ -27,7 +27,8 @@ class AppState {
     const term = this.searchTerm.toLowerCase();
 
     return this.books
-      .filter(book => book.name.toLowerCase().indexOf(term) >= 0)
+      .filter(book => book.name.toLowerCase().indexOf(term) >= 0 || book.author.toLowerCase().indexOf(term) >= 0 || book.description.toLowerCase().indexOf(term) >= 0)
+      //.filter(book => book.author.toLowerCase().indexOf(term) >= 0)
       .filter(book => !this.wishlist.find((wish) => wish.catalog_entry_id === book.catalog_entry_id));
   }
 

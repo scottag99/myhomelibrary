@@ -96,9 +96,6 @@ nav.main {
   }
 }
 
-
-
-
 .library {
 }
 .library > .row {
@@ -161,22 +158,6 @@ nav.main {
 .search-results {
   flex: 1;
   padding-bottom: 100px;
-}
-.table.list-campaigns .campaign-info > tr{
-  padding:30px;
-}
-.table.list-campaigns .campaign-info .edit-wishlist, .table.list-wishlist .list-wishlist-info .edit-wishlist, .table.list-wishlist .list-wishlist-info .delete-wishlist{
-  background:white;
-  border-color:black;
-  padding-top:3px;
-  padding-bottom:3px;
-}
-.wishlist-header .list-wishlist {
-  display:inline-block;
-}
-.wishlist-header .add-wishlist {
-  float:right;
-  margin-top:20px;
 }
 
 .profile {
