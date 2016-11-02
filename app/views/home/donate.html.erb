@@ -6,10 +6,32 @@ var SchoolName = "<%= @schoolname %>"; //Organization name
 var WishlistID = "<%= @wishListID %>"; // org wishlist ID
 var DonationLevel = <%= @donationLevel %>; // org donationlevel
 
+function kimbiaSuccess(kimbiaResponse) {
+  var initCharge = object.initialCharge;
+  var confCode = object.confirmationCode;
+  var wishlistId = getValueByLabel(object.answers[0], 'Wishlist ID');
+  console.log(initCharge);
+  console.log(confCode);
+  console.log(wishlistId);
+}
+//Helper function from Widget_DataObject_JS.pdf
+function getValueByLabel(aSignup, labelText, sublabelText){
+  for(var a = 0; a < aSignup.length; a++){
+    var formAnswerObject = aSignup[a];
+    if(formAnswerObject.questionLabel === labelText){
+      if(sublabelText == null || sublabelText == '' || formAnswerObject.questionSubLabel == sublabelText) {
+        return formAnswerObject.data;
+      }
+    }
+  }
+  // found none
+  return '';
+}
 </script>
-
-
 
 <!-- script to populate form tag -->
-<script src="https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrive">
-</script>
+<% if Rails.env == 'development' %>
+<script src='https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrivetest&oncomplete=kimbiaSuccess'></script>
+<% else %>
+<script src="https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrive&oncomplete=kimbiaSuccess"></script>
+<% end %>
