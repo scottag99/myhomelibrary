@@ -7,6 +7,7 @@ var WishlistID = "<%= @wishListID %>"; // org wishlist ID
 var DonationLevel = <%= @donationLevel %>; // org donationlevel
 
 function kimbiaSuccess(kimbiaResponse) {
+  console.log(kimbiaResponse);
   var initCharge = object.initialCharge;
   var confCode = object.confirmationCode;
   var wishlistId = getValueByLabel(object.answers[0], 'Wishlist ID');
@@ -30,8 +31,8 @@ function getValueByLabel(aSignup, labelText, sublabelText){
 </script>
 
 <!-- script to populate form tag -->
-<% if Rails.env == 'development' %>
-<script src='https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrivetest&oncomplete=kimbiaSuccess'></script>
-<% else %>
+<% if ENV['IS_PRODUCTION'] %>
 <script src="https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrive&oncomplete=kimbiaSuccess"></script>
+<% else %>
+<script src='https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrivetest&oncomplete=kimbiaSuccess'></script>
 <% end %>
