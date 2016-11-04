@@ -1,4 +1,23 @@
-<h1 class="featurette-heading text-center">Fund a Child's Home Library</h1>
-<div class="row">
-  <%= render partial: 'wishlist', collection: @wishlists %>
+<div class="row featurette hero-top">
+  <div class="col-sm-6 col-sm-offset-3">
+    <h2 class="featurette-heading">Home Libraries</h2>
+    <p class="lead">
+      Search for a <strong>Home Library</strong> to fund and begin to make a child's wish come true. You can also make a general donation to this cause with the button below. Thank you for your support.
+    </p>
+    <p>
+      <%= link_to 'Donate', donate_url({:wishlist_id => 0, :amount => 30.00, :campaign_name => "General", :schoolname => "None"}), :class => 'btn btn-primary' %>
+    </p>
+    <p>&nbsp;</p>
+    <p><input class="form-control" placeholder="Name, teacher, school" /></p>
+  </div>
+</div>
+
+<div class="row hero1">
+  <div class="col-sm-8 col-sm-offset-3">
+
+    <div class="row">
+      <%= render partial: 'wishlist', collection: @wishlists %>
+    </div>
+
+  </div>
 </div>
