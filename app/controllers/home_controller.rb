@@ -11,7 +11,7 @@ class HomeController < ApplicationController
 
   def logout
     reset_session
-    redirect_to "/"
+    redirect_to root_url
   end
 
   def library
@@ -30,5 +30,15 @@ class HomeController < ApplicationController
   def search
     #Load all current wishlists with at least one book
     @wishlists = Wishlist.joins(:campaign, :wishlist_entries).where("deadline > ?", [Date.today]).uniq.all
+  end
+
+  def success
+    wishlist = Wishlist.find(params[:wishlist_id])
+    @donation = wishlist.donations.create!({:confirmation_code => params[:confirmation_code], :amount => params[:amount]})
+
+    respond_to do |format|
+      format.html { render "index" }
+      format.json { render json: @donation }
+    end
   end
 end

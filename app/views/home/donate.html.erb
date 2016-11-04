@@ -7,13 +7,19 @@ var WishlistID = "<%= @wishListID %>"; // org wishlist ID
 var DonationLevel = <%= @donationLevel %>; // org donationlevel
 
 function kimbiaSuccess(kimbiaResponse) {
-  console.log(kimbiaResponse);
-  var initCharge = object.initialCharge;
-  var confCode = object.confirmationCode;
-  var wishlistId = getValueByLabel(object.answers[0], 'Wishlist ID');
-  console.log(initCharge);
-  console.log(confCode);
-  console.log(wishlistId);
+  var initCharge = kimbiaResponse.initialCharge.replace("$", "");
+  var confCode = kimbiaResponse.confirmationCode;
+  var wishlistId = getValueByLabel(kimbiaResponse.answers[0], 'Wishlist ID');
+
+  $.ajax({
+    url: '<%= success_url %>',
+    dataType: 'json',
+    method: 'POST',
+    data: {'wishlist_id': wishlistId, 'amount': initCharge, 'confirmation_code': confCode},
+    success: function(data) {
+
+    }
+  });
 }
 //Helper function from Widget_DataObject_JS.pdf
 function getValueByLabel(aSignup, labelText, sublabelText){
@@ -30,9 +36,15 @@ function getValueByLabel(aSignup, labelText, sublabelText){
 }
 </script>
 
+<div class="container">
+  <p>&nbsp;</p>
+  <p>
+    <%= link_to 'Wish Lists', search_url, class: 'btn btn-primary btn-lg' %> Back to wish list search
+  </p>
 <!-- script to populate form tag -->
 <% if ENV['IS_PRODUCTION'] %>
 <script src="https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrive&oncomplete=kimbiaSuccess"></script>
 <% else %>
 <script src='https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrivetest&oncomplete=kimbiaSuccess'></script>
 <% end %>
+</div>
