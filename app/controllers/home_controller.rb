@@ -29,7 +29,7 @@ class HomeController < ApplicationController
 
   def search
     #Load all current wishlists with at least one book
-    @wishlists = Wishlist.joins(:campaign, :wishlist_entries).where("deadline > ?", [Date.today]).uniq.all
+    @wishlists = Wishlist.joins(:campaign, :wishlist_entries).where("deadline > ? and ready_for_donations = ?", Date.today, true).uniq.all
   end
 
   def success
