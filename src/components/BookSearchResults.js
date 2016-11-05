@@ -7,7 +7,7 @@ const img = 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABA
 const Book = ({book, addToWishList}) => (
   <a className="book" onClick={addToWishList}>
     <h4 className="book-title">{book.name}</h4>
-    <p className="text-muted book-author">by {book.author}</p>
+    <p className="text-muted book-author">by {book.author}, AR Pts: {book.ar_points}</p>
     <Image src={book.imageUrl} alt="" responsive className="book-cover" />
     <p className="text-muted book-description">{book.description}</p>
   </a>
