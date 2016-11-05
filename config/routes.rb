@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'home#index'
   get 'home/library'
-  get '/donate', to: 'home#donate'
-  get '/search', to: 'home#search'
+  get 'donate', to: 'home#donate'
+  get 'search', to: 'home#search'
+  get 'wishlists', to: 'home#wishlists'
   post 'success', to: 'home#success'
 
   get  'login', to: 'home#login'

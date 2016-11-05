@@ -7,15 +7,21 @@
     <p>
       <%= link_to 'Donate', donate_url({:wishlist_id => 0, :amount => 30.00, :campaign_name => "General", :schoolname => "None"}), :class => 'btn btn-primary' %>
     </p>
-    <p>&nbsp;</p>
-    <p><input class="form-control" placeholder="Name, teacher, school" /></p>
+    <%= form_tag('/wishlists', method: :get, remote: true) do %>
+      <div class="input-group">
+        <input class="form-control" name="term" id="term" placeholder="Name, teacher, school" />
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </span>
+    </div>
+    <% end %>
   </div>
 </div>
 
 <div class="row hero1">
   <div class="col-sm-8 col-sm-offset-3">
 
-    <div class="row">
+    <div class="row" id="search_results">
       <%= render partial: 'wishlist', collection: @wishlists %>
     </div>
 
