@@ -23,6 +23,10 @@ Rails.application.routes.draw do
     end
     resources :organizations do
       resources :campaigns do
+        member do
+          get 'order_sheet'
+          get 'pick_list'
+        end
         resources :wishlists do
           resources :wishlist_entries
         end

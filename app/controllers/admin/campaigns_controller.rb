@@ -41,6 +41,24 @@ class Admin::CampaignsController < Admin::BaseController
       format.json { render json: @organization.campaigns.all}
     end
   end
+
+  def order_sheet
+    @campaign = @organization.campaigns.find(params[:id])
+    @books = Book.joins({catalog_entries: [{wishlist_entries: [{wishlist: :campaign}]}, :catalog]}).where('wishlists.campaign_id = ?', @campaign).group('catalogs.source', :isbn, :title).order(:title).count
+    respond_to do |format|
+      format.html
+      format.json { render json: @campaign }
+    end
+  end
+
+  def pick_list
+    @campaign = @organization.campaigns.find(params[:id])
+    @wishlists = @campaign.wishlists.order(:teacher, :reader_name)
+    respond_to do |format|
+      format.html
+      format.json { render json: @campaign }
+    end
+  end
 private
   def set_organization
     @organization = Organization.find(params[:organization_id])

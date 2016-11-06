@@ -7,5 +7,7 @@
   <td>
     <%= link_to "Edit", edit_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-xs btn-warning" %>
     <%= link_to "Delete", admin_organization_campaign_url(campaign.organization, campaign),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'This action cannot be undone. Are you sure?'} %>
+    <%= link_to "Order Sheet", order_sheet_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-info btn-xs" %>
+    <%= link_to "Pick List", pick_list_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-info btn-xs" %>
   </td>
 </tr>
