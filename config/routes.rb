@@ -28,6 +28,9 @@ Rails.application.routes.draw do
           get 'pick_list'
         end
         resources :wishlists do
+          member do
+            get 'manage'
+          end
           resources :wishlist_entries
         end
       end
@@ -39,6 +42,9 @@ Rails.application.routes.draw do
     resources :organizations do
       resources :campaigns do
         resources :wishlists do
+          member do
+            get 'manage'
+          end
           resources :wishlist_entries
         end
       end

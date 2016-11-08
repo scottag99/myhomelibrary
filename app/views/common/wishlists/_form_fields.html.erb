@@ -22,7 +22,12 @@
 <div class="form-group row">
   <%= f.label :reader_gender, class: "col-md-1 control-label" %>
   <div class="col-md-4">
-    <%= f.text_field :reader_gender, class: "form-control" %>
+    <label class="radio-inline">
+      <%= f.radio_button :reader_gender, 'M' %> M
+    </label>
+    <label class="radio-inline">
+      <%= f.radio_button :reader_gender, 'F' %> F
+    </label>
   </div>
 </div>
 

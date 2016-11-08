@@ -5,7 +5,7 @@ class Partner::WishlistsController < Partner::BaseController
     @wishlist = current_campaign.wishlists.find(params[:id])
     @wishlist.update!(wishlist_params)
     respond_to do |format|
-      format.html { render "show" }
+      format.html { redirect_to partner_organization_campaign_url(current_organization, current_campaign) }
       format.json { render json: @wishlist }
     end
   end

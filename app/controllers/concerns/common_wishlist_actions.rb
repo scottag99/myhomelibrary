@@ -18,11 +18,20 @@ module CommonWishlistActions
     end
   end
 
-  def edit
+  def manage
     @wishlist = current_campaign.wishlists.find(params[:id])
     @add_url = get_add_url(@wishlist)
     @delete_url = get_delete_url(@wishlist)
     @back_url = get_campaign_url
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @wishlist }
+    end
+  end
+
+  def edit
+    @wishlist = current_campaign.wishlists.find(params[:id])
 
     respond_to do |format|
       format.html
