@@ -15,10 +15,12 @@ class AppState {
     this.books = all_active_books;//all_active_books is defined on _wishlist.html.erb
 
   }
-  readingLevels = [
-    'PreK-G2',
-    'G3-G5'
-  ];
+
+  @observable
+  readingLevels = {
+    'PreK-G2': true,
+    'G3-G5': true
+  };
 
   searchTerm = "";
 
@@ -28,7 +30,7 @@ class AppState {
 
     return this.books
       .filter(book => book.name.toLowerCase().indexOf(term) >= 0 || book.author.toLowerCase().indexOf(term) >= 0 || book.description.toLowerCase().indexOf(term) >= 0)
-      //.filter(book => book.author.toLowerCase().indexOf(term) >= 0)
+      .filter(book => this.readingLevels[book.level])
       .filter(book => !this.wishlist.find((wish) => wish.catalog_entry_id === book.catalog_entry_id));
   }
 
@@ -61,6 +63,10 @@ class AppState {
         appState.wishlist = appState.wishlist.filter(b => b.catalog_entry_id !== book.catalog_entry_id);
       }
     });
+  }
+
+  handleGradeLevel(event) {
+    appState.readingLevels[event.target.value] = event.target.checked;
   }
 }
 

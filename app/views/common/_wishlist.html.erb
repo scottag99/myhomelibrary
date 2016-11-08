@@ -9,7 +9,8 @@
       subname: '',
       imageUrl: '<%= entry.catalog_entry.book.cover_image_url %>',
       author: '<%= j entry.catalog_entry.book.author.html_safe %>',
-      description: '<%= j entry.catalog_entry.book.description.html_safe %>'
+      description: '<%= j entry.catalog_entry.book.description.html_safe %>',
+      level: '<%= j entry.catalog_entry.book.level %>'
     }
 
     <% end %>
@@ -23,7 +24,8 @@
       subname: '',
       imageUrl: '<%= entry.book.cover_image_url %>',
       author: '<%= j entry.book.author.html_safe %>',
-      description: '<%= j entry.book.description.html_safe %>'
+      description: '<%= j entry.book.description.html_safe %>',
+      level: '<%= j entry.book.level %>'
     }
     <% end %>
   ];
