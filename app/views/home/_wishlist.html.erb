@@ -1,8 +1,8 @@
 <div class="col-sm-12 col-md-2">
   <div class="pull-left">
-    <h3><%= wishlist.public_name %>, <small><%= wishlist.reader_age %></small></h3>
+    <h3><%= wishlist.public_name %>, <small>Age: <%= wishlist.reader_age %></small></h3>
     <h4 class="text-muted"><%= wishlist.campaign.organization.name %></h5>
-    <h5 class="text-muted"><%= wishlist.teacher %></h4>
+    <h5 class="text-muted">Teacher: <%= wishlist.teacher %></h4>
     <ul class="list-group">
       <%= render partial: 'wishlist_entry', collection: wishlist.wishlist_entries %>
     </ul>
