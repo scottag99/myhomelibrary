@@ -13,6 +13,7 @@ class SecuredController < ApplicationController
   end
 
   def has_role?
+    role = ''
     if session[:userinfo]['extra'] && session[:userinfo]['extra']['raw_info']
       role = session[:userinfo]['extra']['raw_info']['role']
     end
@@ -24,7 +25,7 @@ class SecuredController < ApplicationController
       end
     end
 
-    if role.nil? || !self.class::ALLOWED_ROLES.include?(role)
+    if role.empty? || !self.class::ALLOWED_ROLES.include?(role)
       flash[:error] = "You must have one of the following roles #{self.class::ALLOWED_ROLES} in order to access this section. Your role: #{role}"
       redirect_to "/"
     end
