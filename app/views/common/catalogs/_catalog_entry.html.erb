@@ -2,7 +2,7 @@
   <td><%= catalog_entry.book.title %></td>
   <td><%= catalog_entry.book.author %></td>
   <td><%= catalog_entry.book.level %></td>
-  <td><%= number_to_currency(catalog_entry.price) %></td>
+  <% if admin? %><td><%= number_to_currency(catalog_entry.price) %></td><% end %>
   <td><%= catalog_entry.book.isbn %></td>
   <td><%= catalog_entry.book.ar_level %></td>
   <td><%= catalog_entry.book.ar_points %></td>

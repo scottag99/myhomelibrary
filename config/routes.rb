@@ -16,12 +16,17 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'home#index'
-    resources :users
+    resources :users do
+      member do
+        put 'toggle_admin'
+      end
+    end
     resources :books
     resources :catalogs do
       resources :catalog_entries
     end
     resources :organizations do
+      resources :partners
       resources :campaigns do
         member do
           get 'order_sheet'

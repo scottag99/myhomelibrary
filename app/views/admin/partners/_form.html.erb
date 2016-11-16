@@ -1,0 +1,36 @@
+<%= form_for [:admin, @partner.organization, @partner], :html => {:class => "form-horizontal"} do |f| %>
+
+  <div class="form-group">
+    <%= f.label :name, class: "col-md-1 control-label" %>
+    <div class="col-md-4">
+      <%= f.text_field :name, class: "form-control", :required => true %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email, class: "col-md-1 control-label" %>
+    <div class="col-md-4">
+      <%= f.text_field :email, :class => 'form-control', :required => true %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-1 col-md-4">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :active %>
+          Active
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+      <div class="col-md-offset-1 col-md-4 ">
+          <%= f.submit 'Submit'.html_safe, :class => 'btn btn-primary' %>
+          <%= link_to 'Back', admin_organization_url(@partner.organization), :class => "btn btn-default"%>
+      </div>
+  </div>
+</div>
+  
+<% end %>

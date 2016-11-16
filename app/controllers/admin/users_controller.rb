@@ -5,6 +5,17 @@ class Admin::UsersController < Admin::BaseController
     auth0 = get_auth0_client
     @users = auth0.get_users
   end
+
+  def toggle_admin
+    auth0 = get_auth0_client
+    user = auth0.user(params[:id])
+    app_meta = user['app_metadata'] || {'role' => '' }
+    app_meta['role'] = app_meta['role'].empty? ? 'admin' : ''
+    auth0.patch_user(params[:id], {'app_metadata' => app_meta})
+    flash[:success] = 'User updated. This change takes a few seconds to take effect. Refresh this page to see change.'
+    redirect_to admin_users_url
+  end
+
   private
   def get_auth0_client
     return Auth0Client.new(

@@ -1,5 +1,6 @@
 class Partner::WishlistEntriesController < Partner::BaseController
   include CommonWishlistEntryActions
+  before_action :set_organization
 
   def update
     @wishlist_entry = current_wishlist.wishlist_entries.find(params[:id])
@@ -36,7 +37,7 @@ class Partner::WishlistEntriesController < Partner::BaseController
   private
     #TODO: restrict to partner orgs if not admin
     def current_organization
-      Organization.find(params[:organization_id])
+      @organization
     end
 
     def current_campaign

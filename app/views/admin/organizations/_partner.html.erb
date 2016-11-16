@@ -1,0 +1,11 @@
+<tr>
+  <td>
+    <%= link_to partner.name, [:admin, partner.organization, partner] %>
+  </td>
+  <td><%= partner.email %></td>
+  <td><input type=checkbox disabled <%= partner.active ? 'checked' : '' %> /></td>
+  <td>
+    <%= link_to "Edit", edit_admin_organization_partner_url(partner.organization, partner), class: "btn btn-xs btn-warning" %>
+    <%= link_to "Delete", admin_organization_partner_url(partner.organization, partner),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'This action cannot be undone. Are you sure?'} %>
+  </td>
+</tr>

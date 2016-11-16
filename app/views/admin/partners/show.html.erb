@@ -1,0 +1,6 @@
+<%= breadcrumb([
+  @partner.organization.name,
+    {href: admin_organization_url(@partner.organization), label: 'Partners'}
+  ])
+%>
+<%= render partial: 'common/partners/show' %>

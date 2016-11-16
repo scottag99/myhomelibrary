@@ -24,8 +24,10 @@
           <th>Age</th>
           <th>Gender</th>
           <th>Book Count</th>
+          <% if admin? %>
           <th>Wishlist Total</th>
           <th>Donation Total</th>
+          <% end %>
           <th>&nbsp;</th>
         </tr>
       </thead>
@@ -33,8 +35,10 @@
         <tr>
           <th colspan="4"></th>
           <th><%= WishlistEntry.where(:wishlist_id => @campaign.wishlists).count %></th>
+          <% if admin? %>
           <th><%= number_to_currency(CatalogEntry.joins(:wishlist_entries => :wishlist).where('wishlist_entries.wishlist_id' => @campaign.wishlists).sum(:price)) %></th>
           <th><%= number_to_currency(Donation.where(:wishlist_id => @campaign.wishlists).sum(:amount)) %></th>
+          <% end %>
           <th>&nbsp;</th>
         </tr>
       </tfoot>

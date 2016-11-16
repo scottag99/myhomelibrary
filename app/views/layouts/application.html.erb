@@ -18,9 +18,21 @@
   <body>
     <nav class="main navbar navbar-fixed-top">
       <div class="container-fluid">
-        <a href="/">
-          <img src="<%= asset_path('logo.png') %>" alt="Barbara Bush Houston Literacy Foundation" height="50px" />
-        </a>
+        <div class="pull-left"
+          <a href="/">
+            <img src="<%= asset_path('logo.png') %>" alt="Barbara Bush Houston Literacy Foundation" height="50px" />
+          </a>
+        </div>
+        <% unless session[:userinfo].nil? -%>
+        <ul class="pull-right nav navbar-nav">
+          <li>
+            <a href="#"><img class="avatar" src="<%= session[:userinfo]['info']['image'] %>"/>
+              <span><%= session[:userinfo]['info']['name'] %></span>
+            </a>
+          </li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+        <% end -%>
       </div>
     </nav>
 

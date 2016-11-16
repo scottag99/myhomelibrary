@@ -1,0 +1,13 @@
+<div class="panel panel-default outer-panel">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h3 class="panel-title">Partner Detail</h3></div>
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+      <dt>Name</dt>
+      <dd><%= @partner.name %></dd>
+      <dt>Email</dt>
+      <dd><%= @partner.email
+      <dd><input type=checkbox disabled <%= @partner.active ? 'checked' : '' %> /></dd>
+    </dl>
+  </div>
+</div>
