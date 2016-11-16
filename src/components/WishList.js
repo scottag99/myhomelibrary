@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import { Col, Glyphicon, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
+import { Col, Glyphicon, ListGroup, ListGroupItem, Row, Button } from 'react-bootstrap';
 
 const WishListItem = ({ book, handleRemoveFromWishList }) => (
   <ListGroupItem>
@@ -28,6 +28,7 @@ const WishList = ({store}) => {
       <ListGroup>
         {children}
       </ListGroup>
+      <Button bsStyle="primary" href='#' onClick={store.goBack}>Done</Button>
     </div>
   );
 }

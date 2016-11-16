@@ -10,10 +10,12 @@ class AppState {
   @observable
   books = [];
 
+  wishlistList = '/';
+
   constructor() {
     this.wishlist = current_wishlist;//current_wishlist is defined on _wishlist.html.erb
     this.books = all_active_books;//all_active_books is defined on _wishlist.html.erb
-
+    this.wishlistList = back_url;
   }
 
   @observable
@@ -63,6 +65,10 @@ class AppState {
         appState.wishlist = appState.wishlist.filter(b => b.catalog_entry_id !== book.catalog_entry_id);
       }
     });
+  }
+
+  goBack() {
+    document.location.href=appState.wishlistList;
   }
 
   handleGradeLevel(event) {

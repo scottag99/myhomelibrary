@@ -58,7 +58,8 @@ class Admin::CatalogsController < Admin::BaseController
           :description => elem.xpath('./description').first.inner_html,
           :isbn => isbn,
           :level => elem.xpath('./grade').first.inner_html.sub('<b>Grade:</b> ', ''),
-          :cover_image_url => elem.xpath('./coverimage/image').attr('href')
+          :cover_image_url => elem.xpath('./coverimage/image').attr('href'),
+          :ar_points => elem.at_xpath('./ar_points').nil? ? nil : elem.xpath('./ar_points').first.text
         })
       end
       entry = @catalog.catalog_entries.new
@@ -74,7 +75,7 @@ class Admin::CatalogsController < Admin::BaseController
   end
 
   def destroy
-    Catalog.delete(params[:id])
+    Catalog.destroy(params[:id])
     @catalogs = Catalog.all
     respond_to do |format|
       format.html { render "index" }

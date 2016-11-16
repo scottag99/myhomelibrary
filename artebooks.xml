@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-stylesheet type="text/css" href="http://brightskypress.com/wp-content/book-samples/style_xml.css" ?>
+
+<productListing title="Arte Público Books">
+  <product>
+    <coverimage><image href="https://artepublicopress.com/wp-content/uploads/2013/12/Brujas-lechuzas-y-espantos.jpg"/></coverimage>
+    <name>Witches, Owls and Spooks</name>
+    <author>Alonso Perales</author>
+    <isbn>978-1-55885-512-0</isbn>
+    <grade>G3-G5</grade>
+    <cost>$4.98</cost>
+    <description>Brujas, lechuzas y espantos</description>
+    <ar_points></ar_points>
+  </product>
+  <product>
+    <coverimage><image href="https://artepublicopress.com/wp-content/uploads/2013/12/Case-of-the-Pen-Gone-Missing-The.jpg"/></coverimage>
+    <name>The Case of the Pen Gone Missing: A Mickey Rangel Mystery</name>
+    <author>René Saldaña, Jr.</author>
+    <isbn>978-1-55885-555-7</isbn>
+    <grade>G3-G5</grade>
+    <cost>$4.98</cost>
+    <description>El caso de la pluma perdida: Colección Mickey Rangel, detective privado</description>
+    <ar_points>1</ar_points>
+  </product>
+  <product>
+    <coverimage><image href="https://artepublicopress.com/wp-content/uploads/2013/11/Family-Familia.jpg"/></coverimage>
+    <name>Family</name>
+    <author>Diane Gonzales Bertrand</author>
+    <isbn>978-1-55885-270-9</isbn>
+    <grade>PreK-G2</grade>
+    <cost>$3.98</cost>
+    <description>Familia</description>
+    <ar_points>0.5</ar_points>
+  </product>
+  <product>
+    <coverimage><image href="https://artepublicopress.com/wp-content/uploads/2013/11/Frog-and-His-Friends-The.jpg"/></coverimage>
+    <name>Frog and His Friends Save Humanity</name>
+    <author>Victor Villaseñor</author>
+    <isbn>978-1-55885-556-4</isbn>
+    <grade>G3-G5</grade>
+    <cost>$3.98</cost>
+    <description>La rana y sus amigos salvan a la humanidad</description>
+    <ar_points>0.5</ar_points>
+  </product>
+  <product>
+    <coverimage><image href="https://artepublicopress.com/wp-content/uploads/2013/10/icy-watermelon.jpg"/></coverimage>
+    <name>Icy Watermelon</name>
+    <author>Mary Sue Galindo</author>
+    <isbn>978-1-55885-307-2</isbn>
+    <grade>PreK-G2</grade>
+    <cost>$3.98</cost>
+    <description>Sandía fría</description>
+    <ar_points>0.5</ar_points>
+  </product>
+  <product>
+    <coverimage><image href="https://artepublicopress.com/wp-content/uploads/2013/11/Last-Doll-The.jpg"/></coverimage>
+    <name>The Last Doll</name>
+    <author>Diane Gonzales Bertrand</author>
+    <isbn>978-1-55885-291-4</isbn>
+    <grade>G3-G5</grade>
+    <cost>$3.98</cost>
+    <description>La última muñeca</description>
+    <ar_points>0.5</ar_points>
+  </product>
+  <product>
+    <coverimage><image href="https://artepublicopress.com/wp-content/uploads/2013/12/Missing-Chancleta-The-NEW.jpg"/></coverimage>
+    <name>The Missing Chancleta and Other Top-Secret Cases</name>
+    <author>Alidis Vicente</author>
+    <isbn>978-1-55885-779-7</isbn>
+    <grade>G3-G5</grade>
+    <cost>$4.98</cost>
+    <description>La chancleta perdida y otros casos secretos</description>
+    <ar_points>1</ar_points>
+  </product>
+  <product>
+    <coverimage><image href="https://artepublicopress.com/wp-content/uploads/2013/12/Monster-in-the-Mattress-The.jpg"/></coverimage>
+    <name>The Monster in the Mattress and Other Stories</name>
+    <author>Diane de Anda</author>
+    <isbn>978-1-55885-693-6</isbn>
+    <grade>G3-G5</grade>
+    <cost>$4.98</cost>
+    <description>El monstruo en el colchón y otros cuentos</description>
+    <ar_points>1</ar_points>
+  </product>
+  <product>
+    <coverimage><image href="https://artepublicopress.com/wp-content/uploads/2013/10/Muffler-Man1.jpg"/></coverimage>
+    <name>Muffler Man</name>
+    <author>Tito Campos</author>
+    <isbn>978-1-55885-557-1</isbn>
+    <grade>G3-G5</grade>
+    <cost>$3.98</cost>
+    <description>El hombre mofle</description>
+    <ar_points>0.5</ar_points>
+  </product>
+  <product>
+    <coverimage><image href="https://artepublicopress.com/wp-content/uploads/2013/12/A-Mummy-in-Her-Backpack.jpg"/></coverimage>
+    <name>A Mummy In Her Backpack</name>
+    <author>James Luna</author>
+    <isbn>978-1-55885-756-8</isbn>
+    <grade>G3-G5</grade>
+    <cost>$4.98</cost>
+    <description>Una momia en su mochila</description>
+    <ar_points>1</ar_points>
+  </product>
+  <product>
+    <coverimage><image href="https://artepublicopress.com/wp-content/uploads/2013/11/Pepita-Takes-Time-Pepita-siempre-tardeHardcover.jpg"/></coverimage>
+    <name>Pepita Takes Time</name>
+    <author>Ofelia Dumas Lachtman</author>
+    <isbn>978-1-55885-305-8</isbn>
+    <grade>PreK-G2</grade>
+    <cost>$8.48</cost>
+    <description>Pepita, siempre tarde</description>
+    <ar_points>0.5</ar_points>
+  </product>
+  <product>
+    <coverimage><image href="https://artepublicopress.com/wp-content/uploads/2013/11/sip-slurp-soup-size-TEST.jpg"/></coverimage>
+    <name>Sip, Slurp, Soup, Soup</name>
+    <author>Diane Gonzales Bertrand</author>
+    <isbn>978-1-55885-241-9</isbn>
+    <grade>PreK-G2</grade>
+    <cost>$3.98</cost>
+    <description>Caldo, caldo, caldo</description>
+    <ar_points>0.5</ar_points>
+  </product>
+</productListing>
