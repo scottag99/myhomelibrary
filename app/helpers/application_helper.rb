@@ -23,4 +23,11 @@ module ApplicationHelper
     end
     html.html_safe
   end
+
+  def user_is_admin?
+    if session[:userinfo] && session[:userinfo]['extra'] && session[:userinfo]['extra']['raw_info']
+      return session[:userinfo]['extra']['raw_info']['role'] == 'admin'
+    end
+    return false
+  end
 end

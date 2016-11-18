@@ -4,6 +4,9 @@
   </td>
   <td><%= campaign.deadline %></td>
   <td><input type=checkbox disabled <%= campaign.ready_for_donations ? 'checked' : '' %> /></td>
+  <td><%= campaign.wishlists.count %></td>
+  <td><%= number_to_currency(CatalogEntry.joins(:wishlist_entries => :wishlist).where('wishlist_entries.wishlist_id' => campaign.wishlists).sum(:price)) %></td>
+  <td><%= number_to_currency(Donation.where(:wishlist_id => campaign.wishlists).sum(:amount)) %></td>
   <td>
     <%= link_to "Edit", edit_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-xs btn-warning" %>
     <%= link_to "Delete", admin_organization_campaign_url(campaign.organization, campaign),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'This action cannot be undone. Are you sure?'} %>

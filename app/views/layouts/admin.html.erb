@@ -28,6 +28,11 @@
           <li><%= link_to 'Campaigns', '/partner' if partner? %></li>
         </ul>
         <ul class="pull-right nav navbar-nav">
+          <% if user_is_admin? -%>
+          <li>
+            <%= link_to 'Admin', '/admin' %>
+          </li>
+          <% end -%>
           <li>
             <a href="#"><img class="avatar" src="<%= session[:userinfo]['info']['image'] %>"/>
               <span><%= session[:userinfo]['info']['name'] %></span>

@@ -23,16 +23,25 @@
             <img src="<%= asset_path('logo.png') %>" alt="Barbara Bush Houston Literacy Foundation" height="50px" />
           </a>
         </div>
-        <% unless session[:userinfo].nil? -%>
         <ul class="pull-right nav navbar-nav">
+          <li>
+            <a href="mailto:info@bushhoustonliteracy.org">Inquiries or Help</a>
+          </li>
+          <% unless session[:userinfo].nil? -%>
+          <% if user_is_admin? -%>
+          <li>
+            <%= link_to 'Admin', '/admin' %>
+          </li>
+          <% end -%>
           <li>
             <a href="#"><img class="avatar" src="<%= session[:userinfo]['info']['image'] %>"/>
               <span><%= session[:userinfo]['info']['name'] %></span>
             </a>
           </li>
           <li><a href="/logout">Logout</a></li>
-        </ul>
-        <% end -%>
+          <% end -%>
+      </ul>
+
       </div>
     </nav>
 
