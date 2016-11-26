@@ -59,7 +59,8 @@ class Admin::CatalogsController < Admin::BaseController
           :isbn => isbn,
           :level => elem.xpath('./grade').first.inner_html.sub('<b>Grade:</b> ', ''),
           :cover_image_url => elem.xpath('./coverimage/image').attr('href'),
-          :ar_points => elem.at_xpath('./ar_points').nil? ? nil : elem.xpath('./ar_points').first.text
+          :ar_points => elem.at_xpath('./ar_points').nil? ? nil : elem.xpath('./ar_points').first.text,
+          :ar_level => elem.at_xpath('./ar_level').nil? ? nil : elem.xpath('./ar_level').first.text
         })
       end
       entry = @catalog.catalog_entries.new
