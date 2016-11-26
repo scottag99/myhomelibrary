@@ -1,6 +1,6 @@
 class Wishlist < ApplicationRecord
   belongs_to :campaign
-  has_many :wishlist_entries, :dependent => :delete_all
+  has_many :wishlist_entries, :dependent => :destroy
   has_many :donations
   has_many :catalog_entries, through: :wishlist_entries
 

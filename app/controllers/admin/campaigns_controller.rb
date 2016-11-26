@@ -32,7 +32,7 @@ class Admin::CampaignsController < Admin::BaseController
   end
 
   def destroy
-    @organization.campaigns.delete(params[:id])
+    @organization.campaigns.destroy(params[:id])
     @campaigns = @organization.campaigns
     flash[:success] = "Thank you! Your Campaign was deleted successfully."
 

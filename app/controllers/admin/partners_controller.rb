@@ -33,7 +33,7 @@ class Admin::PartnersController < Admin::BaseController
   end
 
   def destroy
-    @organization.partners.delete(params[:id])
+    @organization.partners.destroy(params[:id])
     @partners = @organization.partners
     flash[:success] = "Thank you! Your Partner was deleted successfully."
 

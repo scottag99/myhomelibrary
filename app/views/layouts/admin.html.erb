@@ -28,6 +28,9 @@
           <li><%= link_to 'Campaigns', '/partner' if partner? %></li>
         </ul>
         <ul class="pull-right nav navbar-nav">
+          <li>
+            <a href="mailto:info@bushhoustonliteracy.org">Inquiries or Help</a>
+          </li>
           <% if user_is_admin? -%>
           <li>
             <%= link_to 'Admin', '/admin' %>

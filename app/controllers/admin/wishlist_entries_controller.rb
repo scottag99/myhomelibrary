@@ -27,7 +27,7 @@ class Admin::WishlistEntriesController < Admin::BaseController
   end
 
   def destroy
-    current_wishlist.wishlist_entries.delete(params[:id])
+    current_wishlist.wishlist_entries.destroy(params[:id])
     respond_to do |format|
       format.html { render "index" }
       format.json { render json: current_wishlist.wishlist_entries.all}

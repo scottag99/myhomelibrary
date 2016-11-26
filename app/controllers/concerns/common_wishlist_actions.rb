@@ -48,7 +48,7 @@ module CommonWishlistActions
   end
 
   def destroy
-    current_campaign.wishlists.delete(params[:id])
+    current_campaign.wishlists.destroy(params[:id])
     respond_to do |format|
       format.html { redirect_to get_campaign_url }
       format.json { render json: current_campaign.wishlists.all}

@@ -1,6 +1,6 @@
 class Admin::OrganizationsController < Admin::BaseController
   include CommonOrganizationActions
-  
+
   def new
     @organization = Organization.new
     respond_to do |format|
@@ -30,7 +30,7 @@ class Admin::OrganizationsController < Admin::BaseController
   end
 
   def destroy
-    Organization.delete(params[:id])
+    Organization.destroy(params[:id])
     @organizations = find_organizations
     flash[:success] = "Delete successful."
     respond_to do |format|

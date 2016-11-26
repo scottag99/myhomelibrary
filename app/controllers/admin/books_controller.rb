@@ -41,7 +41,7 @@ class Admin::BooksController < Admin::BaseController
   end
 
   def destroy
-    Book.delete(params[:id])
+    Book.destroy(params[:id])
     respond_to do |format|
       format.html { render "index" }
       format.json { render json: Book.all}
