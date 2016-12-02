@@ -26,7 +26,7 @@ module ApplicationHelper
 
   def user_is_admin?
     if session[:userinfo] && session[:userinfo]['extra'] && session[:userinfo]['extra']['raw_info']
-      return session[:userinfo]['extra']['raw_info']['role'] == 'admin'
+      return session[:userinfo]['extra']['raw_info']['role'] == 'admin' && session[:userinfo]['extra']['raw_info']['email_verified']
     end
     return false
   end

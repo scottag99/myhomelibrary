@@ -27,7 +27,7 @@
           <li>
             <a href="mailto:info@bushhoustonliteracy.org">Inquiries or Help</a>
           </li>
-          <% unless session[:userinfo].nil? -%>
+          <% unless session[:userinfo].nil?  -%>
           <% if user_is_admin? -%>
           <li>
             <%= link_to 'Admin', '/admin' %>

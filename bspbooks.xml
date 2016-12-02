@@ -2,143 +2,143 @@
 
 <?xml-stylesheet type="text/css" href="http://brightskypress.com/wp-content/book-samples/style_xml.css" ?>
 
-<productListing title="BSP Books"> 
-  <product> 
+<productListing title="BSP Books">
+  <product>
     <coverimage><image href="http://brightskypress.com/wp-content/book-samples/images/watercycle_web_image.jpg" /></coverimage>
-  	<name>A Wild Ride on the Water Cycle</name> 
+  	<name>A Wild Ride on the Water Cycle</name>
     <subname>A Jake &amp; Alice Adventure</subname>
 	<author>Anthony Yañez</author>
 	<illustrator>Illustrated by Mike Guillory</illustrator>
-	<isbn><b>ISBN:</b> 978-1-939055-80-4</isbn>
-	<grade><b>Grade:</b> PreK-G2</grade>
+	<isbn>978-1-939055-80-4</isbn>
+	<grade>PreK-G2</grade>
     <cost>$5.00</cost>
-	<cover>Hardcover</cover> 
-    <description>Join Alice and Jake on an adventure through time and weather. From the belly of a T-Rex to beads of sweat running down the faces of children to falling snowflakes, Alice and Jake explore and learn as they evaporate, condense and precipitate their way through history on the wild ride that is the water cycle.</description> 
-  </product> 
-    <product> 
+	<cover>Hardcover</cover>
+    <description>Join Alice and Jake on an adventure through time and weather. From the belly of a T-Rex to beads of sweat running down the faces of children to falling snowflakes, Alice and Jake explore and learn as they evaporate, condense and precipitate their way through history on the wild ride that is the water cycle.</description>
+  </product>
+    <product>
     <coverimage><image href="http://brightskypress.com/wp-content/book-samples/images/daniellestrawfairies_web_image.jpg" /></coverimage>
-  	<name>Danielle &amp; The Strawberry Fairies</name> 
+  	<name>Danielle &amp; The Strawberry Fairies</name>
     <subname>How Strawberries Become Red</subname>
 	<author>Rini</author>
-	<isbn><b>ISBN:</b> 978-1-939055-14-9</isbn>
-	<grade><b>Grade:</b> PreK-G2</grade>
+	<isbn>978-1-939055-14-9</isbn>
+	<grade>PreK-G2</grade>
     <cost>$5.00</cost>
-	<cover>Hardcover</cover> 
-    <description>This delicious treat for the senses and delightful tale celebrates the power of a child's imagination and its connection to a magic that never fades. It includes a disc of original music so young readers can sing along with the fairies as they work. <b>Rini</b>, an award-winning creative executive at Ogilvy &amp; Mather Advertising Agency, has a unique ability to blend art and story and reminds readers of all ages that there is magic all around us. 
-</description> 
+	<cover>Hardcover</cover>
+    <description>This delicious treat for the senses and delightful tale celebrates the power of a child's imagination and its connection to a magic that never fades. It includes a disc of original music so young readers can sing along with the fairies as they work. Rini, an award-winning creative executive at Ogilvy &amp; Mather Advertising Agency, has a unique ability to blend art and story and reminds readers of all ages that there is magic all around us.
+</description>
   </product>
-  <product> 
+  <product>
     <coverimage><image href="http://brightskypress.com/wp-content/book-samples/images/davidmighty8_web_image.jpg" /></coverimage>
-  	<name>David &amp; the Mighty Eighth</name> 
+  	<name>David &amp; the Mighty Eighth</name>
     <subname></subname>
 	<author>Marjorie Hodgson Parker</author>
 	<illustrator>Illustrated by Mark Postlethwaite</illustrator>
-	<isbn><b>ISBN:</b> 978-1-931721-93-6</isbn>
-	<grade><b>Grade:</b> G3-G5</grade>
+	<isbn>978-1-931721-93-6</isbn>
+	<grade>G3-G5</grade>
     <cost>$3.00</cost>
-	<cover>Hardcover</cover> 
-    <description>Evacuated from his war-torn London home during the Blitz, devastated by the news that his father—a Royal Air Force pilot—is missing in action, and determined to become a man, David Freeman seeks what it takes to have courage. Based on a true story, this historical fiction recounts David’s adventures with an American pilot, &quot;Tex,&quot; and his crew. The friendly airmen with the United States’ Eighth Air Force give David hope when Hitler’s Nazis seem unstoppable. <i>David &amp; the Mighty Eighth</i> confirms the importance of faith, family and freedom, and is a testimony to the resilience of the human spirit. 
-</description> 
+	<cover>Hardcover</cover>
+    <description>Evacuated from his war-torn London home during the Blitz, devastated by the news that his father—a Royal Air Force pilot—is missing in action, and determined to become a man, David Freeman seeks what it takes to have courage. Based on a true story, this historical fiction recounts David’s adventures with an American pilot, &quot;Tex,&quot; and his crew. The friendly airmen with the United States’ Eighth Air Force give David hope when Hitler’s Nazis seem unstoppable. David &amp; the Mighty Eighth confirms the importance of faith, family and freedom, and is a testimony to the resilience of the human spirit.
+</description>
   </product>
-    <product> 
+    <product>
     <coverimage><image href="http://brightskypress.com/wp-content/book-samples/images/desertdays_nights_web_image.jpg" /></coverimage>
-  	<name>Desert Days, Desert Nights</name> 
+  	<name>Desert Days, Desert Nights</name>
     <subname></subname>
 	<author>Roxie Munro</author>
-	<isbn><b>ISBN:</b> 978-1-933979-77-9</isbn>
-	<grade><b>Grade:</b> PreK-G2</grade>
+	<isbn>978-1-933979-77-9</isbn>
+	<grade>PreK-G2</grade>
     <cost>$4.00</cost>
-	<cover>Hardcover</cover> 
-    <description>The arid majesty of the seven great American deserts is depicted throughout this beautifully illustrated book. Ideal for young learners, <i>Desert Days, Desert Nights</i> includes a list of animals for readers to locate, and uncolored illustrations are available on the web for educators to use. Intricate paintings highlight the different ways deserts come to life day and night. 
-</description> 
+	<cover>Hardcover</cover>
+    <description>The arid majesty of the seven great American deserts is depicted throughout this beautifully illustrated book. Ideal for young learners, Desert Days, Desert Nights includes a list of animals for readers to locate, and uncolored illustrations are available on the web for educators to use. Intricate paintings highlight the different ways deserts come to life day and night.
+</description>
   </product>
-    <product> 
+    <product>
     <coverimage><image href="http://brightskypress.com/wp-content/book-samples/images/douwlina_web_image.jpg" /></coverimage>
-  	<name>Douwlina</name> 
+  	<name>Douwlina</name>
     <subname>A Rhino's Story</subname>
 	<author>Grace Borgeson</author>
-	<isbn><b>ISBN:</b> 978-1-936474-63-9</isbn>
-	<grade><b>Grade:</b> G3-G5</grade>
+	<isbn>978-1-936474-63-9</isbn>
+	<grade>G3-G5</grade>
     <cost>$4.00</cost>
-	<cover>Hardcover</cover> 
-    <description><i>Douwlina</i> tells the inspirational story of an orphaned rhino in South Africa. When her mother is killed by poachers, Douwlina is raised in a shelter. There, people and other animals love and care for her until she is ready to live with her own kind again. Funds from this book go to &quot;Care for Wild Africa&quot; and other groups working to stop rhino poaching. 
-</description> 
+	<cover>Hardcover</cover>
+    <description>Douwlina tells the inspirational story of an orphaned rhino in South Africa. When her mother is killed by poachers, Douwlina is raised in a shelter. There, people and other animals love and care for her until she is ready to live with her own kind again. Funds from this book go to &quot;Care for Wild Africa&quot; and other groups working to stop rhino poaching.
+</description>
   </product>
-    <product> 
+    <product>
     <coverimage><image href="http://brightskypress.com/wp-content/book-samples/images/onedayrambling_web_image.jpg" /></coverimage>
-  	<name>One Day I Went Rambling</name> 
+  	<name>One Day I Went Rambling</name>
     <subname></subname>
 	<author>Kelly Bennett</author>
 	<illustrator>Illustrated by Terri Murphy</illustrator>
-	<isbn><b>ISBN:</b> 978-1-936474-06-6</isbn>
-	<grade><b>Grade:</b> G3-G5</grade>
+	<isbn>978-1-936474-06-6</isbn>
+	<grade>G3-G5</grade>
     <cost>$4.00</cost>
-	<cover>Hardcover</cover> 
-    <description>When Zane goes rambling, his friends call him crazy and refuse to play along, but after watching him find magic in the ordinary, they are eventually drawn into his imaginative game. Zane sees the treasures in everyday objects that have been stolen from today's children by electronic entertainment. Winner of the Character Building Silver Medal, like all <b>Bennett's</b> award-winning books, this fun read celebrates the love and imagination all kids need to thrive. 
-</description> 
+	<cover>Hardcover</cover>
+    <description>When Zane goes rambling, his friends call him crazy and refuse to play along, but after watching him find magic in the ordinary, they are eventually drawn into his imaginative game. Zane sees the treasures in everyday objects that have been stolen from today's children by electronic entertainment. Winner of the Character Building Silver Medal, like all Bennett's award-winning books, this fun read celebrates the love and imagination all kids need to thrive.
+</description>
   </product>
-    <product> 
+    <product>
     <coverimage><image href="http://brightskypress.com/wp-content/book-samples/images/riverroyals_web_image.jpg" /></coverimage>
-  	<name>River Royals</name> 
+  	<name>River Royals</name>
     <subname>Master the Mississippi</subname>
 	<author>Katie Clark &amp; Sarah Wynne</author>
 	<illustrator>Illustrated by Penny Weber</illustrator>
-	<isbn><b>ISBN:</b> 978-1-939055-71-2</isbn>
-	<grade><b>Grade:</b> PreK-G2</grade>
+	<isbn>978-1-939055-71-2</isbn>
+	<grade>PreK-G2</grade>
     <cost>$3.00</cost>
-	<cover>Hardcover</cover> 
-    <description>Join Eliza Jane and Henry as they explore the Mighty Mississippi and discover the wonders of America at every bend. <b>Katie Clark</b> and <b>Sarah Wynne</b> created the <i>River Royals</i> series to celebrate patriotism with their children, friends and families. Exploring the country one river at a time, they share facts about history and geography, promoting an appreciation of America. 
-</description> 
+	<cover>Hardcover</cover>
+    <description>Join Eliza Jane and Henry as they explore the Mighty Mississippi and discover the wonders of America at every bend. Katie Clark and Sarah Wynne created the River Royals series to celebrate patriotism with their children, friends and families. Exploring the country one river at a time, they share facts about history and geography, promoting an appreciation of America.
+</description>
   </product>
-  <product> 
+  <product>
     <coverimage><image href="http://brightskypress.com/wp-content/book-samples/images/rodeo_web_image.jpg" /></coverimage>
-  	<name>Rodeo</name> 
+  	<name>Rodeo</name>
     <subname></subname>
 	<author>Roxie Munro</author>
-	<isbn><b>ISBN:</b> 978-1-933979-03-8</isbn>
-	<grade><b>Grade:</b> PreK-G2</grade>
+	<isbn>978-1-933979-03-8</isbn>
+	<grade>PreK-G2</grade>
     <cost>$3.00</cost>
-	<cover>Hardcover</cover> 
-    <description>This lift-the-flap, fold-out book contains 50 flaps, plus a unique rodeo event on every brilliantly colored spread. <b>Munro's</b> attention to detail brings the rodeo to life. Many flaps have multiple fold-outs. Explanations of rodeo events on every page assure that young readers will know what the rodeo is all about when they get there and can relive it when they come home. 
-</description> 
+	<cover>Hardcover</cover>
+    <description>This lift-the-flap, fold-out book contains 50 flaps, plus a unique rodeo event on every brilliantly colored spread. Munro's attention to detail brings the rodeo to life. Many flaps have multiple fold-outs. Explanations of rodeo events on every page assure that young readers will know what the rodeo is all about when they get there and can relive it when they come home.
+</description>
     </product>
-    <product> 
+    <product>
     <coverimage><image href="http://brightskypress.com/wp-content/book-samples/images/sillyshoes_web_image.jpg" /></coverimage>
-  	<name>Silly Shoes</name> 
+  	<name>Silly Shoes</name>
     <subname>Poems To Make You Smile</subname>
 	<author>Lawson Gow</author>
 	<illustrator>Illustrated by Mike Guillory</illustrator>
-	<isbn><b>ISBN:</b> 978-1-939055-81-1</isbn>
-	<grade><b>Grade:</b> PreK-G2</grade>
+	<isbn>978-1-939055-81-1</isbn>
+	<grade>PreK-G2</grade>
     <cost>$4.00</cost>
-	<cover>Hardcover</cover> 
-    <description>The world can seem so serious, and sometimes people just can't think of a reason to smile. <i>Silly Shoes,</i> a collection of whimsical, endearing poems, gives kids just the tickle that's needed. Life is good, and <i>Silly Shoes</i> reminds us of the color and fun that surrounds us, if we're willing to look. No matter what's going on, <b>Lawson Gow</b> proves that there are always things to smile about if you just put on your silly shoes—and tie them up tight!
-</description> 
+	<cover>Hardcover</cover>
+    <description>The world can seem so serious, and sometimes people just can't think of a reason to smile. Silly Shoes, a collection of whimsical, endearing poems, gives kids just the tickle that's needed. Life is good, and Silly Shoes reminds us of the color and fun that surrounds us, if we're willing to look. No matter what's going on, Lawson Gow proves that there are always things to smile about if you just put on your silly shoes—and tie them up tight!
+</description>
     </product>
-    <product> 
+    <product>
     <coverimage><image href="http://brightskypress.com/wp-content/book-samples/images/stormwrangler_web_image.jpg" /></coverimage>
-  	<name>Storm Wrangler</name> 
+  	<name>Storm Wrangler</name>
     <subname></subname>
 	<author>Coert Voorhees</author>
 	<illustrator>Illustrated by Mike Guillory</illustrator>
-	<isbn><b>ISBN:</b> 978-1-936474-07-3</isbn>
-	<grade><b>Grade:</b> PreK-G2</grade>
+	<isbn>978-1-936474-07-3</isbn>
+	<grade>PreK-G2</grade>
     <cost>$3.00</cost>
-	<cover>Hardcover</cover> 
-    <description>Come rain or shine, children will love this brave storm-fighting hero. <i>Storm Wrangler</i> brings the legendary feel of the old Wild West, its vast landscapes and huge weather patterns to life in brilliant illustrations. Told in rhymes that convey the energy of building tempests, the <i>Storm Wrangler</i> battles all forms of weather and delivers the calm that comes after every storm.
-</description> 
+	<cover>Hardcover</cover>
+    <description>Come rain or shine, children will love this brave storm-fighting hero. Storm Wrangler brings the legendary feel of the old Wild West, its vast landscapes and huge weather patterns to life in brilliant illustrations. Told in rhymes that convey the energy of building tempests, the Storm Wrangler battles all forms of weather and delivers the calm that comes after every storm.
+</description>
     </product>
-	 <product> 
+	 <product>
     <coverimage><image href="http://brightskypress.com/wp-content/book-samples/images/wordburglar_web_image.jpg" /></coverimage>
-  	<name>The Word Burglar</name> 
+  	<name>The Word Burglar</name>
     <subname></subname>
 	<author>Chris Cander</author>
 	<illustrator>Illustrated by Katherine Tramonte</illustrator>
-	<isbn><b>ISBN:</b> 978-1-936474-96-7</isbn>
-	<grade><b>Grade:</b> PreK-G2</grade>
+	<isbn>978-1-936474-96-7</isbn>
+	<grade>PreK-G2</grade>
     <cost>$4.00</cost>
-	<cover>Hardcover</cover> 
-    <description><i>The Word Burglar</i> reveals the power of language and helps children understand that without reading skills they become diminished. This tale will delight logophiles of all ages and encourage new or struggling readers to persevere. <b>Chris Cander</b> is member of the American Society of Journalists and Authors, SCBWI, Author's Guild and Mensa, and she lives with her family in Houston. 
-</description> 
+	<cover>Hardcover</cover>
+    <description>The Word Burglar reveals the power of language and helps children understand that without reading skills they become diminished. This tale will delight logophiles of all ages and encourage new or struggling readers to persevere. Chris Cander is member of the American Society of Journalists and Authors, SCBWI, Author's Guild and Mensa, and she lives with her family in Houston.
+</description>
     </product>
  </productListing>

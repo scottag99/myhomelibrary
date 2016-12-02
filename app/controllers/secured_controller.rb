@@ -10,6 +10,11 @@ class SecuredController < ApplicationController
       session[:original_url] = request.original_url
       redirect_to '/login'
     end
+
+    if session[:userinfo].present? && session[:userinfo]['extra'] && session[:userinfo]['extra']['raw_info'] && !session[:userinfo]['extra']['raw_info']['email_verified']
+      flash[:error] = "You must verify your email before continuing. Check your email for a verification link and then re-login to My Home Library after verification."
+      redirect_to '/'
+    end
   end
 
   def has_role?

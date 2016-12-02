@@ -49,20 +49,19 @@ class Admin::CatalogsController < Admin::BaseController
     doc = File.open(uploaded_io.path) { |f| Nokogiri::XML(f) }
 
     doc.xpath('//product').each do |elem|
-      isbn = elem.xpath('./isbn').first.inner_html.sub('<b>ISBN:</b> ', '')
-      b = Book.find_by_isbn(isbn)
-      if b.nil?
-        b = Book.create({
-          :title => elem.xpath('./name').first.text,
-          :author => elem.xpath('./author').first.text,
-          :description => elem.xpath('./description').first.inner_html,
-          :isbn => isbn,
-          :level => elem.xpath('./grade').first.inner_html.sub('<b>Grade:</b> ', ''),
-          :cover_image_url => elem.xpath('./coverimage/image').attr('href'),
-          :ar_points => elem.at_xpath('./ar_points').nil? ? nil : elem.xpath('./ar_points').first.text,
-          :ar_level => elem.at_xpath('./ar_level').nil? ? nil : elem.xpath('./ar_level').first.text
-        })
-      end
+      isbn = elem.xpath('./isbn').first.text
+
+      b = Book.where(isbn: isbn).first_or_initialize
+      b.title = elem.xpath('./name').first.text
+      b.author = elem.xpath('./author').first.text
+      b.description = elem.xpath('./description').first.inner_html
+      b.isbn = isbn
+      b.level = elem.xpath('./grade').first.text
+      b.cover_image_url = elem.xpath('./coverimage/image').attr('href')
+      b.ar_points = elem.at_xpath('./ar_points').nil? ? nil : elem.xpath('./ar_points').first.text
+      b.ar_level = elem.at_xpath('./ar_level').nil? ? nil : elem.xpath('./ar_level').first.text
+      b.save
+
       entry = @catalog.catalog_entries.new
       entry.book = b
       entry.price = elem.xpath('./cost').first.inner_html.sub('$', '')
