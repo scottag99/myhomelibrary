@@ -48,8 +48,16 @@ class HomeController < ApplicationController
 private
 
   def find_wishlists
-    term = "%#{params[:term]}%"
+    term = params[:term]
     #By joining wishlist_entries, we get only wishlists with books added.
-    @wishlists = Wishlist.joins([{:campaign => :organization}, :wishlist_entries]).where("deadline > ? and ready_for_donations = ? and (reader_name like ? or teacher like ? or organizations.name like ?)", Date.today, true, term, term, term).distinct.limit(60).all
+    query = Wishlist.joins([{:campaign => :organization}, :wishlist_entries]).distinct
+    if term.to_s.size < 2
+      query = query.order('random()').limit(20)
+    else
+      term = "%#{term}%"
+      # ILIKE is a postgres extension so this fails in local dev environments
+      query = query.where("deadline > ? and ready_for_donations = ? and (reader_name ilike ? or teacher ilike ? or organizations.name ilike ?)", Date.today, true, term, term, term)
+    end
+    @wishlists = query.all
   end
 end
