@@ -42,9 +42,9 @@ The first time you deploy with Vagrant, an OS image is downloaded and provisione
 
 1. Member of Barbara Bush Houston Literacy Foundation (BBHLF) logs in to Admin area.
 1. BBHLF user creates a new organization. This will almost always be a school right now but could expand beyond schools in the future.
-1. A user is assigned as a "Partner" to the organization. This will be a librarian or teacher in most cases.
+1. A user is assigned as a "Volunteer" to the organization. This will be a librarian or teacher in most cases.
 1. A new campaign is created for the organization with title like "Fall 2016".
-1. The partner assigned above is now able to log in the Partner area.
+1. The partner assigned above is now able to log in the Volunteer area.
 1. The partner works with kids to build their wish list by searching the catalog of books and assigning to the kid's specific wish list.
 1. After the wish lists are created, donors can search for lists by school, gender, grade, or teacher. They will not see the child's name.
 1. The donor can choose to fund a wish list which will take them to the donation page where the amount for the wish list is pre-populated in the form.
@@ -52,7 +52,7 @@ The first time you deploy with Vagrant, an OS image is downloaded and provisione
 
 ### Authentication
 
-Authentication is handled by Auth0. Metadata on the Auth0 record marks users as Admin or Partner. Before filters on the different area controllers handle verifying access to these areas.
+Authentication is handled by Auth0. Metadata on the Auth0 record marks users as Admin. Before filters on the different area controllers handle verifying access to these areas.
 
 ## Running Rails Commands
 

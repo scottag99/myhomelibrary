@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :partner do
+  namespace :partner, :path => 'volunteer' do
     root to: 'home#index'
     resources :organizations do
       resources :campaigns do
@@ -55,4 +55,5 @@ Rails.application.routes.draw do
       end
     end
   end
+
 end

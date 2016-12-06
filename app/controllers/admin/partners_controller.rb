@@ -6,7 +6,7 @@ class Admin::PartnersController < Admin::BaseController
     @partner = @organization.partners.find(params[:id])
     @partner.update!(partner_params)
     @partners = @organization.partners
-    flash[:success] = "Thank you! Your Partner was updated successfully."
+    flash[:success] = "Thank you! Your volunteer was updated successfully."
     respond_to do |format|
       format.html { redirect_to admin_organization_url(@organization) }
       format.json { render json: @partner }
@@ -25,7 +25,7 @@ class Admin::PartnersController < Admin::BaseController
   def create
     @partner = @organization.partners.create!(partner_params)
     @partners = @organization.partners
-    flash[:success] = "Thank you! Your Partner was added successfully."
+    flash[:success] = "Thank you! Your volunteer was added successfully."
     respond_to do |format|
       format.html { redirect_to admin_organization_url(@organization) }
       format.json { render json: @partner }
@@ -35,7 +35,7 @@ class Admin::PartnersController < Admin::BaseController
   def destroy
     @organization.partners.destroy(params[:id])
     @partners = @organization.partners
-    flash[:success] = "Thank you! Your Partner was deleted successfully."
+    flash[:success] = "Thank you! Your volunteer was deleted successfully."
 
     respond_to do |format|
       format.html { redirect_to admin_organization_url(@organization) }
