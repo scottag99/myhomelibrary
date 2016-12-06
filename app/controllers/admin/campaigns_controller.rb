@@ -45,6 +45,7 @@ class Admin::CampaignsController < Admin::BaseController
   def order_sheet
     @campaign = @organization.campaigns.find(params[:id])
     @books = Book.joins({catalog_entries: [{wishlist_entries: [{wishlist: :campaign}]}, :catalog]}).where('wishlists.campaign_id = ?', @campaign).group('catalogs.source', :isbn, :title).order('catalogs.source', :title).count
+    @prices = Book.joins({catalog_entries: [{wishlist_entries: [{wishlist: :campaign}]}, :catalog]}).where('wishlists.campaign_id = ?', @campaign).group('catalogs.source', :isbn, :title).order('catalogs.source', :title).sum('catalog_entries.price')
     respond_to do |format|
       format.html
       format.json { render json: @campaign }
