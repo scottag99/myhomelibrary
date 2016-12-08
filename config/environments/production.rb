@@ -85,4 +85,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.debug_exception_response_format = :api
+
+  config.auth0_endpoint = 'myhomelibrary-prod.auth0.com'
 end

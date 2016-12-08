@@ -53,4 +53,6 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.debug_exception_response_format = :api
+
+  config.auth0_endpoint = 'myhomelibrary-dev.auth0.com'
 end

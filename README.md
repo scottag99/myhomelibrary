@@ -30,6 +30,15 @@ The first time you deploy with Vagrant, an OS image is downloaded and provisione
 1. In a browser, navigate to http://127.0.0.1:3000/ and the My Home Library splash page should render.
 1. You are now ready to code. To execute new migrations, gems, or restart the server, run `vagrant reload`.
 
+
+##### Environment variables
+
+My Home Library uses `dotenv` to manage environment variables while in development. You will need to create a `.env` file with the keys below. Values can be obtained from the maintainer.
+
+    AUTH0_CLIENT_ID=
+    AUTH0_CLIENT_SECRET=
+    AUTH0_API_TOKEN=
+
 ##### Helpful commands:
 
 * `vagrant up` to start the environment.

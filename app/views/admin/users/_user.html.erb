@@ -3,5 +3,6 @@
   <td><%= user['email'] %></td>
   <td><input type=checkbox disabled <%= user['email_verified'] ? 'checked' : '' %> /></td>
   <td><input type=checkbox disabled <%= user['app_metadata'].nil? ? '' : user['app_metadata']['role'] == 'admin' ? 'checked' : '' %> /></td>
-  <td><%= link_to "Toggle Admin", toggle_admin_admin_user_url(user['user_id']),  method: :put, class: "btn btn-danger btn-xs" %></td>
+  <td><%= link_to "Toggle Admin", toggle_admin_admin_user_url(user['user_id']),  method: :put, class: "btn btn-danger btn-xs" %>
+  <%= link_to "Delete", admin_user_url(user['user_id']),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'This action cannot be undone. Are you sure?'} %></td>
 </tr>

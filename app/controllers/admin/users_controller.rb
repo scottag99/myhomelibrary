@@ -16,12 +16,19 @@ class Admin::UsersController < Admin::BaseController
     redirect_to admin_users_url
   end
 
+  def destroy
+    auth0 = get_auth0_client
+    auth0.delete_user(params[:id])
+    flash[:success] = 'User deleted. This change takes a few seconds to take effect. Refresh this page to see change.'
+    redirect_to admin_users_url
+  end
+
   private
   def get_auth0_client
     return Auth0Client.new(
       :client_id => Rails.application.secrets.auth0_client_id,
       :token => Rails.application.secrets.auth0_api_token,
-      :domain => "dreamlibrary.auth0.com",
+      :domain => Rails.application.config.auth0_endpoint,
       :protocols => 'v2',
       :api_version => 2
     )
