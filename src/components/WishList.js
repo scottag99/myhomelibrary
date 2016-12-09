@@ -24,7 +24,7 @@ const WishList = ({store}) => {
 
   return (
     <div>
-      <h3>My Wish List</h3>
+      <h4>Wish List for {store.reader}</h4>
       <ListGroup>
         {children}
       </ListGroup>
