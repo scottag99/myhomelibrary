@@ -23,7 +23,7 @@ class HomeController < ApplicationController
     @schoolname = params[:schoolname]
     @wishListID = params[:wishlist_id]
     @donationLevel = params[:amount]
-    @Semester = params[:campaign_name]
+    @Campaign = params[:campaign_name]
     @reader_name = params[:reader_name]
   end
 
@@ -52,7 +52,7 @@ private
     term = params[:term]
     #By joining wishlist_entries, we get only wishlists with books added.
     if term.to_s.size < 2
-      @wishlists = Wishlist.joins(:wishlist_entries).order('random()').limit(20).all
+      @wishlists = Wishlist.joins([{:campaign => :organization},"INNER JOIN (select count(*), wishlist_id from wishlist_entries group by wishlist_id having count(*) > 0) c on c.wishlist_id = wishlists.id"]).where("deadline > ? and ready_for_donations = ?", Date.today, true).order('random()').limit(20)
     else
       term = "%#{term}%"
       # ILIKE is a postgres extension so this fails in local dev environments

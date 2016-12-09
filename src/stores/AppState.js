@@ -13,9 +13,11 @@ class AppState {
   wishlistList = '/';
 
   constructor() {
-    this.wishlist = current_wishlist;//current_wishlist is defined on _wishlist.html.erb
-    this.books = all_active_books;//all_active_books is defined on _wishlist.html.erb
+    //This values are defined on common/_wishlist.html.erb
+    this.wishlist = current_wishlist;
+    this.books = all_active_books;
     this.wishlistList = back_url;
+    this.reader = reader;
   }
 
   @observable
