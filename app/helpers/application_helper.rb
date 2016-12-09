@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def breadcrumb(items)
-    html = '<p>'
+    html = '<p id="breadcrumb">'
     items.each do |item|
       if item.is_a?(Hash)
         html += link_to( item[:label], item[:href])

@@ -16,6 +16,11 @@
  @import "bootstrap";
  @import 'bootstrap-datetimepicker';
 
+ @media print {
+    table {page-break-after: always;}
+    nav, #breadcrumb {display: none;}
+}
+
 body {
   color: #5a5a5a;
   padding-top: 50px;
