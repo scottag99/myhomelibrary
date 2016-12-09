@@ -52,7 +52,7 @@ private
     term = params[:term]
     #By joining wishlist_entries, we get only wishlists with books added.
     if term.to_s.size < 2
-      @wishlists = Wishlist.joins(:wishlist_entries).order('random()').limit(20).all
+      @wishlists = Wishlist.joins(:wishlist_entries).order('random()').limit(20).distinct
     else
       term = "%#{term}%"
       # ILIKE is a postgres extension so this fails in local dev environments
