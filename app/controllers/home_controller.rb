@@ -24,6 +24,7 @@ class HomeController < ApplicationController
     @wishListID = params[:wishlist_id]
     @donationLevel = params[:amount]
     @Semester = params[:campaign_name]
+    @reader_name = params[:reader_name]
   end
 
   def search
