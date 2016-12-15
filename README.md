@@ -37,7 +37,6 @@ My Home Library uses `dotenv` to manage environment variables while in developme
 
     AUTH0_CLIENT_ID=
     AUTH0_CLIENT_SECRET=
-    AUTH0_API_TOKEN=
 
 ##### Helpful commands:
 
