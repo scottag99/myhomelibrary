@@ -48,12 +48,12 @@ nav.main {
   border-top: 1px solid #eee;
 
   &.hero2{
-    background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); 
-    background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); 
-    background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); 
+    background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+    background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
   }
-  
+
 }
 
 
@@ -146,7 +146,7 @@ nav.main {
 }
 .book-description {
   position: relative;
-  height: 10em;
+  height: 9em;
   overflow: hidden;
 }
 .book:hover .book-description {
@@ -218,6 +218,4 @@ nav.main {
   }
   &.phillips {
   }
-} 
-
-
+}

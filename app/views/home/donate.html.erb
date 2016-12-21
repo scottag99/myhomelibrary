@@ -35,6 +35,16 @@ function getValueByLabel(aSignup, labelText, sublabelText){
   // found none
   return '';
 }
+
+function kimbiaSubmit(f) {
+  $(f.view.theForm.getElementsByTagName('button')[0]).hide();
+  $(f.view.theForm.getElementsByTagName('button')[0]).after($('<span id="spinner">Submitting...</span>'))
+}
+
+function kimbiaResponse(f) {
+  $(f.view.theForm.getElementsByTagName('button')[0]).show();
+  $(f.view.theForm.getElementsByTagName('button')[0]).find('#spinner').remove();
+}
 </script>
 
 <div class="container">
@@ -44,8 +54,8 @@ function getValueByLabel(aSignup, labelText, sublabelText){
   </p>
 <!-- script to populate form tag -->
 <% if ENV['IS_PRODUCTION'] %>
-<script src="https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrive&oncomplete=kimbiaSuccess"></script>
+<script src="https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrive&oncomplete=kimbiaSuccess&onbeforesubmit=kimbiaSubmit&onplatformresponse=kimbiaResponse"></script>
 <% else %>
-<script src='https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrivetest&oncomplete=kimbiaSuccess'></script>
+<script src='https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrivetest&oncomplete=kimbiaSuccess&onbeforesubmit=kimbiaSubmit&onplatformresponse=kimbiaResponse'></script>
 <% end %>
 </div>
