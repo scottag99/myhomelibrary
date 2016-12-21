@@ -190,6 +190,15 @@ nav.main {
   padding: 0.5em 2em;
 }
 
+.brand-logo{
+  margin:10px;
+  display:block;
+}
+
+html .navbar-nav > li > a {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
 
 /* lead
 ------------------------- */
