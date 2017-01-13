@@ -1,10 +1,9 @@
 <div class="container-fluid home">
 
   <div class="row featurette hero-top">
-    <div class="col-sm-3">
-      <h2 class="featurette-heading">&nbsp;</h2>
-      <span class="pull-right">
-        <img src="<%= asset_path('my-home-library.png') %>" alt="Barbara Bush Houston Literacy Foundation" height="50px" />
+    <div class="col-sm-3 ">
+      <span class="pull-right mhl-logo">
+        <img src="<%= asset_path('my-home-library.png') %>" alt="My Home Library Logo" height="100px" />
       </span>
     </div>
     <div class="col-sm-6">
@@ -40,17 +39,7 @@
       </p>
     </div>
   </div> -->
-  <div class="featurette hero2">
-    <div class="row">
-      <div class="col-sm-12">
-        <h2 class="featurette-heading">Special Thanks to Our Partners</h2>
-      </div>
-    </div>
-    <div class="row lead-logos">
-      <div class="col-sm-3 lead-logo phillips" style="background-image:url(<%= asset_path('66color.gif') %>);" ></div>
-      <div class="col-sm-3 lead-logo credera" style="background-image:url(<%= asset_path('credera.png') %>);" ></div>
-    </div>
-  </div>
+  <%= render :partial => 'common/sponsor' %>
 
   <div class="row featurette hero-bottom">
     <div class="col-sm-6 col-sm-offset-3">

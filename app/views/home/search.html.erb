@@ -21,18 +21,13 @@
 <div class="row">
   <div class="col-sm-8 col-sm-offset-3">
 
+    <% @wishlists.in_groups_of(6, false) do |chunk| -%>
     <div class="row" id="search_results">
-      <%= render partial: 'wishlist', collection: @wishlists %>
+      <%= render partial: 'wishlist', collection: chunk %>
     </div>
+    <% end -%>
 
   </div>
 </div>
 
-<div class="row featurette hero2">
-  <div class="col-sm-6 col-sm-offset-3">
-    <h2 class="featurette-heading">Special Thanks to Our Partners</h2>
-    <p class="lead">
-      <img src="<%= asset_path('marathon-oil-logo.png') %>" alt="Phillips 66" height="175px" />
-    </p>
-  </div>
-</div>
+<%= render :partial => 'common/sponsor' %>

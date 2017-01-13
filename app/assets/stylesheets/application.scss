@@ -69,6 +69,10 @@ nav.main {
   box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
 }
 
+.featurette .mhl-logo {
+  padding-top: 2.5em;
+}
+
 .home {
   margin: 0 -15px;
 }
@@ -174,11 +178,6 @@ nav.main {
 .search-results {
   flex: 1;
   padding-bottom: 100px;
-}
-
-.search-entry {
-  height: 640px;
-  overflow: hidden;
 }
 
 .profile {
