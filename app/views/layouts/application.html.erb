@@ -38,7 +38,7 @@
               <span><%= session[:userinfo]['info']['name'] %></span>
             </a>
           </li>
-          <li><a href="/logout?returnTo=<%= request.base_url %>&client_id=<%= Rails.application.secrets.auth0_client_id %>">Logout</a></li>
+          <li><a href="/logout?returnTo=<%= request.base_url %>&client_id=CLIENT_ID">Logout</a></li>
           <% end -%>
       </ul>
 
