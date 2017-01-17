@@ -41,7 +41,7 @@
               <span><%= session[:userinfo]['info']['name'] %></span>
             </a>
           </li>
-          <li><a href="/logout">Logout</a></li>
+          <li><a href="/logout?returnTo=<%= request.base_url %>">Logout</a></li>
         </ul>
       </div>
     </nav>

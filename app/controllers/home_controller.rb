@@ -13,7 +13,7 @@ class HomeController < ApplicationController
 
   def logout
     reset_session
-    redirect_to root_url
+    redirect_to "https://#{Rails.application.config.auth0_endpoint}/v2/logout?returnTo=#{params['returnTo']}"
   end
 
   def library
