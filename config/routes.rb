@@ -31,6 +31,7 @@ Rails.application.routes.draw do
         member do
           get 'order_sheet'
           get 'pick_list'
+          get 'readers'
         end
         resources :wishlists do
           member do
@@ -46,6 +47,9 @@ Rails.application.routes.draw do
     root to: 'home#index'
     resources :organizations do
       resources :campaigns do
+        member do
+          get 'readers'
+        end
         resources :wishlists do
           member do
             get 'manage'

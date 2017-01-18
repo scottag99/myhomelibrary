@@ -44,7 +44,7 @@ nav.main {
 ------------------------- */
 
 .featurette {
-  padding: 80px 0;
+  padding: 5% 0;
   border-top: 1px solid #eee;
 
   &.hero2{
@@ -80,31 +80,17 @@ nav.main {
 .home .title {
   text-align: center;
 }
-.hero-top {
-  background-image: image-url('hero-top.png');
-  background-repeat: no-repeat;
-  background-position: 100% 100%;
-}
-.hero1 {
-  background-image: image-url('hero1.png');
-  background-repeat: no-repeat;
-}
-.hero2 {
-  background-image: image-url('hero2.png');
-  background-repeat: no-repeat;
-  background-position: 100% 0;
-  background-size: cover;
-}
-.hero-bottom {
-  background-image: image-url('hero-bottom.png');
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  background-size: cover;
-  padding: 120px 0;
-}
+
 .logo {
   margin-top: -20px;
   margin-left: -22px;
+  max-width: 100%;
+  height: auto;
+}
+
+.mhl-logo img {
+  max-width: 100%;
+  height: auto;
 }
 
 /* RESPONSIVE CSS
@@ -113,6 +99,30 @@ nav.main {
 @media (min-width: 768px) {
   .featurette-heading {
     font-size: 50px;
+  }
+  .hero-top {
+    background-image: image-url('hero-top.png');
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    background-size: contain;
+  }
+  .hero1 {
+    background-image: image-url('hero1.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .hero2 {
+    background-image: image-url('hero2.png');
+    background-repeat: no-repeat;
+    background-position: 100% 0;
+    background-size: cover;
+  }
+  .hero-bottom {
+    background-image: image-url('hero-bottom.png');
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: cover;
+    padding: 120px 0;
   }
 }
 

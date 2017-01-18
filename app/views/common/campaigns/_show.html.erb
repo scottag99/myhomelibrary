@@ -16,7 +16,23 @@
     <!-- Default panel contents -->
     <div class="panel-heading"><h3 class="panel-title">Wishlists</h3></div>
     <table class="table table-striped table-condensed">
-      <caption><%= link_to '<i class="glyphicon glyphicon-plus"></i> New Wishlist'.html_safe, url_for([:new, get_namespace, @campaign.organization, @campaign, :wishlist]), :class => "btn btn-xs btn-primary" %></caption>
+      <caption>
+        <%= form_tag(url_for([:readers, get_namespace, @campaign.organization, @campaign]), method: :get, remote: true, :class => 'form-inline') do %>
+          <div class="form-group">
+            <%= link_to '<i class="glyphicon glyphicon-plus"></i> New Wishlist'.html_safe, url_for([:new, get_namespace, @campaign.organization, @campaign, :wishlist]), :class => "btn btn-xs btn-primary" %>
+          </div>
+          <div class="input-group">
+            <input class="form-control" name="term" id="term" placeholder="Name or teacher" />
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="submit">Search</button>
+            </span>
+          </div>
+          <div class="form-group">
+            <p class="form-control-static">Enter part of the reader's name or teacher's name or leave blank to return all.</p>
+          </div>
+        <% end -%>
+
+      </caption>
       <thead>
         <tr>
           <th>Teacher</th>
@@ -42,8 +58,8 @@
           <th>&nbsp;</th>
         </tr>
       </tfoot>
-      <tbody>
-      <%= render :partial => 'common/campaigns/wishlist', :collection => @campaign.wishlists.order([:teacher, :reader_name]) %>
+      <tbody id="reader_list">
+      <%#= render :partial => 'common/campaigns/wishlist', :collection => @campaign.wishlists.order([:teacher, :reader_name]) %>
       </tbody>
     </table>
   </div>
