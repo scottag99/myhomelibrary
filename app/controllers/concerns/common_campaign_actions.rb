@@ -29,7 +29,7 @@ module CommonCampaignActions
 
   def readers
     term = "%#{params[:term]}%".downcase
-    @readers = Wishlist.joins([{:campaign => :organization}]).where("(lower(reader_name) like ? or lower(teacher) like ?) and organizations.id = ?", term, term, @organization).distinct.order(:teacher, :reader_name).all
+    @readers = Wishlist.select("teacher, reader_name, reader_age, reader_gender, sum(price) as wishlist_total, sum(amount) as donation_total, campaign_id, wishlists.id as id, count(catalog_entries.id) as book_count").joins([{:campaign => :organization}, "LEFT JOIN wishlist_entries ON wishlist_entries.wishlist_id = wishlists.id LEFT JOIN catalog_entries ON catalog_entries.id = wishlist_entries.catalog_entry_id", "LEFT JOIN donations ON donations.wishlist_id = wishlists.id"]).where("(lower(reader_name) like ? or lower(teacher) like ?) and organizations.id = ?", term, term, @organization).group(:teacher, :reader_name, :reader_age, :reader_gender).order(:teacher, :reader_name)
     respond_to do |format|
       format.js { render 'common/campaigns/readers' }
     end
