@@ -13,7 +13,12 @@ class Wishlist < ApplicationRecord
   end
 
   def public_name
-    parts = reader_name.split
+    firstNameLast = reader_name =~ /,/
+    if firstNameLast.nil?
+      parts = reader_name.split
+    else #this is to handle names entered like this Johnson, Frank
+      parts = reader_name.gsub(/,/, '').split.reverse
+    end
     if parts.count >= 2
       "#{parts[0]} #{parts[1].slice(0)}."
     else
