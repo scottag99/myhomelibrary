@@ -5,7 +5,7 @@
       More than 500 children in need have created a wish list of books for their very own home library. You can make a child’s wish come true by sponsoring a child’s home library of six books with a $30 tax-deductible donation. You may also make a general donation to the My Home Library program using the button below. Thank you for supporting a child in need.
     </p>
     <p>
-      <%= link_to 'Donate', donate_url({:wishlist_id => 0, :amount => 30.00, :campaign_name => "General", :schoolname => "None"}), :class => 'btn btn-primary' %>
+      <%= link_to 'General Donation', donate_url({:wishlist_id => 0, :amount => 30.00, :campaign_name => "General", :schoolname => "None"}), :class => 'btn btn-primary' %>
     </p>
     <%= form_tag('/wishlists', method: :get, remote: true) do %>
       <div class="input-group">
