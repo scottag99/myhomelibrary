@@ -33,38 +33,47 @@
   </head>
 
   <body>
-    <nav class="main navbar navbar-fixed-top">
+    <!-- Fixed navbar -->
+    <nav class="main navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
-        <div class="pull-left brand-logo">
-          <a href="/">
-            <img src="<%= asset_path('logo.png') %>" alt="Barbara Bush Houston Literacy Foundation" height="50px" />
-          </a>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><img src="<%= asset_path('logo.png') %>" alt="Barbara Bush Houston Literacy Foundation" /></a>
         </div>
-        <ul class="pull-right nav navbar-nav">
-          <li>
-            <a target="_blank" href="http://www.bushhoustonliteracy.org/my-home-library/">About</a>
-          </li>
-          <li>
-            <a target="_blank" href="https://static1.squarespace.com/static/5731ee0840261d67c7155483/t/588b85658419c241f5369276/1485538662279/My+Home+Library+FAQ+FINAL.pdf">FAQ</a>
-          </li>
-          <li>
-            <a href="mailto:info@myhomelibraryhouston.org">Inquiries or Help</a>
-          </li>
-          <% unless session[:userinfo].nil?  -%>
-          <% if user_is_admin? -%>
-          <li>
-            <%= link_to 'Admin', '/admin' %>
-          </li>
-          <% end -%>
-          <li>
-            <a href="#"><img class="avatar" src="<%= session[:userinfo]['info']['image'] %>"/>
-              <span><%= session[:userinfo]['info']['name'] %></span>
-            </a>
-          </li>
-          <li><a href="/logout?returnTo=<%= request.base_url %>&client_id=<%= Rails.application.secrets.auth0_client_id %>">Logout</a></li>
-          <% end -%>
-      </ul>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
 
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a target="_blank" href="http://www.bushhoustonliteracy.org/my-home-library/">About</a>
+            </li>
+            <li>
+              <a target="_blank" href="https://static1.squarespace.com/static/5731ee0840261d67c7155483/t/588b85658419c241f5369276/1485538662279/My+Home+Library+FAQ+FINAL.pdf">FAQ</a>
+            </li>
+            <li>
+              <a href="mailto:info@myhomelibraryhouston.org">Inquiries or Help</a>
+            </li>
+            <% unless session[:userinfo].nil?  -%>
+            <% if user_is_admin? -%>
+            <li>
+              <%= link_to 'Admin', '/admin' %>
+            </li>
+            <% end -%>
+            <li>
+              <a href="#"><img class="avatar" src="<%= session[:userinfo]['info']['image'] %>"/>
+                <span><%= session[:userinfo]['info']['name'] %></span>
+              </a>
+            </li>
+            <li><a href="/logout?returnTo=<%= request.base_url %>&client_id=<%= Rails.application.secrets.auth0_client_id %>">Logout</a></li>
+            <% end -%>
+          </ul>
+        </div><!--/.nav-collapse -->
       </div>
     </nav>
 

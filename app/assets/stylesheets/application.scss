@@ -29,6 +29,8 @@ nav.main {
   background: #fff;
   box-shadow: 0 1px 5px 1px rgba(0,0,0,.2);
 }
+.navbar-brand { padding: 0px; }
+.navbar-brand img { height: 100%; }
 .starter-template {
   padding: 40px 15px;
   text-align: center;
@@ -202,11 +204,6 @@ nav.main {
 .brand-logo{
   margin:10px;
   display:block;
-}
-
-html .navbar-nav > li > a {
-    padding-top: 25px;
-    padding-bottom: 25px;
 }
 
 /* lead
