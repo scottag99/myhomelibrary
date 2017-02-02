@@ -33,33 +33,41 @@
   </head>
 
   <body>
-    <nav class="main navbar navbar-fixed-top">
+    <!-- Fixed navbar -->
+    <nav class="main navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
-        <div class="pull-left brand-logo">
-          <a href="/"><img src="<%= asset_path('logo.png') %>" alt="Barbara Bush Houston Literacy Foundation" height="50px" /></a>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><img src="<%= asset_path('logo.png') %>" alt="Barbara Bush Houston Literacy Foundation" /></a>
         </div>
-        <ul class="nav navbar-nav">
-          <li><%= link_to 'Catalogs', admin_catalogs_url if admin? %></li>
-          <li><%= link_to 'Organizations', admin_organizations_url if admin? %></li>
-          <li><%= link_to 'Users', admin_users_url if admin? %></li>
-          <li><%= link_to 'Campaigns', '/volunteer' if partner? %></li>
-        </ul>
-        <ul class="pull-right nav navbar-nav">
-          <!--li>
-            <a href="mailto:info@myhomelibraryhouston.org">Inquiries or Help</a>
-          </li-->
-          <% if user_is_admin? -%>
-          <li>
-            <%= link_to 'Admin', '/admin' %>
-          </li>
-          <% end -%>
-          <li>
-            <a href="#"><img class="avatar" src="<%= session[:userinfo]['info']['image'] %>"/>
-              <span><%= session[:userinfo]['info']['name'] %></span>
-            </a>
-          </li>
-          <li><a href="/logout?returnTo=<%= request.base_url %>&client_id=<%= Rails.application.secrets.auth0_client_id %>">Logout</a></li>
-        </ul>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><%= link_to 'Catalogs', admin_catalogs_url if admin? %></li>
+            <li><%= link_to 'Organizations', admin_organizations_url if admin? %></li>
+            <li><%= link_to 'Users', admin_users_url if admin? %></li>
+            <li><%= link_to 'Campaigns', '/volunteer' if partner? %></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <% unless session[:userinfo].nil?  -%>
+            <% if user_is_admin? -%>
+            <li>
+              <%= link_to 'Admin', '/admin' %>
+            </li>
+            <% end -%>
+            <li>
+              <a href="#"><img class="avatar" src="<%= session[:userinfo]['info']['image'] %>"/>
+                <span><%= session[:userinfo]['info']['name'] %></span>
+              </a>
+            </li>
+            <li><a href="/logout?returnTo=<%= request.base_url %>&client_id=<%= Rails.application.secrets.auth0_client_id %>">Logout</a></li>
+            <% end -%>
+          </ul>
+        </div><!--/.nav-collapse -->
       </div>
     </nav>
 
