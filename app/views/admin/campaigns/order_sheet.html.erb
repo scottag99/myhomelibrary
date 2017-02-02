@@ -13,7 +13,9 @@ catalogs.each do |catalog|
 %>
 <h2><%= catalog %></h2>
 <h3><%= @campaign.organization.name %> - <%= @campaign.name %></h3>
-<h4><%= @campaign.deadline %></h4>
+<h4 class="pull-right">Deadline: <%= @campaign.deadline %></h4>
+<h5>Ship to:</h5>
+<address><%= h(@campaign.address).gsub(/\n/, '<br/>').html_safe %></address>
 <table class="table table-striped table-condensed">
   <thead>
     <tr>
