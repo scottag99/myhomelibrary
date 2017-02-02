@@ -24,17 +24,28 @@
     <table class="table table-striped table-condensed">
       <thead>
         <tr>
+          <th>Catalog</th>
           <th>Title</th>
           <th>Author</th>
           <th>ISBN</th>
         </tr>
       </thead>
       <tbody>
-        <% wishlist.wishlist_entries.each do |wishlist_entry| -%>
+        <%
+          current_catalog = ""
+          wishlist.catalog_entries.joins(:book, :catalog).order(["catalogs.source", "books.title"]).each do |catalog_entry|
+            if current_catalog != catalog_entry.catalog.source
+              catalog_name = catalog_entry.catalog.source
+              current_catalog = catalog_name
+            else
+              catalog_name = ""
+            end
+          -%>
         <tr>
-          <td><%= wishlist_entry.catalog_entry.book.title %></td>
-          <td><%= wishlist_entry.catalog_entry.book.author %></td>
-          <td><%= wishlist_entry.catalog_entry.book.isbn %></td>
+          <td><%= catalog_name %></td>
+          <td><%= catalog_entry.book.title %></td>
+          <td><%= catalog_entry.book.author %></td>
+          <td><%= catalog_entry.book.isbn %></td>
         </tr>
         <% end -%>
       </tbody>
