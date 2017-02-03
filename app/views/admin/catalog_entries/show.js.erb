@@ -1,0 +1,2 @@
+$('#globalModal').modal('hide');
+$("#catalog-entry-<%= @catalog_entry.id %>").replaceWith($("<%= escape_javascript(render :partial => 'common/catalogs/catalog_entry', object: @catalog_entry) %>"));

@@ -30,7 +30,7 @@
         </tr>
       </thead>
       <tbody>
-    <%= render :partial => 'common/catalogs/catalog_entry', :collection => @wishlist.wishlist_entries.collect{|e| e.catalog_entry} %>
+    <%= render :partial => 'common/catalogs/catalog_entry', :collection => @wishlist.catalog_entries.includes(:book).order("books.title") %>
       </tbody>
     </table>
   </div>

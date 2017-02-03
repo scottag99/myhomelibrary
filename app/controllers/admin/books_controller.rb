@@ -28,6 +28,7 @@ class Admin::BooksController < Admin::BaseController
     @book.update!(book_params)
     respond_to do |format|
       format.html { render "show" }
+      format.js
       format.json { render json: @book }
     end
   end
@@ -49,6 +50,6 @@ class Admin::BooksController < Admin::BaseController
   end
 private
   def book_params
-    params.require(:book).permit(:title, :author, :description, :year, :isbn, :cover_image, :level)
+    params.require(:book).permit(:title, :author, :description, :year, :isbn, :cover_image_url, :level, :ar_level, :ar_points)
   end
 end

@@ -22,6 +22,8 @@ class AppState {
 
   @observable
   readingLevels = {
+    'PreK-K': true,
+    'G1-G2': true,
     'PreK-G2': true,
     'G3-G5': true
   };

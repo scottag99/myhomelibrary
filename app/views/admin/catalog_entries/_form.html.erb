@@ -1,0 +1,72 @@
+<%= form_for [:admin, @catalog, @catalog_entry], html: {class: 'form-horizontal'}, remote: true do |cat_form| %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <%= cat_form.fields_for :book do |f| %>
+    <div class="form-group">
+      <%= f.label :title, class: "col-md-2 control-label" %>
+      <div class="col-md-10">
+        <%= f.text_field :title, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :author, class: "col-md-2 control-label" %>
+      <div class="col-md-10">
+        <%= f.text_field :author, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description, class: "col-md-2 control-label" %>
+      <div class="col-md-10">
+        <%= f.text_area :description, class: "form-control", :rows => 6 %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :level, class: "col-md-2 control-label" %>
+      <div class="col-md-10">
+        <%= f.select :level, [
+          ['PreK-G2', 'PreK-G2', { 'disabled' => 'true' }],
+          ['PreK-K', 'PreK-K'],
+          ['G1-G2', 'G1-G2'],
+          ['G3-G5', 'G3-G5']
+        ] %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :isbn, class: "col-md-2 control-label text-uppercase" %>
+      <div class="col-md-10">
+        <%= f.text_field :isbn, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :cover_image_url, class: "col-md-2 control-label" %>
+      <div class="col-md-10">
+        <%= f.text_field :cover_image_url, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :ar_level, class: "col-md-2 control-label" %>
+      <div class="col-md-10">
+        <%= f.text_field :ar_level, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :ar_points, class: "col-md-2 control-label" %>
+      <div class="col-md-10">
+        <%= f.text_field :ar_points, class: "form-control" %>
+      </div>
+    </div>
+  <% end -%>
+
+  <div class="form-group">
+    <%= cat_form.label :price, class: "col-md-2 control-label" %>
+    <div class="col-md-10">
+      <%= cat_form.number_field :price, class: "form-control", :min => 0, :step => 0.01 %>
+    </div>
+  </div>
+<% end %>
