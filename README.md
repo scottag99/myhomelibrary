@@ -78,4 +78,4 @@ This will load a `node` environment on your local machine and allow you to modif
 
 This will produce a `main.js` file in the `build/static/js` directory. This file needs to be copied to the respective `app/assets/javascripts` directory.
 
-    cp build/static/js/main.js app/assets/javascripts/
+    cp build/static/js/main.j* app/assets/javascripts/
