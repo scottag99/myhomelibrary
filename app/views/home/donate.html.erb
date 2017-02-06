@@ -16,7 +16,7 @@ function kimbiaSuccess(kimbiaResponse) {
     url: '<%= success_url %>',
     dataType: 'json',
     method: 'POST',
-    data: {'wishlist_id': wishlistId, 'amount': initCharge, 'confirmation_code': confCode},
+    data: {'id_list': wishlistId, 'amount': initCharge, 'confirmation_code': confCode},
     success: function(data) {
 
     }

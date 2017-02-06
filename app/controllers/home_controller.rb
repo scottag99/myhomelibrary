@@ -20,11 +20,20 @@ class HomeController < ApplicationController
   end
 
   def donate
-    @schoolname = params[:schoolname]
-    @wishListID = params[:wishlist_id]
-    @donationLevel = params[:amount]
-    @Campaign = params[:campaign_name]
-    @reader_name = params[:reader_name]
+    @wishlists = Wishlist.joins([{:campaign => :organization}]).where("wishlists.id in (?)", params[:id_list].split(",").map(&:to_i)).all
+    school = {}
+    campaign = {}
+    reader = {}
+    @wishlists.each{|w|
+      school[w.campaign.organization.name] = true
+      campaign[w.campaign.name] = true
+      reader[w.reader_name] = true
+    }
+    @schoolname = school.keys.join(",")
+    @wishListID = params[:id_list]
+    @donationLevel = 30.0*@wishlists.count #TODO: Make the amount configurable
+    @Campaign = campaign.keys.join(",")
+    @reader_name = reader.keys.join(",")
   end
 
   def search
@@ -37,9 +46,11 @@ class HomeController < ApplicationController
   end
 
   def success
-    wishlist = Wishlist.find(params[:wishlist_id])
-    @donation = wishlist.donations.create!({:confirmation_code => params[:confirmation_code], :amount => params[:amount]})
-
+    @wishlists = Wishlist.joins([{:campaign => :organization}]).where("wishlists.id in (?)", params[:id_list].split(",").map(&:to_i)).all
+    @wishlists.each do |w|
+      @donation = w.donations.create!({:confirmation_code => params[:confirmation_code], :amount => params[:amount]})
+    end
+    
     respond_to do |format|
       format.html { render "index" }
       format.json { render json: @donation }
@@ -54,9 +65,8 @@ private
     if term.to_s.size < 2
       @wishlists = Wishlist.joins([{:campaign => :organization},"INNER JOIN (select count(*), wishlist_id from wishlist_entries group by wishlist_id having count(*) > 0) c on c.wishlist_id = wishlists.id"]).where("deadline > ? and ready_for_donations = ?", Date.today, true).order('random()').limit(20)
     else
-      term = "%#{term}%"
-      # ILIKE is a postgres extension so this fails in local dev environments
-      @wishlists = Wishlist.joins([{:campaign => :organization}, :wishlist_entries]).where("deadline > ? and ready_for_donations = ? and (reader_name ilike ? or teacher ilike ? or organizations.name ilike ?)", Date.today, true, term, term, term).distinct.order(:reader_name).all
+      term = "%#{term.downcase}%"
+      @wishlists = Wishlist.joins([{:campaign => :organization}, :wishlist_entries]).where("deadline > ? and ready_for_donations = ? and (lower(reader_name) like ? or lower(teacher) like ? or lower(organizations.name) like ?)", Date.today, true, term, term, term).distinct.order(:reader_name).all
     end
   end
 end
