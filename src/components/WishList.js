@@ -1,9 +1,10 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import { Col, Glyphicon, ListGroup, ListGroupItem, Row, Button } from 'react-bootstrap';
+import { Col, Image, Glyphicon, ListGroup, ListGroupItem, Row, Button } from 'react-bootstrap';
 
 const WishListItem = ({ book, handleRemoveFromWishList }) => (
   <ListGroupItem>
+    <Image src={book.imageUrl} alt="" responsive className="thumb-book-cover" />
     {book.name}
     <button onClick={handleRemoveFromWishList} className="close btn-sm">
       <Glyphicon bsSize="small" glyph="remove" />
@@ -23,7 +24,7 @@ const WishList = ({store}) => {
   }
 
   return (
-    <div>
+    <div data-spy="affix">
       <h4>Wish List for {store.reader}</h4>
       <ListGroup>
         {children}

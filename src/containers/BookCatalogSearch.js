@@ -7,7 +7,7 @@ import BookSearchResults from '../components/BookSearchResults';
 
 export default function({store}) {
   return (
-    <div>
+    <div className="row">
       <Col lg={3}>
         <WishList store={store} />
       </Col>
