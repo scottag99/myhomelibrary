@@ -15,7 +15,7 @@
 <div class="form-group row">
   <%= f.label :reader_age, class: "col-md-1 control-label" %>
   <div class="col-md-4">
-    <%= f.number_field :reader_age, class: "form-control" %>
+    <%= f.number_field :reader_age, class: "form-control", :min => 1, :max => 99, :step => 1 %>
   </div>
 </div>
 
@@ -23,10 +23,10 @@
   <%= f.label :reader_gender, class: "col-md-1 control-label" %>
   <div class="col-md-4">
     <label class="radio-inline">
-      <%= f.radio_button :reader_gender, 'M' %> M
+      <%= f.radio_button :reader_gender, 'M' %> Male
     </label>
     <label class="radio-inline">
-      <%= f.radio_button :reader_gender, 'F' %> F
+      <%= f.radio_button :reader_gender, 'F' %> Female
     </label>
   </div>
 </div>
