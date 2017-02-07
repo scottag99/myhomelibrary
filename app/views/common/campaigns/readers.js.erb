@@ -1,1 +1,13 @@
 $("#reader_list").html($("<%= escape_javascript(render :partial => 'common/campaigns/wishlist', :collection => @readers) %>"));
+
+
+$(document).ready(function() {
+    $('#campaign-wishlist-list').DataTable({
+        "order": [[ 0, "asc" ], [ 1, "asc" ]],
+        "paging":   false,
+        "info": false,
+        "searching": false,
+        "scrollY": "500px",
+        "scrollCollapse": true
+    });
+} );
