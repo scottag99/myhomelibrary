@@ -1,2 +1,2 @@
 $('#globalModal').modal('hide');
-$("tbody").prepend($("<%= escape_javascript(render :partial => 'common/catalogs/catalog_entry', object: @catalog_entry) %>"));
+$("tbody").prepend($("<%= escape_javascript(render :partial => 'common/catalogs/catalog_entry', object: @catalog_entry, :locals => {:catalog_actions => true}) %>"));
