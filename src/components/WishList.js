@@ -4,7 +4,9 @@ import { Col, Image, Glyphicon, ListGroup, ListGroupItem, Row, Button } from 're
 
 const WishListItem = ({ book, handleRemoveFromWishList }) => (
   <ListGroupItem>
-    <Image src={book.imageUrl} alt="" responsive className="thumb-book-cover" />
+    <span className="thumb-book-cover">
+    <Image src={book.imageUrl} alt="Cover Image" className="img-responsive" />
+    </span>
     {book.name}
     <button onClick={handleRemoveFromWishList} className="close btn-sm">
       <Glyphicon bsSize="small" glyph="remove" />
@@ -24,7 +26,7 @@ const WishList = ({store}) => {
   }
 
   return (
-    <div data-spy="affix">
+    <div data-spy="affix" className="current-wishlist">
       <h4>Wish List for {store.reader}</h4>
       <ListGroup>
         {children}

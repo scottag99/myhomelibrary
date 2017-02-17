@@ -165,8 +165,9 @@ nav.main {
   box-shadow: 1px 1px 4px #ccc;
 }
 .thumb-book-cover {
-  height: 25px;
-  width: 15px;
+  width: 30px;
+  margin-right: 4px;
+  max-height: 25px;
   float: left;
 }
 .book-description {
@@ -186,6 +187,10 @@ nav.main {
   width: 70%;
   height: 1.4em;
   background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+}
+
+.current-wishlist {
+  width: 23%;
 }
 
 .search {
