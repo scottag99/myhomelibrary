@@ -167,8 +167,10 @@ nav.main {
 .thumb-book-cover {
   width: 30px;
   margin-right: 4px;
-  max-height: 25px;
+  max-height: 30px;
   float: left;
+  overflow: hidden;
+  height: 30px;
 }
 .book-description {
   position: relative;
