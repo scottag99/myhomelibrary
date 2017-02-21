@@ -12,9 +12,6 @@ export default observer(({store}) => (
       <Checkbox inline value='G1-G2' checked={store.readingLevels['G1-G2']} onChange={store.handleGradeLevel}>
         G1-G2
       </Checkbox>
-      <Checkbox inline value='PreK-G2' checked={store.readingLevels['PreK-G2']} onChange={store.handleGradeLevel}>
-        PreK-G2
-      </Checkbox>
       <Checkbox inline value='G3-G5' checked={store.readingLevels['G3-G5']} onChange={store.handleGradeLevel}>
         G3-G5
       </Checkbox>
