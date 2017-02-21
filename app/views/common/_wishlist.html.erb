@@ -34,6 +34,6 @@
   var api_add_url = '<%= @add_url %>';
   var api_delete_url = '<%= @delete_url %>';
   var back_url = '<%= @back_url %>';
-  var reader = '<%= j @wishlist.public_name %>';
+  var reader = '<%= j @wishlist.public_name.html_safe %>';
 </script>
-<%= javascript_include_tag 'main', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'main' %>
