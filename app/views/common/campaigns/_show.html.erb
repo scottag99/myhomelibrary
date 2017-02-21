@@ -20,6 +20,7 @@
     <%= link_to '<i class="glyphicon glyphicon-plus"></i> New Wishlist'.html_safe, url_for([:new, get_namespace, @campaign.organization, @campaign, :wishlist]), :class => "btn btn-xs btn-primary" %>
     <input placeholder="Filter..." type="text" oninput="onFilterChanged(this.value)" id="filterTerm" />
     <%= link_to 'Bulk Edit', url_for([:edit_multiple, get_namespace, @campaign.organization, @campaign, :wishlists, :wishlists_ids => '']), :class => "btn btn-xs btn-warning", :onclick => 'bulkEdit()', :remote => true, :id => 'bulk-edit' %>
+    <%= link_to 'Bulk Upload', url_for([:edit_upload, get_namespace, @campaign.organization, @campaign, :wishlists]), :class => "btn btn-xs btn-primary", :remote => true, :id => 'bulk-upload' %>
     <div id="myGrid" style="height: 450px;" class="ag-bootstrap"></div>
   </div>
 
@@ -76,7 +77,7 @@ function asMoney(val) {
 function editButton(val) {
   return '<a class="btn btn-info btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/manage') + '">Pick Books</a> ' +
     '<a class="btn btn-warning btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/edit') + '">Edit</a> ' +
-    '<a class="btn btn-danger btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id ) + '" data-method="delete" data-confirm="This action cannot be undone. Are you sure?">Edit</a>';
+    '<a class="btn btn-danger btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id ) + '" data-method="delete" data-confirm="This action cannot be undone. Are you sure?">Delete</a>';
 }
 
 var gridOptions = {

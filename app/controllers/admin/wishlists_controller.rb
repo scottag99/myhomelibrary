@@ -1,3 +1,5 @@
+require 'csv'
+
 class Admin::WishlistsController < Admin::BaseController
   include CommonWishlistActions
 
@@ -15,6 +17,27 @@ class Admin::WishlistsController < Admin::BaseController
     respond_to do |format|
       format.html { redirect_to admin_organization_campaign_url(current_organization, current_campaign) }
       format.json { render json: @wishlist }
+    end
+  end
+
+  def edit_upload
+    @campaign = current_campaign
+    respond_to do |format|
+      format.js { render 'common/wishlists/edit_upload' }
+    end
+  end
+
+  def upload
+    uploaded_io = params[:wishlist][:upload]
+
+    CSV.foreach(uploaded_io.path, :headers => true,
+     :header_converters=> lambda {|f| f.strip},
+     :converters=> lambda {|f| f ? f.strip : nil}) do |row|
+      current_campaign.wishlists.create!(row.to_hash)
+    end
+
+    respond_to do |format|
+      format.html { redirect_to admin_organization_campaign_url(current_organization, current_campaign) }
     end
   end
 

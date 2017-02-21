@@ -38,8 +38,10 @@ Rails.application.routes.draw do
             get 'manage'
           end
           collection do
-            get 'edit_multiple'
+            get  'edit_multiple'
             put  'update_multiple'
+            get  'edit_upload'
+            post 'upload'
           end
           resources :wishlist_entries
         end
@@ -57,6 +59,10 @@ Rails.application.routes.draw do
         resources :wishlists do
           member do
             get 'manage'
+          end
+          collection do
+            get 'edit_multiple'
+            put  'update_multiple'
           end
           resources :wishlist_entries
         end
