@@ -8,8 +8,10 @@
   <td><%= number_to_currency(wishlist[:donation_total]) %></td><%# These values are coming from a custom query for perf reason %>
   <% end %>
   <td>
+    <% if wishlist.can_edit_wishlists %>
     <%= link_to "Pick Books", url_for([:manage, get_namespace, wishlist.campaign.organization, wishlist.campaign, wishlist]), class: "btn btn-info btn-xs" %>
     <%= link_to "Edit", url_for([:edit, get_namespace, wishlist.campaign.organization, wishlist.campaign, wishlist]), class: "btn btn-warning btn-xs" %>
     <%= link_to "Delete", url_for([get_namespace, wishlist.campaign.organization, wishlist.campaign, wishlist]),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'This action cannot be undone. Are you sure?'} %>
+    <% end %>
   </td>
 </tr>

@@ -11,16 +11,22 @@
       <dd><input type=checkbox disabled <%= @campaign.ready_for_donations ? 'checked' : '' %> /></dd>
       <dt>Address</dt>
       <dd><address><%= h(@campaign.address).gsub(/\n/, '<br/>').html_safe %></address></dd>
+      <dt>Can Edit Wish Lists</dt>
+      <dd><input type=checkbox disabled <%= @campaign.can_edit_wishlists ? 'checked' : '' %> /></dd>
     </dl>
   </div>
 
   <div class="panel panel-default table-condensed">
     <!-- Default panel contents -->
     <div class="panel-heading"><h3 class="panel-title">Wishlists</h3></div>
+    <% if @campaign.can_edit_wishlists %>
     <%= link_to '<i class="glyphicon glyphicon-plus"></i> New Wishlist'.html_safe, url_for([:new, get_namespace, @campaign.organization, @campaign, :wishlist]), :class => "btn btn-xs btn-primary" %>
+    <% end %>
     <input placeholder="Filter..." type="text" oninput="onFilterChanged(this.value)" id="filterTerm" />
+    <% if @campaign.can_edit_wishlists %>
     <%= link_to 'Bulk Edit', url_for([:edit_multiple, get_namespace, @campaign.organization, @campaign, :wishlists, :wishlists_ids => '']), :class => "btn btn-xs btn-warning", :onclick => 'bulkEdit()', :remote => true, :id => 'bulk-edit' %>
     <%= link_to 'Bulk Upload', url_for([:edit_upload, get_namespace, @campaign.organization, @campaign, :wishlists]), :class => "btn btn-xs btn-primary", :remote => true, :id => 'bulk-upload' %>
+    <% end %>
     <div id="myGrid" style="height: 450px;" class="ag-bootstrap"></div>
   </div>
 
@@ -30,6 +36,8 @@
 <%= javascript_include_tag 'ag-grid.min.js' %>
 <script>
 var url = '<%= url_for([:readers, get_namespace, @campaign.organization, @campaign]) %>';
+var can_edit_wishlists = <%= @campaign.can_edit_wishlists.nil? || !@campaign.can_edit_wishlists ? 'false' : 'true' %>;
+
 function onFilterChanged(value) {
     gridOptions.api.onFilterChanged();
 }
@@ -75,9 +83,13 @@ function asMoney(val) {
 }
 
 function editButton(val) {
-  return '<a class="btn btn-info btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/manage') + '">Pick Books</a> ' +
-    '<a class="btn btn-warning btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/edit') + '">Edit</a> ' +
-    '<a class="btn btn-danger btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id ) + '" data-method="delete" data-confirm="This action cannot be undone. Are you sure?">Delete</a>';
+  if (!can_edit_wishlists) {
+    return '';
+  } else {
+    return '<a class="btn btn-info btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/manage') + '">Pick Books</a> ' +
+      '<a class="btn btn-warning btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/edit') + '">Edit</a> ' +
+      '<a class="btn btn-danger btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id ) + '" data-method="delete" data-confirm="This action cannot be undone. Are you sure?">Delete</a>';
+  }
 }
 
 var gridOptions = {

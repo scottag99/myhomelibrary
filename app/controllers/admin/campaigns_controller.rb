@@ -15,6 +15,7 @@ class Admin::CampaignsController < Admin::BaseController
 
   def new
     @campaign = @organization.campaigns.new
+    @campaign.can_edit_wishlists = true
     respond_to do |format|
       format.html
       format.json { render json: @campaign }
@@ -66,6 +67,6 @@ private
   end
 
   def campaign_params
-    params.require(:campaign).permit(:name, :deadline, :ready_for_donations, :address)
+    params.require(:campaign).permit(:name, :deadline, :ready_for_donations, :address, :can_edit_wishlists)
   end
 end
