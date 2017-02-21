@@ -18,6 +18,15 @@ class SecuredController < ApplicationController
   end
 
   def has_role?
+    role = get_role
+
+    if role.blank? || !self.class::ALLOWED_ROLES.include?(role)
+      flash[:error] = "You must have one of the following roles #{self.class::ALLOWED_ROLES} in order to access this section. Your role: #{role}"
+      redirect_to "/"
+    end
+  end
+
+  def get_role
     if session[:userinfo]['extra'] && session[:userinfo]['extra']['raw_info']
       role = session[:userinfo]['extra']['raw_info']['role']
     end
@@ -28,10 +37,6 @@ class SecuredController < ApplicationController
         role = 'partner'
       end
     end
-
-    if role.blank? || !self.class::ALLOWED_ROLES.include?(role)
-      flash[:error] = "You must have one of the following roles #{self.class::ALLOWED_ROLES} in order to access this section. Your role: #{role}"
-      redirect_to "/"
-    end
+    role
   end
 end

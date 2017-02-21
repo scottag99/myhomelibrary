@@ -31,9 +31,14 @@ module CommonCampaignActions
     @campaign = @organization.campaigns.find(params[:id])
 
     term = "%#{params[:term]}%".downcase
-    @readers = Wishlist.select("teacher, reader_name, reader_age, reader_gender, sum(price) as wishlist_total, sum(amount) as donation_total, campaign_id, wishlists.id as id, count(catalog_entries.id) as book_count").joins([:campaign, "LEFT JOIN wishlist_entries ON wishlist_entries.wishlist_id = wishlists.id LEFT JOIN catalog_entries ON catalog_entries.id = wishlist_entries.catalog_entry_id", "LEFT JOIN donations ON donations.wishlist_id = wishlists.id"]).where("(lower(reader_name) like ? or lower(teacher) like ?) and campaign_id = ?", term, term, @campaign).group(:teacher, :reader_name, :reader_age, :reader_gender, "campaign_id", "wishlists.id").order(:teacher, :reader_name)
+    select_text = "teacher, reader_name, reader_age, reader_gender, campaign_id, wishlists.id as id, count(catalog_entries.id) as book_count"
+    if get_role == 'admin'
+      select_text += ", sum(price) as wishlist_total, sum(amount) as donation_total"
+    end
+    @readers = Wishlist.select(select_text).joins([:campaign, "LEFT JOIN wishlist_entries ON wishlist_entries.wishlist_id = wishlists.id LEFT JOIN catalog_entries ON catalog_entries.id = wishlist_entries.catalog_entry_id", "LEFT JOIN donations ON donations.wishlist_id = wishlists.id"]).where("(lower(reader_name) like ? or lower(teacher) like ?) and campaign_id = ?", term, term, @campaign).group(:teacher, :reader_name, :reader_age, :reader_gender, "campaign_id", "wishlists.id").order(params[:sort]).limit(params[:limit]).offset(params[:offset])
     respond_to do |format|
       format.js { render 'common/campaigns/readers' }
+      format.json { render json: @readers }
     end
   end
 end

@@ -37,6 +37,10 @@ Rails.application.routes.draw do
           member do
             get 'manage'
           end
+          collection do
+            get 'edit_multiple'
+            put  'update_multiple'
+          end
           resources :wishlist_entries
         end
       end

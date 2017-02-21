@@ -17,53 +17,106 @@
   <div class="panel panel-default table-condensed">
     <!-- Default panel contents -->
     <div class="panel-heading"><h3 class="panel-title">Wishlists</h3></div>
-    <table class="table table-striped table-condensed" id="campaign-wishlist-list">
-      <caption>
-        <%= form_tag(url_for([:readers, get_namespace, @campaign.organization, @campaign]), method: :get, remote: true, :class => 'form-inline') do %>
-          <div class="form-group">
-            <%= link_to '<i class="glyphicon glyphicon-plus"></i> New Wishlist'.html_safe, url_for([:new, get_namespace, @campaign.organization, @campaign, :wishlist]), :class => "btn btn-xs btn-primary" %>
-          </div>
-          <div class="input-group">
-            <input class="form-control" name="term" id="term" placeholder="Name or teacher" />
-            <span class="input-group-btn">
-              <button class="btn btn-primary" type="submit">Search</button>
-            </span>
-          </div>
-          <div class="form-group">
-            <p class="form-control-static">Enter part of the reader's name or teacher's name or leave blank to return all.</p>
-          </div>
-        <% end -%>
-
-      </caption>
-      <thead>
-        <tr>
-          <th>Teacher</th>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Gender</th>
-          <th>Book Count</th>
-          <% if admin? %>
-          <th>Wishlist Total</th>
-          <th>Donation Total</th>
-          <% end %>
-          <th>&nbsp;</th>
-        </tr>
-      </thead>
-      <tfoot>
-        <tr>
-          <th colspan="4"></th>
-          <th><%= WishlistEntry.where(:wishlist_id => @campaign.wishlists).count %></th>
-          <% if admin? %>
-          <th><%= number_to_currency(CatalogEntry.joins(:wishlist_entries => :wishlist).where('wishlist_entries.wishlist_id' => @campaign.wishlists).sum(:price)) %></th>
-          <th><%= number_to_currency(Donation.where(:wishlist_id => @campaign.wishlists).sum(:amount)) %></th>
-          <% end %>
-          <th>&nbsp;</th>
-        </tr>
-      </tfoot>
-      <tbody id="reader_list">
-      <%#= render :partial => 'common/campaigns/wishlist', :collection => @campaign.wishlists.order([:teacher, :reader_name]) %>
-      </tbody>
-    </table>
+    <%= link_to '<i class="glyphicon glyphicon-plus"></i> New Wishlist'.html_safe, url_for([:new, get_namespace, @campaign.organization, @campaign, :wishlist]), :class => "btn btn-xs btn-primary" %>
+    <input placeholder="Filter..." type="text" oninput="onFilterChanged(this.value)" id="filterTerm" />
+    <%= link_to 'Bulk Edit', url_for([:edit_multiple, get_namespace, @campaign.organization, @campaign, :wishlists, :wishlists_ids => '']), :class => "btn btn-xs btn-warning", :onclick => 'bulkEdit()', :remote => true, :id => 'bulk-edit' %>
+    <div id="myGrid" style="height: 450px;" class="ag-bootstrap"></div>
   </div>
 
 </div>
+
+<% content_for :foot do -%>
+<%= javascript_include_tag 'ag-grid.min.js' %>
+<script>
+var url = '<%= url_for([:readers, get_namespace, @campaign.organization, @campaign]) %>';
+function onFilterChanged(value) {
+    gridOptions.api.onFilterChanged();
+}
+
+function bulkEdit() {
+  var ids = "";
+  $.each(gridOptions.api.getSelectedRows(), function(idx, row) {
+    if (ids.length > 0) { ids += "," }
+    ids += row.id;
+  });
+
+  if (ids.length == 0) return false;
+  var href = $('#bulk-edit').attr('href');
+  $('#bulk-edit').attr('href', href.substring(0, href.lastIndexOf('?')) + "?wishlists_ids=" + ids);
+}
+
+// Datasource used by both PaginationController and VirtualPageRowModel
+var ds = {
+
+    // If you know up front how many rows are in the dataset, set it here. Otherwise leave blank.
+    rowCount: <%= @campaign.wishlists.count %>,
+
+    // Callback the grid calls that you implement to fetch rows from the server. See below for params.
+    getRows: function(params){
+      var term = $("#filterTerm").val();
+      var sort = "";
+      $.each(params.sortModel, function(idx, s) {
+        if (sort.length > 0) { sort += ", "}
+        sort += s.colId + " " + s.sort
+      });
+      $.ajax( url + '?offset=' + params.startRow + '&limit=' + (params.endRow-params.startRow) + "&sort=" + sort + "&term=" + term, {
+        dataType: 'json',
+        success: function(data, status, xhr) {
+          params.successCallback(data)
+        },
+        error: params.failCallback
+      });
+    }
+};
+
+function asMoney(val) {
+  return parseFloat(val.value, 10).toFixed(2);
+}
+
+function editButton(val) {
+  return '<a class="btn btn-info btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/manage') + '">Pick Books</a> ' +
+    '<a class="btn btn-warning btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/edit') + '">Edit</a> ' +
+    '<a class="btn btn-danger btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id ) + '" data-method="delete" data-confirm="This action cannot be undone. Are you sure?">Edit</a>';
+}
+
+var gridOptions = {
+    columnDefs: [
+        {headerName: 'Teacher', field: 'teacher', checkboxSelection: true, sort: 'asc', sortAt: 0},
+        {headerName: 'Name', field: 'reader_name', sort: 'asc', sortAt: 1},
+        {headerName: 'Age', field: 'reader_age', width: 75, cellClass: 'text-right'},
+        {headerName: 'Gender', field: 'reader_gender', width: 75, cellClass: 'text-right'},
+        {headerName: 'Book Count', field: 'book_count', cellClass: 'text-right'}
+        <% if admin? %>
+        ,
+        {headerName: 'Wish List Total ($)', field: 'wishlist_total', cellClass: 'text-right', cellFormatter: asMoney},
+        {headerName: 'Donation Total ($)', field: 'donation_total', cellClass: 'text-right', cellFormatter: asMoney}
+        <% end %>
+        ,
+        {headerName: '&nbsp;', field: 'actions', cellRenderer: editButton }
+
+    ],
+
+    // the default col def, gets applied to every col
+    defaultColDef: {
+        // make every column use 'text' filter by default
+        suppressFilter: true,
+        headerClass: 'text-left'
+    },
+    rowModelType: 'pagination',
+    datasource: ds,
+    rowSelection: 'multiple',
+    enableColResize: true,
+    enableServerSideSorting: true,
+    enableServerSideFilter: true,
+    paginationPageSize: 100,
+    suppressRowClickSelection: true
+};
+
+// wait for the document to be loaded, otherwise
+// ag-Grid will not find the div in the document.
+document.addEventListener("DOMContentLoaded", function() {
+    var eGridDiv = document.querySelector('#myGrid');
+    new agGrid.Grid(eGridDiv, gridOptions);
+});
+</script>
+<% end -%>

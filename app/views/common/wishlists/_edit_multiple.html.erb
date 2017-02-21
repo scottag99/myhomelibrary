@@ -1,0 +1,8 @@
+<%= form_for :wishlist, url: url_for([:update_multiple, get_namespace, @campaign.organization, @campaign, :wishlists, :wishlists_ids => params[:wishlists_ids]]), :method => :put, :html => {:class => "form-horizontal"} do |f| %>
+<div class="form-group row">
+  <%= f.label :teacher, class: "col-md-1 control-label" %>
+  <div class="col-md-4">
+    <%= f.text_field :teacher, class: "form-control" %>
+  </div>
+</div>
+<% end %>

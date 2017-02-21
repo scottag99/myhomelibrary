@@ -24,8 +24,8 @@
     <title>My Home Library</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag 'https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css', media: 'all' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%#= stylesheet_link_tag 'https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css', media: 'all' %>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -84,8 +84,8 @@
       </div>
     </div><!-- /.container -->
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js' %>
-    <%= javascript_include_tag 'https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js' %>
+    <%#= javascript_include_tag 'https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js' %>
+    <%#= javascript_include_tag 'https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js' %>
 
 	  <%= yield :foot %>
 
