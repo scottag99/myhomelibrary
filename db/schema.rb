@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170221223823) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "books", force: :cascade do |t|
     t.string   "title"
     t.string   "author"
@@ -35,7 +38,7 @@ ActiveRecord::Schema.define(version: 20170221223823) do
     t.boolean  "ready_for_donations"
     t.string   "address"
     t.boolean  "can_edit_wishlists"
-    t.index ["organization_id"], name: "index_campaigns_on_organization_id"
+    t.index ["organization_id"], name: "index_campaigns_on_organization_id", using: :btree
   end
 
   create_table "catalog_entries", force: :cascade do |t|
@@ -44,8 +47,8 @@ ActiveRecord::Schema.define(version: 20170221223823) do
     t.decimal  "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_catalog_entries_on_book_id"
-    t.index ["catalog_id"], name: "index_catalog_entries_on_catalog_id"
+    t.index ["book_id"], name: "index_catalog_entries_on_book_id", using: :btree
+    t.index ["catalog_id"], name: "index_catalog_entries_on_catalog_id", using: :btree
   end
 
   create_table "catalogs", force: :cascade do |t|
@@ -62,7 +65,7 @@ ActiveRecord::Schema.define(version: 20170221223823) do
     t.string   "confirmation_code"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.index ["wishlist_id"], name: "index_donations_on_wishlist_id"
+    t.index ["wishlist_id"], name: "index_donations_on_wishlist_id", using: :btree
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -78,7 +81,7 @@ ActiveRecord::Schema.define(version: 20170221223823) do
     t.integer  "organization_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.index ["organization_id"], name: "index_partners_on_organization_id"
+    t.index ["organization_id"], name: "index_partners_on_organization_id", using: :btree
   end
 
   create_table "wishlist_entries", force: :cascade do |t|
@@ -86,8 +89,8 @@ ActiveRecord::Schema.define(version: 20170221223823) do
     t.integer  "catalog_entry_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.index ["catalog_entry_id"], name: "index_wishlist_entries_on_catalog_entry_id"
-    t.index ["wishlist_id"], name: "index_wishlist_entries_on_wishlist_id"
+    t.index ["catalog_entry_id"], name: "index_wishlist_entries_on_catalog_entry_id", using: :btree
+    t.index ["wishlist_id"], name: "index_wishlist_entries_on_wishlist_id", using: :btree
   end
 
   create_table "wishlists", force: :cascade do |t|
@@ -98,9 +101,17 @@ ActiveRecord::Schema.define(version: 20170221223823) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.string   "teacher"
-    t.index ["campaign_id"], name: "index_wishlists_on_campaign_id"
-    t.index ["reader_name"], name: "index_wishlists_on_reader_name"
-    t.index ["teacher"], name: "index_wishlists_on_teacher"
+    t.index ["campaign_id"], name: "index_wishlists_on_campaign_id", using: :btree
+    t.index ["reader_name"], name: "index_wishlists_on_reader_name", using: :btree
+    t.index ["teacher"], name: "index_wishlists_on_teacher", using: :btree
   end
 
+  add_foreign_key "campaigns", "organizations"
+  add_foreign_key "catalog_entries", "books"
+  add_foreign_key "catalog_entries", "catalogs"
+  add_foreign_key "donations", "wishlists"
+  add_foreign_key "partners", "organizations"
+  add_foreign_key "wishlist_entries", "catalog_entries"
+  add_foreign_key "wishlist_entries", "wishlists"
+  add_foreign_key "wishlists", "campaigns"
 end

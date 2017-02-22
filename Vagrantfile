@@ -13,7 +13,14 @@ $init = <<SCRIPT
 
   # some missing dependencies
   sudo apt-get -y update
-  sudo apt-get -y install libsqlite3-dev
+  sudo apt-get -y install postgresql postgresql-contrib libpq-dev
+
+  sudo -u postgres psql -c "create role dev_user with createdb login password 'myhomelibrary'";
+
+  cd /vagrant
+  bash -i -c bundler install
+
+  bash -i -c 'rake db:create'
 SCRIPT
 
 $deploy = <<SCRIPT
