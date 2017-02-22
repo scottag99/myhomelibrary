@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170221223823) do
+ActiveRecord::Schema.define(version: 20170222215516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,8 +45,9 @@ ActiveRecord::Schema.define(version: 20170221223823) do
     t.integer  "catalog_id"
     t.integer  "book_id"
     t.decimal  "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "disabled",   default: false
     t.index ["book_id"], name: "index_catalog_entries_on_book_id", using: :btree
     t.index ["catalog_id"], name: "index_catalog_entries_on_catalog_id", using: :btree
   end
@@ -89,6 +90,7 @@ ActiveRecord::Schema.define(version: 20170221223823) do
     t.integer  "catalog_entry_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.decimal  "price"
     t.index ["catalog_entry_id"], name: "index_wishlist_entries_on_catalog_entry_id", using: :btree
     t.index ["wishlist_id"], name: "index_wishlist_entries_on_wishlist_id", using: :btree
   end

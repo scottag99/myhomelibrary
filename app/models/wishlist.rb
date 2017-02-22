@@ -4,14 +4,6 @@ class Wishlist < ApplicationRecord
   has_many :donations
   has_many :catalog_entries, through: :wishlist_entries
 
-  def donation_total
-    donations.sum(:amount)
-  end
-
-  def wishlist_total
-    catalog_entries.sum(:price)
-  end
-
   def public_name
     firstNameLast = reader_name =~ /,/
     if firstNameLast.nil?

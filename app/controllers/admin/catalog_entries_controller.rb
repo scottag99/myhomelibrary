@@ -83,6 +83,6 @@ private
   end
 
   def catalog_entry_params
-    params.require(:catalog_entry).permit(:book_id, :price, book_attributes: [:id, :title, :author, :description, :year, :isbn, :cover_image_url, :level, :ar_level, :ar_points])
+    params.require(:catalog_entry).permit(:book_id, :price, :disabled, book_attributes: [:id, :title, :author, :description, :year, :isbn, :cover_image_url, :level, :ar_level, :ar_points])
   end
 end

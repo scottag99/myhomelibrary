@@ -6,10 +6,11 @@
   <td><%= catalog_entry.book.isbn %></td>
   <td><%= catalog_entry.book.ar_level %></td>
   <td><%= catalog_entry.book.ar_points %></td>
+  <td><input type=checkbox disabled <%= catalog_entry.disabled ? 'checked' : '' %> /></td>
   <% if local_assigns.has_key?(:catalog_actions) %>
   <td>
     <%= link_to "Edit", edit_admin_catalog_catalog_entry_url(catalog_entry.catalog, catalog_entry), class: "btn btn-warning btn-xs", remote: true %>
-    <%= link_to "Delete", admin_catalog_catalog_entry_url(catalog_entry.catalog, catalog_entry),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'Deleting this entry will also remove it from any wish lists it has been added to. This action cannot be undone. Are you sure?'}, remote: true %>
+    <%#= link_to "Delete", admin_catalog_catalog_entry_url(catalog_entry.catalog, catalog_entry),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'Deleting this entry will also remove it from any wish lists it has been added to. This action cannot be undone. Are you sure?'}, remote: true %>
   </td>
   <% end -%>
 </tr>

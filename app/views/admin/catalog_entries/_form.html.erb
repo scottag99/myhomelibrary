@@ -69,4 +69,15 @@
       <%= cat_form.number_field :price, class: "form-control", :min => 0, :step => 0.01 %>
     </div>
   </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+      <div class="checkbox">
+        <label>
+          <%= cat_form.check_box :disabled %>
+          Disabled
+        </label>
+      </div>
+    </div>
+  </div>
 <% end %>

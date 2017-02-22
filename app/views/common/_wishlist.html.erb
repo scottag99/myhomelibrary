@@ -18,7 +18,7 @@
   ];
 
   var all_active_books = [
-    <% CatalogEntry.includes([:catalog, :book]).where('catalogs.active' => true).each_with_index do |entry,idx| %>
+    <% CatalogEntry.joins([:catalog, :book]).where('catalogs.active = ? and disabled = ?', true, false).each_with_index do |entry,idx| %>
     <%= ', ' unless idx == 0 %>{
       catalog_entry_id: <%= entry.id %>,
       name: '<%= j entry.book.title.html_safe %>',
