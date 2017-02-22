@@ -34,7 +34,15 @@
 
 <% content_for :foot do -%>
 <%= javascript_include_tag 'ag-grid.min.js' %>
+
 <script>
+// Very hacky solution for attempting to fix a "timeout" issue on this page
+// that I couldn't recreate
+function heartbeat() {
+   $.ajax('/');
+}
+window.setInterval("heartbeat()", 1000*60*5);
+
 var url = '<%= url_for([:readers, get_namespace, @campaign.organization, @campaign]) %>';
 var can_edit_wishlists = <%= @campaign.can_edit_wishlists.nil? || !@campaign.can_edit_wishlists ? 'false' : 'true' %>;
 
