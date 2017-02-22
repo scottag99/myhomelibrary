@@ -54,7 +54,8 @@ class AppState {
       success: function(data) {
         book.id = data.id;
         appState.wishlist = appState.wishlist.concat(book);
-      }
+      },
+      async: false
     });
   }
 
@@ -67,7 +68,8 @@ class AppState {
       success: function(data) {
         book.id = null;
         appState.wishlist = appState.wishlist.filter(b => b.catalog_entry_id !== book.catalog_entry_id);
-      }
+      },
+      async: false
     });
   }
 
