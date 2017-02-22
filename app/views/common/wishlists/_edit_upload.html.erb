@@ -1,13 +1,34 @@
 
 <%= form_for :wishlist, url: url_for([:upload, get_namespace, @campaign.organization, @campaign, :wishlists]) do |f| %>
 <div class="form-group">
-<p>Upload a CSV file in the following format:</p>
-<pre width="50%">
-teacher,reader_name,reader_age,reader_gender
-Harrington, Joe Pesci, 9, M
-Harrington, Susan Sarandon, 11, F
-O'Malley, Mike Meyers, 13, M
-</pre>
+  <h4>Excel</h4>
+  <p>Upload an Excel file in the following format:</p>
+  <table class="table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>teacher</th>
+        <th>reader_name</th>
+        <th>reader_age</th>
+        <th>reader_gender</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Harrington</td><td>Joe Pesci</td><td>9</td><td>M</td></tr>
+      <tr><td>Harrington</td><td>Susan Sarandon</td><td>11</td><td>F</td></tr>
+      <tr><td>O'Malley</td><td>Mike Meyers</td><td>13</td><td>M</td></tr>
+      <tr><td>O'Malley</td><td>Witherspoon, Reese</td><td>12</td><td>F</td></tr>
+    </tbody>
+  </table>
+
+  <h4>CSV</h4>
+  <p>Upload a CSV file in the following format (note that <code>commas</code> cannot appear in the text to upload, so if you want to do last name first, you'll have to use Excel importing described above):</p>
+  <pre width="50%">
+  teacher,reader_name,reader_age,reader_gender
+  Harrington, Joe Pesci, 9, M
+  Harrington, Susan Sarandon, 11, F
+  O'Malley, Mike Meyers, 13, M
+  O'Malley, Reese Witherspoon, 12, F
+  </pre>
 </div>
 <div class="form-group">
   <%= f.label "File", class: "col-md-1 control-label" %>

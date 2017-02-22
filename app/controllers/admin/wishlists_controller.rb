@@ -1,4 +1,4 @@
-require 'csv'
+require 'roo'
 
 class Admin::WishlistsController < Admin::BaseController
   include CommonWishlistActions
@@ -28,11 +28,14 @@ class Admin::WishlistsController < Admin::BaseController
   end
 
   def upload
+
     uploaded_io = params[:wishlist][:upload]
 
-    CSV.foreach(uploaded_io.path, :headers => true,
-     :header_converters=> lambda {|f| f.strip},
-     :converters=> lambda {|f| f ? f.strip : nil}) do |row|
+    parser = Roo::Spreadsheet.open(uploaded_io.path)
+    header = parser.row(1)
+    (2..parser.last_row).each do |i|
+      row = Hash[[header, parser.row(i)].transpose]
+      row.each{|k,v| row[k] = v.strip if v.is_a? String }
       current_campaign.wishlists.create!(row.to_hash)
     end
 
