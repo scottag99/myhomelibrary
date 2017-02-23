@@ -46,6 +46,21 @@ nav.main {
   @extend .has-error;
 }
 
+.mhl-ag-grid-cell {
+  color: #5a5a5a;
+  padding: 5px;
+}
+
+.mhl-ag-grid-header-left {
+  @extend .mhl-ag-grid-cell;
+  text-align: left !important;
+}
+
+.mhl-ag-grid-header-right {
+  @extend .mhl-ag-grid-cell;
+  text-align: right !important;
+}
+
 /* Featurettes
 ------------------------- */
 

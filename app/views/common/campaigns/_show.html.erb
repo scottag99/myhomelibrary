@@ -19,6 +19,7 @@
   <div class="panel panel-default table-condensed">
     <!-- Default panel contents -->
     <div class="panel-heading"><h3 class="panel-title">Wishlists</h3></div>
+    <div class="panel-body">
     <% if @campaign.can_edit_wishlists %>
     <%= link_to '<i class="glyphicon glyphicon-plus"></i> New Wishlist'.html_safe, url_for([:new, get_namespace, @campaign.organization, @campaign, :wishlist]), :class => "btn btn-xs btn-primary" %>
     <% end %>
@@ -27,6 +28,7 @@
     <%= link_to 'Bulk Edit', url_for([:edit_multiple, get_namespace, @campaign.organization, @campaign, :wishlists, :wishlists_ids => '']), :class => "btn btn-xs btn-warning", :onclick => 'bulkEdit()', :remote => true, :id => 'bulk-edit' %>
     <%= link_to 'Bulk Upload', url_for([:edit_upload, get_namespace, @campaign.organization, @campaign, :wishlists]), :class => "btn btn-xs btn-primary", :remote => true, :id => 'bulk-upload' %>
     <% end %>
+    </div>
     <div id="myGrid" style="height: 450px;" class="ag-bootstrap"></div>
   </div>
 
@@ -104,13 +106,13 @@ var gridOptions = {
     columnDefs: [
         {headerName: 'Teacher', field: 'teacher', checkboxSelection: true, sort: 'asc', sortAt: 0},
         {headerName: 'Name', field: 'reader_name', sort: 'asc', sortAt: 1},
-        {headerName: 'Age', field: 'reader_age', width: 75, cellClass: 'text-right'},
-        {headerName: 'Gender', field: 'reader_gender', width: 75, cellClass: 'text-right'},
-        {headerName: 'Book Count', field: 'book_count', cellClass: 'text-right'}
+        {headerName: 'Age', field: 'reader_age', width: 75, cellClass: 'mhl-ag-grid-cell'},
+        {headerName: 'Gender', field: 'reader_gender', width: 75, cellClass: 'mhl-ag-grid-cell'},
+        {headerName: 'Book Count', field: 'book_count', cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right'}
         <% if admin? %>
         ,
-        {headerName: 'Wish List Total ($)', field: 'wishlist_total', cellClass: 'text-right', cellFormatter: asMoney},
-        {headerName: 'Donation Total ($)', field: 'donation_total', cellClass: 'text-right', cellFormatter: asMoney}
+        {headerName: 'Wish List Total ($)', field: 'wishlist_total', cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right', cellFormatter: asMoney},
+        {headerName: 'Donation Total ($)', field: 'donation_total', cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right', cellFormatter: asMoney}
         <% end %>
         ,
         {headerName: '&nbsp;', field: 'actions', cellRenderer: editButton }
@@ -121,7 +123,8 @@ var gridOptions = {
     defaultColDef: {
         // make every column use 'text' filter by default
         suppressFilter: true,
-        headerClass: 'text-left'
+        headerClass: 'mhl-ag-grid-header-left',
+        cellClass: 'mhl-ag-grid-cell'
     },
     rowModelType: 'pagination',
     datasource: ds,
