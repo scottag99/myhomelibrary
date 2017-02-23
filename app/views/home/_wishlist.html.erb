@@ -6,7 +6,7 @@
     <ul class="list-group">
       <%= render partial: 'wishlist_entry', collection: wishlist.wishlist_entries %>
     </ul>
-    <p><%= link_to 'Sponsor Wish List', donate_url({:wishlist_id => wishlist.id, :amount => 30.00, :campaign_name => wishlist.campaign.name, :schoolname => wishlist.campaign.organization.name, :reader_name => wishlist.public_name}), :class => 'btn btn-primary' if wishlist.wishlist_entries.sum(:price) > wishlist.donations.sum(:amount) %>
+    <p><%= link_to 'Sponsor Wish List', donate_url({:id_list => wishlist.id}), :class => 'btn btn-primary' if wishlist.wishlist_entries.sum(:price) > wishlist.donations.sum(:amount) %>
        <%= link_to 'Sponsored', '#', :class => 'btn btn-default', :disabled => true if wishlist.wishlist_entries.sum(:price) <= wishlist.donations.sum(:amount) %></p>
   </div>
 </div>

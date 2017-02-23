@@ -1,5 +1,14 @@
 <div class="row featurette hero-top">
-  <div class="col-sm-6 col-sm-offset-3">
+  <div class="col-md-2 col-sm-2">
+    <div data-spy="affix" id="sponsor-list" class="hidden-xs" data-id-list="" data-offset-top="50" data-offset-bottom="740">
+      <h3>Home Libraries to Sponsor</h3>
+      <ul class="list-group" id="sponsor-list">
+        <li id="empty-list-message" class="list-group-item disabled">No wish lists selected</li>
+      </ul>
+      <%= link_to 'Checkout', donate_url(), :class => 'btn btn-primary disabled', :id => 'checkout-btn' %>
+    </div>
+  </div>
+  <div class="col-md-6 col-md-offset-1 col-sm-6 col-sm-offset-1">
     <h2 class="featurette-heading">Home Libraries</h2>
     <p class="lead">
       More than 500 children in need have created a wish list of books for their very own home library. You can make a child’s wish come true by sponsoring a child’s home library of six books with a $30 tax-deductible donation. You may also make a general donation to the My Home Library program using the button below. Thank you for supporting a child in need.
@@ -19,16 +28,8 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-2 col-sm-offset-1">
-    <div data-spy="affix" id="sponsor-list" data-id-list="">
-      <h3>Home Libraries to Sponsor</h3>
-      <ul class="list-group" id="sponsor-list">
-        <li id="empty-list-message" class="list-group-item disabled">No wish lists selected</li>
-      </ul>
-      <%= link_to 'Checkout', donate_url(), :class => 'btn btn-primary disabled', :id => 'checkout-btn' %>
-    </div>
-  </div>
-  <div class="col-sm-8" id="search_results">
+
+  <div class="col-md-8 col-md-offset-3 col-sm-offset-3 col-sm-8" id="search_results">
 
     <%= render partial: 'search_results', locals: {wishlists: @wishlists} %>
 

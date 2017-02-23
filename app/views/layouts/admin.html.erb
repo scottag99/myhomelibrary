@@ -61,8 +61,8 @@
             </li>
             <% end -%>
             <li>
-              <a href="#"><img class="avatar" src="<%= session[:userinfo]['info']['image'] %>"/>
-                <span><%= session[:userinfo]['info']['name'] %></span>
+              <a href="#"><img class="avatar" src="<%= session[:userinfo]['info']['image'] %>" alt="<%= session[:userinfo]['info']['name'] %>" />
+                <span class="hidden-sm"><%= session[:userinfo]['info']['name'] %></span>
               </a>
             </li>
             <li><a href="/logout?returnTo=<%= request.base_url %>&client_id=<%= Rails.application.secrets.auth0_client_id %>">Logout</a></li>

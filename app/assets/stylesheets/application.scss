@@ -223,8 +223,12 @@ nav.main {
   padding-bottom: 100px;
 }
 
-#sponsor-list {
-  top: 200px;
+#sponsor-list.affix {
+  width: 250px;
+}
+
+#sponsor-list.affix-bottom {
+  position: absolute;
 }
 
 .profile {

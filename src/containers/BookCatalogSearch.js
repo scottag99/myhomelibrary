@@ -11,7 +11,7 @@ export default function({store}) {
       <Col lg={3}>
         <WishList store={store} />
       </Col>
-      <Col lg={9}>
+      <Col lg={9} sm={9} smOffset={3}>
         <BookSearch store={store} />
         <BookSearchResults store={store} />
       </Col>

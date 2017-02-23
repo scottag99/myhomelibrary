@@ -18,6 +18,7 @@
 //= require bootstrap-datetimepicker
 
 $('body').on("click", '.search-entry a', function() {
+  if (!$('#sponsor-list').is(':visible')) return true;
   var entry = $(this).closest('.search-entry');
   var list = $('#sponsor-list');
   var idList = list.data('id-list');
