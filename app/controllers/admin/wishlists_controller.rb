@@ -28,7 +28,6 @@ class Admin::WishlistsController < Admin::BaseController
   end
 
   def upload
-
     uploaded_io = params[:wishlist][:upload]
 
     parser = Roo::Spreadsheet.open(uploaded_io.path)
@@ -42,6 +41,17 @@ class Admin::WishlistsController < Admin::BaseController
     respond_to do |format|
       format.html { redirect_to admin_organization_campaign_url(current_organization, current_campaign) }
     end
+  end
+
+  def download
+    file_name = "#{current_campaign.organization.name.parameterize}-#{current_campaign.name.parameterize}.csv"
+    content = "#{current_campaign.organization.name},#{current_campaign.name}\r\n"
+    content += "Teacher Name,Student Name,Grade\r\n"
+    current_campaign.wishlists.each do |w|
+      content += "\"#{w.teacher}\",\"#{w.reader_name}\",#{w.grade}\r\n"
+    end
+
+    send_data content, :filename => file_name
   end
 
 private

@@ -42,6 +42,7 @@ Rails.application.routes.draw do
             put  'update_multiple'
             get  'edit_upload'
             post 'upload'
+            get  'download'
           end
           resources :wishlist_entries
         end
