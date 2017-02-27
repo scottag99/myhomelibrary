@@ -29,11 +29,15 @@
 
 <div class="row">
 
-  <div class="col-md-8 col-md-offset-3 col-sm-offset-3 col-sm-8" id="search_results">
-
-    <%= render partial: 'search_results', locals: {wishlists: @wishlists} %>
-
+  <div class="col-md-8 col-md-offset-3 col-sm-offset-3 col-sm-8">
+    <div id="search_results">
+      <%= render partial: 'search_results', locals: {wishlists: @wishlists} %>
+    </div>
+    <p>
+      <%= link_to 'Load More Wish Lists', '/wishlists?append=true', :remote => true, :class => 'btn btn-info', :id => 'load-more' %>
+    </p>
   </div>
+
 </div>
 
 <%= render :partial => 'common/sponsor' %>

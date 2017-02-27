@@ -1,1 +1,7 @@
+<% if params[:append] == 'true' %>
+$("#search_results").append($("<%= escape_javascript(render :partial => 'search_results', :locals => {:wishlists => @wishlists}) %>"));
+$('#load-more').show();
+<% else %>
 $("#search_results").html($("<%= escape_javascript(render :partial => 'search_results', :locals => {:wishlists => @wishlists}) %>"));
+$('#load-more').hide();
+<% end %>
