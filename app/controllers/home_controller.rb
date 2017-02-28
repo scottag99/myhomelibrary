@@ -34,6 +34,7 @@ class HomeController < ApplicationController
     @donationLevel = 30.0*@wishlists.count #TODO: Make the amount configurable
     @Campaign = campaign.keys.join(",")
     @reader_name = reader.keys.join(",")
+    session[:wishlist_cart] = params[:id_list]
   end
 
   def search
@@ -50,7 +51,9 @@ class HomeController < ApplicationController
     @wishlists.each do |w|
       @donation = w.donations.create!({:confirmation_code => params[:confirmation_code], :amount => params[:amount]})
     end
-    
+
+    session[:wishlist_cart] = nil
+
     respond_to do |format|
       format.html { render "index" }
       format.json { render json: @donation }
@@ -61,12 +64,13 @@ private
 
   def find_wishlists
     term = params[:term]
+    ids = (session[:wishlist_cart] || "").split(",").map(&:to_i)
     #By joining wishlist_entries, we get only wishlists with books added.
     if term.to_s.size < 2
-      @wishlists = Wishlist.joins([{:campaign => :organization},"INNER JOIN (select count(*), wishlist_id from wishlist_entries group by wishlist_id having count(*) > 0) c on c.wishlist_id = wishlists.id"]).where("deadline > ? and ready_for_donations = ?", Date.today, true).order('random()').limit(20)
+      @wishlists = Wishlist.joins([{:campaign => :organization},"INNER JOIN (select count(*), wishlist_id from wishlist_entries group by wishlist_id having count(*) > 0) c on c.wishlist_id = wishlists.id"]).where("wishlist_id in (?) or (deadline > ? and ready_for_donations = ?)", ids, Date.today, true).order('random()').limit(20)
     else
       term = "%#{term.downcase}%"
-      @wishlists = Wishlist.joins([{:campaign => :organization}, :wishlist_entries]).where("deadline > ? and ready_for_donations = ? and (lower(reader_name) like ? or lower(teacher) like ? or lower(organizations.name) like ?)", Date.today, true, term, term, term).distinct.order(:reader_name).all
+      @wishlists = Wishlist.joins([{:campaign => :organization}, :wishlist_entries]).where("wishlist_id in (?) or (deadline > ? and ready_for_donations = ? and (lower(reader_name) like ? or lower(teacher) like ? or lower(organizations.name) like ?))", ids, Date.today, true, term, term, term).distinct.order(:reader_name).all
     end
   end
 end

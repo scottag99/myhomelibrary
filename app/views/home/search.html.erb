@@ -41,3 +41,89 @@
 </div>
 
 <%= render :partial => 'common/sponsor' %>
+<%= content_for :foot do %>
+<script>
+var preselected = "<%= session[:wishlist_cart] %>";
+
+$(document).ready(function() {
+  $.each(preselected.split(','), function(idx, id){
+    addIdToCart(id);
+  });
+});
+$('body').on("click", '.search-entry a', function() {
+  if (!$('#sponsor-list').is(':visible')) return true;
+  var entry = $(this).closest('.search-entry');
+  addToCart(entry);
+  return false;
+});
+
+$('body').on("click", '.list-group-item button', function() {
+  var entry = $(this).closest('li');
+  var id = entry.data('wishlist-id');
+  var idList = updateIdList(id, null, true);
+
+  entry.remove();
+
+  return false;
+});
+
+function updateIdList(id, text, isRemove) {
+  var list = $('#sponsor-list');
+  var idList = list.data('id-list');
+
+  if (idList.length == 0) {
+    idList = [];
+  }
+
+  if (!isRemove && idList.indexOf(id) >= 0) {
+    return idList;
+  }
+
+  if (isRemove) {
+    idList.splice(idList.indexOf(id), 1);
+  } else {
+    idList[idList.length] = id;
+  }
+
+
+  updateCheckoutUrl(idList);
+  list.data('id-list', idList);
+
+  if (!isRemove) {
+    var li = $('<li class="list-group-item">' + text + '<button class="close btn-sm"><span class="glyphicon glyphicon-sm glyphicon-remove"></span></button></li>');
+    li.data('wishlist-id', id);
+    list.find('ul').append(li);
+  } else {
+    $(".search-entry[data-wishlist-id=" + id + "] a").removeClass('disabled');
+  }
+
+  return idList;
+}
+
+function addIdToCart(id) {
+  var wishlist = $('.search-entry[data-wishlist-id=' + id + ']');
+  addToCart(wishlist);
+}
+
+function addToCart(entry) {
+  var idList = updateIdList(entry.data('wishlist-id'), entry.find('h3').html());
+
+  entry.find('a').addClass('disabled');
+}
+
+function updateCheckoutUrl(idList) {
+  var checkoutBtn = $('#checkout-btn');
+  if (idList.length == 0) {
+    $('#empty-list-message').show();
+    checkoutBtn.addClass('disabled');
+  } else {
+    $('#empty-list-message').hide();
+    checkoutBtn.removeClass('disabled');
+  }
+
+  var href = checkoutBtn.attr('href');
+  href = href.replace(/\?.+/, "") + "?id_list=" + idList;
+  checkoutBtn.attr('href', href);
+}
+</script>
+<% end %>
