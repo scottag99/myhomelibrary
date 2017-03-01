@@ -67,7 +67,8 @@ private
     ids = (session[:wishlist_cart] || "").split(",").map(&:to_i)
     #By joining wishlist_entries, we get only wishlists with books added.
     if term.to_s.size < 2
-      @wishlists = Wishlist.joins([{:campaign => :organization},"INNER JOIN (select count(*), wishlist_id from wishlist_entries group by wishlist_id having count(*) > 0) c on c.wishlist_id = wishlists.id"]).where("wishlist_id in (?) or (deadline > ? and ready_for_donations = ?)", ids, Date.today, true).order('random()').limit(20)
+      @wishlists = Wishlist.joins([{:campaign => :organization},"INNER JOIN (select count(*), wishlist_id from wishlist_entries group by wishlist_id having count(*) > 0) c on c.wishlist_id = wishlists.id"]).where("wishlist_id in (?)", ids)
+      @wishlists = @wishlists + Wishlist.joins([{:campaign => :organization},"INNER JOIN (select count(*), wishlist_id from wishlist_entries group by wishlist_id having count(*) > 0) c on c.wishlist_id = wishlists.id"]).where("(deadline > ? and ready_for_donations = ?)", Date.today, true).order('random()').limit(20)
     else
       term = "%#{term.downcase}%"
       @wishlists = Wishlist.joins([{:campaign => :organization}, :wishlist_entries]).where("wishlist_id in (?) or (deadline > ? and ready_for_donations = ? and (lower(reader_name) like ? or lower(teacher) like ? or lower(organizations.name) like ?))", ids, Date.today, true, term, term, term).distinct.order(:reader_name).all
