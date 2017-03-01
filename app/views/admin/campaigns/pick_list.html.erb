@@ -49,6 +49,14 @@
           <td><%= catalog_entry.book.author %></td>
           <td><%= catalog_entry.book.isbn %></td>
         </tr>
+          <% unless catalog_entry.related_entry.nil? %>
+          <tr>
+            <td>&nbsp;</td>
+            <td><%= catalog_entry.related_entry.book.title %></td>
+            <td><%= catalog_entry.related_entry.book.author %></td>
+            <td><%= catalog_entry.related_entry.book.isbn %></td>
+          </tr>
+          <% end -%>
         <% end -%>
       </tbody>
     </table>

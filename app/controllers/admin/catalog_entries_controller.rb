@@ -18,6 +18,8 @@ class Admin::CatalogEntriesController < Admin::BaseController
 
   def edit
     @catalog_entry = @catalog.catalog_entries.includes(:book).find(params[:id])
+    @related_entries = @catalog.catalog_entries.includes(:book).where("catalog_entries.id != ?", @catalog_entry).order("books.title")
+
     respond_to do |format|
       format.html
       format.js
@@ -36,8 +38,10 @@ class Admin::CatalogEntriesController < Admin::BaseController
   end
 
   def new
+    @related_entries = @catalog.catalog_entries
     @catalog_entry = @catalog.catalog_entries.new
     @catalog_entry.book = Book.new
+
     respond_to do |format|
       format.html
       format.js
@@ -83,6 +87,6 @@ private
   end
 
   def catalog_entry_params
-    params.require(:catalog_entry).permit(:book_id, :price, :disabled, book_attributes: [:id, :title, :author, :description, :year, :isbn, :cover_image_url, :level, :ar_level, :ar_points])
+    params.require(:catalog_entry).permit(:book_id, :price, :disabled, :related_entry_id, book_attributes: [:id, :title, :author, :description, :year, :isbn, :cover_image_url, :level, :ar_level, :ar_points])
   end
 end

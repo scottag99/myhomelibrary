@@ -40,6 +40,19 @@ catalogs.each do |catalog|
       <td class="text-right"><%= number_to_currency(@prices[key]) %></td>
     </tr>
 <%
+    unless key[3].nil?
+      book_total += count
+      related = CatalogEntry.find(key[3])
+%>
+    <tr>
+      <td><%= related.book.isbn %></td>
+      <td>&#8627; <%= related.book.title %> <em>(related to previous)</em></td>
+      <td class="text-right">&nbsp;</td>
+      <td class="text-right"><%= count %></td>
+      <td class="text-right">&nbsp;</td>
+    </tr>
+<%
+    end
   end
 end -%>
   </tbody>

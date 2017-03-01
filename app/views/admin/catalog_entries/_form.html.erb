@@ -80,4 +80,11 @@
       </div>
     </div>
   </div>
+
+  <div class="form-group">
+    <%= cat_form.label :related_entry, class: "col-md-2 control-label" %>
+    <div class="col-md-10">
+      <%= cat_form.collection_select :related_entry_id, @related_entries, :id, :title, :prompt => true %>
+    </div>
+  </div>
 <% end %>

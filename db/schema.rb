@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227142510) do
+ActiveRecord::Schema.define(version: 20170228193948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,9 +45,10 @@ ActiveRecord::Schema.define(version: 20170227142510) do
     t.integer  "catalog_id"
     t.integer  "book_id"
     t.decimal  "price"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.boolean  "disabled",   default: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "disabled",         default: false
+    t.integer  "related_entry_id"
     t.index ["book_id"], name: "index_catalog_entries_on_book_id", using: :btree
     t.index ["catalog_id"], name: "index_catalog_entries_on_catalog_id", using: :btree
   end
@@ -111,6 +112,7 @@ ActiveRecord::Schema.define(version: 20170227142510) do
 
   add_foreign_key "campaigns", "organizations"
   add_foreign_key "catalog_entries", "books"
+  add_foreign_key "catalog_entries", "catalog_entries", column: "related_entry_id"
   add_foreign_key "catalog_entries", "catalogs"
   add_foreign_key "donations", "wishlists"
   add_foreign_key "partners", "organizations"
