@@ -1,7 +1,7 @@
 class CatalogEntry < ApplicationRecord
   belongs_to :catalog
   belongs_to :book
-  belongs_to :related_entry, :class_name => 'CatalogEntry'
+  belongs_to :related_entry, :class_name => 'CatalogEntry', optional: true
   has_many :wishlist_entries, :dependent => :destroy
   accepts_nested_attributes_for :book
 
