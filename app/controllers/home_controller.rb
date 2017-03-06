@@ -20,21 +20,31 @@ class HomeController < ApplicationController
   end
 
   def donate
-    @wishlists = Wishlist.joins([{:campaign => :organization}]).where("wishlists.id in (?)", params[:id_list].split(",").map(&:to_i)).all
-    school = {}
-    campaign = {}
-    reader = {}
-    @wishlists.each{|w|
-      school[w.campaign.organization.name] = true
-      campaign[w.campaign.name] = true
-      reader[w.reader_name] = true
-    }
-    @schoolname = school.keys.join(",")
-    @wishListID = params[:id_list]
-    @donationLevel = 30.0*@wishlists.count #TODO: Make the amount configurable
-    @Campaign = campaign.keys.join(",")
-    @reader_name = reader.keys.join(",")
-    session[:wishlist_cart] = params[:id_list]
+    if params[:id_list].nil?
+      @wishlists = []
+      @donationLevel = 30.0
+      @Campaign = "General"
+      @schoolname = "None"
+      @reader_name = ""
+      @wishListID = ""
+    else
+      school = {}
+      campaign = {}
+      reader = {}
+
+      @wishlists = Wishlist.joins([{:campaign => :organization}]).where("wishlists.id in (?)", params[:id_list].split(",").map(&:to_i)).all
+      @wishlists.each{|w|
+        school[w.campaign.organization.name] = true
+        campaign[w.campaign.name] = true
+        reader[w.reader_name] = true
+      }
+      @schoolname = school.keys.join(",")
+      @donationLevel = 30.0*@wishlists.count #TODO: Make the amount configurable
+      @Campaign = campaign.keys.join(",")
+      @reader_name = reader.keys.join(",")
+      @wishListID = params[:id_list]
+      session[:wishlist_cart] = params[:id_list]
+    end
   end
 
   def search
