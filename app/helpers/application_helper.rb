@@ -30,4 +30,8 @@ module ApplicationHelper
     end
     return false
   end
+
+  def live_campaigns?
+    Campaign.where("deadline > ? and ready_for_donations = ?", 1.day.from_now.at_midnight, true).count > 0
+  end
 end

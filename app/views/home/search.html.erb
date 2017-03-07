@@ -1,42 +1,45 @@
 <div class="row featurette hero-top">
   <div class="col-md-2 col-sm-2">
     <div data-spy="affix" id="sponsor-list" class="hidden-xs" data-id-list="" data-offset-top="50" data-offset-bottom="740">
-      <h3>Home Libraries to Sponsor</h3>
-      <ul class="list-group" id="sponsor-list">
-        <li id="empty-list-message" class="list-group-item disabled">No wish lists selected</li>
-      </ul>
-      <%= link_to 'Checkout', donate_url(), :class => 'btn btn-primary disabled', :id => 'checkout-btn' %>
+      <% if live_campaigns? -%>
+        <h3>Home Libraries to Sponsor</h3>
+        <ul class="list-group" id="sponsor-list">
+          <li id="empty-list-message" class="list-group-item disabled">No wish lists selected</li>
+        </ul>
+        <%= link_to 'Checkout', donate_url(), :class => 'btn btn-primary disabled', :id => 'checkout-btn' %>
+      <% end -%>
     </div>
   </div>
   <div class="col-md-6 col-md-offset-1 col-sm-6 col-sm-offset-1">
     <h2 class="featurette-heading">Home Libraries</h2>
-    <p class="lead"><%= @content['sponsor_lead'] %></p>
+    <p class="lead"><%= live_campaigns? ? @content['sponsor_lead'] : @content['sponsor_lead_no_campaign'] %></p>
     <p>
       <%= link_to 'General Donation', donate_url(), :class => 'btn btn-primary' %>
     </p>
-    <%= form_tag('/wishlists', method: :get, remote: true) do %>
-      <div class="input-group">
-        <input class="form-control" name="term" id="term" placeholder="Name, teacher, or school" />
-        <span class="input-group-btn">
-          <button class="btn btn-primary" type="submit">Search</button>
-        </span>
-    </div>
-    <% end %>
+    <% if live_campaigns? %>
+      <%= form_tag('/wishlists', method: :get, remote: true) do %>
+        <div class="input-group">
+          <input class="form-control" name="term" id="term" placeholder="Name, teacher, or school" />
+          <span class="input-group-btn">
+            <button class="btn btn-primary" type="submit">Search</button>
+          </span>
+      </div>
+      <% end -%>
+    <% end -%>
   </div>
 </div>
-
-<div class="row">
-
-  <div class="col-md-8 col-md-offset-3 col-sm-offset-3 col-sm-8">
-    <div id="search_results">
-      <%= render partial: 'search_results', locals: {wishlists: @wishlists} %>
+<% if live_campaigns? -%>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-3 col-sm-offset-3 col-sm-8">
+      <div id="search_results">
+        <%= render partial: 'search_results', locals: {wishlists: @wishlists} %>
+      </div>
+      <p>
+        <%= link_to 'Load More Wish Lists', '/wishlists?append=true', :remote => true, :class => 'btn btn-info', :id => 'load-more' %>
+      </p>
     </div>
-    <p>
-      <%= link_to 'Load More Wish Lists', '/wishlists?append=true', :remote => true, :class => 'btn btn-info', :id => 'load-more' %>
-    </p>
   </div>
-
-</div>
+<% end -%>
 
 <%= render :partial => 'common/sponsor' %>
 <%= content_for :foot do %>
@@ -120,8 +123,10 @@ function updateCheckoutUrl(idList) {
   }
 
   var href = checkoutBtn.attr('href');
-  href = href.replace(/\?.+/, "") + "?id_list=" + idList;
-  checkoutBtn.attr('href', href);
+  if (href) {
+    href = href.replace(/\?.+/, "") + "?id_list=" + idList;
+    checkoutBtn.attr('href', href);
+  }
 }
 </script>
 <% end %>
