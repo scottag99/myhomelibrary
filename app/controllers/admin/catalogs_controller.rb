@@ -19,7 +19,7 @@ class Admin::CatalogsController < Admin::BaseController
   def new
     @catalog = Catalog.new
     respond_to do |format|
-      format.html
+      format.html { render 'common/form', locals: {form_title: 'New Catalog', model: 'catalogs'} }
       format.json { render json: @catalog }
     end
   end
@@ -27,7 +27,7 @@ class Admin::CatalogsController < Admin::BaseController
   def edit
     @catalog = Catalog.find(params[:id])
     respond_to do |format|
-      format.html
+      format.html { render 'common/form', locals: {form_title: 'Edit Catalog', model: 'catalogs'}  }
       format.json { render json: @catalog }
     end
   end

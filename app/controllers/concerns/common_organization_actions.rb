@@ -20,7 +20,7 @@ module CommonOrganizationActions
   def edit
     @organization = find_organization
     respond_to do |format|
-      format.html
+      format.html { render 'common/form', locals: {form_title: 'Edit Organization', model: 'organizations'} }
       format.json { render json: @organization }
     end
   end

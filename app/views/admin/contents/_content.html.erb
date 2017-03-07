@@ -1,0 +1,9 @@
+<tr>
+  <td><%= content.name %></td>
+  <td><%= content.action_name %></td>
+  <td><%= content.content %></td>
+  <td>
+    <%= link_to "Edit", edit_admin_content_url(content), class: "btn btn-warning btn-xs" %>
+    <%= link_to "Delete", admin_content_url(content),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'This action cannot be undone. Are you sure?'} %>
+  </td>
+</tr>

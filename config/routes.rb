@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :catalogs do
       resources :catalog_entries
     end
+    resources :contents
     resources :organizations do
       resources :partners
       resources :campaigns do

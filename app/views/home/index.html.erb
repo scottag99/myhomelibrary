@@ -9,7 +9,7 @@
     <div class="col-sm-6">
       <h2 class="featurette-heading">My Home Library</h2>
       <p class="lead">
-        Books are essential tools for reading success. Through My Home Library, disadvantaged children across Houston gain access to their very own home library.
+        <%= @content['mhl_lead'] %>
       </p>
     </div>
   </div>
@@ -18,8 +18,7 @@
     <div class="col-sm-6 col-sm-offset-3">
       <h2 class="featurette-heading">Sponsor a child</h2>
       <p class="lead">
-        Through your tax-deductible gift of $30, you have the power to make a meaningful difference by
-        providing a home library to a low-income child in Houston.
+        <%= @content['sponsor_lead'] %>
       </p>
       <p>
         <%= link_to 'Sponsor', search_url, class: 'btn btn-primary btn-lg' %>

@@ -25,7 +25,7 @@ module CommonWishlistActions
     @back_url = get_campaign_url
 
     respond_to do |format|
-      format.html
+      format.html { render 'common/wishlists/manage'}
       format.json { render json: @wishlist }
     end
   end
@@ -34,7 +34,7 @@ module CommonWishlistActions
     @wishlist = current_campaign.wishlists.find(params[:id])
 
     respond_to do |format|
-      format.html
+      format.html { render 'common/form', locals: {form_title: 'Edit Wishlist', model: 'wishlists'} }
       format.json { render json: @wishlist }
     end
   end
@@ -42,7 +42,7 @@ module CommonWishlistActions
   def new
     @wishlist = current_campaign.wishlists.new
     respond_to do |format|
-      format.html
+      format.html { render 'common/form', locals: {form_title: 'New Wishlist', model: 'wishlists'} }
       format.json { render json: @wishlist }
     end
   end

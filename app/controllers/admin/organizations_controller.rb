@@ -4,7 +4,7 @@ class Admin::OrganizationsController < Admin::BaseController
   def new
     @organization = Organization.new
     respond_to do |format|
-      format.html
+      format.html { render 'common/form', locals: {form_title: 'New Organization', model: 'organizations'} }
       format.json { render json: @organization }
     end
   end

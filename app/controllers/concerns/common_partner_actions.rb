@@ -22,7 +22,7 @@ module CommonPartnerActions
     @partner = @organization.partners.find(params[:id])
 
     respond_to do |format|
-      format.html
+      format.html { render 'common/form', locals: {form_title: 'Edit Volunteer', model: 'partners'} }
       format.json { render json: @partner }
     end
   end

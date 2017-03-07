@@ -17,7 +17,7 @@ class Admin::CampaignsController < Admin::BaseController
     @campaign = @organization.campaigns.new
     @campaign.can_edit_wishlists = true
     respond_to do |format|
-      format.html
+      format.html { render 'common/form', locals: {form_title: 'New Campaign', model: 'campaigns'} }
       format.json { render json: @campaign }
     end
   end

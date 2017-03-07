@@ -22,7 +22,7 @@ module CommonCampaignActions
     @campaign = @organization.campaigns.find(params[:id])
 
     respond_to do |format|
-      format.html
+      format.html { render 'common/form', locals: {form_title: 'Edit Campaign', model: 'campaigns'} }
       format.json { render json: @campaign }
     end
   end

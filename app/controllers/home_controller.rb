@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   before_action :find_wishlists, only: [:search, :wishlists]
+  before_action :find_content, only: [:index, :search, :wishlists]
 
   def index
   end
@@ -84,4 +85,9 @@ private
       @wishlists = Wishlist.joins([{:campaign => :organization}, :wishlist_entries]).where("wishlist_id in (?) or (deadline > ? and ready_for_donations = ? and (lower(reader_name) like ? or lower(teacher) like ? or lower(organizations.name) like ?))", ids, Date.today, true, term, term, term).distinct.order(:reader_name).all
     end
   end
+
+  def find_content
+    @content = Content.where(action_name: action_name).all.map{|c| [c.name, c.content]}.to_h
+  end
+
 end

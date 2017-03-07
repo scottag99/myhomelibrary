@@ -17,7 +17,7 @@ class Admin::PartnersController < Admin::BaseController
     @partner = @organization.partners.new
     @partner.active = true
     respond_to do |format|
-      format.html
+      format.html { render 'common/form', locals: {form_title: 'New Volunteer', model: 'partners'} }
       format.json { render json: @partner }
     end
   end
