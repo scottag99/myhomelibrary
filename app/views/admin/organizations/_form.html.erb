@@ -8,6 +8,13 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :slug, class: "col-md-1 control-label" %>
+    <div class="col-md-4">
+      <%= f.text_field :slug, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
     <div class="col-md-offset-1 col-md-4">
       <%= f.submit "Submit", class: "btn btn-default btn-primary" %>
       <%= link_to 'Back', admin_organizations_url(), :class => "btn btn-default"%>

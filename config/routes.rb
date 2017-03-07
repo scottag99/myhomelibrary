@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get 'home/library'
   get 'donate', to: 'home#donate'
-  get 'search', to: 'home#search'
+  get 'search/(:slug)', to: 'home#search', as: 'search'
   get 'wishlists', to: 'home#wishlists'
   post 'success', to: 'home#success'
 

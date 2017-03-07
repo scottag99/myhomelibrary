@@ -1,5 +1,6 @@
 <tr>
   <td><%= link_to organization.name, admin_organization_url(organization) %></td>
+  <td><%= organization.slug %></td>
   <td><%= organization.campaigns.count %></td>
   <td><%= Wishlist.joins(:campaign).where("campaigns.organization_id = ?",  organization).count %></td>
   <td><%= number_to_currency(Donation.joins(:wishlist => :campaign).where("campaigns.organization_id = ?", organization).sum(:amount)) %></td>

@@ -5,6 +5,8 @@
     <dl class="dl-horizontal">
       <dt>Name</dt>
       <dd><%= @organization.name %></dd>
+      <dt>External Wish List Search Page Link</dt>
+      <dd><%= search_url(@organization.slug) %></dd>
     </dl>
   </div>
   <div class="panel panel-default">

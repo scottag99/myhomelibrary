@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  before_action :find_organization, only: [:search, :wishlists]
   before_action :find_wishlists, only: [:search, :wishlists]
   before_action :find_content, only: [:index, :search, :wishlists]
 
@@ -24,26 +25,39 @@ class HomeController < ApplicationController
     if params[:id_list].nil?
       @wishlists = []
       @donationLevel = 30.0
-      @Campaign = "General"
       @schoolname = "None"
+      @Campaign = "General"
       @reader_name = ""
       @wishListID = ""
+      @slug = ""
+      if !params[:campaign_id].nil? && campaign = Campaign.find(params[:campaign_id])
+        @Campaign = campaign.name
+        @schoolname = campaign.organization.name
+        @slug = campaign.organization.slug
+      end
+      if !params[:organization_id].nil? && org = Organization.find(params[:organization_id])
+        @schoolname = org.name
+        @slug = org.slug
+      end
     else
       school = {}
       campaign = {}
       reader = {}
+      slug = {}
 
       @wishlists = Wishlist.joins([{:campaign => :organization}]).where("wishlists.id in (?)", params[:id_list].split(",").map(&:to_i)).all
       @wishlists.each{|w|
         school[w.campaign.organization.name] = true
         campaign[w.campaign.name] = true
         reader[w.reader_name] = true
+        slug[w.campaign.organization.slug] = true
       }
       @schoolname = school.keys.join(",")
       @donationLevel = 30.0*@wishlists.count #TODO: Make the amount configurable
       @Campaign = campaign.keys.join(",")
       @reader_name = reader.keys.join(",")
       @wishListID = params[:id_list]
+      @slug = slug.keys.join("") if slug.count == 1
       session[:wishlist_cart] = params[:id_list]
     end
   end
@@ -73,16 +87,40 @@ class HomeController < ApplicationController
 
 private
 
+  def find_organization
+    unless params[:slug].nil?
+      @organization = Organization.find_by_slug(params[:slug])
+    end
+
+    if !params[:term].nil? && @organization.nil?
+      @organization = Organization.find_by_name(params[:term])
+    end
+  end
+
   def find_wishlists
     term = params[:term]
     ids = (session[:wishlist_cart] || "").split(",").map(&:to_i)
     #By joining wishlist_entries, we get only wishlists with books added.
     if term.to_s.size < 2
+      if @organization.nil?
+        where = "(deadline > ? and ready_for_donations = ?)"
+        where_args = [Date.today, true]
+      else
+        where = "(deadline > ? and ready_for_donations = ? and organizations.id = ?)"
+        where_args = [Date.today, true, @organization.id]
+      end
       @wishlists = Wishlist.joins([{:campaign => :organization},"INNER JOIN (select count(*), wishlist_id from wishlist_entries group by wishlist_id having count(*) > 0) c on c.wishlist_id = wishlists.id"]).where("wishlist_id in (?)", ids)
-      @wishlists = @wishlists + Wishlist.joins([{:campaign => :organization},"INNER JOIN (select count(*), wishlist_id from wishlist_entries group by wishlist_id having count(*) > 0) c on c.wishlist_id = wishlists.id"]).where("(deadline > ? and ready_for_donations = ?)", Date.today, true).order('random()').limit(20)
+      @wishlists = @wishlists + Wishlist.joins([{:campaign => :organization},"INNER JOIN (select count(*), wishlist_id from wishlist_entries group by wishlist_id having count(*) > 0) c on c.wishlist_id = wishlists.id"]).where(where, *where_args).order('random()').limit(20)
     else
       term = "%#{term.downcase}%"
-      @wishlists = Wishlist.joins([{:campaign => :organization}, :wishlist_entries]).where("wishlist_id in (?) or (deadline > ? and ready_for_donations = ? and (lower(reader_name) like ? or lower(teacher) like ? or lower(organizations.name) like ?))", ids, Date.today, true, term, term, term).distinct.order(:reader_name).all
+      if @organization.nil?
+        where = "wishlist_id in (?) or (deadline > ? and ready_for_donations = ? and (lower(reader_name) like ? or lower(teacher) like ? or lower(organizations.name) like ?))"
+        where_args = [ids, Date.today, true, term, term, term]
+      else
+        where = "wishlist_id in (?) or (deadline > ? and ready_for_donations = ? and organizations.id = ? and (lower(reader_name) like ? or lower(teacher) like ?))"
+        where_args = [ids, Date.today, true, @organization.id, term, term]
+      end
+      @wishlists = Wishlist.joins([{:campaign => :organization}, :wishlist_entries]).where(where, *where_args).distinct.order(:reader_name).all
     end
   end
 

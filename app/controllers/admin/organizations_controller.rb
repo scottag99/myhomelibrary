@@ -24,7 +24,7 @@ class Admin::OrganizationsController < Admin::BaseController
     @organizations = find_organizations
     flash[:success] = "Thank you! Your Organization has been added."
     respond_to do |format|
-      format.html { render "index" }
+      format.html { render "show" }
       format.json { render json: @organization }
     end
   end
@@ -48,6 +48,6 @@ private
   end
 
   def org_params
-    params.require(:organization).permit(:name, :contact_name, :contact_email)
+    params.require(:organization).permit(:name, :contact_name, :contact_email, :slug)
   end
 end

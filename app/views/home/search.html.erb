@@ -11,13 +11,20 @@
     </div>
   </div>
   <div class="col-md-6 col-md-offset-1 col-sm-6 col-sm-offset-1">
-    <h2 class="featurette-heading">Home Libraries</h2>
+    <h2 class="featurette-heading">Home Libraries<%= " for #{@organization.name}" unless @organization.nil? %></h2>
     <p class="lead"><%= live_campaigns? ? @content['sponsor_lead'] : @content['sponsor_lead_no_campaign'] %></p>
-    <p>
-      <%= link_to 'General Donation', donate_url(), :class => 'btn btn-primary' %>
-    </p>
+    <% if @organization.nil? -%>
+      <p>
+        <%= link_to 'General Donation', donate_url(), :class => 'btn btn-primary' %>
+      </p>
+    <% else -%>
+      <p>
+        <%= link_to "General Donation to #{@organization.name}", donate_url(:campaign_id => @organization.current_campaign), :class => 'btn btn-primary' if live_campaigns? %>
+        <%= link_to "General Donation to #{@organization.name}", donate_url(:organization_id => @organization.id), :class => 'btn btn-primary' unless live_campaigns? %>
+      </p>
+    <% end -%>
     <% if live_campaigns? %>
-      <%= form_tag('/wishlists', method: :get, remote: true) do %>
+      <%= form_tag("/wishlists?slug=#{params[:slug]}", method: :get, remote: true) do %>
         <div class="input-group">
           <input class="form-control" name="term" id="term" placeholder="Name, teacher, or school" />
           <span class="input-group-btn">
@@ -35,7 +42,7 @@
         <%= render partial: 'search_results', locals: {wishlists: @wishlists} %>
       </div>
       <p>
-        <%= link_to 'Load More Wish Lists', '/wishlists?append=true', :remote => true, :class => 'btn btn-info', :id => 'load-more' %>
+        <%= link_to 'Load More Wish Lists', "/wishlists?slug=#{params[:slug]}&append=true", :remote => true, :class => 'btn btn-info', :id => 'load-more' %>
       </p>
     </div>
   </div>
