@@ -23,6 +23,11 @@ module CommonWishlistActions
     @add_url = get_add_url(@wishlist)
     @delete_url = get_delete_url(@wishlist)
     @back_url = get_campaign_url
+    previous_books = [0]
+    unless @wishlist.external_id.blank?
+      previous_books = previous_books + CatalogEntry.joins(:wishlist_entries => {:wishlist => :campaign}).where("wishlists.id <> ? and campaigns.organization_id = ? and wishlists.external_id = ?", @wishlist, current_campaign.organization_id, @wishlist.external_id).collect{|ce| ce.book_id}
+    end
+    @active_books = CatalogEntry.joins([:catalog, :book]).where('catalogs.active = ? and disabled = ? and book_id NOT IN (?)', true, false, previous_books).all
 
     respond_to do |format|
       format.html { render 'common/wishlists/manage'}
@@ -74,6 +79,6 @@ module CommonWishlistActions
   end
 private
   def wishlist_params
-    params.require(:wishlist).permit(:reader_name, :reader_age, :reader_gender, :teacher, :grade, :grl)
+    params.require(:wishlist).permit(:reader_name, :reader_age, :reader_gender, :teacher, :grade, :grl, :external_id)
   end
 end

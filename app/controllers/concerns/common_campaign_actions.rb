@@ -31,8 +31,8 @@ module CommonCampaignActions
     @campaign = @organization.campaigns.find(params[:id])
 
     term = "%#{params[:term]}%".downcase
-    select_text = "teacher, reader_name, reader_age, reader_gender, grade, campaign_id, wishlists.id as id, COALESCE(book_count, 0) as book_count, grl"
-    grouping = [:teacher, :reader_name, :reader_age, :reader_gender, :grade, "campaign_id", "wishlists.id", "book_count", :grl]
+    select_text = "teacher, reader_name, reader_age, reader_gender, grade, campaign_id, wishlists.id as id, COALESCE(book_count, 0) as book_count, grl, external_id"
+    grouping = [:teacher, :reader_name, :reader_age, :reader_gender, :grade, "campaign_id", "wishlists.id", "book_count", :grl, :external_id]
     if get_role == 'admin'
       select_text += ", COALESCE(wishlist_total, 0) as wishlist_total, COALESCE(donation_total, 0) as donation_total"
       grouping = grouping + ['wishlist_total', 'donation_total']
