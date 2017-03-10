@@ -2,6 +2,8 @@
   <td><%= link_to wishlist.reader_name, [get_namespace, @organization, wishlist.campaign, wishlist] %></td>
   <td><%= wishlist.reader_age %></td>
   <td><%= wishlist.reader_gender %></td>
+  <td><%= wishlist.grade %></td>
+  <td><%= wishlist.grl %></td>
   <td><%= wishlist[:book_count] %></td><%# These values are coming from a custom query for perf reason %>
   <% if admin? %>
   <td><%= number_to_currency(wishlist[:wishlist_total]) %></td><%# These values are coming from a custom query for perf reason %>

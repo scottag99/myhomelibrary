@@ -109,7 +109,8 @@ var gridOptions = {
         {headerName: 'Age', field: 'reader_age', width: 75, cellClass: 'mhl-ag-grid-cell'},
         {headerName: 'Gender', field: 'reader_gender', width: 75, cellClass: 'mhl-ag-grid-cell'},
         {headerName: 'Grade', field: 'grade', width: 75, cellClass: 'mhl-ag-grid-cell'},
-        {headerName: 'Book Count', field: 'book_count', cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right'}
+        {headerName: 'GRL', field: 'grl', width: 75, cellClass: 'mhl-ag-grid-cell'},
+        {headerName: 'Book Count', field: 'book_count', width: 100, cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right'}
         <% if admin? %>
         ,
         {headerName: 'Wish List Total ($)', field: 'wishlist_total', cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right', cellFormatter: asMoney},

@@ -28,6 +28,9 @@ const WishList = ({store}) => {
   return (
     <div data-spy="affix" className="current-wishlist">
       <h4>Wish List for {store.reader}</h4>
+      {store.grl &&
+        <h6>Reading Level: {store.grl}</h6>
+      }
       <ListGroup>
         {children}
       </ListGroup>

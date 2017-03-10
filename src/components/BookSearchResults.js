@@ -14,7 +14,14 @@ const LongDesc = ({book}) => (
 const Book = ({book, addToWishList}) => (
   <a className="book" onClick={addToWishList}>
     <h4 className="book-title">{book.name}</h4>
-    <p className="text-muted book-author">by {book.author}, AR Pts: {book.ar_points}</p>
+    <p className="text-muted book-author">by {book.author}
+    {book.ar_points &&
+        <span>, AR Pts: {book.ar_points}</span>
+    }
+    {book.grl &&
+        <span>, GRL: {book.grl}</span>
+    }
+    </p>
     <Image src={book.imageUrl} alt="" responsive className="book-cover" />
     <p className="text-muted book-description">{book.description}</p>
     <OverlayTrigger trigger={['hover', 'focus']} placement="right" overlay={LongDesc(book={book})}>

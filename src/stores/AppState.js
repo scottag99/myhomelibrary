@@ -18,6 +18,10 @@ class AppState {
     this.books = all_active_books;
     this.wishlistList = back_url;
     this.reader = reader;
+    this.grl = grl;
+    // convert letter value to int for comparison
+    this.readerMin = this.grl.charCodeAt(0) - 1;
+    this.readerMax = this.grl.charCodeAt(0) + 2;
   }
 
   @observable
@@ -36,7 +40,7 @@ class AppState {
 
     return this.books
       .filter(book => book.name.toLowerCase().indexOf(term) >= 0 || book.author.toLowerCase().indexOf(term) >= 0 || book.description.toLowerCase().indexOf(term) >= 0)
-      .filter(book => this.readingLevels[book.level])
+      .filter(book => this.filterByLevel(book))
       .filter(book => !this.wishlist.find((wish) => wish.catalog_entry_id === book.catalog_entry_id));
   }
 
@@ -79,6 +83,15 @@ class AppState {
 
   handleGradeLevel(event) {
     appState.readingLevels[event.target.value] = event.target.checked;
+  }
+
+  filterByLevel(book) {
+    if (appState.grl) {
+      var bookValue = book.grl.charCodeAt(0);
+      return book.grl == '' || ( bookValue >= appState.readerMin && bookValue <= appState.readerMax)
+    } else {
+      return appState.readingLevels[book.level]
+    }
   }
 }
 

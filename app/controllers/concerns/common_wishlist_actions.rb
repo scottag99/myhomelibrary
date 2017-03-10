@@ -74,6 +74,6 @@ module CommonWishlistActions
   end
 private
   def wishlist_params
-    params.require(:wishlist).permit(:reader_name, :reader_age, :reader_gender, :teacher, :grade)
+    params.require(:wishlist).permit(:reader_name, :reader_age, :reader_gender, :teacher, :grade, :grl)
   end
 end
