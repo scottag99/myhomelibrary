@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170310183858) do
+ActiveRecord::Schema.define(version: 20170310201232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 20170310183858) do
     t.decimal  "ar_level"
     t.decimal  "ar_points"
     t.string   "grl"
+  end
+
+  create_table "campaign_catalogs", force: :cascade do |t|
+    t.integer  "campaign_id"
+    t.integer  "catalog_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["campaign_id"], name: "index_campaign_catalogs_on_campaign_id", using: :btree
+    t.index ["catalog_id"], name: "index_campaign_catalogs_on_catalog_id", using: :btree
   end
 
   create_table "campaigns", force: :cascade do |t|
@@ -122,6 +131,8 @@ ActiveRecord::Schema.define(version: 20170310183858) do
     t.index ["teacher"], name: "index_wishlists_on_teacher", using: :btree
   end
 
+  add_foreign_key "campaign_catalogs", "campaigns"
+  add_foreign_key "campaign_catalogs", "catalogs"
   add_foreign_key "campaigns", "organizations"
   add_foreign_key "catalog_entries", "books"
   add_foreign_key "catalog_entries", "catalog_entries", column: "related_entry_id"

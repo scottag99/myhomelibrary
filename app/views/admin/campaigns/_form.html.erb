@@ -44,6 +44,13 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :catalogs, class: "col-md-1 control-label" %>
+    <div class="col-md-4">
+      <%= f.collection_select :catalog_ids, Catalog.all, :id, :name, {}, {:multiple => true} %>
+    </div>
+  </div>
+
+  <div class="form-group">
       <div class="col-md-offset-1 col-md-4 ">
           <%= f.submit 'Submit'.html_safe, :class => 'btn btn-primary' %>
           <%= link_to 'Back', admin_organization_url(@campaign.organization), :class => "btn btn-default"%>

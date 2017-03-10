@@ -27,7 +27,7 @@ module CommonWishlistActions
     unless @wishlist.external_id.blank?
       previous_books = previous_books + CatalogEntry.joins(:wishlist_entries => {:wishlist => :campaign}).where("wishlists.id <> ? and campaigns.organization_id = ? and wishlists.external_id = ?", @wishlist, current_campaign.organization_id, @wishlist.external_id).collect{|ce| ce.book_id}
     end
-    @active_books = CatalogEntry.joins([:catalog, :book]).where('catalogs.active = ? and disabled = ? and book_id NOT IN (?)', true, false, previous_books).all
+    @active_books = CatalogEntry.joins([{:catalog => :campaigns}, :book]).where('catalogs.active = ? and disabled = ? and book_id NOT IN (?) and campaigns.id = ?', true, false, previous_books, current_campaign).all
 
     respond_to do |format|
       format.html { render 'common/wishlists/manage'}
