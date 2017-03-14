@@ -61,6 +61,7 @@ class Admin::CatalogsController < Admin::BaseController
       b.ar_points = elem.at_xpath('./ar_points').nil? ? nil : elem.xpath('./ar_points').first.text
       b.ar_level = elem.at_xpath('./ar_level').nil? ? nil : elem.xpath('./ar_level').first.text
       b.grl = elem.at_xpath('./grl').nil? ? nil : elem.xpath('./grl').first.text
+      b.dra = elem.at_xpath('./dra').nil? ? nil : elem.xpath('./dra').first.text
       b.save
 
       entry = @catalog.catalog_entries.new

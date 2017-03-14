@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170310201232) do
+ActiveRecord::Schema.define(version: 20170314184902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20170310201232) do
     t.decimal  "ar_level"
     t.decimal  "ar_points"
     t.string   "grl"
+    t.string   "dra"
   end
 
   create_table "campaign_catalogs", force: :cascade do |t|

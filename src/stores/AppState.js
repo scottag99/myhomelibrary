@@ -32,6 +32,12 @@ class AppState {
     'G3-G5': true
   };
 
+  @observable
+  grlFilter = '';
+
+  @observable
+  draFilter = '';
+
   searchTerm = "";
 
   @computed
@@ -85,10 +91,28 @@ class AppState {
     appState.readingLevels[event.target.value] = event.target.checked;
   }
 
+  handleGrlFilter(event) {
+    appState.draFilter = '';
+    appState.grlFilter = event.target.value;
+  }
+
+  handleDraFilter(event) {
+    appState.grlFilter = '';
+    appState.draFilter = event.target.value;
+  }
+
   filterByLevel(book) {
-    if (appState.grl) {
-      var bookValue = book.grl.charCodeAt(0);
-      return book.grl == '' || ( bookValue >= appState.readerMin && bookValue <= appState.readerMax)
+    if (appState.grlFilter.length > 0) {
+      return book.grl == '' || book.grl == appState.grlFilter;
+    } else if (appState.draFilter > 0) {
+      if (book.dra === undefined || book.dra.length < 1) {
+        return true;
+      } else {
+        var minMax = book.dra.split("-").map(function(v){ return parseInt(v)});
+        var min = isNaN(minMax[0]) ? 0 : minMax[0];
+        var max = isNaN(minMax[minMax.length-1]) ? 80 : minMax[minMax.length-1];
+        return min <= appState.draFilter && appState.draFilter <= max;
+      }
     } else {
       return appState.readingLevels[book.level]
     }

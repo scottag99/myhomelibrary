@@ -6,7 +6,16 @@ const img = 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABA
 
 const LongDesc = ({book}) => (
   <Popover id="popover-trigger-hover-focus" title="Description">
-    {book.description}
+    <p>{book.description}</p>
+    {book.ar_points &&
+        <span> <strong>AR Pts</strong>: {book.ar_points}</span>
+    }
+    {book.grl &&
+        <span> <strong>GRL</strong>: {book.grl}</span>
+    }
+    {book.dra &&
+        <span> <strong>DRA</strong>: {book.dra}</span>
+    }
   </Popover>
 );
 
@@ -14,14 +23,7 @@ const LongDesc = ({book}) => (
 const Book = ({book, addToWishList}) => (
   <a className="book" onClick={addToWishList}>
     <h4 className="book-title">{book.name}</h4>
-    <p className="text-muted book-author">by {book.author}
-    {book.ar_points &&
-        <span>, AR Pts: {book.ar_points}</span>
-    }
-    {book.grl &&
-        <span>, GRL: {book.grl}</span>
-    }
-    </p>
+    <p className="text-muted book-author">by {book.author}</p>
     <Image src={book.imageUrl} alt="" responsive className="book-cover" />
     <p className="text-muted book-description">{book.description}</p>
     <OverlayTrigger trigger={['hover', 'focus']} placement="right" overlay={LongDesc(book={book})}>
@@ -31,7 +33,9 @@ const Book = ({book, addToWishList}) => (
 );
 
 export default observer(({store}) => (
-  <div>
+  <Row>
+    <Col xs={12} md={12}>
     {store.searchResults.map((r, i) => <Book key={i} book={r} addToWishList={() => store.addToWishList(r)} />)}
-  </div>
+    </Col>
+  </Row>
 ));

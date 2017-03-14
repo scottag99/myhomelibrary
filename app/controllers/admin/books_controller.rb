@@ -50,6 +50,6 @@ class Admin::BooksController < Admin::BaseController
   end
 private
   def book_params
-    params.require(:book).permit(:title, :author, :description, :year, :isbn, :cover_image_url, :level, :ar_level, :ar_points, :grl)
+    params.require(:book).permit(:title, :author, :description, :year, :isbn, :cover_image_url, :level, :ar_level, :ar_points, :grl, :dra)
   end
 end
