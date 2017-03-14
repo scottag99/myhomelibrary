@@ -62,6 +62,7 @@ class Admin::CatalogsController < Admin::BaseController
       b.ar_level = elem.at_xpath('./ar_level').nil? ? nil : elem.xpath('./ar_level').first.text
       b.grl = elem.at_xpath('./grl').nil? ? nil : elem.xpath('./grl').first.text
       b.dra = elem.at_xpath('./dra').nil? ? nil : elem.xpath('./dra').first.text
+      b.is_bilingual = elem.at_xpath('./is_bilingual').nil? ? false : elem.xpath('.is_bilingual').first.text.downcase == 'true'
       b.save
 
       entry = @catalog.catalog_entries.new

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314184902) do
+ActiveRecord::Schema.define(version: 20170314202730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,12 +23,13 @@ ActiveRecord::Schema.define(version: 20170314184902) do
     t.string   "isbn"
     t.string   "cover_image_url"
     t.string   "level"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.decimal  "ar_level"
     t.decimal  "ar_points"
     t.string   "grl"
     t.string   "dra"
+    t.boolean  "is_bilingual",    default: false
   end
 
   create_table "campaign_catalogs", force: :cascade do |t|

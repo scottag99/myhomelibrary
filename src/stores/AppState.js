@@ -38,6 +38,9 @@ class AppState {
   @observable
   draFilter = '';
 
+  @observable
+  bilingualOnly = false;
+
   searchTerm = "";
 
   @computed
@@ -101,7 +104,14 @@ class AppState {
     appState.draFilter = event.target.value;
   }
 
+  handleBilingualFilter(event) {
+    appState.bilingualOnly = event.target.checked;
+  }
+
   filterByLevel(book) {
+    if (appState.bilingualOnly && !book.is_bilingual) {
+      return false;
+    }
     if (appState.grlFilter.length > 0) {
       return book.grl == '' || book.grl == appState.grlFilter;
     } else if (appState.draFilter > 0) {

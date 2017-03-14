@@ -5,7 +5,7 @@ import { Checkbox, FormControl, ControlLabel, Row, Col } from 'react-bootstrap';
 export default observer(({store}) => (
   <Row>
     <h3>Find Books</h3>
-    <Col sm={4} lg={3}>
+    <Col sm={4} lg={2}>
       <Checkbox value='PreK-K' checked={store.readingLevels['PreK-K']} onChange={store.handleGradeLevel}>
         PreK-K
       </Checkbox>
@@ -14,6 +14,9 @@ export default observer(({store}) => (
       </Checkbox>
       <Checkbox value='G3-G5' checked={store.readingLevels['G3-G5']} onChange={store.handleGradeLevel}>
         G3-G5
+      </Checkbox>
+      <Checkbox value='true' checked={store.bilingualOnly} onChange={store.handleBilingualFilter}>
+        Bilingual Only
       </Checkbox>
     </Col>
     <Col sm={4} lg={3}>
