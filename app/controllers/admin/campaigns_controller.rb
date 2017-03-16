@@ -27,7 +27,7 @@ class Admin::CampaignsController < Admin::BaseController
     @campaigns = @organization.campaigns
     flash[:success] = "Thank you! Your Campaign was added successfully."
     respond_to do |format|
-      format.html { redirect_to "show" }
+      format.html { redirect_to admin_organization_campaign_url(@organization, @campaign) }
       format.json { render json: @campaign }
     end
   end
