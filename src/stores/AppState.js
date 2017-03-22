@@ -112,20 +112,36 @@ class AppState {
     if (appState.bilingualOnly && !book.is_bilingual) {
       return false;
     }
-    if (appState.grlFilter.length > 0) {
-      return book.grl == '' || book.grl == appState.grlFilter;
-    } else if (appState.draFilter > 0) {
-      if (book.dra === undefined || book.dra.length < 1) {
-        return true;
-      } else {
-        var minMax = book.dra.split("-").map(function(v){ return parseInt(v)});
-        var min = isNaN(minMax[0]) ? 0 : minMax[0];
-        var max = isNaN(minMax[minMax.length-1]) ? 80 : minMax[minMax.length-1];
-        return min <= appState.draFilter && appState.draFilter <= max;
-      }
-    } else {
-      return appState.readingLevels[book.level]
+
+    var draPresent = !(book.dra === undefined || book.dra.length < 1);
+    var draMatch = false;
+    if (draPresent) {
+      var minMax = book.dra.split("-").map(function(v){ return parseInt(v)});
+      var min = isNaN(minMax[0]) ? 0 : minMax[0];
+      var max = isNaN(minMax[minMax.length-1]) ? 80 : minMax[minMax.length-1];
+      draMatch = (min <= appState.draFilter && appState.draFilter <= max);
     }
+
+    var grlMatch = appState.grlFilter != '' && book.grl == appState.grlFilter;
+
+    //When any match is made, we always return true
+    if (appState.readingLevels[book.level] || grlMatch || draMatch) {
+      return true;
+    }
+    //If no levels exist on the book, return true
+    //this keeps us from hiding books that can never be filterd
+    var grlPresent = !(book.grl === undefined || book.grl.length < 1)
+    var lvlPresent = !(book.level === undefined || book.level.length < 1)
+    if (!draPresent && !grlPresent && !lvlPresent) {
+      return true;
+    }
+
+    //If the GRL or DRA filters are not on, and the book has no grade level, return true
+    if (!lvlPresent && appState.grlFilter == '' && appState.draFilter == '') {
+      return true;
+    }
+    //Every other case should be false b/c there is a level value present but no filter matched
+    return false;
   }
 }
 
