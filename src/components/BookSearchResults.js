@@ -21,15 +21,19 @@ const LongDesc = ({book}) => (
 
 
 const Book = ({book, addToWishList}) => (
-  <a className="book" onClick={addToWishList}>
+
+  <div className="book">
     <h4 className="book-title">{book.name}</h4>
     <p className="text-muted book-author">by {book.author}</p>
-    <Image src={book.imageUrl} alt="" responsive className="book-cover" />
-    <p className="text-muted book-description">{book.description}</p>
-    <OverlayTrigger trigger={['hover', 'focus']} placement="right" overlay={LongDesc(book={book})}>
-      <a href="#">Full Description</a>
-    </OverlayTrigger>
-  </a>
+    <div className="book-desc-box">
+      <Image src={book.imageUrl} alt="" responsive className="book-cover" />
+      <p className="text-muted book-description">{book.description}</p>
+      <OverlayTrigger trigger={['hover', 'focus']} placement="right" overlay={LongDesc(book={book})}>
+        <a href="#">Full Description</a>
+      </OverlayTrigger>
+    </div>
+    <button onClick={addToWishList} className="btn btn-primary">Add</button>
+  </div>
 );
 
 export default observer(({store}) => (

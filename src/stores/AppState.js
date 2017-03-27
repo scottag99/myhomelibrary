@@ -10,6 +10,9 @@ class AppState {
   @observable
   books = [];
 
+  @observable
+  cart = [];
+
   wishlistList = '/';
 
   constructor() {
@@ -58,6 +61,7 @@ class AppState {
     if(this.wishlist.find((b) => b.catalog_entry_id === book.catalog_entry_id)) {
       return;
     }
+    appState.wishlist = appState.wishlist.concat(book);
 
     $.ajax({
       url: api_add_url,
@@ -66,9 +70,10 @@ class AppState {
       data: {wishlist_entry: {catalog_entry_id: book.catalog_entry_id}},
       success: function(data) {
         book.id = data.id;
-        appState.wishlist = appState.wishlist.concat(book);
       },
-      async: false
+      error: function(data) {
+        appState.wishlist = appState.wishlist.filter(b => b.catalog_entry_id !== book.catalog_entry_id);
+      }
     });
   }
 
@@ -81,8 +86,7 @@ class AppState {
       success: function(data) {
         book.id = null;
         appState.wishlist = appState.wishlist.filter(b => b.catalog_entry_id !== book.catalog_entry_id);
-      },
-      async: false
+      }
     });
   }
 

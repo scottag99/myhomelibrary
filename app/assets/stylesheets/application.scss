@@ -159,10 +159,9 @@ nav.main {
 .book {
   float: left;
   width: 350px;
-  height: 220px;
+  height: auto;
   margin: 2.5em 3em 0 0;
   box-sizing: border-box;
-  cursor: pointer;
   overflow: hidden;
 }
 .book-title {
@@ -199,7 +198,6 @@ nav.main {
   content: "";
   text-align: right;
   position: absolute;
-  bottom: 0;
   right: 0;
   width: 70%;
   height: 1.4em;
