@@ -103,6 +103,7 @@ function updateIdList(id, text, isRemove) {
     list.find('ul').append(li);
   } else {
     $(".search-entry[data-wishlist-id=" + id + "] a").removeClass('disabled');
+    $(".search-entry[data-wishlist-id=" + id + "] a").html('Sponsor Wish List');
   }
 
   return idList;
@@ -117,6 +118,7 @@ function addToCart(entry) {
   var idList = updateIdList(entry.data('wishlist-id'), entry.find('h3').html());
 
   entry.find('a').addClass('disabled');
+  entry.find('a').html('Added to Cart')
 }
 
 function updateCheckoutUrl(idList) {
