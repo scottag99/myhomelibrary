@@ -44,6 +44,13 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :book_limit, class: "col-md-1 control-label" %>
+    <div class="col-md-4">
+      <%= f.number_field :book_limit, :class => 'form-control', :required => true %>
+    </div>
+  </div>
+
+  <div class="form-group">
     <%= f.label :catalogs, class: "col-md-1 control-label" %>
     <div class="col-md-4">
       <%= f.collection_select :catalog_ids, Catalog.all, :id, :name, {}, {:multiple => true} %>

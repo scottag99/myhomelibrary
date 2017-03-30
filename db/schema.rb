@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314202730) do
+ActiveRecord::Schema.define(version: 20170327210659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20170314202730) do
     t.boolean  "ready_for_donations"
     t.string   "address"
     t.boolean  "can_edit_wishlists"
+    t.integer  "book_limit"
     t.index ["organization_id"], name: "index_campaigns_on_organization_id", using: :btree
   end
 

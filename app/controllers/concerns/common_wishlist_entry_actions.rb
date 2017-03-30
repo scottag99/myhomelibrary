@@ -18,7 +18,7 @@ module CommonWishlistEntryActions
   end
 
   def create
-    @wishlist_entry = current_wishlist.wishlist_entries.create(wishlist_entry_params)
+    @wishlist_entry = current_wishlist.wishlist_entries.build(wishlist_entry_params)
     @wishlist_entry.price = @wishlist_entry.catalog_entry.total_price
     @wishlist_entry.save!
     respond_to do |format|

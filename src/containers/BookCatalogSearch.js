@@ -8,15 +8,18 @@ import BookSearchResults from '../components/BookSearchResults';
 
 export default function({store}) {
   return (
-    <Row>
-      <Col lg={3}>
-        <WishList store={store} />
-      </Col>
-      <Col lg={9} sm={9} smOffset={3}>
-        <BookFilter store={store} />
-        <BookSearch store={store} />
-        <BookSearchResults store={store} />
-      </Col>
-    </Row>
+    <div>
+      <div id="modal-container"></div>
+      <Row>
+        <Col lg={3}>
+          <WishList store={store} />
+        </Col>
+        <Col lg={9} sm={9} smOffset={3}>
+          <BookFilter store={store} />
+          <BookSearch store={store} />
+          <BookSearchResults store={store} />
+        </Col>
+      </Row>
+    </div>
   );
 }

@@ -67,13 +67,14 @@ class AppState {
       url: api_add_url,
       dataType: 'json',
       method: 'POST',
-      data: {wishlist_entry: {catalog_entry_id: book.catalog_entry_id}},
-      success: function(data) {
-        book.id = data.id;
-      },
-      error: function(data) {
-        appState.wishlist = appState.wishlist.filter(b => b.catalog_entry_id !== book.catalog_entry_id);
-      }
+      data: {wishlist_entry: {catalog_entry_id: book.catalog_entry_id}}
+    }).done(function(data) {
+      book.id = data.id;
+    }).fail(function(data, status, error) {
+      $(".modal-title").html('Error Adding Book');
+      $(".modal-body").html("Book limit most likely reached. Remove a book from your list in order to add this one.");
+      $('#globalModalError').modal();
+      appState.wishlist = appState.wishlist.filter(b => b.catalog_entry_id !== book.catalog_entry_id);
     });
   }
 
@@ -82,11 +83,10 @@ class AppState {
     $.ajax({
       url: api_delete_url.replace(':id', book.id),
       dataType: 'json',
-      method: 'DELETE',
-      success: function(data) {
-        book.id = null;
-        appState.wishlist = appState.wishlist.filter(b => b.catalog_entry_id !== book.catalog_entry_id);
-      }
+      method: 'DELETE'
+    }).done(function(data) {
+      book.id = null;
+      appState.wishlist = appState.wishlist.filter(b => b.catalog_entry_id !== book.catalog_entry_id);
     });
   }
 

@@ -28,8 +28,8 @@ const Book = ({book, addToWishList}) => (
     <div className="book-desc-box">
       <Image src={book.imageUrl} alt="" responsive className="book-cover" />
       <p className="text-muted book-description">{book.description}</p>
-      <OverlayTrigger trigger={['hover', 'focus']} placement="right" overlay={LongDesc(book={book})}>
-        <a href="#">Full Description</a>
+      <OverlayTrigger trigger={['hover', 'focus', 'click']} placement="right" overlay={LongDesc(book={book})}>
+        <span className="text-info">Full Description</span>
       </OverlayTrigger>
     </div>
     <button onClick={addToWishList} className="btn btn-primary">Add</button>
