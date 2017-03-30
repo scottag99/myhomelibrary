@@ -49,6 +49,7 @@ window.setInterval("heartbeat()", 1000*60*5);
 
 var url = '<%= url_for([:readers, get_namespace, @campaign.organization, @campaign]) %>';
 var can_edit_wishlists = <%= @campaign.can_edit_wishlists.nil? || !@campaign.can_edit_wishlists ? 'false' : 'true' %>;
+var is_admin = <%= admin? %>;
 
 function onFilterChanged(value) {
     gridOptions.api.onFilterChanged();
@@ -98,9 +99,10 @@ function editButton(val) {
   if (!can_edit_wishlists) {
     return '';
   } else {
+    var del = is_admin ? '<a class="btn btn-danger btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id ) + '" data-method="delete" data-confirm="This action cannot be undone. Are you sure?">Delete</a>' : '';
     return '<a class="btn btn-info btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/manage') + '">Pick Books</a> ' +
-      '<a class="btn btn-warning btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/edit') + '">Edit</a> ' +
-      '<a class="btn btn-danger btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id ) + '" data-method="delete" data-confirm="This action cannot be undone. Are you sure?">Delete</a>';
+      '<a class="btn btn-warning btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/edit') + '">Edit</a> ' + del;
+      ;
   }
 }
 
@@ -108,7 +110,9 @@ var gridOptions = {
     columnDefs: [
         {headerName: 'Teacher', field: 'teacher', checkboxSelection: true, sort: 'asc', sortAt: 0},
         {headerName: 'Name', field: 'reader_name', sort: 'asc', sortAt: 1},
+        <% if admin? %>
         {headerName: 'Age', field: 'reader_age', width: 75, cellClass: 'mhl-ag-grid-cell'},
+        <% end -%>
         {headerName: 'Gender', field: 'reader_gender', width: 75, cellClass: 'mhl-ag-grid-cell'},
         {headerName: 'Grade', field: 'grade', width: 75, cellClass: 'mhl-ag-grid-cell'},
         //{headerName: 'GRL', field: 'grl', width: 75, cellClass: 'mhl-ag-grid-cell'},
@@ -118,7 +122,7 @@ var gridOptions = {
         ,
         {headerName: 'Wish List Total ($)', field: 'wishlist_total', cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right', cellFormatter: asMoney},
         {headerName: 'Donation Total ($)', field: 'donation_total', cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right', cellFormatter: asMoney}
-        <% end %>
+        <% end -%>
         ,
         {headerName: '&nbsp;', field: 'actions', cellRenderer: editButton }
 
