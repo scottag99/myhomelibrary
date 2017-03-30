@@ -71,7 +71,7 @@ private
       admin_organization_campaign_wishlist_wishlist_entry_url(current_organization, current_campaign, wishlist, ':id')
     end
 
-    def get_campaign_url
-      admin_organization_campaign_url(current_organization, current_campaign)
+    def get_done_url(wishlist)
+      admin_organization_campaign_wishist_url(current_organization, current_campaign, wishlist)
     end
 end

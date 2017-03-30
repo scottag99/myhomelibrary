@@ -22,7 +22,7 @@ module CommonWishlistActions
     @wishlist = current_campaign.wishlists.find(params[:id])
     @add_url = get_add_url(@wishlist)
     @delete_url = get_delete_url(@wishlist)
-    @back_url = get_campaign_url
+    @back_url = get_done_url(@wishlist)
     previous_books = [0]
     unless @wishlist.external_id.blank?
       previous_books = previous_books + CatalogEntry.joins(:wishlist_entries => {:wishlist => :campaign}).where("wishlists.id <> ? and campaigns.organization_id = ? and wishlists.external_id = ?", @wishlist, current_campaign.organization_id, @wishlist.external_id).collect{|ce| ce.book_id}
