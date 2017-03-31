@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import { Checkbox, FormControl, ControlLabel, Row, Col } from 'react-bootstrap';
+import { Checkbox, FormControl, ControlLabel, Row, Col, Radio, FormGroup } from 'react-bootstrap';
 
 export default observer(({store}) => (
   <Row>
@@ -15,9 +15,11 @@ export default observer(({store}) => (
       <Checkbox value='G3-G5' checked={store.readingLevels['G3-G5']} onChange={store.handleGradeLevel}>
         G3-G5
       </Checkbox>
-      <Checkbox value='true' checked={store.bilingualOnly} onChange={store.handleBilingualFilter}>
-        Bilingual Only
-      </Checkbox>
+      <FormGroup>
+        <Radio name="bilingual-filter" id="all" onChange={store.handleBilingualFilter}>All</Radio>
+        <Radio name="bilingual-filter" id="bilingual" onChange={store.handleBilingualFilter}>Bilingual</Radio>
+        <Radio name="bilingual-filter" id="english" onChange={store.handleBilingualFilter}>English Only</Radio>
+      </FormGroup>
     </Col>
     <Col sm={4} lg={3}>
       <ControlLabel>Filter by GRL</ControlLabel>

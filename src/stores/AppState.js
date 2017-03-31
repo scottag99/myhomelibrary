@@ -109,11 +109,15 @@ class AppState {
   }
 
   handleBilingualFilter(event) {
-    appState.bilingualOnly = event.target.checked;
+    appState.bilingualOnly = event.target.id;
   }
 
   filterByLevel(book) {
-    if (appState.bilingualOnly && !book.is_bilingual) {
+    if (appState.bilingualOnly == 'bilingual' && !book.is_bilingual) {
+      return false;
+    }
+
+    if (appState.bilingualOnly == 'english' && book.is_bilingual) {
       return false;
     }
 
