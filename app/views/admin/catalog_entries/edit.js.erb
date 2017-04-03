@@ -1,3 +1,3 @@
-$(".modal-title").html('Edit Book Details');
-$(".modal-body").html($("<%= escape_javascript(render :partial => 'form') %>"));
+$("#globalModal .modal-title").html('Edit Book Details');
+$("#globalModal .modal-body").html($("<%= escape_javascript(render :partial => 'form') %>"));
 $('#globalModal').modal();
