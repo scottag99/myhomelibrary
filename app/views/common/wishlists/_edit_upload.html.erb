@@ -35,4 +35,6 @@
   <%= f.label "File", class: "col-md-1 control-label" %>
     <%= f.file_field :upload %>
 </div>
+<!-- Needed to add this as a hidden field b/c Chrome would not submit the file in the post otherwise -->
+<%= f.submit "Submit", class: "btn btn-default btn-primary hidden" %>
 <% end %>
