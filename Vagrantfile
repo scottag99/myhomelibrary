@@ -13,7 +13,7 @@ $init = <<SCRIPT
 
   # some missing dependencies
   sudo apt-get -y update
-  sudo apt-get -y install postgresql postgresql-contrib libpq-dev
+  sudo apt-get -y install postgresql postgresql-contrib libpq-dev libsqlite3-dev
 
   sudo -u postgres psql -c "create role dev_user with createdb login password 'myhomelibrary'";
 
