@@ -12,29 +12,26 @@ class Admin::OrganizationsController < Admin::BaseController
   def update
     @organization = Organization.find(params[:id])
     @organization.update!(org_params)
-    @organizations = find_organizations
     respond_to do |format|
-      format.html { render "index" }
+      format.html { redirect_to admin_organizations_url }
       format.json { render json: @organization }
     end
   end
 
   def create
     @organization = Organization.create!(org_params)
-    @organizations = find_organizations
     flash[:success] = "Thank you! Your Organization has been added."
     respond_to do |format|
-      format.html { render "show" }
+      format.html { redirect_to admin_organization_url(@organization) }
       format.json { render json: @organization }
     end
   end
 
   def destroy
     Organization.destroy(params[:id])
-    @organizations = find_organizations
     flash[:success] = "Delete successful."
     respond_to do |format|
-      format.html { render "index" }
+      format.html { redirect_to admin_organizations_url }
       format.json { render json: Organization.all}
     end
   end

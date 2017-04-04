@@ -1,11 +1,30 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: Campaign One
   deadline: 2016-10-21
   organization: one
+  can_edit_wishlists: true
 
 two:
-  name: MyString
+  name: Campaign Two
+  deadline: 2016-10-21
+  book_limit: 1
+  organization: one
+
+three:
+  name: Campaign Three
+  deadline: 2016-10-21
+  organization: one
+  can_edit_wishlists: false
+
+four:
+  name: Campaign Four
   deadline: 2016-10-21
   organization: two
+  can_edit_wishlists: true
+
+five:
+  name: Campaign Five
+  deadline: 2016-10-21
+  organization: three

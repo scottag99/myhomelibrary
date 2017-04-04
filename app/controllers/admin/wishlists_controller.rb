@@ -54,6 +54,14 @@ class Admin::WishlistsController < Admin::BaseController
     send_data content, :filename => file_name
   end
 
+  def destroy
+    current_campaign.wishlists.destroy(params[:id])
+    respond_to do |format|
+      format.html { redirect_to admin_organization_campaign_url(current_organization, current_campaign) }
+      format.json { render json: current_campaign.wishlists.all}
+    end
+  end
+
 private
     def current_organization
       Organization.find(params[:organization_id])
@@ -72,6 +80,6 @@ private
     end
 
     def get_done_url(wishlist)
-      admin_organization_campaign_wishist_url(current_organization, current_campaign, wishlist)
+      admin_organization_campaign_wishlist_url(current_organization, current_campaign, wishlist)
     end
 end

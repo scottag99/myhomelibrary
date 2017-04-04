@@ -1,13 +1,22 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  reader_name: MyString
-  reader_age: 1
-  reader_gender: MyString
+  teacher: Test Teacher
+  reader_name: Reader One
+  reader_age: 11
+  reader_gender: F
   campaign: one
 
 two:
-  reader_name: MyString
-  reader_age: 1
-  reader_gender: MyString
+  teacher: Test Teacher
+  reader_name: Reader Two
+  reader_age: 12
+  reader_gender: M
   campaign: two
+
+three:
+  teacher: Test Teacher
+  reader_name: Reader Three
+  reader_age: 12
+  reader_gender: M
+  campaign: three

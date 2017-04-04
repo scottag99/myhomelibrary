@@ -1,0 +1,23 @@
+one:
+  title: Book One
+  description: Book One description
+  author: Book One Author
+  cover_image_url: book_one_cover.jpg
+
+two:
+  title: Book Two
+  description: Book Two description
+  author: Book Two Author
+  cover_image_url: book_two_cover.jpg
+
+three:
+  title: Book Three
+  description: Book Three description
+  author: Book Three Author
+  cover_image_url: book_three_cover.jpg
+
+four:
+  title: Book Four
+  description: Book Four description
+  author: Book Four Author
+  cover_image_url: 

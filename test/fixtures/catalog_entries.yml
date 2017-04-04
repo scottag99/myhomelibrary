@@ -6,6 +6,11 @@ one:
   price: 9.99
 
 two:
-  catalog: two
+  catalog: one
   book: two
+  price: 9.99
+
+three:
+  catalog: two
+  book: three
   price: 9.99

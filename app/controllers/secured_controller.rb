@@ -1,9 +1,16 @@
 class SecuredController < ApplicationController
   ALLOWED_ROLES = []
+  before_action :login_for_test
   before_action :logged_in_using_omniauth?
   before_action :has_role?
 
   private
+
+  def login_for_test
+    if Rails.env.test?
+      session[:userinfo] = {'info' => {'image' => 'AVI URL', 'name' => 'TEST ADMIN USER', 'email' => 'test@example.com'}, 'extra' => {'raw_info' => {'email_verified' => true, 'role' => 'admin'}}}
+    end
+  end
 
   def logged_in_using_omniauth?
     unless session[:userinfo].present?
