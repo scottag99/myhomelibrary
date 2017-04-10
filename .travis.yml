@@ -2,3 +2,7 @@ language: ruby
 rvm:
   - 2.3.0
 bundler_args: --without production
+notifications:
+  email:
+    on_success: never
+    on_failure: always

@@ -1,6 +1,8 @@
 # My Home Library
 Connecting aspiring readers with donors to build a home library of books.
 
+[![Build Status](https://travis-ci.org/scottag99/myhomelibrary.svg?branch=master)](https://travis-ci.org/scottag99/myhomelibrary)
+
 ## Development Environment setup
 
 My Home Library is a Ruby on Rails application deployed to a Heroku pipeline. Rails 5, Ruby 2.3.0, and Postgres 9.4(?) are the current framework versions.
