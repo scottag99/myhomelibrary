@@ -32,6 +32,7 @@ Rails.application.routes.draw do
         member do
           get 'order_sheet'
           get 'pick_list'
+          get 'export'
           get 'readers'
         end
         resources :wishlists do
