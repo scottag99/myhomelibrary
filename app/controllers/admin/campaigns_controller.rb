@@ -61,6 +61,20 @@ class Admin::CampaignsController < Admin::BaseController
       format.json { render json: @campaign }
     end
   end
+
+  def export
+    campaign = @organization.campaigns.find(params[:id])
+    records = Wishlist.joins(wishlist_entries: [{catalog_entry: [:book, :catalog]}]).where(:campaign => campaign).group(:source, :teacher, :grade, :isbn, :title, 'wishlist_entries.price').order('catalogs.source', 'wishlists.grade', 'wishlists.teacher', 'books.title').count
+
+    data = CSV.generate(headers: true) do |csv|
+      csv << ['School_Name', 'Campaign_name', 'Teacher', 'Grade', 'Catalog', 'ISBN', 'Title', 'Unit_Price', 'QTY', 'Subtotal']
+
+      records.each do |key, count|
+        csv << [@organization.name, campaign.name, key[1], key[2], key[0], key[3], key[4], key[5], count, key[5]*count]
+      end
+    end
+    send_data data, filename: "#{@organization.name}-#{campaign.name}.csv"
+  end
 private
   def set_organization
     @organization = Organization.find(params[:organization_id])
