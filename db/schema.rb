@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327210659) do
+ActiveRecord::Schema.define(version: 20170417195825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,12 +123,13 @@ ActiveRecord::Schema.define(version: 20170327210659) do
     t.integer  "reader_age"
     t.string   "reader_gender"
     t.integer  "campaign_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.string   "teacher"
     t.string   "grade"
     t.string   "grl"
     t.string   "external_id"
+    t.integer  "wishlist_entry_count"
     t.index ["campaign_id"], name: "index_wishlists_on_campaign_id", using: :btree
     t.index ["reader_name"], name: "index_wishlists_on_reader_name", using: :btree
     t.index ["teacher"], name: "index_wishlists_on_teacher", using: :btree

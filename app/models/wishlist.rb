@@ -4,6 +4,8 @@ class Wishlist < ApplicationRecord
   has_many :donations
   has_many :catalog_entries, through: :wishlist_entries
 
+  scope :has_books, -> { where('wishlist_entry_count > 0') }
+
   def public_name
     firstNameLast = reader_name =~ /,/
     if firstNameLast.nil?
