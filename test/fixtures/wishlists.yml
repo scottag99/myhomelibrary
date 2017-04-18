@@ -6,6 +6,7 @@ one:
   reader_age: 11
   reader_gender: F
   campaign: one
+  wishlist_entry_count: 1
 
 two:
   teacher: Test Teacher
@@ -13,6 +14,7 @@ two:
   reader_age: 12
   reader_gender: M
   campaign: two
+  wishlist_entry_count: 1
 
 three:
   teacher: Test Teacher
@@ -20,3 +22,4 @@ three:
   reader_age: 12
   reader_gender: M
   campaign: three
+  wishlist_entry_count: 0
