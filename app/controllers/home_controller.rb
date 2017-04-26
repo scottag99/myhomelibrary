@@ -73,8 +73,9 @@ class HomeController < ApplicationController
 
   def success
     @wishlists = Wishlist.joins([{:campaign => :organization}]).where("wishlists.id in (?)", params[:id_list].split(",").map(&:to_i)).all
+    amt = params[:amount].to_d/@wishlists.count unless params[:amount].nil? || @wishlists.count == 0
     @wishlists.each do |w|
-      @donation = w.donations.create!({:confirmation_code => params[:confirmation_code], :amount => params[:amount]})
+      @donation = w.donations.create!({:confirmation_code => params[:confirmation_code], :amount => amt})
     end
 
     session[:wishlist_cart] = nil
