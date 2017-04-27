@@ -7,8 +7,8 @@
       <%= render partial: 'wishlist_entry', collection: wishlist.wishlist_entries %>
     </ul>
     <%
-    has_price = @wishlist_prices[wishlist.id].nil?
-    has_donation = @donations[wishlist.id].nil?
+    has_price = !@wishlist_prices[wishlist.id].nil?
+    has_donation = !@donations[wishlist.id].nil?
     funded = has_price && has_donation && @wishlist_prices[wishlist.id] <= @donations[wishlist.id]
     %>
     <p><%= link_to 'Sponsor Wish List', donate_url({:id_list => wishlist.id}), :class => 'btn btn-primary' if !funded %>
