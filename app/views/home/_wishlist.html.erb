@@ -12,6 +12,6 @@
     funded = has_price && has_donation && @wishlist_prices[wishlist.id] <= @donations[wishlist.id]
     %>
     <p><%= link_to 'Sponsor Wish List', donate_url({:id_list => wishlist.id}), :class => 'btn btn-primary' if !funded %>
-       <%= link_to 'Sponsored', '#', :class => 'btn btn-default', :disabled => true if funded %></p>
+       <%= link_to 'Sponsored', '#', :class => 'btn btn-default disabled', :disabled => true if funded %></p>
   </div>
 </div>
