@@ -13,20 +13,12 @@
  */
  // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 
- /*
-*= require scrivito
-*= require scrivito_three_column_widget
-*= require scrivito_two_column_widget
-*= require scrivito_section_widgets
-*= require scrivito_content_box_widget
-*/
+
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
  @import 'bootstrap-datetimepicker';
- @import "scrivito_section_widgets/base_section";
- @import "scrivito_section_widgets/parallax_section";
- @import "scrivito_section_widgets/colors";
+
 
  @media print {
     table {page-break-after: always;}
