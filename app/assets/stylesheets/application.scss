@@ -13,12 +13,32 @@
  */
  // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 
-
+ /*
+*= require scrivito
+*= require scrivito_three_column_widget
+*= require scrivito_two_column_widget
+*= require scrivito_section_widgets
+*= require scrivito_content_box_widget
+*/
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
  @import 'bootstrap-datetimepicker';
+ @import "scrivito_section_widgets/base_section";
+ @import "scrivito_section_widgets/parallax_section";
+ @import "scrivito_section_widgets/colors";
 
+ @import url('https://fonts.googleapis.com/css?family=Lora:400,700');
+
+ @font-face {
+   font-family: Calibri;
+   src: local(Calibri), url('Calibri.ttf') format('opentype');
+ }
+
+ @font-face {
+   font-family: Calibri-Bold;
+   src: local(Calibri-Bold), url('Calibri-Bold.ttf') format('opentype');
+ }
 
  @media print {
     table {page-break-after: always;}
@@ -28,13 +48,77 @@
 body {
   color: #5a5a5a;
   padding-top: 50px;
+  font-family: 'Lora', serif;
 }
 nav.main {
   background: #fff;
   box-shadow: 0 1px 5px 1px rgba(0,0,0,.2);
+  font-weight: 700;
+  height: 100px;
+  ul {
+    transform: translateY(40%);
+    li {
+      font-size: 18px;
+      a {
+        color: #255aa8 !important;
+      }
+     }
+  }
 }
-.navbar-brand { padding: 0px; }
-.navbar-brand img { height: 100%; }
+.nav {
+  text-align: center;
+}
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand img {
+  height: 100%;
+}
+.navbar-header {
+  // float: none;
+  img {
+    width: 300px;
+  }
+}
+
+.wireframe {
+  border: 1px solid gray;
+}
+
+#banner {
+  min-height: 300px;
+}
+
+// Scrivito CSS
+
+.descriptions {
+  color: #fff;
+  min-height: 300px;
+  .aboutus {
+    background-color: #255AA8;
+    min-height: 300px;
+    h2 {
+      font-size: 4rem;
+    }
+    p {
+      font-size: 16px;
+    }
+  }
+  .mission {
+    background-color: #D06828;
+    min-height: 300px;
+    h2 {
+      font-size: 4rem;
+    }
+    p {
+      font-size: 16px;
+    }
+  }
+}
+
+
+
+
 .starter-template {
   padding: 40px 15px;
   text-align: center;
@@ -147,7 +231,8 @@ nav.main {
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: cover;
-    padding: 120px 0;
+    //padding: 120px 0;
+    font-family: Calibri-Bold;
   }
 }
 

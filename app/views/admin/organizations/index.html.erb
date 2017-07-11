@@ -16,13 +16,20 @@
           <th>Slug</th>
           <th>Campaigns</th>
           <th>Wish Lists</th>
-          <th>Donations</th>
-          <th>Sponsored Lists</th>
+          <!-- <th>Donations</th> -->
+          <th>Sponsored Wish Lists</th>
           <th>&nbsp;</th>
         </tr>
         </thead>
         <tbody>
         <%= render :partial => 'organization', :collection => @organizations %>
+        <tr>
+          <td>--</td>
+          <td>--</td>
+          <td><%= Campaign.count %></td>
+          <td><%= Wishlist.count %></td>
+          <td></td>
+        </tr>
         </tbody>
       </table>
     </div>

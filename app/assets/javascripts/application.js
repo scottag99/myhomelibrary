@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require scrivito
 // require_tree .
 //= require bootstrap-sprockets
 //= require moment
