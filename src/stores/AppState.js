@@ -22,6 +22,7 @@ class AppState {
     this.wishlistList = back_url;
     this.reader = reader;
     this.grl = grl;
+    this.bookLimit = book_limit;
     // convert letter value to int for comparison
     this.readerMin = this.grl.charCodeAt(0) - 1;
     this.readerMax = this.grl.charCodeAt(0) + 2;
@@ -91,7 +92,14 @@ class AppState {
   }
 
   goBack() {
-    document.location.href=appState.wishlistList;
+    var diff = appState.bookLimit - appState.wishlist.length
+    if(diff > 0) {
+      $(".modal-title").html('Add more books!');
+      $(".modal-body").html(`You can still add books! Please add ${diff} book(s) to your wishlist.`);
+      $('#globalModalError').modal();
+    } else {
+      document.location.href=appState.wishlistList;
+    }
   }
 
   handleGradeLevel(event) {

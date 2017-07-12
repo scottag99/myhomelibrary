@@ -42,6 +42,7 @@
   var back_url = '<%= @back_url %>';
   var reader = '<%= j @wishlist.public_name.html_safe %>';
   var grl = '<%= @wishlist.grl %>';
+  var book_limit = '<%= @wishlist.campaign.book_limit %>'
   // Very hacky solution for attempting to fix a "timeout" issue on this page
   // that I couldn't recreate
   function heartbeat() {
