@@ -24,6 +24,9 @@ Rails.application.routes.draw do
     end
     resources :books
     resources :catalogs do
+      member do
+        get 'export'
+      end
       resources :catalog_entries
     end
     resources :contents
