@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170710202305) do
+ActiveRecord::Schema.define(version: 20170712222840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20170710202305) do
     t.string   "grl"
     t.string   "dra"
     t.boolean  "is_bilingual",    default: false
+    t.boolean  "is_chapter"
   end
 
   create_table "campaign_catalogs", force: :cascade do |t|
