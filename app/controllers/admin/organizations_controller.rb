@@ -35,6 +35,14 @@ class Admin::OrganizationsController < Admin::BaseController
       format.json { render json: Organization.all}
     end
   end
+
+  def included
+    @organization = Organization.find(params[:id])
+    @organization.is_included = !@organization.is_included
+    @organization.save
+    calculate_org_total()
+  end
+
 private
   def find_organizations
     Organization.all
@@ -47,4 +55,13 @@ private
   def org_params
     params.require(:organization).permit(:name, :contact_name, :contact_email, :slug)
   end
+
+  def calculate_org_total
+    @org_campaign_count = Campaign.joins(:organization).where("organizations.is_included = ?", true).count
+    @org_wishlist_count = Wishlist.joins(campaign:[:organization]).where("organizations.is_included = ?", true).count
+    @org_student_count = Wishlist.select(:external_id).joins(campaign:[:organization]).where("organizations.is_included = ?", true).distinct.count
+    @org_donation_count = Donation.joins(wishlist: [{campaign: [:organization]}]).where("organizations.is_included = ?", true).count
+    @org_donation_sum = Donation.joins(wishlist: [{campaign: [:organization]}]).where("organizations.is_included = ?", true).sum(:amount)
+  end
+
 end

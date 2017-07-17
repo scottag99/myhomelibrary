@@ -1,0 +1,5 @@
+$("#campaign-count").html("<%= @org_campaign_count %>");
+$("#wishlist-count").html("<%= @org_wishlist_count %>");
+$("#student-count").html("<%= @org_student_count %>");
+$("#wishlist-donation-count").html("<%= @org_donation_count %>");
+$("#wishlist-donation-total").html("<%= number_to_currency(@org_donation_sum) %>");

@@ -32,6 +32,9 @@ Rails.application.routes.draw do
     end
     resources :contents
     resources :organizations do
+      member do
+        put 'included'
+      end
       resources :partners
       resources :campaigns do
         member do

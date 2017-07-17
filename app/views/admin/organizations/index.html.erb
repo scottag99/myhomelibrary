@@ -32,11 +32,11 @@
           <th>&nbsp;</th><!--included - keep empty-->
           <th>&nbsp;</th><!--name - keep empty-->
           <th>&nbsp;</th><!--slug - keep empty-->
-          <th><%= Campaign.count %></th><!--campaign count-->
-          <th><%= Wishlist.count %></th><!--wish lists count-->
-          <th><%= Wishlist.select(:external_id).distinct.count %></th><!--student count-->
-          <th><%= Donation.count %></th><!--wish list donations count-->
-          <th><%= number_to_currency(Donation.sum(:amount)) %></th><!--wish list donations money total-->
+          <th id="campaign-count"><%= @org_campaign_count %></th><!--campaign count-->
+          <th id="wishlist-count"><%= @org_wishlist_count %></th><!--wish lists count-->
+          <th id="student-count"><%= @org_student_count %></th><!--student count-->
+          <th id="wishlist-donation-count"><%= @org_donation_count %></th><!--wish list donations count-->
+          <th id="wishlist-donation-total"><%= number_to_currency(@org_donation_sum) %></th><!--wish list donations money total-->
           <th>&nbsp;</th><!--edit button - keep empty-->
           <th>&nbsp;</th>
         </tr>

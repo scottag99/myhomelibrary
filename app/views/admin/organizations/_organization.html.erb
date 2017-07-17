@@ -1,6 +1,11 @@
 <tr>
   <td>&nbsp;</td>
-  <td><input type=checkbox checked /></td>
+  <td><%= check_box_tag 'included', organization.id, organization.is_included,
+            data: {
+              remote: true,
+              url: included_admin_organization_url(organization),
+              method: "PUT"
+              } %></td>
   <td><%= link_to organization.name, admin_organization_url(organization) %></td>
   <td><%= organization.slug %></td>
   <td><%= organization.campaigns.count %></td>

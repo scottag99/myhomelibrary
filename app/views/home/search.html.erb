@@ -67,6 +67,9 @@ $('body').on("click", '.search-entry a', function() {
   if (!$('#sponsor-list').is(':visible')) return true;
   var entry = $(this).closest('.search-entry');
   addToCart(entry);
+  $("#globalModal .modal-title").html('title test');
+  $("#globalModal .modal-body").html('test');
+  $('#globalModal').modal();
   return false;
 });
 
@@ -109,6 +112,7 @@ function updateIdList(id, text, isRemove) {
   } else {
     $(".search-entry[data-wishlist-id=" + id + "] a").removeClass('disabled');
     $(".search-entry[data-wishlist-id=" + id + "] a").html('Sponsor Wish List');
+
   }
 
   return idList;
@@ -144,3 +148,4 @@ function updateCheckoutUrl(idList) {
 }
 </script>
 <% end %>
+<%= render 'common/modal' %>
