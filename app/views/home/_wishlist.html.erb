@@ -1,17 +1,17 @@
 <div class="col-sm-12 col-md-2 align-left search-entry" data-wishlist-id=<%= wishlist.id %>>
   <div class="pull-left">
-    <h3><%= wishlist.public_name %>, <small>Age: <%= wishlist.reader_age %></small></h3>
+    <h3><%= wishlist.public_name %>, Age: <%= wishlist.reader_age %></h3>
     <h4 class="text-muted"><%= wishlist.campaign.organization.name %></h5>
     <h5 class="text-muted">Teacher: <%= wishlist.teacher %></h4>
-    <ul class="list-group">
+    <div class="list-group">
       <%= render partial: 'wishlist_entry', collection: wishlist.wishlist_entries %>
-    </ul>
+    </div>
     <%
     has_price = !@wishlist_prices[wishlist.id].nil?
     has_donation = !@donations[wishlist.id].nil?
     funded = has_price && has_donation && @wishlist_prices[wishlist.id] <= @donations[wishlist.id]
     %>
-    <p><%= link_to 'Sponsor Wish List', donate_url({:id_list => wishlist.id}), :class => 'btn btn-primary' if !funded %>
+    <p><%= link_to 'Sponsor This Child', donate_url({:id_list => wishlist.id}), :class => 'btn btn-primary' if !funded %>
        <%= link_to 'Sponsored', '#', :class => 'btn btn-default disabled', :disabled => true if funded %></p>
   </div>
 </div>

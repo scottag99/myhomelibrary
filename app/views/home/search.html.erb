@@ -11,7 +11,7 @@
             <li id="empty-list-message" class="list-group-item disabled">No wish lists selected</li>
           </ul>
         </div>
-        <%= link_to 'Checkout', donate_url(), :class => 'btn btn-warning disabled btn-lg focus', :id => 'checkout-btn' %>
+        <%= link_to 'Complete Donation', donate_url(), :class => 'btn btn-warning disabled btn-lg focus', :id => 'checkout-btn' %>
       <% end -%>
     </div>
   </div>
@@ -19,8 +19,8 @@
     <h2 class="featurette-heading">Home Libraries<%= " for #{@organization.name}" unless @organization.nil? %></h2>
     <p class="lead"><%= live_campaigns? ? @content['sponsor_lead'] : @content['sponsor_lead_no_campaign'] %></p>
     <% if @organization.nil? -%>
-      <p>
-        <%= link_to 'General Donation', donate_url(), :class => 'btn btn-primary' %>
+      <p class="donation">
+        <%= link_to 'Program Donation', donate_url(), :class => 'btn btn-primary' %>
       </p>
     <% else -%>
       <p>
@@ -31,7 +31,7 @@
     <% if live_campaigns? %>
       <%= form_tag("/wishlists?slug=#{params[:slug]}", method: :get, remote: true) do %>
         <div class="input-group">
-          <input class="form-control" name="term" id="term" placeholder="Name, teacher, or school" />
+          <input class="form-control" name="term" id="term" placeholder="Find a child, teacher, or school" />
           <span class="input-group-btn">
             <button class="btn btn-primary" type="submit">Search</button>
           </span>
@@ -103,7 +103,7 @@ function updateIdList(id, text, isRemove) {
   list.data('id-list', idList);
 
   if (!isRemove) {
-    var li = $('<li class="list-group-item">' + text + '<button class="close btn-sm"><span class="glyphicon glyphicon-sm glyphicon-remove"></span></button></li>');
+    var li = $('<li class="list-group-item">' + text + ': $30.00 <button class="close btn-sm">Remove Child</button></li>');
     li.data('wishlist-id', id);
     list.find('ul').append(li);
   } else {
@@ -123,7 +123,7 @@ function addToCart(entry) {
   var idList = updateIdList(entry.data('wishlist-id'), entry.find('h3').html());
 
   entry.find('a').addClass('disabled');
-  entry.find('a').html('Added to Cart')
+  entry.find('a').html('Selected')
 }
 
 function updateCheckoutUrl(idList) {

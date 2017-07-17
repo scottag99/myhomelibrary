@@ -99,6 +99,12 @@ class Admin::CatalogsController < Admin::BaseController
     send_data data, filename: "#{@catalog.name}-CatalogReport.csv"
   end
 
+  def active
+    @catalog = Catalog.find(params[:id])
+    @catalog.active = !@catalog.active
+    @catalog.save
+  end
+
 private
   def catalog_params
     params.require(:catalog).permit(:name, :source, :active)

@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20170712222840) do
     t.string   "grl"
     t.string   "dra"
     t.boolean  "is_bilingual",    default: false
-    t.boolean  "is_chapter"
+    t.boolean  "is_chapter",      default: false
   end
 
   create_table "campaign_catalogs", force: :cascade do |t|

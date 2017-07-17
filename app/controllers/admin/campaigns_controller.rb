@@ -102,6 +102,19 @@ class Admin::CampaignsController < Admin::BaseController
     end
     send_data data, filename: "#{@organization.name}-#{campaign.name}-ClassRosterReport.csv"
   end
+
+  def donations
+    campaign = @organization.campaigns.find(params[:id])
+    campaign.ready_for_donations = !campaign.ready_for_donations
+    campaign.save
+  end
+
+  def wishlists
+    campaign = @organization.campaigns.find(params[:id])
+    campaign.can_edit_wishlists = !campaign.can_edit_wishlists
+    campaign.save
+  end
+
 private
   def set_organization
     @organization = Organization.find(params[:organization_id])

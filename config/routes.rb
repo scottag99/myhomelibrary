@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :catalogs do
       member do
         get 'export'
+        put 'active'
       end
       resources :catalog_entries
     end
@@ -39,6 +40,8 @@ Rails.application.routes.draw do
           get 'export'
           get 'exportroster'
           get 'readers'
+          put 'donations'
+          put 'wishlists'
         end
         resources :wishlists do
           member do

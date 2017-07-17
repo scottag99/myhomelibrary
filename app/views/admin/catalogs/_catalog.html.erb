@@ -1,6 +1,11 @@
 <tr>
   <td><%= link_to catalog.name, [:admin, catalog] %></td>
-  <td><input type=checkbox disabled <%= catalog.active? ? 'checked' : '' %> /></td>
+  <td><%= check_box_tag 'active', catalog.id, catalog.active,
+            data: {
+              remote: true,
+              url: active_admin_catalog_url(catalog),
+              method: "PUT"
+              } %></td>
   <td><%= catalog.source %></td>
   <td><%= catalog.catalog_entries.count %></td>
   <td>
