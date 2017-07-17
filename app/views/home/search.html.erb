@@ -58,11 +58,13 @@
 <script>
 var preselected = "<%= session[:wishlist_cart] %>";
 
-$(document).ready(function() {
-  $.each(preselected.split(','), function(idx, id){
-    addIdToCart(id);
+if(preselected.length > 0){
+  $(document).ready(function() {
+    $.each(preselected.split(','), function(idx, id){
+      addIdToCart(id);
+    });
   });
-});
+}
 $('body').on("click", '.search-entry a', function() {
   if (!$('#sponsor-list').is(':visible')) return true;
   var entry = $(this).closest('.search-entry');

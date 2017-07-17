@@ -45,7 +45,11 @@ class Admin::OrganizationsController < Admin::BaseController
 
 private
   def find_organizations
-    Organization.all
+    if params[:begin_date] && params[:end_date]
+      Organization.joins(:campaigns).where('campaigns.deadline between ? and ?', params[:begin_date], params[:end_date]).all
+    else
+      Organization.all
+    end
   end
 
   def find_organization
@@ -57,11 +61,13 @@ private
   end
 
   def calculate_org_total
-    @org_campaign_count = Campaign.joins(:organization).where("organizations.is_included = ?", true).count
-    @org_wishlist_count = Wishlist.joins(campaign:[:organization]).where("organizations.is_included = ?", true).count
-    @org_student_count = Wishlist.select(:external_id).joins(campaign:[:organization]).where("organizations.is_included = ?", true).distinct.count
-    @org_donation_count = Donation.joins(wishlist: [{campaign: [:organization]}]).where("organizations.is_included = ?", true).count
-    @org_donation_sum = Donation.joins(wishlist: [{campaign: [:organization]}]).where("organizations.is_included = ?", true).sum(:amount)
+    orgs = find_organizations.collect{|o| o.id }
+    @org_campaign_count = Campaign.joins(:organization).where("organizations.is_included = ? and organizations.id in (?)", true, orgs).count
+    @org_wishlist_count = Wishlist.joins(campaign:[:organization]).where("organizations.is_included = ? and organizations.id in (?)", true, orgs).count
+    @org_student_count = Wishlist.select(:external_id).joins(campaign:[:organization]).where("organizations.is_included = ? and organizations.id in (?)", true, orgs).distinct.count
+    @org_donation_count = Donation.joins(wishlist: [{campaign: [:organization]}]).where("organizations.is_included = ? and organizations.id in (?)", true, orgs).count
+    @org_donation_sum = Donation.joins(wishlist: [{campaign: [:organization]}]).where("organizations.is_included = ? and organizations.id in (?)", true, orgs).sum(:amount)
+    @org_programdonation_sum = Donation.joins(campaign: [:organization]).where("organizations.is_included = ? and organizations.id in (?)", true, orgs).sum(:amount)
   end
 
 end

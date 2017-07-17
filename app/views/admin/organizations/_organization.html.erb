@@ -13,6 +13,7 @@
   <td><%= Wishlist.joins(:campaign).select(:external_id).where("campaigns.organization_id = ?", organization).distinct.count %></td>
   <td><%= Donation.joins(:wishlist => :campaign).where("campaigns.organization_id = ?", organization).count %></td>
   <td><%= number_to_currency(Donation.joins(:wishlist => :campaign).where("campaigns.organization_id = ?", organization).sum(:amount)) %></td>
+  <td><%= number_to_currency(Donation.joins(:campaign).where("campaigns.organization_id = ?", organization).sum(:amount)) %></td>
   <!-- <td><%= Wishlist.includes([:donations, :campaign]).where("campaigns.organization_id = ?", organization).where.not(donations: {id: nil}).count() %></td> -->
   <td>
     <%= link_to "Edit", edit_admin_organization_url(organization), class: "btn btn-warning btn-xs" %>

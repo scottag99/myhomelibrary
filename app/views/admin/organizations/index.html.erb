@@ -9,7 +9,16 @@
     <!-- Default panel contents -->
     <div class="panel-heading"><h3 class="panel-title">Organizations</h3></div>
       <table class="table table-striped table-condensed">
-        <caption><%= link_to '<i class="glyphicon glyphicon-plus"></i> New Organization'.html_safe, new_admin_organization_url, :class => "btn btn-primary btn-xs" %></caption>
+        <caption><%= link_to '<i class="glyphicon glyphicon-plus"></i> New Organization'.html_safe, new_admin_organization_url, :class => "btn btn-primary btn-xs" %>
+          <div class="pull-right">
+            <select id="academicYear">
+              <option value="">All</option>
+              <option value="?begin_date=2016-08-01&end_date=2017-07-31">2016-2017 Academic Year</option>
+              <option value="?begin_date=2017-08-01&end_date=2018-07-31">2017-2018 Academic Year</option>
+              <option value="?begin_date=2018-08-01&end_date=2019-07-31">2018-2019 Academic Year</option>
+            </select>
+          </div>
+        </caption>
         <thead>
         <tr>
           <th>&nbsp;</th>
@@ -21,6 +30,7 @@
           <th>Student Count</th>
           <th>Sponsored Wish Lists</th>
           <th>Sponsored Wish Lists Donations Made</th>
+          <th>Program Donations</th>
           <th>&nbsp;</th>
           <th>&nbsp;</th>
         </tr>
@@ -37,6 +47,7 @@
           <th id="student-count"><%= @org_student_count %></th><!--student count-->
           <th id="wishlist-donation-count"><%= @org_donation_count %></th><!--wish list donations count-->
           <th id="wishlist-donation-total"><%= number_to_currency(@org_donation_sum) %></th><!--wish list donations money total-->
+          <th id="program-donation-amount"><%= number_to_currency(@org_programdonation_sum) %></th><!--program donations total-->
           <th>&nbsp;</th><!--edit button - keep empty-->
           <th>&nbsp;</th>
         </tr>
@@ -44,3 +55,15 @@
       </table>
     </div>
 </div>
+
+<%= content_for :foot do %>
+  <script>
+    $(window).load(function() {
+      $('#academicYear').val(location.search);
+    });
+
+    $('#academicYear').change(function(){
+    window.location.href = location.protocol + "//" + location.host + location.pathname + $(this).val();
+    });
+  </script>
+<% end %>
