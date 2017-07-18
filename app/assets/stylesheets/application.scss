@@ -354,6 +354,26 @@ nav.main {
   position: absolute;
 }
 
+#globalModalShopping {
+  .modal-body {
+    text-align: center;
+  }
+
+  div {
+    display: block;
+    padding-bottom: 20px;
+  }
+  input {
+    width: 50%;
+    float: none;
+  }
+  span {
+    font-size: 20px;
+    display: block;
+    padding-bottom: 10px;
+  }
+}
+
 .profile {
   width: 250px;
   height: 250px;

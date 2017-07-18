@@ -11,7 +11,7 @@
             <li id="empty-list-message" class="list-group-item disabled">No wish lists selected</li>
           </ul>
         </div>
-        <%= link_to 'Complete Donation', donate_url(), :class => 'btn btn-warning disabled btn-lg focus', :id => 'checkout-btn' %>
+        <%= link_to 'Complete Donation', donate_url(:id_list => ""), :class => 'btn btn-warning disabled btn-lg focus', :id => 'checkout-btn' %>
       <% end -%>
     </div>
   </div>
@@ -20,12 +20,12 @@
     <p class="lead"><%= live_campaigns? ? @content['sponsor_lead'] : @content['sponsor_lead_no_campaign'] %></p>
     <% if @organization.nil? -%>
       <p class="donation">
-        <%= link_to 'Program Donation', donate_url(), :class => 'btn btn-primary' %>
+        <%= link_to 'Program Donation', donate_url(:id_list => ""), :class => 'btn btn-primary', :id => 'program-checkout' %>
       </p>
     <% else -%>
-      <p>
-        <%= link_to "General Donation to #{@organization.name}", donate_url(:campaign_id => @organization.current_campaign), :class => 'btn btn-primary' if live_campaigns? %>
-        <%= link_to "General Donation to #{@organization.name}", donate_url(:organization_id => @organization.id), :class => 'btn btn-primary' unless live_campaigns? %>
+      <p class="donation">
+        <%= link_to "Program Donation to #{@organization.name}", donate_url(:campaign_id => @organization.current_campaign), :class => 'btn btn-primary', :id => 'program-checkout' if live_campaigns? %>
+        <%= link_to "Program Donation to #{@organization.name}", donate_url(:organization_id => @organization.id), :class => 'btn btn-primary', :id => 'program-checkout' unless live_campaigns? %>
       </p>
     <% end -%>
     <% if live_campaigns? %>
@@ -65,13 +65,39 @@ if(preselected.length > 0){
     });
   });
 }
+
+$('body').on('click', '.donation', function(){
+  var modalDonation = '<h5 style="color:red">Please note: if you are sponsoring a child and additionally want to make a program donation, please use the "Complete Donation" button on the left of main page.</h5>\
+  <div><button type="button" class="btn btn-default" data-dismiss="modal">Sponsor a Child</button></div>\
+  <div class="input-group"><span>Please input your amount:</span>\
+  <input type="number" step="1.00" id="addl_donation_slug" class="form-control" placeholder="Enter dollar amount" /></div>\
+  <div><% if @organization.nil? -%>\
+  <%= link_to "Complete Donation", donate_url(), :class => "btn btn-warning btn-lg focus", :id => "checkout-btn-3" %></div>\
+  <% else -%>\
+  <%= link_to "Complete Donation to #{@organization.name}", donate_url(:campaign_id => @organization.current_campaign), :id => "checkout-btn-3", :class => 'btn btn-warning btn-lg focus' if live_campaigns? %>\
+  <%= link_to "Complete Donation to #{@organization.name}", donate_url(:organization_id => @organization.id), :id => "checkout-btn-3", :class => 'btn btn-warning btn-lg focus' unless live_campaigns? %>\
+  <% end -%>'
+
+  $("#globalModalShopping .modal-body").html(modalDonation);
+  $('#globalModalShopping').modal();
+
+  return false;
+});
+
 $('body').on("click", '.search-entry a', function() {
   if (!$('#sponsor-list').is(':visible')) return true;
   var entry = $(this).closest('.search-entry');
   addToCart(entry);
-  $("#globalModal .modal-title").html('title test');
-  $("#globalModal .modal-body").html('test');
-  $('#globalModal').modal();
+
+  var modalShopping = '<div><span>Thank you for sponsoring a child!</span>\
+  <button type="button" class="btn btn-default" data-dismiss="modal">Sponsor Another Child</button></div>\
+  <div class="input-group"><span>You can also add a general donation to your cart as well.</span>\
+  <input type="number" step="1.00" id="addl_donation" class="form-control" placeholder="Enter dollar amount" /></div>\
+  <div><%= link_to "Complete Donation", donate_url(), :class => "btn btn-warning btn-lg focus", :id => "checkout-btn-2" %></div>'
+
+  $("#globalModalShopping .modal-body").html(modalShopping);
+  $('#globalModalShopping').modal();
+
   return false;
 });
 
@@ -113,7 +139,7 @@ function updateIdList(id, text, isRemove) {
     list.find('ul').append(li);
   } else {
     $(".search-entry[data-wishlist-id=" + id + "] a").removeClass('disabled');
-    $(".search-entry[data-wishlist-id=" + id + "] a").html('Sponsor Wish List');
+    $(".search-entry[data-wishlist-id=" + id + "] a").html('Sponsor This Child');
 
   }
 
@@ -148,6 +174,17 @@ function updateCheckoutUrl(idList) {
     checkoutBtn.attr('href', href);
   }
 }
+
+$('body').on("change", '#addl_donation', function() {
+  var link = $("#checkout-btn").attr('href');
+  $("#checkout-btn-2").attr("href", link + '&addl_donation=' + $(this).val());
+});
+
+$('body').on("change", '#addl_donation_slug', function() {
+  var link = $("#program-checkout").attr('href');
+  $("#checkout-btn-3").attr("href", link + '&addl_donation=' + $(this).val());
+});
+
 </script>
 <% end %>
 <%= render 'common/modal' %>

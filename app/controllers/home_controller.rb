@@ -22,9 +22,11 @@ class HomeController < ApplicationController
   end
 
   def donate
+    addl_donation = params[:addl_donation].nil? ? 0.0 : params[:addl_donation].to_d
+    addl_donation_slug = params[:addl_donation_slug].nil? ? 0.0 : params[:addl_donation_slug].to_d
     if params[:id_list].nil?
       @wishlists = []
-      @donationLevel = 30.0
+      @donationLevel = addl_donation + addl_donation_slug + 30.0
       @schoolname = "None"
       @Campaign = "General"
       @reader_name = ""
@@ -55,7 +57,7 @@ class HomeController < ApplicationController
         slug[w.campaign.organization.slug] = true
       }
       @schoolname = school.keys.join(",")
-      @donationLevel = 30.0*@wishlists.count #TODO: Make the amount configurable
+      @donationLevel = addl_donation + addl_donation_slug + (30.0*@wishlists.count) #TODO: Make the amount configurable
       @Campaign = campaign.keys.join(",")
       @reader_name = reader.keys.join(",")
       @wishListID = params[:id_list]
