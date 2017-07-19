@@ -1,20 +1,21 @@
 <tr id="catalog-entry-<%= catalog_entry.id %>">
   <td><%= image_tag catalog_entry.book.cover_image_url, class: 'book-cover' %><%= catalog_entry.book.title %></td>
   <td><%= catalog_entry.book.author %></td>
+  <td class="book-summary"><%= catalog_entry.book.description %></td>
   <td><%= catalog_entry.book.level %></td>
-  <% if admin? %><td><%= number_to_currency(catalog_entry.price) %></td><% end %>
-  <td><%= catalog_entry.book.isbn %></td>
-  <td><%= catalog_entry.book.ar_level %></td>
-  <td><%= catalog_entry.book.ar_points %></td>
+  <% if admin? %><td class="toggle-show"><%= number_to_currency(catalog_entry.price) %></td><% end %>
+  <td class="toggle-show"><%= catalog_entry.book.isbn %></td>
+  <td class="toggle-show"><%= catalog_entry.book.ar_level %></td>
+  <td class="toggle-show"><%= catalog_entry.book.ar_points %></td>
   <% if admin? -%>
   <td><%= catalog_entry.book.grl %></td>
   <td><%= catalog_entry.book.dra %></td>
   <td><input type=checkbox disabled <%= catalog_entry.book.is_bilingual ? 'checked' : '' %> /></td>
   <td><input type=checkbox disabled <%= catalog_entry.book.is_chapter ? 'checked' : '' %> /></td>
-  <td><input type=checkbox disabled <%= catalog_entry.disabled ? 'checked' : '' %> /></td>
+  <td class="toggle-show"><input type=checkbox disabled <%= catalog_entry.disabled ? 'checked' : '' %> /></td>
   <% end -%>
   <% if local_assigns.has_key?(:catalog_actions) %>
-  <td>
+  <td class="toggle-show">
     <%= link_to "Edit", edit_admin_catalog_catalog_entry_url(catalog_entry.catalog, catalog_entry), class: "btn btn-warning btn-xs", remote: true %>
     <%#= link_to "Delete", admin_catalog_catalog_entry_url(catalog_entry.catalog, catalog_entry),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'Deleting this entry will also remove it from any wish lists it has been added to. This action cannot be undone. Are you sure?'}, remote: true %>
   </td>

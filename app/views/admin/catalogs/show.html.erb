@@ -15,24 +15,25 @@
     <!-- Default panel contents -->
     <div class="panel-heading"><h3 class="panel-title">Books</h3></div>
     <table class="table table-striped table-condensed">
-      <caption>
+      <caption class="toggle-show">
         <%= link_to '<i class="glyphicon glyphicon-plus"></i> New Book'.html_safe, new_admin_catalog_catalog_entry_url(@catalog), :class => "btn btn-xs btn-primary", :remote => true %>
       </caption>
       <thead>
         <tr>
           <th>Title</th>
           <th>Author</th>
+          <th class="book-summary">Summary</th>
           <th>Level</th>
-          <th>Price</th>
-          <th>ISBN</th>
-          <th>AR Level</th>
-          <th>AR Points</th>
+          <th class="toggle-show">Price</th>
+          <th class="toggle-show">ISBN</th>
+          <th class="toggle-show">AR Level</th>
+          <th class="toggle-show">AR Points</th>
           <th>GRL</th>
           <th>DRA</th>
           <th>Bilingual?</th>
           <th>Chapters?</th>
-          <th>Disabled</th>
-          <th>&nbsp;</th>
+          <th class="toggle-show">Disabled</th>
+          <th class="toggle-show">&nbsp;</th>
         </tr>
       </thead>
       <tbody>

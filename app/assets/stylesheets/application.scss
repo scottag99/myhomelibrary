@@ -43,6 +43,8 @@
  @media print {
     table {page-break-after: always;}
     nav, #breadcrumb {display: none;}
+    .book-summary {display: inline-block !important;}
+    .toggle-show {display: none;}
 }
 
 body {
@@ -96,6 +98,10 @@ nav.main {
     font-size: 2rem;
     padding: 15px 30px;
   }
+}
+
+.book-summary {
+  display: none;
 }
 
 // Scrivito CSS
