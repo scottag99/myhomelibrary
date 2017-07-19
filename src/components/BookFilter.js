@@ -15,6 +15,11 @@ export default observer(({store}) => (
       <Checkbox value='G3-G5' checked={store.readingLevels['G3-G5']} onChange={store.handleGradeLevel}>
         G3-G5
       </Checkbox>
+
+      <Checkbox checked={store.chapters} onChange={store.handleChapterFilter}>
+        Chapters
+      </Checkbox>
+
       <FormGroup>
         <Radio name="bilingual-filter" id="all" onChange={store.handleBilingualFilter}>All</Radio>
         <Radio name="bilingual-filter" id="bilingual" onChange={store.handleBilingualFilter}>Bilingual</Radio>

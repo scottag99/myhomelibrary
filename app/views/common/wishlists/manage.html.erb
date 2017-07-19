@@ -14,7 +14,8 @@
       ar_points: '<%= entry.catalog_entry.book.ar_points %>',
       grl: '<%= entry.catalog_entry.book.grl %>',
       dra: '<%= entry.catalog_entry.book.dra %>',
-      is_bilingual: <%= entry.catalog_entry.book.is_bilingual %>
+      is_bilingual: <%= entry.catalog_entry.book.is_bilingual %>,
+      is_chapter: <%= entry.catalog_entry.book.is_chapter %>
     }
 
     <% end %>
@@ -33,7 +34,8 @@
       ar_points: '<%= entry.book.ar_points %>',
       grl: '<%= entry.book.grl %>',
       dra: '<%= entry.book.dra %>',
-      is_bilingual: <%= entry.book.is_bilingual %>
+      is_bilingual: <%= entry.book.is_bilingual %>,
+      is_chapter: <%= entry.book.is_chapter %>
     }
     <% end %>
   ];

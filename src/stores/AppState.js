@@ -37,6 +37,9 @@ class AppState {
   };
 
   @observable
+  chapters = false;
+
+  @observable
   grlFilter = '';
 
   @observable
@@ -54,6 +57,7 @@ class AppState {
     return this.books
       .filter(book => book.name.toLowerCase().indexOf(term) >= 0 || book.author.toLowerCase().indexOf(term) >= 0 || book.description.toLowerCase().indexOf(term) >= 0)
       .filter(book => this.filterByLevel(book))
+      .filter(book => this.filterByChapters(book))
       .filter(book => !this.wishlist.find((wish) => wish.catalog_entry_id === book.catalog_entry_id));
   }
 
@@ -118,6 +122,16 @@ class AppState {
 
   handleBilingualFilter(event) {
     appState.bilingualOnly = event.target.id;
+  }
+
+  handleChapterFilter(event) {
+    appState.chapters = event.target.checked;
+  }
+
+  filterByChapters(book) {
+    if(appState.chapters == book.is_chapter) {
+      return true;
+    }
   }
 
   filterByLevel(book) {
