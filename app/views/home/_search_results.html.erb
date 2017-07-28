@@ -1,5 +1,5 @@
 <% wishlists.in_groups_of(6, false) do |chunk| -%>
-<div class="row">
+<div class="row flexbox">
   <%= render partial: 'wishlist', collection: chunk %>
 </div>
 <% end -%>

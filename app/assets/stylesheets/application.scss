@@ -28,7 +28,8 @@
  @import "scrivito_section_widgets/parallax_section";
  @import "scrivito_section_widgets/colors";
 
- @import url('https://fonts.googleapis.com/css?family=Lora:400,700');
+ // @import url('https://fonts.googleapis.com/css?family=Lora:400,700');
+ @import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,700');
 
  @font-face {
    font-family: Calibri;
@@ -47,25 +48,99 @@
     .toggle-show {display: none;}
 }
 
+h1 {
+  margin-top: 0;
+}
+
 body {
   color: #5a5a5a;
-  padding-top: 50px;
-  font-family: 'Lora', serif;
+  font-family: 'Work Sans', sans-serif;
+  // margin: 0 -15px;
 }
+
+// NAV BAR
+
 nav.main {
-  background: #fff;
-  box-shadow: 0 1px 5px 1px rgba(0,0,0,.2);
-  font-weight: 700;
-  height: 100px;
+  // font-weight: 700;
+}
+
+// nav header info
+.page-headline {
+    text-align: center;
+    color: #fff;
+    transform: translateY(100%);
+    position: relative;
+    width: 50%;
+    margin: 0 auto;
+    h1 {
+      text-transform: uppercase;
+    }
+    button {
+      border-radius: 20px;
+      border: 2px solid #fff;
+      text-transform: uppercase;
+      padding: 5px 20px;
+      background-color: transparent;
+      margin-top: 30px;
+    }
+}
+
+// search page header image
+.bg-image-home {
+  background: linear-gradient(
+      rgba(72, 37, 157, 0.4),
+      rgba(72, 37, 157, 0.4)
+    ),
+    image-url('navbar-bg.jpg') center center no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.bg-image-search {
+  background: linear-gradient(
+      rgba(72, 37, 157, 0.4),
+      rgba(72, 37, 157, 0.4)
+    ),
+    image-url('navbar-bg-search.jpg') center center no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+#navbar {
   ul {
-    transform: translateY(40%);
     li {
-      font-size: 18px;
-      a {
-        color: #255aa8 !important;
+      color: #fff !important;
+      text-transform: uppercase;
+      a.non-admin {
+        color: #fff;
+        text-transform: uppercase;
       }
-     }
+    }
   }
+}
+.navbar-left {
+  transform: translateY(60%);
+  a {
+    color: #fff !important;
+  }
+}
+.navbar-right {
+  transform: translateY(85%);
+  a.non-admin {
+    background-color: #E38A45;
+    padding: 10px 10px !important;
+    border-radius: 20px;
+    margin-right: 5px;
+  }
+  .slug-names {
+    a {
+
+    }
+  }
+}
+.navbar-default {
+  background-color: transparent;
+  border: none;
 }
 .nav {
   text-align: center;
@@ -77,11 +152,51 @@ nav.main {
   height: 100%;
 }
 .navbar-header {
-  // float: none;
-  img {
-    width: 300px;
+  a.non-admin {
+    background-color: #fff;
+    height: 85px;
+    width: 130px;
+    display: block;
+    border-radius: 0 45px 45px 0;
+    // margin-left: -15px;
+    margin-top: 15px;
+  }
+  img.non-admin {
+    width: 100px;
   }
 }
+
+.mouse {
+  bottom: 10px;
+  position: absolute;
+  img {
+    width: 40px;
+  }
+}
+
+// FOOTER
+
+.hero-bottom {
+  img {
+    width: 100px;
+  }
+  .links {
+    text-align: center;
+    margin-top: 30px;
+    a {
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0 5px;
+    }
+  }
+  p {
+    margin: 20px 0 10px;
+    text-align: center;
+    color: lightgray;
+    font-size: 10px;
+  }
+}
+
 
 .wireframe {
   border: 1px solid gray;
@@ -91,12 +206,15 @@ nav.main {
   min-height: 300px;
 }
 
+// ************SEARCH PAGE***************
+
 .donation {
   text-align: center;
   margin-bottom: 30px;
   a {
     font-size: 2rem;
     padding: 15px 30px;
+    margin-top: 20px;
   }
 }
 
@@ -104,30 +222,184 @@ nav.main {
   display: none;
 }
 
-// Scrivito CSS
+.search-bg-teacher {
+  background: image-url('kids_bg_3.jpg') center center no-repeat;
+  background-size: cover;
+  min-height: 500px;
+}
 
-.descriptions {
-  color: #fff;
-  min-height: 300px;
-  .aboutus {
-    background-color: #255AA8;
-    min-height: 300px;
-    h2 {
-      font-size: 4rem;
+// program donation button
+
+#program-checkout {
+    // margin: 0 auto;
+    // display: block;
+    // width: 200px;
+    background-color: #264692;
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px 20px;
+}
+
+// wishlist results
+
+.search {
+  display: flex;
+  flex-direction: column;
+  margin-left: 325px;
+}
+.search-header {
+  padding: 0 2em 2em;
+}
+.search-results {
+  flex: 1;
+  padding-bottom: 100px;
+}
+.search-entry {
+  width: 20%;
+  margin: 20px;
+  padding: 0;
+  border-radius: 40px;
+  text-align: center;
+  box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
+  .search-entry-header {
+    background-color: #E38A45;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    padding: 10px;
+  }
+  h3 {
+    margin: 0;
+  }
+  .btn-notsponsored {
+    color: #E38A45;
+    background-color: transparent;
+    border: 2px solid #E38A45;
+    border-radius: 30px;
+    padding: 5px 20px;
+  }
+  .btn-sponsored {
+    background-color: #264692;
+    color: #fff;
+    border-radius: 30px;
+    padding: 5px 20px;
+  }
+}
+
+.flexbox {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  .search-entry {
+    flex: 1;
+  }
+}
+
+.list-group {
+  .list-group-item {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    padding: 5px 10px;
+    margin: 5px 10px;
+    span {
+      // flex: 1;
+      text-align: left;
+      img {
+        width: 60px;
+      }
     }
-    p {
-      font-size: 16px;
+    #book-title {
+      margin-left: 10px;
+    }
+    .close {
+      font-size: 14px;
     }
   }
-  .mission {
-    background-color: #D06828;
-    min-height: 300px;
-    h2 {
-      font-size: 4rem;
+}
+
+#load-more {
+  margin: 5% auto;
+  display: block;
+  width: 200px;
+  background-color: #264692;
+  color: #fff;
+  border-radius: 30px;
+  padding: 10px 20px;
+}
+
+// SPONSOR SHOPPING CART
+
+#sponsor-list {
+  margin-top: 20px;
+  margin-left: 10%;
+}
+
+// #sponsor-list.affix {
+//   width: 300px;
+//   margin-left: 30px;
+// }
+//
+// #sponsor-list.affix-top {
+//   width: 300px;
+//   margin-left: 30px;
+// }
+//
+// #sponsor-list.affix-bottom {
+//   position: absolute;
+// }
+
+.sponsor-shoppingcart {
+  .sponsor-header {
+    h4 {
+      text-transform: uppercase;
+      color: #264692;
     }
-    p {
-      font-size: 16px;
-    }
+  }
+  .sponsor-btn {
+    font-size: 10px !important;
+    margin-left: 5px;
+  }
+  .donation-amt {
+    // color: #E38A45;
+    // font-weight: 700;
+  }
+  .donation-info {
+    text-transform: uppercase;
+    margin-right: 5px;
+  }
+  .donation-group {
+    border-bottom: 2px solid #264692;
+    margin-left: 0;
+    padding-left: 0;
+    margin-right: 90px;
+  }
+  .dollars {
+    color: #E38A45;
+    font-weight: 700;
+    display: inline-block;
+  }
+}
+
+#checkout-btn {
+  background-color: #264692;
+  color: #fff;
+  border-radius: 30px;
+  margin-top: 30px;
+}
+
+#subtotal {
+  font-weight: 700;
+  padding: 10px 0;
+  // margin: 5px 30px;
+}
+
+
+// Scrivito CSS
+
+.picture-slider {
+  img {
+    width: 100%;
   }
 }
 
@@ -168,14 +440,23 @@ nav.main {
 ------------------------- */
 
 .featurette {
-  padding: 5% 0;
-  border-top: 1px solid #eee;
+  padding: 5% 20px 20px;
 
   &.hero2{
     background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
     background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
     background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
+  }
+
+  input {
+    height: 40px;
+    border-radius: 40px;
+    padding: 10px 10px;
+    text-align: center;
+  }
+  #specific-child {
+    font-size: 12px;
   }
 
 }
@@ -190,7 +471,21 @@ nav.main {
   text-align:center;
 }
 .featurette .btn {
-  box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
+  // box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
+  // border: none;
+}
+
+.input-group-btn {
+  .btn {
+    height: 40px;
+    border-left: none;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+  }
+}
+
+.input-group {
+  border-radius: 20px;
 }
 
 .featurette .mhl-logo {
@@ -225,10 +520,6 @@ nav.main {
     font-size: 50px;
   }
   .hero-top {
-    background-image: image-url('hero-top.png');
-    background-repeat: no-repeat;
-    background-position: 100% 100%;
-    background-size: contain;
   }
   .hero1 {
     background-image: image-url('hero1.png');
@@ -242,11 +533,6 @@ nav.main {
     background-size: cover;
   }
   .hero-bottom {
-    background-image: image-url('hero-bottom.png');
-    background-repeat: no-repeat;
-    background-position: 0 0;
-    background-size: cover;
-    //padding: 120px 0;
     font-family: Calibri-Bold;
   }
 }
@@ -312,53 +598,7 @@ nav.main {
   width: 23%;
 }
 
-.search {
-  display: flex;
-  flex-direction: column;
-  margin-left: 325px;
-}
-.search-header {
-  padding: 0 2em 2em;
-}
-.search-results {
-  flex: 1;
-  padding-bottom: 100px;
-}
 
-.list-group {
-  border: 1px solid #ddd;
-  .list-group-item {
-    display: flex;
-    border: none;
-    padding: 5px 15px;
-    span {
-      flex: 1;
-      img {
-        width: 60px;
-      }
-    }
-    #book-title {
-      margin-left: 10px;
-    }
-    .close {
-      font-size: 14px;
-    }
-  }
-}
-
-#sponsor-list.affix {
-  width: 250px;
-  margin-left: 15px;
-}
-
-#sponsor-list.affix-top {
-  width: 250px;
-  margin-left: 15px;
-}
-
-#sponsor-list.affix-bottom {
-  position: absolute;
-}
 
 #globalModalShopping {
   .modal-body {
