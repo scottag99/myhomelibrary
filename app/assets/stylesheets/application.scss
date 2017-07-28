@@ -68,8 +68,7 @@ nav.main {
 .page-headline {
     text-align: center;
     color: #fff;
-    transform: translateY(100%);
-    position: relative;
+    padding-top: 15%;
     width: 50%;
     margin: 0 auto;
     h1 {
@@ -174,6 +173,12 @@ nav.main {
   }
 }
 
+.dropdown-menu {
+  background-color: #E38A45;
+  border-radius: 20px;
+  color: #fff;
+}
+
 // FOOTER
 
 .hero-bottom {
@@ -258,9 +263,11 @@ nav.main {
   width: 20%;
   margin: 20px;
   padding: 0;
-  border-radius: 40px;
   text-align: center;
-  box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
+  .pull-left {
+    box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
+    border-radius: 40px;
+  }
   .search-entry-header {
     background-color: #E38A45;
     border-top-left-radius: 40px;
@@ -328,6 +335,10 @@ nav.main {
   padding: 10px 20px;
 }
 
+.search-description {
+  margin-top: 5%;
+}
+
 // SPONSOR SHOPPING CART
 
 #sponsor-list {
@@ -372,7 +383,7 @@ nav.main {
     border-bottom: 2px solid #264692;
     margin-left: 0;
     padding-left: 0;
-    margin-right: 90px;
+    // margin-right: 90px;
   }
   .dollars {
     color: #E38A45;
@@ -396,6 +407,46 @@ nav.main {
 
 
 // Scrivito CSS
+
+.did-you-know {
+  // h2 {
+  //     text-align: center;
+  //     padding: 10px 15px;
+  //     background: red;
+  //     float: left;
+  //     min-width: 300px;
+  //     position: relative;
+  //     left: calc(50% - 150px);
+  // }
+  // h2:before {
+  //     content: '';
+  //     position: absolute;
+  //     left: -60px;
+  //     bottom: -25px;
+  //     background: transparent;
+  //     height: 0px;
+  //     width: 30px;
+  //     border-right: 20px solid navy;
+  //     border-left: 30px solid transparent;
+  //     border-top: 25px solid blue;
+  //     border-bottom: 25px solid blue;
+  //     z-index: -1;
+  // }
+  // h2:after {
+  //     content: '';
+  //     position: absolute;
+  //     right: -60px;
+  //     bottom: -25px;
+  //     background: transparent;
+  //     height: 0px;
+  //     width: 30px;
+  //     border-left: 20px solid navy;
+  //     border-right: 30px solid transparent;
+  //     border-top: 25px solid blue;
+  //     border-bottom: 25px solid blue;
+  //     z-index: -1;
+  // }
+}
 
 .picture-slider {
   img {
@@ -535,6 +586,31 @@ nav.main {
   .hero-bottom {
     font-family: Calibri-Bold;
   }
+  .modal-dialog {
+    width: 900px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-left {
+    transform: none;
+  }
+  .navbar-right {
+    transform: none;
+  }
+  .navbar-collapse {
+    width: 50%;
+    margin: 0 auto;
+    // background-color: rgba(227,138,69,0.3);
+    background-color: #E38A45;
+  }
+  .dropdown-menu {
+    background-color: #E38A45;
+    border-radius: 20px;
+    a {
+      color: #fff !important;
+    }
+  }
 }
 
 .library {
@@ -599,10 +675,60 @@ nav.main {
 }
 
 
+// **********MODAL************
 
 #globalModalShopping {
   .modal-body {
     text-align: center;
+    h2 {
+      text-align: center;
+    }
+    h3 {
+      margin-bottom: 20px;
+    }
+    .row {
+      padding: 0 30px;
+      text-align: left;
+    }
+    .modal-shopping-description {
+      padding-left: 10px;
+      border-left: 1px solid #ccc;
+      img {
+        width: 200px;
+        height: auto;
+      }
+      h4 {
+        text-transform: uppercase;
+        color: #264692;
+      }
+    }
+    .select-children {
+      color: #E38A45;
+      border: 2px solid #E38A45;
+      padding: 10px 20px;
+      border-radius: 20px;
+      margin-right: 5px;
+      margin-bottom: 10px;
+    }
+    .general-donation-option {
+      text-align: center;
+      margin-top: 10px;
+      input {
+        width: 25%;
+      }
+      a {
+        color: #fff;
+        background-color: #264692;
+        // border: 2px solid #264692;
+        padding: 10px 20px;
+        border-radius: 20px;
+        margin-right: 5px;
+        margin-bottom: 10px;
+      }
+    }
+    .donation-group {
+      font-size: 20px;
+    }
   }
 
   div {
