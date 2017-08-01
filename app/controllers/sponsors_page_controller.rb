@@ -1,0 +1,2 @@
+class SponsorsPageController < CmsController
+end

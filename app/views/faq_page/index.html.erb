@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <nav class="main navbar navbar-default bg-image-home">
+    <nav class="main navbar navbar-default bg-image-faq">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
@@ -50,32 +50,22 @@
         </ul>
       </div>
       <div class="page-headline">
-        <h1>Inspiring Readers By Providing Home Libraries To Children In Need</h1>
-        <h3>An initiative of the Barbara Bush Literacy Foundation</h3>
-        <a href="about">Learn More</a>
+        <h1>My Home Library FAQs</h1>
+        <h3>Answers to Important Questions</h3>
       </div>
-      <!-- <div class="col-md-0 col-md-offset-6 col-sm-offset-6 col-xs-offset-6 mouse">
+      <div class="col-md-0 col-md-offset-6 col-sm-offset-6 col-xs-offset-6 mouse">
         <img src="<%= asset_path('scroll-button.png') %>" />
-      </div> -->
+      </div>
 
     </nav>
   </div>
 </div>
 
-<div class="container-fluid">
-
-  <!-- <p><%= link_to 'Home', scrivito_path(Obj.root) %></p> -->
-
-  <%= scrivito_tag_list :ul, Obj.root, :toclist do |list, page| %>
-    <%= list.tag :li do %>
-      <%= link_to page.display_title, scrivito_path(page) %>
-    <% end %>
+<%= scrivito_tag_list :ul, @obj, :toclist do |list, child| %>
+  <%= list.tag :li do %>
+    <%= link_to child.display_title, scrivito_path(child) %>
   <% end %>
-
-  <% if Obj.root.toclist.empty? && scrivito_in_editable_view? %>
-    <p>(Hint: Click on the Scrivito icon to the right to create the first subpage.)</p>
-  <% end %>
-</div>
+<% end %>
 
 <%= scrivito_tag :h1, @obj, :title %>
 <%= scrivito_tag :div, @obj, :body %>

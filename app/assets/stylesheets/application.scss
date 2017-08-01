@@ -68,19 +68,28 @@ nav.main {
 .page-headline {
     text-align: center;
     color: #fff;
-    padding-top: 15%;
+    padding-top: 5%;
     width: 50%;
     margin: 0 auto;
     h1 {
       text-transform: uppercase;
+      font-family: "astounder-squared-bb",sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 5rem;
     }
-    button {
+    h3 {
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+    a {
       border-radius: 20px;
       border: 2px solid #fff;
       text-transform: uppercase;
+      text-decoration: none;
       padding: 5px 20px;
       background-color: transparent;
-      margin-top: 30px;
+      color: #fff;
     }
 }
 
@@ -92,7 +101,7 @@ nav.main {
     ),
     image-url('navbar-bg.jpg') center center no-repeat;
   background-size: cover;
-  height: 100vh;
+  height: 500px;
 }
 
 .bg-image-search {
@@ -102,7 +111,27 @@ nav.main {
     ),
     image-url('navbar-bg-search.jpg') center center no-repeat;
   background-size: cover;
-  height: 100vh;
+  height: 500px;
+}
+
+.bg-image-about {
+  background: linear-gradient(
+      rgba(72, 37, 157, 0.4),
+      rgba(72, 37, 157, 0.4)
+    ),
+    image-url('navbar-bg-about.jpg') center center no-repeat;
+  background-size: cover;
+  height: 500px;
+}
+
+.bg-image-faq {
+  background: linear-gradient(
+      rgba(72, 37, 157, 0.4),
+      rgba(72, 37, 157, 0.4)
+    ),
+    image-url('navbar-bg-faq.jpg') center center no-repeat;
+  background-size: cover;
+  height: 500px;
 }
 
 #navbar {
@@ -408,52 +437,224 @@ nav.main {
 
 // Scrivito CSS
 
+// HOMEPAGE
+
+.banner {
+  h2 {
+  font-family: "astounder-squared-lc-bb", sans-serif;
+   width: 40%;
+   position: relative;
+   background: #325BA3;
+   color: #fff;
+   text-align: center;
+   padding: 15px 2em; /* Adjust to suit */
+   margin: 1em auto 2em; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
+  }
+  h2:before, h2:after {
+   content: "";
+   position: absolute;
+   display: block;
+   bottom: -20px;
+   border: 30px solid #264692;
+   z-index: -1;
+  }
+  h2:before {
+   left: -2em;
+   border-right-width: 1.5em;
+   border-left-color: transparent;
+  }
+  h2:after {
+   right: -2em;
+   border-left-width: 1.5em;
+   border-right-color: transparent;
+  }
+  h2 h2:before, h2 h2:after {
+   content: "";
+   position: absolute;
+   display: block;
+   border-style: solid;
+   border-color: #325BA3 transparent transparent transparent;
+   bottom: -1em;
+  }
+  h2 h2:before {
+   left: 0;
+   border-width: 1em 0 0 1em;
+  }
+  h2 h2:after {
+   right: 0;
+   border-width: 1em 1em 0 0;
+  }
+}
+
 .did-you-know {
-  // h2 {
-  //     text-align: center;
-  //     padding: 10px 15px;
-  //     background: red;
-  //     float: left;
-  //     min-width: 300px;
-  //     position: relative;
-  //     left: calc(50% - 150px);
-  // }
-  // h2:before {
-  //     content: '';
-  //     position: absolute;
-  //     left: -60px;
-  //     bottom: -25px;
-  //     background: transparent;
-  //     height: 0px;
-  //     width: 30px;
-  //     border-right: 20px solid navy;
-  //     border-left: 30px solid transparent;
-  //     border-top: 25px solid blue;
-  //     border-bottom: 25px solid blue;
-  //     z-index: -1;
-  // }
-  // h2:after {
-  //     content: '';
-  //     position: absolute;
-  //     right: -60px;
-  //     bottom: -25px;
-  //     background: transparent;
-  //     height: 0px;
-  //     width: 30px;
-  //     border-left: 20px solid navy;
-  //     border-right: 30px solid transparent;
-  //     border-top: 25px solid blue;
-  //     border-bottom: 25px solid blue;
-  //     z-index: -1;
-  // }
+    padding: 30px 5%;
+  h3 {
+    font-family: "astounder-squared-bb",sans-serif;
+    color: #E38A45;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  p {
+    text-align: center;
+  }
+  img {
+    width: 60%;
+    margin: 0 auto;
+  }
+
+
+}
+
+.what-is-mhl {
+    padding: 30px 5%;
+  h3 {
+    color: #264692;
+    font-family: "astounder-squared-bb",sans-serif;
+  }
+
+  a {
+    color: #E38A45;
+    border-radius: 30px;
+    margin-top: 30px;
+    border: 2px solid #E38A45;
+  }
+}
+
+.how-it-works {
+    padding: 30px 5%;
+  padding-bottom: 30px;
+  img {
+    width: 60%;
+    margin: 0 auto;
+  }
 }
 
 .picture-slider {
+  padding: 30px 0;
   img {
     width: 100%;
   }
 }
 
+.get-involved {
+    margin: 0 5%;
+    border-right: 1px solid #ccc;
+    padding: 30px 50px;
+  p {
+    padding-top: 20px;
+  }
+  a {
+    font-size: 18px;
+  }
+}
+
+.our-impact {
+  background: linear-gradient(
+      rgba(72, 37, 157, 0.4),
+      rgba(72, 37, 157, 0.4)
+    ),
+    image-url('kid_book_2.jpg') center center no-repeat;
+  background-size: cover;
+  height: 400px;
+  h2 {
+    text-align: center;
+    color: #fff;
+    font-family: "astounder-squared-lc-bb",sans-serif;
+  }
+  p {
+    text-transform: uppercase;
+    font-size: 16px;
+    text-align: center;
+    color: #fff;
+    font-family: "astounder-squared-bb",sans-serif;
+    font-weight: 100;
+  }
+  .stat-numbers {
+    p {
+      font-size: 8em;
+      font-family: "astounder-squared-bb",sans-serif;
+    }
+  }
+  .stat-numbers-left {
+    border-right: 2px solid #fff;
+  }
+}
+
+.signature-sponsor {
+    padding: 30px 5%;
+}
+
+// ABOUT PAGE
+
+.about-mhl {
+  img {
+    margin: 0 auto;
+  }
+}
+
+.logo-area {
+  background: image-url('kids_bg_4.jpg') center top no-repeat;
+  background-size: cover;
+  height: 500px;
+  a {
+    color: #E38A45;
+    border-radius: 30px;
+    margin-top: 30px;
+    border: 2px solid #E38A45;
+    width: 150px;
+  }
+  p {
+    text-align: center;
+    font-style: italic;
+    color: #264692;
+  }
+}
+
+.solve-the-problem {
+  a {
+    color: #E38A45;
+    border-radius: 30px;
+    margin-top: 30px;
+    border: 2px solid #E38A45;
+    width: 150px;
+  }
+}
+
+// FAQ PAGE
+
+.faq {
+  padding: 0 15%;
+  line-height: 2;
+  h3 {
+    color: #264692;
+    font-size: 16px;
+  }
+}
+
+.faq-picture {
+  background: image-url('kids_bg_4.jpg') center top no-repeat;
+  background-size: cover;
+  height: 450px;
+}
+
+// SPONSORS PAGE
+
+.publishing-partners {
+  a {
+    color: #264692;
+    border-radius: 30px;
+    margin: 30px auto 0;
+    border: 2px solid #264692;
+    text-transform: uppercase;
+    width: 250px;
+  }
+}
+
+.sponsor-image-kids {
+  background: image-url('kids_bg_1.jpg') center top no-repeat;
+  background-size: cover;
+  height: 450px;
+}
 
 
 
