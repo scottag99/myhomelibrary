@@ -124,16 +124,15 @@
   <% end -%>
 
   <div class="row search-description">
-    <div class="col-md-5 col-md-offset-4 col-sm-5 col-sm-offset-4">
-      <h1>The Impact of Your Donation</h1>
-    </div>
-    <div class="col-md-6 col-md-offset-4 col-sm-6 col-sm-offset-4">
-      <p>This is all the text about impact, about, donations, whatever else you want.</p>
-      <a>Learn More</a>
+    <div class="col-md-5 col-md-offset-3 col-sm-5 col-sm-offset-3 banner">
+      <h2>The Impact of Your Donation</h2>
+      <p>The Houston community is working tirelessly to provide over 8,500 home libraries to children in need this year alone.  By helping us, you will directly change the lives of children throughout our great city.  1 in 4 Houston students do not meet minimum academic standards at Grade 3.  Through your generosity, My Home Library will turn-the-tide and make book ownership and literacy a reality for all Houston’s aspiring young readers.</p>
     </div>
   </div>
   <div class="row">
-    <div class="search-bg-teacher"></div>
+    <div class="search-bg-teacher">
+        <img src="<%= asset_path('kids_bg_3.jpg') %>" />
+    </div>
   </div>
 
 
@@ -175,9 +174,12 @@ $('body').on("click", '.search-entry a', function() {
 
   var template = $('#place-inside-template').html()
 
+  var names = $('.donation-info strong').slice(0,2).map(function(){ return $(this).text(); }).get().join('and ')
+
   $("#globalModalShopping .modal-body").html(template);
   $('#globalModalShopping').modal();
   $(".sponsor-shoppingcart").clone().appendTo(".modal-shopping-info");
+  $(".kid-names").html(names);
 
   return false;
 });
@@ -215,7 +217,7 @@ function updateIdList(id, text, isRemove) {
 
   $('#subtotal').html('Your Subtotal: <p class="dollars">$' + Number(idList.length*(30)).toFixed(2)) + '</p>';
   if (!isRemove) {
-    var li = $('<li class="list-group-item donation-group"><p class="donation-info"><strong>' + text + '</strong></p><p class="donation-amt dollars">$30.00</p><button class="sponsor-btn close btn-sm">Remove</button></li>');
+    var li = $('<li class="list-group-item donation-group"><p class="donation-info"><strong>' + text.split('-')[0] + '</strong></p><p class="donation-amt dollars">$30.00</p><button class="sponsor-btn close btn-sm">Remove</button></li>');
     li.data('wishlist-id', id);
     list.find('ul').append(li);
   } else {
@@ -235,9 +237,8 @@ function addIdToCart(id) {
 }
 
 function addToCart(entry) {
-  console.log(entry)
+  //console.log(entry)
   var idList = updateIdList(entry.data('wishlist-id'), entry.find('h3').html());
-
   entry.find('a').addClass('disabled');
   entry.find('a').addClass('btn-sponsored');
   entry.find('a').removeClass('btn-notsponsored');
@@ -287,7 +288,7 @@ $('body').on("change", '#addl_donation_slug', function() {
         <div class="row">
           <div class="col-md-6" style="padding-left: 0;">
             <h4>Thank you!</h4>
-            <p>Have you thought about sponsoring other children? There are many more students that would love to have their very own home library! Would you like to keep browsing?</p>
+            <p>Have you thought about sponsoring other children? There are many more students like <span class="kid-names"></span> that would love to have their very own home library! Would you like to keep browsing?</p>
           </div>
           <div class="col-md-6" style="padding-bottom: 0;">
               <img src="<%= asset_path('kids6.jpg') %>" />

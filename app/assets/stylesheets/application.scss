@@ -257,9 +257,10 @@ nav.main {
 }
 
 .search-bg-teacher {
-  background: image-url('kids_bg_3.jpg') center center no-repeat;
-  background-size: cover;
-  min-height: 500px;
+  // background: image-url('kids_bg_3.jpg') center center no-repeat;
+  // background-size: cover;
+  // min-height: 500px;
+  width: 100%;
 }
 
 // program donation button
@@ -289,19 +290,27 @@ nav.main {
   padding-bottom: 100px;
 }
 .search-entry {
-  width: 20%;
+  // width: 20%;
   margin: 20px;
   padding: 0;
   text-align: center;
   .pull-left {
     box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
     border-radius: 40px;
+    padding-bottom: 20px;
+    @media (max-width: 800px) {
+      float: none !important;
+    }
   }
   .search-entry-header {
     background-color: #E38A45;
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
     padding: 10px;
+    color: #000;
+    .text-muted {
+      color: #000;
+    }
   }
   h3 {
     margin: 0;
@@ -321,28 +330,37 @@ nav.main {
   }
 }
 
-.flexbox {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  overflow: hidden;
-  .search-entry {
-    flex: 1;
-  }
-}
+// .flexbox {
+//   display: -webkit-flex;
+//   display: -ms-flexbox;
+//   display: flex;
+//   overflow: hidden;
+//   .search-entry {
+//     flex: 1;
+//   }
+// }
 
 .list-group {
   .list-group-item {
     border: none;
-    border-bottom: 1px solid #ccc;
-    display: flex;
-    padding: 5px 10px;
-    margin: 5px 10px;
+    // display: flex;
+    padding: 5px 5px;
+    margin: 5px 0px;
+    text-align: left;
+    @media (max-width: 800px) {
+      display: block;
+    }
     span {
       // flex: 1;
       text-align: left;
+      // @media (max-width: 800px) {
+      //   display: block;
+      // }
       img {
         width: 60px;
+        // @media (max-width: 800px) {
+        //   width: 40px;
+        // }
       }
     }
     #book-title {
@@ -351,6 +369,9 @@ nav.main {
     .close {
       font-size: 14px;
     }
+  }
+  .book-entry {
+    border-bottom: 1px solid #ccc;
   }
 }
 
@@ -366,6 +387,12 @@ nav.main {
 
 .search-description {
   margin-top: 5%;
+  text-align: center;
+  .banner {
+    h2 {
+      width: 70% !important;
+    }
+  }
 }
 
 // SPONSOR SHOPPING CART
@@ -407,12 +434,15 @@ nav.main {
   .donation-info {
     text-transform: uppercase;
     margin-right: 5px;
+    display: inline-block;
   }
   .donation-group {
-    border-bottom: 2px solid #264692;
     margin-left: 0;
     padding-left: 0;
     // margin-right: 90px;
+  }
+  #sponsor-unordered-list {
+    border-bottom: 2px solid #264692;
   }
   .dollars {
     color: #E38A45;
@@ -486,6 +516,7 @@ nav.main {
   }
 }
 
+
 .did-you-know {
     padding: 30px 5%;
   h3 {
@@ -555,7 +586,7 @@ nav.main {
     ),
     image-url('kid_book_2.jpg') center center no-repeat;
   background-size: cover;
-  height: 400px;
+  padding-bottom: 30px;
   h2 {
     text-align: center;
     color: #fff;
@@ -563,11 +594,13 @@ nav.main {
   }
   p {
     text-transform: uppercase;
-    font-size: 16px;
+    font-size: 22px;
     text-align: center;
     color: #fff;
     font-family: "astounder-squared-bb",sans-serif;
     font-weight: 100;
+    width: 50%;
+    margin: 0 auto;
   }
   .stat-numbers {
     p {
@@ -582,6 +615,9 @@ nav.main {
 
 .signature-sponsor {
     padding: 30px 5%;
+    a {
+      padding-left: 0;
+    }
 }
 
 // ABOUT PAGE
@@ -589,6 +625,11 @@ nav.main {
 .about-mhl {
   img {
     margin: 0 auto;
+  }
+  p {
+    width: 50%;
+    margin: 0 auto;
+    padding-bottom: 30px;
   }
 }
 
@@ -609,14 +650,29 @@ nav.main {
     color: #264692;
   }
 }
+.books-are-essential {
+  text-align: center;
+  h3 {
+    font-family: "astounder-squared-lc-bb",sans-serif;
+    color: #264692;
+  }
+  p {
+    color: #E38A45;
+    text-transform: uppercase;
+  }
+}
 
 .solve-the-problem {
+  p {
+    text-align: center;
+  }
   a {
     color: #E38A45;
     border-radius: 30px;
     margin-top: 30px;
     border: 2px solid #E38A45;
     width: 150px;
+    text-transform: uppercase;
   }
 }
 
@@ -655,6 +711,44 @@ nav.main {
   background-size: cover;
   height: 450px;
 }
+
+// RESPONSIVE FOR SCRIVITO
+
+@media (max-width: 768px) {
+  .banner {
+    h2 {
+      width: 70%;
+    }
+  }
+}
+
+@media (max-width: 568px) {
+  .banner {
+    h2 {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .our-impact {
+    .stat-numbers-left {
+      border-right: none !important;
+    }
+    .col-md-6 {
+      border-bottom: 2px solid #fff;
+      margin: 0 100px;
+      padding: 30px 0;
+    }
+  }
+  .signature-sponsor {
+    img {
+      margin: 0 auto;
+      padding-bottom: 30px;
+    }
+  }
+}
+
 
 
 
@@ -902,6 +996,11 @@ nav.main {
         text-transform: uppercase;
         color: #264692;
       }
+      .kid-names {
+        font-size: 16px;
+        display: inline;
+        font-weight: 700;
+      }
     }
     .select-children {
       color: #E38A45;
@@ -944,6 +1043,14 @@ nav.main {
     font-size: 20px;
     display: block;
     padding-bottom: 10px;
+  }
+}
+
+.modal-shopping-info {
+  .donation-group {
+    button {
+      display: none;
+    }
   }
 }
 
