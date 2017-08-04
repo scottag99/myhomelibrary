@@ -8,7 +8,7 @@ class SecuredController < ApplicationController
 
   def login_for_test
     if Rails.env.test?
-      session[:userinfo] = {'info' => {'image' => 'AVI URL', 'name' => 'TEST ADMIN USER', 'email' => 'test@example.com'}, 'extra' => {'raw_info' => {'email_verified' => true, 'role' => 'admin'}}}
+      session[:userinfo] = {'uid' => 'test_user', 'info' => {'image' => 'AVI URL', 'name' => 'TEST ADMIN USER', 'email' => 'test@example.com'}, 'extra' => {'raw_info' => {'email_verified' => true, 'role' => 'admin'}}}
     end
   end
 

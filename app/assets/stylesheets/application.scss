@@ -28,24 +28,39 @@
  @import "scrivito_section_widgets/parallax_section";
  @import "scrivito_section_widgets/colors";
 
- // @import url('https://fonts.googleapis.com/css?family=Lora:400,700');
  @import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,700');
 
- @font-face {
-   font-family: Calibri;
-   src: local(Calibri), url('Calibri.ttf') format('opentype');
- }
-
- @font-face {
-   font-family: Calibri-Bold;
-   src: local(Calibri-Bold), url('Calibri-Bold.ttf') format('opentype');
- }
-
  @media print {
-    table {page-break-after: always;}
-    nav, #breadcrumb {display: none;}
-    .book-summary {display: inline-block !important;}
-    .toggle-show {display: none;}
+
+    table {
+      page-break-after: always;
+    }
+    nav, #breadcrumb {
+      display: none;
+    }
+    .book-summary {
+      display: inline-block !important;
+    }
+    .book-cover {
+      max-height: 3em;
+    }
+    .row-books {
+      max-height: 3em;
+      font-size: 0.5em;
+    }
+    .toggle-show {
+      display: none;
+    }
+
+}
+
+html,body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
 }
 
 h1 {
@@ -68,9 +83,12 @@ nav.main {
 .page-headline {
     text-align: center;
     color: #fff;
-    padding-top: 5%;
+    padding: 5%;
     width: 50%;
     margin: 0 auto;
+    @media (max-width: 600px) {
+      width: 100%;
+    }
     h1 {
       text-transform: uppercase;
       font-family: "astounder-squared-bb",sans-serif;
@@ -212,6 +230,16 @@ nav.main {
   background-color: #E38A45;
   border-radius: 20px;
   color: #fff;
+}
+
+.social-media {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 10px;
+  margin-right: 5px;
+  a {
+    color: #fff;
+  }
 }
 
 // FOOTER
@@ -554,6 +582,7 @@ nav.main {
     border-radius: 30px;
     margin-top: 30px;
     border: 2px solid #E38A45;
+    float: none !important;
   }
 }
 
@@ -575,7 +604,7 @@ nav.main {
 
 .get-involved {
     margin: 0 5%;
-    border-right: 1px solid #ccc;
+    // border-right: 1px solid #ccc;
     padding: 30px 50px;
   p {
     padding-top: 20px;
@@ -636,6 +665,9 @@ nav.main {
     width: 50%;
     margin: 0 auto;
     padding-bottom: 30px;
+    @media (max-width: 700px) {
+      width: 100%;
+    }
   }
 }
 
@@ -731,6 +763,7 @@ nav.main {
 
 @media (max-width: 768px) {
   .banner {
+    padding: 20px 0;
     h2 {
       width: 70%;
     }
@@ -768,7 +801,7 @@ nav.main {
   .our-impact {
     p {
       width: 100%;
-      font-size: 6em;
+      font-size: 2em;
     }
   }
   .banner {
@@ -964,7 +997,7 @@ nav.main {
 .book-cover {
   float: left;
   max-width: 150px;
-  max-height: 10em;
+  max-height: 7em;
   margin: 0 1em .25em 0;
   border: 1px solid #ccc;
   box-shadow: 1px 1px 4px #ccc;
@@ -1129,3 +1162,9 @@ nav.main {
     width: 300px;
   }
 }
+
+// * {
+//   background: #000 !important;
+//   color: #0f0 !important;
+//   outline: solid #f00 1px !important;
+// }
