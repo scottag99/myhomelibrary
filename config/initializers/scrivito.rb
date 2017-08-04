@@ -14,8 +14,8 @@ Scrivito.configure do |config|
   config.editing_auth do |env|
       user_data = env['rack.session'][:userinfo]
 
-      if user_data[‘extra’] && user_data[‘extra’][‘raw_info’]
-        role = user_data[‘extra’][‘raw_info’][‘role’]
+      if user_data['extra'] && user_data['extra']['raw_info']
+        role = user_data['extra']['raw_info']['role']
       end
       if user_data && !role.blank? && role == 'admin'
 

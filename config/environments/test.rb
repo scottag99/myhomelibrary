@@ -43,8 +43,8 @@ Rails.application.configure do
   config.auth0_endpoint = 'myhomelibrary-dev.auth0.com'
 
   Scrivito.configure do |config|
-    config.tenant  = ‘my_tenant’
-    config.api_key = ‘secret123’
+    config.tenant  = 'my_tenant'
+    config.api_key = 'secret123'
   end
 
 end
