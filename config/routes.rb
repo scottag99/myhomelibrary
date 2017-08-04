@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "/auth/failure" => "auth0#failure"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: 'home#index'
+  root to: redirect('/home')
   get 'home/library'
   get 'donate', to: 'home#donate'
   get 'search/(:slug)', to: 'home#search', as: 'search'
