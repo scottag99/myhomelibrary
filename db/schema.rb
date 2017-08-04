@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170417195825) do
+ActiveRecord::Schema.define(version: 20170717150405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20170417195825) do
     t.string   "grl"
     t.string   "dra"
     t.boolean  "is_bilingual",    default: false
+    t.boolean  "is_chapter",      default: false
   end
 
   create_table "campaign_catalogs", force: :cascade do |t|
@@ -45,11 +46,11 @@ ActiveRecord::Schema.define(version: 20170417195825) do
     t.string   "name"
     t.date     "deadline"
     t.integer  "organization_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.boolean  "ready_for_donations"
     t.string   "address"
-    t.boolean  "can_edit_wishlists"
+    t.boolean  "can_edit_wishlists",  default: true
     t.integer  "book_limit"
     t.index ["organization_id"], name: "index_campaigns_on_organization_id", using: :btree
   end
@@ -88,14 +89,17 @@ ActiveRecord::Schema.define(version: 20170417195825) do
     t.string   "confirmation_code"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "campaign_id"
+    t.index ["campaign_id"], name: "index_donations_on_campaign_id", using: :btree
     t.index ["wishlist_id"], name: "index_donations_on_wishlist_id", using: :btree
   end
 
   create_table "organizations", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "slug"
+    t.boolean  "is_included", default: true
   end
 
   create_table "partners", force: :cascade do |t|
@@ -141,6 +145,7 @@ ActiveRecord::Schema.define(version: 20170417195825) do
   add_foreign_key "catalog_entries", "books"
   add_foreign_key "catalog_entries", "catalog_entries", column: "related_entry_id"
   add_foreign_key "catalog_entries", "catalogs"
+  add_foreign_key "donations", "campaigns"
   add_foreign_key "donations", "wishlists"
   add_foreign_key "partners", "organizations"
   add_foreign_key "wishlist_entries", "catalog_entries"

@@ -1,10 +1,20 @@
 <tr>
+  <td>&nbsp;</td>
+  <td><%= check_box_tag 'included', organization.id, organization.is_included,
+            data: {
+              remote: true,
+              url: included_admin_organization_url(organization),
+              method: "PUT"
+              } %></td>
   <td><%= link_to organization.name, admin_organization_url(organization) %></td>
   <td><%= organization.slug %></td>
   <td><%= organization.campaigns.count %></td>
   <td><%= Wishlist.joins(:campaign).where("campaigns.organization_id = ?",  organization).count %></td>
+  <td><%= Wishlist.joins(:campaign).select(:external_id).where("campaigns.organization_id = ?", organization).distinct.count %></td>
+  <td><%= Donation.joins(:wishlist => :campaign).where("campaigns.organization_id = ?", organization).count %></td>
   <td><%= number_to_currency(Donation.joins(:wishlist => :campaign).where("campaigns.organization_id = ?", organization).sum(:amount)) %></td>
-  <td><%= Wishlist.includes([:donations, :campaign]).where("campaigns.organization_id = ?", organization).where.not(donations: {id: nil}).count() %></td>
+  <td><%= number_to_currency(Donation.joins(:campaign).where("campaigns.organization_id = ?", organization).sum(:amount)) %></td>
+  <!-- <td><%= Wishlist.includes([:donations, :campaign]).where("campaigns.organization_id = ?", organization).where.not(donations: {id: nil}).count() %></td> -->
   <td>
     <%= link_to "Edit", edit_admin_organization_url(organization), class: "btn btn-warning btn-xs" %>
     <%= link_to "Delete", admin_organization_url(organization),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'This action cannot be undone. Are you sure?'} %>

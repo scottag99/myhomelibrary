@@ -86,6 +86,25 @@ class Admin::CatalogsController < Admin::BaseController
     end
   end
 
+  def export
+    @catalog = Catalog.find(params[:id])
+
+    data = CSV.generate(headers: true) do |csv|
+      csv << ['Title', 'Author', 'Description', 'Publisher', 'DRA', 'Bilingual', 'Chapters']
+
+      @catalog.catalog_entries.each do |ce|
+        csv << [ce.book.title, ce.book.author, ce.book.description, @catalog.source, ce.book.dra, ce.book.is_bilingual, ce.book.is_chapter]
+      end
+    end
+    send_data data, filename: "#{@catalog.name}-CatalogReport.csv"
+  end
+
+  def active
+    @catalog = Catalog.find(params[:id])
+    @catalog.active = !@catalog.active
+    @catalog.save
+  end
+
 private
   def catalog_params
     params.require(:catalog).permit(:name, :source, :active)

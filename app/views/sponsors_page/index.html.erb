@@ -1,0 +1,72 @@
+<div class="container-fluid">
+  <div class="row">
+    <nav class="main navbar navbar-default bg-image-about">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" class="non-admin"><img class="non-admin" src="<%= asset_path('my-home-library.png') %>" alt="Barbara Bush Houston Literacy Foundation" /></a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-left">
+          <li><%= link_to 'About Us', scrivito_path(Obj.find_by_permalink('about')) %></li>
+          <li><%= link_to 'FAQ', scrivito_path(Obj.find_by_permalink('faq')) %></li>
+          <li><%= link_to 'Our Partners', scrivito_path(Obj.find_by_permalink('sponsors')) %></li>
+          <li><a class="non-admin" href="">Our Impact</a></li>
+
+          <% unless session[:userinfo].nil?  -%>
+          <% if user_is_admin? -%>
+          <li><%= link_to 'Admin', '/admin' %></li>
+          <% end -%>
+
+          <li>
+            <a href="#"><img class="avatar" src="<%= session[:userinfo]['info']['image'] %>" alt="<%= session[:userinfo]['info']['name'] %>" />
+              <span class="hidden-sm"><%= session[:userinfo]['info']['name'] %></span>
+            </a>
+          </li>
+
+          <li><a href="/logout?returnTo=<%= request.base_url %>&client_id=<%= Rails.application.secrets.auth0_client_id %>">Logout</a></li>
+          <% end -%>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li><a class="non-admin btn" href="search">Sponsor a Child</a></li>
+
+          <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle non-admin btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              Donate to Program <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <% Organization.where("is_included = ?", true).each do |org| %>
+                <li>
+                  <%= link_to(org.name, search_url(org.slug)) %>
+                </li>
+                <% end %>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="page-headline">
+        <h1>We love our sponsors!</h1>
+        <h3>These great companies make it possible</h3>
+      </div>
+      <div class="col-md-0 col-md-offset-6 col-sm-offset-6 col-xs-offset-6 mouse">
+        <img src="<%= asset_path('scroll-button.png') %>" />
+      </div>
+
+    </nav>
+  </div>
+</div>
+
+
+<%= scrivito_tag_list :ul, @obj, :toclist do |list, child| %>
+  <%= list.tag :li do %>
+    <%= link_to child.display_title, scrivito_path(child) %>
+  <% end %>
+<% end %>
+
+<%= scrivito_tag :h1, @obj, :title %>
+<%= scrivito_tag :div, @obj, :body %>

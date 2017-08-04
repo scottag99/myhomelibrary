@@ -44,7 +44,7 @@ class Admin::WishlistsController < Admin::BaseController
   end
 
   def download
-    file_name = "#{current_campaign.organization.name.parameterize}-#{current_campaign.name.parameterize}.csv"
+    file_name = "#{current_campaign.organization.name.parameterize}-#{current_campaign.name.parameterize}-LabelSheet.csv"
     content = "#{current_campaign.organization.name},#{current_campaign.name}\r\n"
     content += "Teacher Name,Student Name,Grade\r\n"
     current_campaign.wishlists.each do |w|

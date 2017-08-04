@@ -7,10 +7,10 @@
       <dd><%= @campaign.name %></dd>
       <dt>Deadline</dt>
       <dd><%= @campaign.deadline %></dd>
-      <dt>Ready for Donations</dt>
-      <dd><input type=checkbox disabled <%= @campaign.ready_for_donations ? 'checked' : '' %> /></dd>
       <dt>Address</dt>
       <dd><address><%= h(@campaign.address).gsub(/\n/, '<br/>').html_safe %></address></dd>
+      <dt>Ready for Donations</dt>
+      <dd><input type=checkbox disabled <%= @campaign.ready_for_donations ? 'checked' : '' %> /></dd>
       <dt>Can Edit Wish Lists</dt>
       <dd><input type=checkbox disabled <%= @campaign.can_edit_wishlists ? 'checked' : '' %> /></dd>
       <dt>Book Limit</dt>

@@ -22,18 +22,22 @@ class HomeController < ApplicationController
   end
 
   def donate
+    addl_donation = params[:addl_donation].nil? ? 0.0 : params[:addl_donation].to_d
+    addl_donation_slug = params[:addl_donation_slug].nil? ? 0.0 : params[:addl_donation_slug].to_d
     if params[:id_list].nil?
       @wishlists = []
-      @donationLevel = 30.0
+      @donationLevel = addl_donation + addl_donation_slug + 30.0
       @schoolname = "None"
       @Campaign = "General"
       @reader_name = ""
       @wishListID = ""
       @slug = ""
+      @campaign_id = ""
       if !params[:campaign_id].nil? && campaign = Campaign.find(params[:campaign_id])
         @Campaign = campaign.name
         @schoolname = campaign.organization.name
         @slug = campaign.organization.slug
+        @campaign_id = campaign.id
       end
       if !params[:organization_id].nil? && org = Organization.find(params[:organization_id])
         @schoolname = org.name
@@ -53,7 +57,7 @@ class HomeController < ApplicationController
         slug[w.campaign.organization.slug] = true
       }
       @schoolname = school.keys.join(",")
-      @donationLevel = 30.0*@wishlists.count #TODO: Make the amount configurable
+      @donationLevel = addl_donation + addl_donation_slug + (30.0*@wishlists.count) #TODO: Make the amount configurable
       @Campaign = campaign.keys.join(",")
       @reader_name = reader.keys.join(",")
       @wishListID = params[:id_list]
@@ -73,9 +77,13 @@ class HomeController < ApplicationController
 
   def success
     @wishlists = Wishlist.joins([{:campaign => :organization}]).where("wishlists.id in (?)", params[:id_list].split(",").map(&:to_i)).all
-    amt = params[:amount].to_d/@wishlists.count unless params[:amount].nil? || @wishlists.count == 0
-    @wishlists.each do |w|
-      @donation = w.donations.create!({:confirmation_code => params[:confirmation_code], :amount => amt})
+    if @wishlists.count > 0
+      amt = params[:amount].to_d/@wishlists.count unless params[:amount].nil? || @wishlists.count == 0
+      @wishlists.each do |w|
+        @donation = w.donations.create!({:confirmation_code => params[:confirmation_code], :amount => amt})
+      end
+    elsif campaign = Campaign.find(params[:campaign_id])
+      @donation = campaign.donations.create!({:confirmation_code => params[:confirmation_code], :amount => params[:amount]})
     end
 
     session[:wishlist_cart] = nil

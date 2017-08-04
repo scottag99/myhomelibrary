@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'home#index'
+    get 'admin/organizations', to: 'admin/organizations#index', as: 'admin_organizations_path'
     resources :users do
       member do
         put 'toggle_admin'
@@ -23,17 +24,27 @@ Rails.application.routes.draw do
     end
     resources :books
     resources :catalogs do
+      member do
+        get 'export'
+        put 'active'
+      end
       resources :catalog_entries
     end
     resources :contents
     resources :organizations do
+      member do
+        put 'included'
+      end
       resources :partners
       resources :campaigns do
         member do
           get 'order_sheet'
           get 'pick_list'
           get 'export'
+          get 'exportroster'
           get 'readers'
+          put 'donations'
+          put 'wishlists'
         end
         resources :wishlists do
           member do
@@ -72,5 +83,11 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  # Default Scrivito routes. Adapt them to change the routing of CMS objects.
+  # See the documentation of 'scrivito_route' for a detailed description.
+  scrivito_route '/', using: 'homepage'
+  scrivito_route '(/)(*slug-):id', using: 'slug_id'
+  scrivito_route '/*permalink', using: 'permalink', format: false
 
 end

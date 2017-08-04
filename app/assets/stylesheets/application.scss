@@ -13,28 +13,775 @@
  */
  // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 
-
+ /*
+*= require scrivito
+*= require scrivito_three_column_widget
+*= require scrivito_two_column_widget
+*= require scrivito_section_widgets
+*= require scrivito_content_box_widget
+*/
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
  @import 'bootstrap-datetimepicker';
+ @import "scrivito_section_widgets/base_section";
+ @import "scrivito_section_widgets/parallax_section";
+ @import "scrivito_section_widgets/colors";
 
+ // @import url('https://fonts.googleapis.com/css?family=Lora:400,700');
+ @import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,700');
+
+ @font-face {
+   font-family: Calibri;
+   src: local(Calibri), url('Calibri.ttf') format('opentype');
+ }
+
+ @font-face {
+   font-family: Calibri-Bold;
+   src: local(Calibri-Bold), url('Calibri-Bold.ttf') format('opentype');
+ }
 
  @media print {
     table {page-break-after: always;}
     nav, #breadcrumb {display: none;}
+    .book-summary {display: inline-block !important;}
+    .toggle-show {display: none;}
+}
+
+h1 {
+  margin-top: 0;
 }
 
 body {
   color: #5a5a5a;
-  padding-top: 50px;
+  font-family: 'Work Sans', sans-serif;
+  // margin: 0 -15px;
 }
+
+// NAV BAR
+
 nav.main {
-  background: #fff;
-  box-shadow: 0 1px 5px 1px rgba(0,0,0,.2);
+  // font-weight: 700;
 }
-.navbar-brand { padding: 0px; }
-.navbar-brand img { height: 100%; }
+
+// nav header info
+.page-headline {
+    text-align: center;
+    color: #fff;
+    padding-top: 5%;
+    width: 50%;
+    margin: 0 auto;
+    h1 {
+      text-transform: uppercase;
+      font-family: "astounder-squared-bb",sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 5rem;
+    }
+    h3 {
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+    a {
+      border-radius: 20px;
+      border: 2px solid #fff;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 5px 20px;
+      background-color: transparent;
+      color: #fff;
+    }
+}
+
+// search page header image
+.bg-image-home {
+  background: linear-gradient(
+      rgba(72, 37, 157, 0.4),
+      rgba(72, 37, 157, 0.4)
+    ),
+    image-url('navbar-bg.jpg') center center no-repeat;
+  background-size: cover;
+  height: 500px;
+}
+
+.bg-image-search {
+  background: linear-gradient(
+      rgba(72, 37, 157, 0.4),
+      rgba(72, 37, 157, 0.4)
+    ),
+    image-url('navbar-bg-search.jpg') center center no-repeat;
+  background-size: cover;
+  height: 500px;
+}
+
+.bg-image-about {
+  background: linear-gradient(
+      rgba(72, 37, 157, 0.4),
+      rgba(72, 37, 157, 0.4)
+    ),
+    image-url('navbar-bg-about.jpg') center center no-repeat;
+  background-size: cover;
+  height: 500px;
+}
+
+.bg-image-faq {
+  background: linear-gradient(
+      rgba(72, 37, 157, 0.4),
+      rgba(72, 37, 157, 0.4)
+    ),
+    image-url('navbar-bg-faq.jpg') center center no-repeat;
+  background-size: cover;
+  height: 500px;
+}
+
+#navbar {
+  ul {
+    li {
+      color: #fff !important;
+      text-transform: uppercase;
+      a.non-admin {
+        color: #fff;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+.navbar-left {
+  transform: translateY(60%);
+  a {
+    color: #fff !important;
+  }
+}
+.navbar-right {
+  transform: translateY(85%);
+  a.non-admin {
+    background-color: #E38A45;
+    padding: 10px 10px !important;
+    border-radius: 20px;
+    margin-right: 5px;
+  }
+  .slug-names {
+    a {
+
+    }
+  }
+}
+.navbar-default {
+  background-color: transparent;
+  border: none;
+}
+.nav {
+  text-align: center;
+}
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand img {
+  height: 100%;
+}
+.navbar-header {
+  a.non-admin {
+    background-color: #fff;
+    height: 85px;
+    width: 130px;
+    display: block;
+    border-radius: 0 45px 45px 0;
+    // margin-left: -15px;
+    margin-top: 15px;
+  }
+  img.non-admin {
+    width: 100px;
+  }
+}
+
+.mouse {
+  bottom: 10px;
+  position: absolute;
+  img {
+    width: 40px;
+  }
+}
+
+@media (max-width: 800px) {
+  .mouse {
+    display: none;
+  }
+}
+
+.dropdown-menu {
+  background-color: #E38A45;
+  border-radius: 20px;
+  color: #fff;
+}
+
+// FOOTER
+
+.hero-bottom {
+  img {
+    width: 100px;
+  }
+  .links {
+    text-align: center;
+    margin-top: 30px;
+    a {
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0 5px;
+    }
+  }
+  p {
+    margin: 20px 0 10px;
+    text-align: center;
+    color: lightgray;
+    font-size: 10px;
+  }
+}
+
+
+.wireframe {
+  border: 1px solid gray;
+}
+
+#banner {
+  min-height: 300px;
+}
+
+// ************SEARCH PAGE***************
+
+.donation {
+  text-align: center;
+  margin-bottom: 30px;
+  a {
+    font-size: 2rem;
+    padding: 15px 30px;
+    margin-top: 20px;
+  }
+}
+
+.book-summary {
+  display: none;
+}
+
+.search-bg-teacher {
+  // background: image-url('kids_bg_3.jpg') center center no-repeat;
+  // background-size: cover;
+  // min-height: 500px;
+  width: 100%;
+}
+
+// program donation button
+
+#program-checkout {
+    // margin: 0 auto;
+    // display: block;
+    // width: 200px;
+    background-color: #264692;
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px 20px;
+}
+
+// wishlist results
+
+.search {
+  display: flex;
+  flex-direction: column;
+  margin-left: 325px;
+}
+.search-header {
+  padding: 0 2em 2em;
+}
+.search-results {
+  flex: 1;
+  padding-bottom: 100px;
+}
+.search-entry {
+  // width: 20%;
+  margin: 20px;
+  padding: 0;
+  text-align: center;
+  .pull-left {
+    box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
+    border-radius: 40px;
+    padding-bottom: 20px;
+    @media (max-width: 800px) {
+      float: none !important;
+    }
+  }
+  .search-entry-header {
+    background-color: #E38A45;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    padding: 10px;
+    color: #000;
+    .text-muted {
+      color: #000;
+    }
+  }
+  h3 {
+    margin: 0;
+  }
+  .btn-notsponsored {
+    color: #E38A45;
+    background-color: transparent;
+    border: 2px solid #E38A45;
+    border-radius: 30px;
+    padding: 5px 20px;
+  }
+  .btn-sponsored {
+    background-color: #264692;
+    color: #fff;
+    border-radius: 30px;
+    padding: 5px 20px;
+  }
+}
+
+// .flexbox {
+//   display: -webkit-flex;
+//   display: -ms-flexbox;
+//   display: flex;
+//   overflow: hidden;
+//   .search-entry {
+//     flex: 1;
+//   }
+// }
+
+.list-group {
+  .list-group-item {
+    border: none;
+    // display: flex;
+    padding: 5px 5px;
+    margin: 5px 0px;
+    text-align: left;
+    @media (max-width: 800px) {
+      display: block;
+    }
+    span {
+      // flex: 1;
+      text-align: left;
+      // @media (max-width: 800px) {
+      //   display: block;
+      // }
+      img {
+        width: 60px;
+        // @media (max-width: 800px) {
+        //   width: 40px;
+        // }
+      }
+    }
+    #book-title {
+      margin-left: 10px;
+    }
+    .close {
+      font-size: 14px;
+    }
+  }
+  .book-entry {
+    border-bottom: 1px solid #ccc;
+  }
+}
+
+#load-more {
+  margin: 5% auto;
+  display: block;
+  width: 200px;
+  background-color: #264692;
+  color: #fff;
+  border-radius: 30px;
+  padding: 10px 20px;
+}
+
+.search-description {
+  margin-top: 5%;
+  text-align: center;
+  .banner {
+    h2 {
+      width: 70% !important;
+    }
+  }
+}
+
+// SPONSOR SHOPPING CART
+
+#sponsor-list {
+  margin-top: 20px;
+  margin-left: 10%;
+}
+
+// #sponsor-list.affix {
+//   width: 300px;
+//   margin-left: 30px;
+// }
+//
+// #sponsor-list.affix-top {
+//   width: 300px;
+//   margin-left: 30px;
+// }
+//
+// #sponsor-list.affix-bottom {
+//   position: absolute;
+// }
+
+.sponsor-shoppingcart {
+  .sponsor-header {
+    h4 {
+      text-transform: uppercase;
+      color: #264692;
+    }
+  }
+  .sponsor-btn {
+    font-size: 10px !important;
+    margin-left: 5px;
+  }
+  .donation-amt {
+    // color: #E38A45;
+    // font-weight: 700;
+  }
+  .donation-info {
+    text-transform: uppercase;
+    margin-right: 5px;
+    display: inline-block;
+  }
+  .donation-group {
+    margin-left: 0;
+    padding-left: 0;
+    // margin-right: 90px;
+  }
+  #sponsor-unordered-list {
+    border-bottom: 2px solid #264692;
+  }
+  .dollars {
+    color: #E38A45;
+    font-weight: 700;
+    display: inline-block;
+  }
+}
+
+#checkout-btn {
+  background-color: #264692;
+  color: #fff;
+  border-radius: 30px;
+  margin-top: 30px;
+}
+
+#subtotal {
+  font-weight: 700;
+  padding: 10px 0;
+  // margin: 5px 30px;
+}
+
+
+// Scrivito CSS
+
+// HOMEPAGE
+
+.banner {
+  h2 {
+  font-family: "astounder-squared-lc-bb", sans-serif;
+   width: 40%;
+   position: relative;
+   background: #325BA3;
+   color: #fff;
+   text-align: center;
+   padding: 15px 2em; /* Adjust to suit */
+   margin: 1em auto 2em; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
+  }
+  h2:before, h2:after {
+   content: "";
+   position: absolute;
+   display: block;
+   bottom: -20px;
+   border: 30px solid #264692;
+   z-index: -1;
+  }
+  h2:before {
+   left: -2em;
+   border-right-width: 1.5em;
+   border-left-color: transparent;
+  }
+  h2:after {
+   right: -2em;
+   border-left-width: 1.5em;
+   border-right-color: transparent;
+  }
+  h2 h2:before, h2 h2:after {
+   content: "";
+   position: absolute;
+   display: block;
+   border-style: solid;
+   border-color: #325BA3 transparent transparent transparent;
+   bottom: -1em;
+  }
+  h2 h2:before {
+   left: 0;
+   border-width: 1em 0 0 1em;
+  }
+  h2 h2:after {
+   right: 0;
+   border-width: 1em 1em 0 0;
+  }
+}
+
+
+.did-you-know {
+    padding: 30px 5%;
+  h3 {
+    font-family: "astounder-squared-bb",sans-serif;
+    color: #E38A45;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  p {
+    text-align: center;
+  }
+  img {
+    width: 60%;
+    margin: 0 auto;
+  }
+
+
+}
+
+.what-is-mhl {
+    padding: 30px 5%;
+  h3 {
+    color: #264692;
+    font-family: "astounder-squared-bb",sans-serif;
+  }
+
+  a {
+    color: #E38A45;
+    border-radius: 30px;
+    margin-top: 30px;
+    border: 2px solid #E38A45;
+  }
+}
+
+.how-it-works {
+    padding: 30px 5%;
+  padding-bottom: 30px;
+  img {
+    width: 60%;
+    margin: 0 auto;
+  }
+}
+
+.picture-slider {
+  padding: 30px 0;
+  img {
+    width: 100%;
+  }
+}
+
+.get-involved {
+    margin: 0 5%;
+    border-right: 1px solid #ccc;
+    padding: 30px 50px;
+  p {
+    padding-top: 20px;
+  }
+  a {
+    font-size: 18px;
+  }
+}
+
+.our-impact {
+  background: linear-gradient(
+      rgba(72, 37, 157, 0.4),
+      rgba(72, 37, 157, 0.4)
+    ),
+    image-url('kid_book_2.jpg') center center no-repeat;
+  background-size: cover;
+  padding-bottom: 30px;
+  h2 {
+    text-align: center;
+    color: #fff;
+    font-family: "astounder-squared-lc-bb",sans-serif;
+  }
+  p {
+    text-transform: uppercase;
+    font-size: 22px;
+    text-align: center;
+    color: #fff;
+    font-family: "astounder-squared-bb",sans-serif;
+    font-weight: 100;
+    width: 50%;
+    margin: 0 auto;
+  }
+  .stat-numbers {
+    p {
+      font-size: 8em;
+      font-family: "astounder-squared-bb",sans-serif;
+    }
+  }
+  .stat-numbers-left {
+    border-right: 2px solid #fff;
+  }
+}
+
+.signature-sponsor {
+    padding: 30px 5%;
+    a {
+      padding-left: 0;
+    }
+}
+
+// ABOUT PAGE
+
+.about-mhl {
+  img {
+    margin: 0 auto;
+  }
+  p {
+    width: 50%;
+    margin: 0 auto;
+    padding-bottom: 30px;
+  }
+}
+
+.logo-area {
+  background: image-url('kids_bg_4.jpg') center top no-repeat;
+  background-size: cover;
+  height: 500px;
+  a {
+    color: #E38A45;
+    border-radius: 30px;
+    margin-top: 30px;
+    border: 2px solid #E38A45;
+    width: 150px;
+  }
+  p {
+    text-align: center;
+    font-style: italic;
+    color: #264692;
+  }
+}
+.books-are-essential {
+  text-align: center;
+  h3 {
+    font-family: "astounder-squared-lc-bb",sans-serif;
+    color: #264692;
+  }
+  p {
+    color: #E38A45;
+    text-transform: uppercase;
+  }
+}
+
+.solve-the-problem {
+  p {
+    text-align: center;
+  }
+  a {
+    color: #E38A45;
+    border-radius: 30px;
+    margin-top: 30px;
+    border: 2px solid #E38A45;
+    width: 150px;
+    text-transform: uppercase;
+  }
+}
+
+@media (max-width: 991px) {
+  .solve-the-problem {
+    .img-responsive {
+      width: 50%;
+      margin: 0 auto;
+    }
+  }
+}
+
+// FAQ PAGE
+
+.faq {
+  padding: 0 15%;
+  line-height: 2;
+  h3 {
+    color: #264692;
+    font-size: 16px;
+  }
+}
+
+.faq-picture {
+  background: image-url('kids_bg_4.jpg') center top no-repeat;
+  background-size: cover;
+  height: 450px;
+}
+
+// SPONSORS PAGE
+
+.publishing-partners {
+  a {
+    color: #264692;
+    border-radius: 30px;
+    margin: 30px auto 0;
+    border: 2px solid #264692;
+    text-transform: uppercase;
+    width: 250px;
+  }
+}
+
+.sponsor-image-kids {
+  background: image-url('kids_bg_1.jpg') center top no-repeat;
+  background-size: cover;
+  height: 450px;
+}
+
+// RESPONSIVE FOR SCRIVITO
+
+@media (max-width: 768px) {
+  .banner {
+    h2 {
+      width: 70%;
+    }
+  }
+}
+
+@media (max-width: 568px) {
+  .banner {
+    h2 {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .our-impact {
+    .stat-numbers-left {
+      border-right: none !important;
+    }
+    .col-md-6 {
+      border-bottom: 2px solid #fff;
+      margin: 0 100px;
+      padding: 30px 0;
+    }
+  }
+  .signature-sponsor {
+    img {
+      margin: 0 auto;
+      padding-bottom: 30px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .our-impact {
+    p {
+      width: 100%;
+      font-size: 6em;
+    }
+  }
+  .banner {
+    h2 {
+      font-size: 20px;
+      width: 80%;
+    }
+  }
+}
+
+
+
+
 .starter-template {
   padding: 40px 15px;
   text-align: center;
@@ -69,14 +816,23 @@ nav.main {
 ------------------------- */
 
 .featurette {
-  padding: 5% 0;
-  border-top: 1px solid #eee;
+  padding: 5% 20px 20px;
 
   &.hero2{
     background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
     background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
     background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
+  }
+
+  input {
+    height: 40px;
+    border-radius: 40px;
+    padding: 10px 10px;
+    text-align: center;
+  }
+  #specific-child {
+    font-size: 12px;
   }
 
 }
@@ -91,7 +847,21 @@ nav.main {
   text-align:center;
 }
 .featurette .btn {
-  box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
+  // box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
+  // border: none;
+}
+
+.input-group-btn {
+  .btn {
+    height: 40px;
+    border-left: none;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+  }
+}
+
+.input-group {
+  border-radius: 20px;
 }
 
 .featurette .mhl-logo {
@@ -126,10 +896,6 @@ nav.main {
     font-size: 50px;
   }
   .hero-top {
-    background-image: image-url('hero-top.png');
-    background-repeat: no-repeat;
-    background-position: 100% 100%;
-    background-size: contain;
   }
   .hero1 {
     background-image: image-url('hero1.png');
@@ -143,11 +909,32 @@ nav.main {
     background-size: cover;
   }
   .hero-bottom {
-    background-image: image-url('hero-bottom.png');
-    background-repeat: no-repeat;
-    background-position: 0 0;
-    background-size: cover;
-    padding: 120px 0;
+    font-family: Calibri-Bold;
+  }
+  .modal-dialog {
+    width: 900px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-left {
+    transform: none;
+  }
+  .navbar-right {
+    transform: none;
+  }
+  .navbar-collapse {
+    width: 50%;
+    margin: 0 auto;
+    // background-color: rgba(227,138,69,0.3);
+    background-color: #E38A45;
+  }
+  .dropdown-menu {
+    background-color: #E38A45;
+    border-radius: 20px;
+    a {
+      color: #fff !important;
+    }
   }
 }
 
@@ -212,25 +999,89 @@ nav.main {
   width: 23%;
 }
 
-.search {
-  display: flex;
-  flex-direction: column;
-  margin-left: 325px;
-}
-.search-header {
-  padding: 0 2em 2em;
-}
-.search-results {
-  flex: 1;
-  padding-bottom: 100px;
+
+// **********MODAL************
+
+#globalModalShopping {
+  .modal-body {
+    text-align: center;
+    h2 {
+      text-align: center;
+    }
+    h3 {
+      margin-bottom: 20px;
+    }
+    .row {
+      padding: 0 30px;
+      text-align: left;
+    }
+    .modal-shopping-description {
+      padding-left: 10px;
+      border-left: 1px solid #ccc;
+      img {
+        width: 200px;
+        height: auto;
+      }
+      h4 {
+        text-transform: uppercase;
+        color: #264692;
+      }
+      .kid-names {
+        font-size: 16px;
+        display: inline;
+        font-weight: 700;
+      }
+    }
+    .select-children {
+      color: #E38A45;
+      border: 2px solid #E38A45;
+      padding: 10px 20px;
+      border-radius: 20px;
+      margin-right: 5px;
+      margin-bottom: 10px;
+    }
+    .general-donation-option {
+      text-align: center;
+      margin-top: 10px;
+      input {
+        width: 25%;
+      }
+      a {
+        color: #fff;
+        background-color: #264692;
+        // border: 2px solid #264692;
+        padding: 10px 20px;
+        border-radius: 20px;
+        margin-right: 5px;
+        margin-bottom: 10px;
+      }
+    }
+    .donation-group {
+      font-size: 20px;
+    }
+  }
+
+  div {
+    display: block;
+    padding-bottom: 20px;
+  }
+  input {
+    width: 50%;
+    float: none;
+  }
+  span {
+    font-size: 20px;
+    display: block;
+    padding-bottom: 10px;
+  }
 }
 
-#sponsor-list.affix {
-  width: 250px;
-}
-
-#sponsor-list.affix-bottom {
-  position: absolute;
+.modal-shopping-info {
+  .donation-group {
+    button {
+      display: none;
+    }
+  }
 }
 
 .profile {

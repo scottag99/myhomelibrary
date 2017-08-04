@@ -3,6 +3,7 @@ module CommonOrganizationActions
 
   def index
     @organizations = find_organizations
+    calculate_org_total()
     respond_to do |format|
       format.html
       format.json { render json: @organizations }

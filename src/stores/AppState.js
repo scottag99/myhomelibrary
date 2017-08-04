@@ -22,6 +22,7 @@ class AppState {
     this.wishlistList = back_url;
     this.reader = reader;
     this.grl = grl;
+    this.bookLimit = book_limit;
     // convert letter value to int for comparison
     this.readerMin = this.grl.charCodeAt(0) - 1;
     this.readerMax = this.grl.charCodeAt(0) + 2;
@@ -34,6 +35,9 @@ class AppState {
     'PreK-G2': true,
     'G3-G5': true
   };
+
+  @observable
+  chapters = false;
 
   @observable
   grlFilter = '';
@@ -53,6 +57,7 @@ class AppState {
     return this.books
       .filter(book => book.name.toLowerCase().indexOf(term) >= 0 || book.author.toLowerCase().indexOf(term) >= 0 || book.description.toLowerCase().indexOf(term) >= 0)
       .filter(book => this.filterByLevel(book))
+      .filter(book => this.filterByChapters(book))
       .filter(book => !this.wishlist.find((wish) => wish.catalog_entry_id === book.catalog_entry_id));
   }
 
@@ -91,7 +96,14 @@ class AppState {
   }
 
   goBack() {
-    document.location.href=appState.wishlistList;
+    var diff = appState.bookLimit - appState.wishlist.length
+    if(diff > 0) {
+      $(".modal-title").html('Add more books!');
+      $(".modal-body").html(`You can still add books! Please add ${diff} book(s) to your wishlist.`);
+      $('#globalModalError').modal();
+    } else {
+      document.location.href=appState.wishlistList;
+    }
   }
 
   handleGradeLevel(event) {
@@ -110,6 +122,16 @@ class AppState {
 
   handleBilingualFilter(event) {
     appState.bilingualOnly = event.target.id;
+  }
+
+  handleChapterFilter(event) {
+    appState.chapters = event.target.checked;
+  }
+
+  filterByChapters(book) {
+    if(appState.chapters == book.is_chapter) {
+      return true;
+    }
   }
 
   filterByLevel(book) {
