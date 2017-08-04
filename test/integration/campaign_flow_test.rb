@@ -48,16 +48,6 @@ class CampaignFlowTest < ActionDispatch::IntegrationTest
     #assert_select "a", {count: 1, text: 'Edit'}
   end
 
-  test "cannot add wishlists when can edit wishlists is nil" do
-    get admin_organization_campaign_url(organizations(:one), campaigns(:two))
-    assert_select "a", {count: 0, text: 'New Wishlist'}
-    assert_select "a", {count: 0, text: 'Bulk Edit'}
-    assert_select "a", {count: 0, text: 'Bulk Upload'}
-    #These require selenium probably since there is some js rendering going on
-    #assert_select "[colid=reader_name]", {count: 1, text: 'Reader Two'}
-    #assert_select "a", {count: 0, text: 'Edit'}
-  end
-
   test "cannot add wishlists when can edit wishlists is false" do
     get admin_organization_campaign_url(organizations(:one), campaigns(:three))
     assert_select "a", {count: 0, text: 'New Wishlist'}
