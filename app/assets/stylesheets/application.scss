@@ -202,6 +202,12 @@ nav.main {
   }
 }
 
+@media (max-width: 800px) {
+  .mouse {
+    display: none;
+  }
+}
+
 .dropdown-menu {
   background-color: #E38A45;
   border-radius: 20px;
@@ -676,6 +682,15 @@ nav.main {
   }
 }
 
+@media (max-width: 991px) {
+  .solve-the-problem {
+    .img-responsive {
+      width: 50%;
+      margin: 0 auto;
+    }
+  }
+}
+
 // FAQ PAGE
 
 .faq {
@@ -745,6 +760,21 @@ nav.main {
     img {
       margin: 0 auto;
       padding-bottom: 30px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .our-impact {
+    p {
+      width: 100%;
+      font-size: 6em;
+    }
+  }
+  .banner {
+    h2 {
+      font-size: 20px;
+      width: 80%;
     }
   }
 }
