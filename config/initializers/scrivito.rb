@@ -14,6 +14,8 @@ Scrivito.configure do |config|
   config.editing_auth do |env|
       user_data = env['rack.session'][:userinfo]
 
+    unless user_data.blank?
+
       if user_data['extra'] && user_data['extra']['raw_info']
         role = user_data['extra']['raw_info']['role']
       end
@@ -28,7 +30,7 @@ Scrivito.configure do |config|
         end
       end
     end
-
+  end
     config.find_user do |user_id|
       # MyUserConversion.to_scrivito_user(MyUser.find(user_id))
     end
