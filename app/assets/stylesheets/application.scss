@@ -781,6 +781,36 @@ nav.main {
 
 // SPONSORS PAGE
 
+.signature-sponsor {
+  .ImageWidget {
+    padding-bottom: 30px;
+    text-align: center;
+    img {
+      @media (max-width: 991px){
+        width: 60%;
+      }
+      @media (max-width: 600px){
+        width: 90%;
+      }
+    }
+  }
+}
+
+.program-sponsors {
+  .ImageWidget {
+    padding-bottom: 30px;
+    text-align: center;
+    img {
+      @media (max-width: 991px){
+        width: 60%;
+      }
+      @media (max-width: 600px){
+        width: 90%;
+      }
+    }
+  }
+}
+
 .publishing-partners {
   a {
     color: #264692;
@@ -789,6 +819,18 @@ nav.main {
     border: 2px solid #264692;
     text-transform: uppercase;
     width: 250px;
+  }
+  .ImageWidget {
+    padding-bottom: 30px;
+    text-align: center;
+    img {
+      @media (max-width: 991px){
+        width: 60%;
+      }
+      @media (max-width: 600px){
+        width: 90%;
+      }
+    }
   }
 }
 
