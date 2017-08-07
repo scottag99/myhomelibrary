@@ -30,6 +30,8 @@
 
  @import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,700');
 
+ img[srcset] { width: 100%; }
+
  @media print {
 
     table {
@@ -562,9 +564,14 @@ nav.main {
   p {
     text-align: center;
   }
-  img {
-    width: 60%;
-    margin: 0 auto;
+  .ImageWidget {
+    text-align: center;
+    img {
+      width: 60%;
+      @media (max-width: 800px) {
+        width: 100%;
+      }
+    }
   }
 
 
@@ -589,9 +596,14 @@ nav.main {
 .how-it-works {
     padding: 30px 5%;
   padding-bottom: 30px;
+  .ImageWidget {
+    text-align: center;
+  }
   img {
     width: 60%;
-    margin: 0 auto;
+    @media (max-width: 800px) {
+      width: 100%;
+    }
   }
 }
 
@@ -611,7 +623,18 @@ nav.main {
   }
   a {
     font-size: 18px;
+    display: block;
+    float: none !important;
   }
+  @media (max-width: 991px) {
+    .ImageWidget {
+      text-align: center;
+      img {
+        width: 60%;
+      }
+    }
+  }
+
 }
 
 .our-impact {
@@ -658,9 +681,17 @@ nav.main {
 // ABOUT PAGE
 
 .about-mhl {
-  img {
-    margin: 0 auto;
+  .ImageWidget {
+    text-align: center;
+    img {
+      // margin: 0 auto;
+      width: 60%;
+      @media (max-width: 700px) {
+        width: 100%;
+      }
+    }
   }
+
   p {
     width: 50%;
     margin: 0 auto;
@@ -712,16 +743,24 @@ nav.main {
     width: 150px;
     text-transform: uppercase;
   }
-}
-
-@media (max-width: 991px) {
-  .solve-the-problem {
-    .img-responsive {
-      width: 50%;
-      margin: 0 auto;
+  .ImageWidget {
+    text-align: center;
+    img {
+      @media (max-width: 991px){
+        width: 50%;
+      }
     }
   }
 }
+
+// @media (max-width: 991px) {
+//   .solve-the-problem {
+//     .img-responsive {
+//       width: 50%;
+//       margin: 0 auto;
+//     }
+//   }
+// }
 
 // FAQ PAGE
 

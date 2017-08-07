@@ -85,4 +85,9 @@ class CustomColumnWidget < Widget
     "Display content in 1-6 columns with adjustable widths"
   end
 
+  # def column_size(image)
+  #   column = image.container_attribute_name
+  #   self.send("#{column}_width") * (100/12.0)
+  # end
+
 end

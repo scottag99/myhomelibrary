@@ -38,4 +38,8 @@ class Obj < Scrivito::BasicObj
   #   ""
   # end
 
+  # def column_size
+  #   100
+  # end
+
 end

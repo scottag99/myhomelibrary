@@ -53,6 +53,10 @@ class Widget < Scrivito::BasicWidget
     ]
   end
 
+  # def column_size(image)
+  #   self.container.column_size(image)
+  # end
+
   # def text_extract
   #   ""
   # end
