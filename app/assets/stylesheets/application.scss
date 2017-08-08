@@ -119,7 +119,7 @@ nav.main {
       rgba(72, 37, 157, 0.4),
       rgba(72, 37, 157, 0.4)
     ),
-    image-url('navbar-bg.jpg') center center no-repeat;
+    image-url('navbar-bg.jpg') center top no-repeat;
   background-size: cover;
   height: 500px;
 }
@@ -129,7 +129,7 @@ nav.main {
       rgba(72, 37, 157, 0.4),
       rgba(72, 37, 157, 0.4)
     ),
-    image-url('navbar-bg-search.jpg') center center no-repeat;
+    image-url('navbar-bg-search.jpg') center top no-repeat;
   background-size: cover;
   height: 500px;
 }
@@ -139,7 +139,7 @@ nav.main {
       rgba(72, 37, 157, 0.4),
       rgba(72, 37, 157, 0.4)
     ),
-    image-url('navbar-bg-about.jpg') center center no-repeat;
+    image-url('navbar-bg-about.jpg') center top no-repeat;
   background-size: cover;
   height: 500px;
 }
@@ -149,7 +149,7 @@ nav.main {
       rgba(72, 37, 157, 0.4),
       rgba(72, 37, 157, 0.4)
     ),
-    image-url('navbar-bg-faq.jpg') center center no-repeat;
+    image-url('navbar-bg-faq.jpg') center top no-repeat;
   background-size: cover;
   height: 500px;
 }
@@ -630,7 +630,7 @@ nav.main {
     .ImageWidget {
       text-align: center;
       img {
-        width: 60%;
+        width: 30%;
       }
     }
   }
@@ -676,6 +676,20 @@ nav.main {
     a {
       padding-left: 0;
     }
+    p {
+      width: 70%;
+      @media (max-width: 991px) {
+        margin: 0 auto;
+      }
+    }
+    // @media (max-width: 991px) {
+    //   p {
+    //     margin: 0 auto;
+    //   }
+    //   a {
+    //     margin: 0 auto;
+    //   }
+    // }
 }
 
 // ABOUT PAGE
@@ -685,7 +699,7 @@ nav.main {
     text-align: center;
     img {
       // margin: 0 auto;
-      width: 60%;
+      width: 30%;
       @media (max-width: 700px) {
         width: 100%;
       }
@@ -733,7 +747,8 @@ nav.main {
 
 .solve-the-problem {
   p {
-    text-align: center;
+    width: 70%;
+    margin: 0 auto;
   }
   a {
     color: #E38A45;
@@ -747,7 +762,7 @@ nav.main {
     text-align: center;
     img {
       @media (max-width: 991px){
-        width: 50%;
+        width: 25%;
       }
     }
   }
@@ -787,7 +802,7 @@ nav.main {
     text-align: center;
     img {
       @media (max-width: 991px){
-        width: 60%;
+        width: 40%;
       }
       @media (max-width: 600px){
         width: 90%;
@@ -802,10 +817,10 @@ nav.main {
     text-align: center;
     img {
       @media (max-width: 991px){
-        width: 60%;
+        width: 25%;
       }
       @media (max-width: 600px){
-        width: 90%;
+        width: 50%;
       }
     }
   }
@@ -825,10 +840,10 @@ nav.main {
     text-align: center;
     img {
       @media (max-width: 991px){
-        width: 60%;
+        width: 25%;
       }
       @media (max-width: 600px){
-        width: 90%;
+        width: 50%;
       }
     }
   }
@@ -838,6 +853,26 @@ nav.main {
   background: image-url('kids_bg_1.jpg') center top no-repeat;
   background-size: cover;
   height: 450px;
+}
+
+// OUR IMPACT PAGE
+
+.donation-impact {
+  .banner {
+    h2 {
+      width: 40%;
+      @media (max-width: 600px) {
+        width: 80%;
+      }
+    }
+  }
+  p {
+    width: 40%;
+    margin: 0 auto;
+    @media (max-width: 600px) {
+      width: 80%;
+    }
+  }
 }
 
 // RESPONSIVE FOR SCRIVITO
@@ -1023,7 +1058,7 @@ nav.main {
     background-size: cover;
   }
   .hero-bottom {
-    font-family: Calibri-Bold;
+    // font-family: Calibri-Bold;
   }
   .modal-dialog {
     width: 900px !important;

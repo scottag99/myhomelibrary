@@ -17,7 +17,7 @@
               <li><%= link_to 'About Us', scrivito_path(Obj.find_by_permalink('about')) %></li>
               <li><%= link_to 'FAQ', scrivito_path(Obj.find_by_permalink('faq')) %></li>
               <li><%= link_to 'Our Partners', scrivito_path(Obj.find_by_permalink('sponsors')) %></li>
-              <li><a class="non-admin" href="">Our Impact</a></li>
+              <li><%= link_to 'Our Impact', scrivito_path(Obj.find_by_permalink('impact')) %></li>
               <% unless session[:userinfo].nil?  -%>
               <% if user_is_admin? -%>
               <li><%= link_to 'Admin', '/admin' %></li>
@@ -124,9 +124,7 @@
   <% end -%>
 
   <div class="row search-description">
-    <div class="col-md-5 col-md-offset-3 col-sm-5 col-sm-offset-3 banner">
-      <h2>The Impact of Your Donation</h2>
-      <p>The Houston community is working tirelessly to provide over 8,500 home libraries to children in need this year alone.  By helping us, you will directly change the lives of children throughout our great city.  1 in 4 Houston students do not meet minimum academic standards at Grade 3.  Through your generosity, My Home Library will turn-the-tide and make book ownership and literacy a reality for all Houston’s aspiring young readers.</p>
+    <div class="col-md-5 col-md-offset-3 col-sm-5 col-sm-offset-3">
     </div>
   </div>
   <div class="row">
