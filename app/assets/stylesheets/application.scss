@@ -241,6 +241,16 @@ nav.main {
   a {
     color: #fff;
   }
+  img {
+    width: 15px;
+  }
+  span {
+    padding-right: 20px;
+  }
+  @media (max-width: 768px) {
+    text-align: center;
+    padding-top: 5px;
+  }
 }
 
 // FOOTER
@@ -660,7 +670,7 @@ nav.main {
       rgba(72, 37, 157, 0.4),
       rgba(72, 37, 157, 0.4)
     ),
-    image-url('kid_book_2.jpg') center center no-repeat;
+    image-url('kid_book_2.jpg') center 20% no-repeat;
   background-size: cover;
   padding-bottom: 30px;
   h2 {
