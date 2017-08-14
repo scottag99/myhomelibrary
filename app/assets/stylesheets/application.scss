@@ -334,7 +334,7 @@ nav.main {
     background-color: #E38A45;
     color: #fff;
     border-radius: 30px;
-    padding: 5px 10px;
+    padding: 0 10px;
 }
 
 // wishlist results
@@ -1032,7 +1032,9 @@ nav.main {
     padding-top: 20px;
     display: inline;
   }
-
+  h4 {
+    display: inline;
+  }
 }
 
 
