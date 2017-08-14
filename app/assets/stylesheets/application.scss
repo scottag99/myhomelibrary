@@ -68,10 +68,18 @@ h1 {
   margin-top: 0;
 }
 
+h3 {
+  font-size: 28px;
+}
+
 body {
   color: #5a5a5a;
   font-family: 'Work Sans', sans-serif;
   // margin: 0 -15px;
+}
+
+p {
+  font-size: 16px;
 }
 
 // NAV BAR
@@ -128,7 +136,7 @@ nav.main {
       rgba(72, 37, 157, 0.4),
       rgba(72, 37, 157, 0.4)
     ),
-    image-url('navbar-bg-search.jpg') center top no-repeat;
+    image-url('navbar-bg-search.jpg') center 15% no-repeat;
   background-size: cover;
   height: 500px;
 }
@@ -138,7 +146,7 @@ nav.main {
       rgba(72, 37, 157, 0.4),
       rgba(72, 37, 157, 0.4)
     ),
-    image-url('navbar-bg-about.jpg') center top no-repeat;
+    image-url('navbar-bg-about.jpg') center 15% no-repeat;
   background-size: cover;
   height: 500px;
 }
@@ -148,7 +156,7 @@ nav.main {
       rgba(72, 37, 157, 0.4),
       rgba(72, 37, 157, 0.4)
     ),
-    image-url('navbar-bg-faq.jpg') center top no-repeat;
+    image-url('navbar-bg-faq.jpg') center 15% no-repeat;
   background-size: cover;
   height: 500px;
 }
@@ -162,6 +170,11 @@ nav.main {
         color: #fff;
         text-transform: uppercase;
       }
+    }
+  }
+  .dropdown-menu {
+    a {
+      color: #fff;
     }
   }
 }
@@ -295,11 +308,16 @@ nav.main {
 .donation {
   text-align: center;
   margin-bottom: 30px;
+  display: inline;
   a {
     font-size: 2rem;
     padding: 15px 30px;
-    margin-top: 20px;
+    margin-top: 0;
   }
+}
+
+.search-bar {
+  padding-bottom: 30px;
 }
 
 .book-summary {
@@ -307,22 +325,16 @@ nav.main {
 }
 
 .search-bg-teacher {
-  // background: image-url('kids_bg_3.jpg') center center no-repeat;
-  // background-size: cover;
-  // min-height: 500px;
   width: 100%;
 }
 
 // program donation button
 
 #program-checkout {
-    // margin: 0 auto;
-    // display: block;
-    // width: 200px;
-    background-color: #264692;
+    background-color: #E38A45;
     color: #fff;
     border-radius: 30px;
-    padding: 10px 20px;
+    padding: 5px 10px;
 }
 
 // wishlist results
@@ -618,10 +630,11 @@ nav.main {
   }
 
   a {
-    color: #E38A45;
+    background: #E38A45;
+    color: #fff;
     border-radius: 30px;
     margin-top: 30px;
-    border: 2px solid #E38A45;
+    // border: 2px solid #E38A45;
     float: none !important;
   }
 }
@@ -708,6 +721,7 @@ nav.main {
     padding: 30px 5%;
     a {
       padding-left: 0;
+      font-size: 16px;
     }
     p {
       width: 70%;
@@ -768,6 +782,7 @@ nav.main {
 }
 .books-are-essential {
   text-align: center;
+  padding: 30px 0;
   h3 {
     font-family: "astounder-squared-lc-bb",sans-serif;
     color: #264692;
@@ -784,10 +799,10 @@ nav.main {
     margin: 0 auto;
   }
   a {
-    color: #E38A45;
+    background: #E38A45;
+    color: #fff;
     border-radius: 30px;
     margin-top: 30px;
-    border: 2px solid #E38A45;
     width: 150px;
     text-transform: uppercase;
   }
@@ -1014,7 +1029,8 @@ nav.main {
     text-align: center;
   }
   #specific-child {
-    font-size: 12px;
+    padding-top: 20px;
+    display: inline;
   }
 
 }

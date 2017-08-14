@@ -45,6 +45,7 @@
               Donate to Program <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
+                <li><a href="search">My Home Library General</a></li>
                 <% Organization.where("is_included = ?", true).each do |org| %>
                 <li>
                   <%= link_to(org.name, search_url(org.slug)) %>
