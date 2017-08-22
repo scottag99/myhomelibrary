@@ -1,4 +1,6 @@
+<%= content_for :breadcrumb do %>
 <%= breadcrumb([@wishlist.campaign.organization.name,
   {href: partner_organization_campaign_url(@wishlist.campaign.organization, @wishlist.campaign), label: @wishlist.campaign.name},
   @wishlist.reader_name]) %>
+  <% end %>
 <%= render partial: 'common/wishlists/show' %>

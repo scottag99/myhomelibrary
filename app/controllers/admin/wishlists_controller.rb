@@ -82,4 +82,8 @@ private
     def get_done_url(wishlist)
       admin_organization_campaign_wishlist_url(current_organization, current_campaign, wishlist)
     end
+
+    def get_campaign_url
+      admin_organization_campaign_url(current_organization, current_campaign)
+    end
 end

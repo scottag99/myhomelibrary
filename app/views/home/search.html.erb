@@ -79,7 +79,7 @@
       <!-- <p class="lead"><%= live_campaigns? ? @content['sponsor_lead'] : @content['sponsor_lead_no_campaign'] %></p> -->
       <h4 id="specific-child">No specific child request? Browse below or let us pick for you with a</h4>
       <% if @organization.nil? -%>
-        <p class="donation">
+        <p class="donation" data-toggle="tooltip" title="General Program Donation will be disabled once child/children selected. If you'd like to add a general donation to your specific child/children sponsorship, please add another child and fill in your donation, or click Complete My Donation on the left side and add to your total.">
           <%= link_to 'Program Donation', donate_url(:id_list => ""), :class => 'btn btn-primary', :id => 'program-checkout' %>
         </p>
       <% else -%>
@@ -88,7 +88,6 @@
           <%= link_to "Program Donation to #{@organization.name}", donate_url(:organization_id => @organization.id), :class => 'btn btn-primary', :id => 'program-checkout' unless live_campaigns? %>
         </p>
       <% end -%>
-      <h4>!</h4>
     </div>
   </div>
 
@@ -307,4 +306,10 @@ $('body').on("change", '#addl_donation_slug', function() {
       <%= link_to "Complete My Sponsorship", donate_url(), :class => "btn btn-md", :id => "checkout-btn-2" %>
     </div>
   </div>
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
 </script>

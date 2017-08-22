@@ -7,13 +7,13 @@
   <td><%= check_box_tag 'donations', campaign.id, campaign.ready_for_donations,
             data: {
               remote: true,
-              url: donations_admin_organization_campaign_url(campaign),
+              url: donations_admin_organization_campaign_url(campaign.organization, campaign),
               method: "PUT"
               } %></td>
   <td><%= check_box_tag 'wishlists', campaign.id, campaign.can_edit_wishlists,
             data: {
               remote: true,
-              url: wishlists_admin_organization_campaign_url(campaign),
+              url: wishlists_admin_organization_campaign_url(campaign.organization, campaign),
               method: "PUT"
               } %></td>
   <td><%= campaign.wishlists.count %></td>

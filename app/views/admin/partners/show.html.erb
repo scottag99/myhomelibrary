@@ -1,6 +1,8 @@
+<%= content_for :breadcrumb do %>
 <%= breadcrumb([
   @partner.organization.name,
     {href: admin_organization_url(@partner.organization), label: 'Volunteers'}
   ])
 %>
+<% end %>
 <%= render partial: 'common/partners/show' %>
