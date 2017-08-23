@@ -212,13 +212,12 @@ ul.right-admin {
     border-radius: 20px;
     margin-right: 5px;
   }
-  // .dropdown-menu {
-  //   .slug-names {
-  //     a {
-  //       color: red !important;
-  //     }
-  //   }
-  // }
+  li {
+    a {
+      color: #fff !important;
+      text-transform: uppercase;
+    }
+  }
 }
 .navbar-default {
   background-color: transparent;
@@ -508,24 +507,25 @@ ul.right-admin {
 
 // SPONSOR SHOPPING CART
 
-#sponsor-list {
+#sponsor-list-affix.top {
   margin-top: 20px;
   margin-left: 10%;
 }
 
 #sponsor-list.affix {
-  width: 300px;
-  margin-left: 30px;
+  top: 200px;
+  width: 20.8%;
+  margin-left: 2.4%;
 }
 
-#sponsor-list.affix-top {
-  width: 300px;
-  margin-left: 30px;
-}
+// #sponsor-list.affix-top {
+//   width: 300px;
+//   margin-left: 30px;
+// }
 
-#sponsor-list.affix-bottom {
-  position: absolute;
-}
+// #sponsor-list.affix-bottom {
+//   position: absolute;
+// }
 
 .sponsor-shoppingcart {
   .sponsor-header {
@@ -693,7 +693,7 @@ ul.right-admin {
 .get-involved {
     margin: 0 5%;
     // border-right: 1px solid #ccc;
-    padding: 30px 50px;
+    padding: 30px 5%;
   p {
     padding-top: 20px;
   }
@@ -738,7 +738,7 @@ ul.right-admin {
   }
   .stat-numbers {
     p {
-      font-size: 8em;
+      font-size: 7em;
       font-family: "astounder-squared-bb",sans-serif;
     }
   }
@@ -829,6 +829,7 @@ ul.right-admin {
 }
 
 .solve-the-problem {
+  padding: 30px 5%;
   p {
     width: 70%;
     margin: 0 auto;
@@ -899,6 +900,7 @@ ul.right-admin {
 }
 
 .program-sponsors {
+  padding: 30px 5%;
   .ImageWidget {
     padding-bottom: 30px;
     text-align: center;
@@ -914,6 +916,7 @@ ul.right-admin {
 }
 
 .publishing-partners {
+  padding: 30px 5%;
   a {
     color: #264692;
     border-radius: 30px;
@@ -940,6 +943,10 @@ ul.right-admin {
   background: image-url('kids_bg_1.jpg') center top no-repeat;
   background-size: cover;
   height: 450px;
+}
+
+.sponsor-page-main-logo {
+  // width: 60%;
 }
 
 // OUR IMPACT PAGE

@@ -33,8 +33,22 @@
               <li><a class="non-admin" href="/logout?returnTo=<%= request.base_url %>&client_id=<%= Rails.application.secrets.auth0_client_id %>">Logout</a></li>
               <% end -%>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a class="non-admin btn" href="">Sponsor a Child</a></li>
+            <div class="nav navbar-nav navbar-right">
+
+              <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle non-admin btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  Sponsor a Child <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="search">Sponsor Any Child</a></li>
+                    <% Organization.where("is_included = ?", true).each do |org| %>
+                    <li>
+                      <%= link_to(org.name, search_url(org.slug)) %>
+                    </li>
+                    <% end %>
+                </ul>
+              </li>
+
               <li role="presentation" class="dropdown">
                 <a class="dropdown-toggle non-admin btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                   Donate to Program <span class="caret"></span>
@@ -42,13 +56,13 @@
                 <ul class="dropdown-menu">
                     <li><a href="search">My Home Library General</a></li>
                     <% Organization.where("is_included = ?", true).each do |org| %>
-                    <li class="slug-names">
+                    <li>
                       <%= link_to(org.name, search_url(org.slug)) %>
                     </li>
                     <% end %>
                 </ul>
               </li>
-            </ul>
+            </div>
           </div>
           <div class="page-headline">
             <h1>Sponsor a Child</h1>
@@ -94,7 +108,7 @@
   <% if live_campaigns? -%>
   <div class="row">
     <div class="col-md-3 col-sm-3">
-      <div id="sponsor-list" data-id-list="">
+       <div id="sponsor-list" data-id-list="" data-spy="affix" data-offset-top="540">
         <% if live_campaigns? -%>
           <div class="sponsor-shoppingcart">
             <div class="sponsor-header">
@@ -179,6 +193,16 @@ $('body').on("click", '.search-entry a', function() {
   var names = $('.donation-info strong').slice(0,2).map(function(){ return $(this).text(); }).get().join('and ')
 
   $("#globalModalShopping .modal-body").html(template);
+
+  var list = $('#sponsor-list');
+  var idList = list.data('id-list');
+  var checkoutBtn = $('#checkout-btn-2');
+  var href = checkoutBtn.attr('href');
+  if (href) {
+    href = href.replace(/\?.+/, "") + "?id_list=" + idList;
+    checkoutBtn.attr('href', href);
+  }
+
   $('#globalModalShopping').modal();
   $(".sponsor-shoppingcart").clone().appendTo(".modal-shopping-info");
   $(".kid-names").html(names);
@@ -303,7 +327,7 @@ $('body').on("change", '#addl_donation_slug', function() {
     <div class="general-donation-option">
       <div class="input-group"><h3>You can also add a general donation as well!</h3>
       <input type="number" step="1.00" id="addl_donation" class="form-control" placeholder="Enter dollar amount" /></div>
-      <%= link_to "Complete My Sponsorship", donate_url(), :class => "btn btn-md", :id => "checkout-btn-2" %>
+      <%= link_to "Complete My Sponsorship", donate_url(:id_list => ""), :class => "btn btn-md", :id => "checkout-btn-2" %>
     </div>
   </div>
 </script>

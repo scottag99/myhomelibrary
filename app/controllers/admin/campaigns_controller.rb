@@ -16,6 +16,7 @@ class Admin::CampaignsController < Admin::BaseController
   def new
     @campaign = @organization.campaigns.new
     @campaign.can_edit_wishlists = true
+    @campaign.book_limit = 6
     respond_to do |format|
       format.html { render 'common/form', locals: {form_title: 'New Campaign', model: 'campaigns'} }
       format.json { render json: @campaign }
