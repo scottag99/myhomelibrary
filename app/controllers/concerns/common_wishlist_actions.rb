@@ -69,8 +69,15 @@ module CommonWishlistActions
     flash[:notice] = "Updated wishlists!"
     redirect_to get_campaign_url
   end
+
+  def toggle_delivered
+    @wishlist = current_campaign.wishlists.find(params[:id])
+    @wishlist.is_delivered = !@wishlist.is_delivered
+    @wishlist.save
+    redirect_to get_campaign_url
+  end
 private
   def wishlist_params
-    params.require(:wishlist).permit(:reader_name, :reader_age, :reader_gender, :teacher, :grade, :grl, :external_id)
+    params.require(:wishlist).permit(:reader_name, :reader_age, :reader_gender, :teacher, :grade, :grl, :external_id, :is_delivered)
   end
 end

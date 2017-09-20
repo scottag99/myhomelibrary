@@ -37,36 +37,7 @@
           <% end -%>
         </ul>
 
-        <div class="nav navbar-nav navbar-right">
-
-          <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle non-admin btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-              Sponsor a Child <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a href="search">Sponsor Any Child</a></li>
-                <% Organization.where("is_included = ?", true).each do |org| %>
-                <li>
-                  <%= link_to(org.name, search_url(org.slug)) %>
-                </li>
-                <% end %>
-            </ul>
-          </li>
-
-          <li role="presentation" class="dropdown">
-            <a class="dropdown-toggle non-admin btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-              Donate to Program <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a href="search">My Home Library General</a></li>
-                <% Organization.where("is_included = ?", true).each do |org| %>
-                <li>
-                  <%= link_to(org.name, search_url(org.slug)) %>
-                </li>
-                <% end %>
-            </ul>
-          </li>
-        </div>
+        <%= render "common/navbar-right" %>
       </div>
       <div class="page-headline">
         <h1>Inspiring Readers By Providing Home Libraries To Children In Need</h1>

@@ -918,10 +918,11 @@ ul.right-admin {
 .publishing-partners {
   padding: 30px 5%;
   a {
-    color: #264692;
-    border-radius: 30px;
+    background-color: #E38A45;
+    padding: 10px 10px !important;
+    border-radius: 20px;
+    color: #fff;
     margin: 30px auto 0;
-    border: 2px solid #264692;
     text-transform: uppercase;
     width: 250px;
   }
@@ -1206,6 +1207,7 @@ ul.right-admin {
 .book-title {
   font-size: 1.2em;
   margin: 0;
+  height: 2em;
 }
 .book-author {
 }
@@ -1227,7 +1229,7 @@ ul.right-admin {
 }
 .book-description {
   position: relative;
-  height: 9em;
+  height: 11em;
   overflow: hidden;
 }
 .book:hover .book-description {

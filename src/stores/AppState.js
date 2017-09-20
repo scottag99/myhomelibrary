@@ -145,14 +145,19 @@ class AppState {
 
     var draPresent = !(book.dra === undefined || book.dra.length < 1);
     var draMatch = false;
-    if (draPresent) {
-      var minMax = book.dra.split("-").map(function(v){ return parseInt(v)});
-      var min = isNaN(minMax[0]) ? 0 : minMax[0];
-      var max = isNaN(minMax[minMax.length-1]) ? 80 : minMax[minMax.length-1];
-      draMatch = (min <= appState.draFilter && appState.draFilter <= max);
+    if (draPresent && appState.draFilter) {
+      var bminMax = book.dra.split("-").map(function(v){ return parseInt(v)});
+      var bmin = isNaN(bminMax[0]) ? 0 : bminMax[0];
+      var bmax = isNaN(bminMax[bminMax.length-1]) ? 80 : bminMax[bminMax.length-1];
+
+      var fminMax = appState.draFilter.split("-").map(function(v){ return parseInt(v)});
+      var fmin = isNaN(fminMax[0]) ? 0 : fminMax[0];
+      var fmax = isNaN(fminMax[fminMax.length-1]) ? 80 : fminMax[fminMax.length-1];
+
+      draMatch = (fmin <= bmin && bmin <= fmax) || (fmin <= bmax && bmax <= bmax);
     }
 
-    var grlMatch = appState.grlFilter != '' && book.grl == appState.grlFilter;
+    var grlMatch = appState.grlFilter != '' && appState.grlFilter.split(",").includes(book.grl);
 
     //When any match is made, we always return true
     if (appState.readingLevels[book.level] || grlMatch || draMatch) {

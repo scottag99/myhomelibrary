@@ -49,6 +49,7 @@ Rails.application.routes.draw do
         resources :wishlists do
           member do
             get 'manage'
+            put 'toggle_delivered'
           end
           collection do
             get  'edit_multiple'
@@ -73,6 +74,7 @@ Rails.application.routes.draw do
         resources :wishlists do
           member do
             get 'manage'
+            put 'toggle_delivered'
           end
           collection do
             get 'edit_multiple'

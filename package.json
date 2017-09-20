@@ -59,7 +59,7 @@
   },
   "scripts": {
     "start": "node react/start.js",
-    "build": "node react/build.js",
+    "build": "node react/build.js; cp build/static/js/main.j* app/assets/javascripts/",
     "test": "node react/test.js --env=jsdom"
   }
 }

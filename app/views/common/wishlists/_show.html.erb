@@ -13,6 +13,8 @@
       <dd><%= @wishlist.reader_gender %></dd>
       <dt>Grade Level</dt>
       <dd><%= @wishlist.grade %></dd>
+      <dt>Delivered</dt>
+      <dd><input type=checkbox disabled <%= @wishlist.is_delivered ? 'checked' : '' %> /></dd>
       <!--dt>Guided Reading Level (GRL)</dt>
       <dd><%= @wishlist.grl %></dd-->
     </dl>
