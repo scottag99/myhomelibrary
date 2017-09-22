@@ -675,6 +675,10 @@ ul.right-admin {
   .ImageWidget {
     text-align: center;
   }
+  h3 {
+    color: #264692;
+    font-family: "astounder-squared-bb",sans-serif;
+  }
   img {
     width: 60%;
     @media (max-width: 800px) {
@@ -751,7 +755,12 @@ ul.right-admin {
     padding: 30px 5%;
     a {
       padding-left: 0;
-      font-size: 16px;
+      font-size: 16px;background: #E38A45;
+      color: #fff;
+      border-radius: 30px;
+      margin-top: 30px;
+      // border: 2px solid #E38A45;
+      float: none !important;
     }
     p {
       width: 70%;

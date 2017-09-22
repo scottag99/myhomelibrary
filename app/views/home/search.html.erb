@@ -38,7 +38,7 @@
           </div>
           <div class="page-headline">
             <h1>Sponsor a Child</h1>
-            <h3>Donate a Home Library to a Child in Need</h3>
+            <h3>Help a Child in Need Learn to Read</h3>
           </div>
           <div class="col-md-0 col-md-offset-6 col-sm-offset-6 col-xs-offset-6 mouse">
             <img src="<%= asset_path('scroll-button.png') %>" />
@@ -48,7 +48,7 @@
 
 
   <div class="row featurette hero-top">
-    <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
+    <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
       <% if live_campaigns? %>
         <%= form_tag("/wishlists?slug=#{params[:slug]}", method: :get, remote: true) do %>
           <div class="input-group search-bar">
@@ -63,7 +63,10 @@
       <% end -%>
       <!-- <h2 class="featurette-heading">Home Libraries<%= " for #{@organization.name}" unless @organization.nil? %></h2> -->
       <!-- <p class="lead"><%= live_campaigns? ? @content['sponsor_lead'] : @content['sponsor_lead_no_campaign'] %></p> -->
-      <h4 id="specific-child">Children are currently in the process of selecting their books. However, you can help donate to My Home Library by clicking</h4>
+      <h4 id="specific-child">Children affected by <strong>Hurricane Harvey</strong> and from low-income families will soon be selecting new books to
+        rebuild their home libraries. You can support them by making a general donation to the <strong>My Home Library</strong>. For every $5 you donate, 
+        we will place a brand-new book in the hands of a child. Your tax-deductible gift will help uplift and inspire children in this
+        great time of need. Thank you for your generous support!</h4>
       <% if @organization.nil? -%>
         <p class="donation" data-toggle="tooltip" title="Make a general donation here if you’re not sponsoring any specific children.  If you'd like to add a general donation to your specific child sponsorship, please click Complete My Donation on the left side and add that amount to your total.">
           <%= link_to 'Program Donation', donate_url(:id_list => ""), :class => 'btn btn-primary', :id => 'program-checkout' %>
