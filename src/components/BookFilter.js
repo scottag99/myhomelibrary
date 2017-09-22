@@ -5,26 +5,19 @@ import { Checkbox, FormControl, ControlLabel, Row, Col, Radio, FormGroup } from 
 export default observer(({store}) => (
   <Row>
     <h3>Find Books</h3>
-    <Col sm={4} lg={2}>
-      <Checkbox value='PreK-K' checked={store.readingLevels['PreK-K']} onChange={store.handleGradeLevel}>
-        PreK-K
-      </Checkbox>
-      <Checkbox value='G1-G2' checked={store.readingLevels['G1-G2']} onChange={store.handleGradeLevel}>
-        G1-G2
-      </Checkbox>
-      <Checkbox value='G3-G5' checked={store.readingLevels['G3-G5']} onChange={store.handleGradeLevel}>
-        G3-G5
-      </Checkbox>
+    <Col sm={4} lg={3}>
+      <ControlLabel>Filter by Grade Level</ControlLabel>
+      <FormControl componentClass="select" placeholder="Select" onChange={store.handleGradeLevel} value={store.lvlFilter}>
+        <option value="">Select</option>
+        <option value="PreK-K">PreK-K</option>
+        <option value="G1-G2">G1-G2</option>
+        <option value="G3-G5">G3-G5</option>
+      </FormControl>
 
       <Checkbox checked={store.chapters} onChange={store.handleChapterFilter}>
-        Chapters
+        Chapter Only
       </Checkbox>
 
-      <FormGroup>
-        <Radio name="bilingual-filter" id="all" onChange={store.handleBilingualFilter}>All</Radio>
-        <Radio name="bilingual-filter" id="bilingual" onChange={store.handleBilingualFilter}>Bilingual</Radio>
-        <Radio name="bilingual-filter" id="english" onChange={store.handleBilingualFilter}>English Only</Radio>
-      </FormGroup>
     </Col>
     <Col sm={4} lg={3}>
       <ControlLabel>Filter by GRL</ControlLabel>
@@ -37,6 +30,12 @@ export default observer(({store}) => (
         <option value="Q,R,S,T">Q-T</option>
         <option value="U,W,X,Y,Z">U-Z</option>
       </FormControl>
+
+      <FormGroup>
+        <Radio name="bilingual-filter" id="all" onClick={store.handleBilingualFilter}>All</Radio>
+        <Radio name="bilingual-filter" id="bilingual" onClick={store.handleBilingualFilter}>Bilingual</Radio>
+        <Radio name="bilingual-filter" id="english" onClick={store.handleBilingualFilter}>English Only</Radio>
+      </FormGroup>
     </Col>
     <Col sm={4} lg={3}>
       <ControlLabel inline>Filter by DRA</ControlLabel>

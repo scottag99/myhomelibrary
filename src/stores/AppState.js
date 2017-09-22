@@ -29,12 +29,7 @@ class AppState {
   }
 
   @observable
-  readingLevels = {
-    'PreK-K': true,
-    'G1-G2': true,
-    'PreK-G2': true,
-    'G3-G5': true
-  };
+  lvlFilter = '';
 
   @observable
   chapters = false;
@@ -46,7 +41,7 @@ class AppState {
   draFilter = '';
 
   @observable
-  bilingualOnly = false;
+  bilingualOnly = '';
 
   searchTerm = "";
 
@@ -107,16 +102,20 @@ class AppState {
   }
 
   handleGradeLevel(event) {
-    appState.readingLevels[event.target.value] = event.target.checked;
+    appState.draFilter = '';
+    appState.grlFilter = '';
+    appState.lvlFilter = event.target.value;
   }
 
   handleGrlFilter(event) {
     appState.draFilter = '';
+    appState.lvlFilter = '';
     appState.grlFilter = event.target.value;
   }
 
   handleDraFilter(event) {
     appState.grlFilter = '';
+    appState.lvlFilter = ''
     appState.draFilter = event.target.value;
   }
 
@@ -158,21 +157,25 @@ class AppState {
     }
 
     var grlMatch = appState.grlFilter != '' && appState.grlFilter.split(",").includes(book.grl);
+    var lvlMatch = appState.lvlFilter != '' && appState.lvlFilter.split(",").includes(book.level);
 
     //When any match is made, we always return true
-    if (appState.readingLevels[book.level] || grlMatch || draMatch) {
-      return true;
-    }
-    //If no levels exist on the book, return true
-    //this keeps us from hiding books that can never be filterd
-    var grlPresent = !(book.grl === undefined || book.grl.length < 1)
-    var lvlPresent = !(book.level === undefined || book.level.length < 1)
-    if (!draPresent && !grlPresent && !lvlPresent) {
+    if (lvlMatch || grlMatch || draMatch) {
       return true;
     }
 
+    var grlPresent = !(book.grl === undefined || book.grl.length < 1)
+    var lvlPresent = !(book.level === undefined || book.level.length < 1)
+    //If no levels exist on the book, return true
+    //this keeps us from hiding books that can never be filterd
+    //9/21/2017 - SJS: Commented this out b/c the next check should show all books when filters are disabled
+    //                 When filters are on, it was decided these shouldn't match anymore
+    // if (!draPresent && !grlPresent && !lvlPresent) {
+    //   return true;
+    // }
+
     //If the GRL or DRA filters are not on, and the book has no grade level, return true
-    if (!lvlPresent && appState.grlFilter == '' && appState.draFilter == '') {
+    if (appState.grlFilter == '' && appState.draFilter == '' && appState.lvlFilter == '' ) {
       return true;
     }
     //Every other case should be false b/c there is a level value present but no filter matched
