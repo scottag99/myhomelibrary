@@ -754,13 +754,19 @@ ul.right-admin {
 .signature-sponsor {
     padding: 30px 5%;
     a {
+      font-family: "astounder-squared-bb",sans-serif;
+      color: #E38A45;
+      text-transform: uppercase;
+      text-align: center;
+
       padding-left: 0;
-      font-size: 16px;background: #E38A45;
-      color: #fff;
-      border-radius: 30px;
+      font-size: 28px;
       margin-top: 30px;
-      // border: 2px solid #E38A45;
+      border-width: 0px;
       float: none !important;
+    }
+    a:hover {
+      background: transparent;
     }
     p {
       width: 70%;
@@ -1088,7 +1094,7 @@ ul.right-admin {
     padding-top: 20px;
     display: block;
     width: 100%;
-    text-align: center;
+    text-align: justify;
   }
   h4 {
     display: inline;
