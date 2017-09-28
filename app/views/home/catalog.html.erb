@@ -1,0 +1,30 @@
+<div id="react-root"></div>
+<script>
+  var current_wishlist = null;
+  var api_add_url;
+  var api_delete_url;
+  var back_url;
+  var reader ;
+  var grl = '';
+  var book_limit;
+  var all_active_books = [
+    <% @active_books.each_with_index do |entry,idx| %>
+    <%= ', ' unless idx == 0 %>{
+      catalog_entry_id: <%= entry.id %>,
+      name: '<%= j entry.book.title.html_safe %>',
+      subname: '',
+      imageUrl: '<%= entry.book.cover_image_url %>',
+      author: '<%= j entry.book.author.html_safe %>',
+      description: '<%= j entry.book.description.html_safe %>',
+      level: '<%= j entry.book.level %>',
+      ar_points: '<%= entry.book.ar_points %>',
+      grl: '<%= entry.book.grl %>',
+      dra: '<%= entry.book.dra %>',
+      is_bilingual: <%= entry.book.is_bilingual %>,
+      is_chapter: <%= entry.book.is_chapter %>
+    }
+    <% end %>
+  ];
+
+</script>
+<%= javascript_include_tag 'main' %>

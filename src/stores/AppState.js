@@ -53,7 +53,7 @@ class AppState {
       .filter(book => book.name.toLowerCase().indexOf(term) >= 0 || book.author.toLowerCase().indexOf(term) >= 0 || book.description.toLowerCase().indexOf(term) >= 0)
       .filter(book => this.filterByLevel(book))
       .filter(book => this.filterByChapters(book))
-      .filter(book => !this.wishlist.find((wish) => wish.catalog_entry_id === book.catalog_entry_id));
+      .filter(book => !this.inWishlist(book));
   }
 
   @action
@@ -125,6 +125,14 @@ class AppState {
 
   handleChapterFilter(event) {
     appState.chapters = event.target.checked;
+  }
+
+  inWishlist(book) {
+    if (appState.wishlist) {
+      return appState.wishlist.find((wish) => wish.catalog_entry_id === book.catalog_entry_id);
+    } else {
+      return false;
+    }
   }
 
   filterByChapters(book) {

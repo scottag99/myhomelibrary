@@ -20,7 +20,7 @@ const LongDesc = ({book}) => (
 );
 
 
-const Book = ({book, addToWishList}) => (
+const Book = ({book, showAddBtn, addToWishList}) => (
 
   <div className="book">
     <h4 className="book-title">{book.name}</h4>
@@ -32,14 +32,16 @@ const Book = ({book, addToWishList}) => (
         <span className="text-info">Full Description</span>
       </OverlayTrigger>
     </div>
-    <button onClick={addToWishList} className="btn btn-primary">Add</button>
+    {showAddBtn &&
+      <button onClick={addToWishList} className="btn btn-primary">Add</button>
+    }
   </div>
 );
 
 export default observer(({store}) => (
   <Row>
     <Col xs={12} md={12}>
-    {store.searchResults.map((r, i) => <Book key={i} book={r} addToWishList={() => store.addToWishList(r)} />)}
+    {store.searchResults.map((r, i) => <Book key={i} book={r} showAddBtn={store.wishlist != undefined} addToWishList={() => store.addToWishList(r)} />)}
     </Col>
   </Row>
 ));

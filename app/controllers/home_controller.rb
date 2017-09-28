@@ -21,6 +21,10 @@ class HomeController < ApplicationController
   def library
   end
 
+  def catalog
+    @active_books = CatalogEntry.joins(:catalog).includes(:book).where('catalogs.active = ? and disabled = ?', true, false).all
+  end
+
   def donate
     addl_donation = params[:addl_donation].nil? ? 0.0 : params[:addl_donation].to_d
     addl_donation_slug = params[:addl_donation_slug].nil? ? 0.0 : params[:addl_donation_slug].to_d
