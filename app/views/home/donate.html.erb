@@ -37,6 +37,11 @@ function getValueByLabel(aSignup, labelText, sublabelText){
   return '';
 }
 
+function showPayment() {
+  $("input[name=DonationLevel_FEE]").focus();
+  $("input[name=DonationLevel_FEE]").blur();
+}
+
 function kimbiaSubmit(f) {
   $(f.view.theForm.getElementsByTagName('button')[0]).hide();
   $(f.view.theForm.getElementsByTagName('button')[0]).after($('<span id="spinner">Submitting...</span>'))
@@ -55,8 +60,8 @@ function kimbiaResponse(f) {
   </p>
 <!-- script to populate form tag -->
 <% if ENV['IS_PRODUCTION'] %>
-<script src="https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrive&oncomplete=kimbiaSuccess&onbeforesubmit=kimbiaSubmit&onplatformresponse=kimbiaResponse"></script>
+<script src="https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrive&onshow=showPayment&oncomplete=kimbiaSuccess&onbeforesubmit=kimbiaSubmit&onplatformresponse=kimbiaResponse"></script>
 <% else %>
-<script src='https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrivetest&oncomplete=kimbiaSuccess&onbeforesubmit=kimbiaSubmit&onplatformresponse=kimbiaResponse'></script>
+<script src='https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrivetest&onshow=showPayment&oncomplete=kimbiaSuccess&onbeforesubmit=kimbiaSubmit&onplatformresponse=kimbiaResponse'></script>
 <% end %>
 </div>
