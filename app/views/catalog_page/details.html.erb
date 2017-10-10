@@ -1,0 +1,9 @@
+<%= scrivito_medium_dialog do %>
+  <%= scrivito_details_for "Title" do %>
+    <%= scrivito_tag :div, @obj, :title %>
+  <% end %>
+
+  <%= scrivito_details_for "Tags" do %>
+    <%= scrivito_tag :div, @obj, :tags %>
+  <% end %>
+<% end %>

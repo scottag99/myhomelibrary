@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   get 'search/(:slug)', to: 'home#search', as: 'search'
   get 'wishlists', to: 'home#wishlists'
   post 'success', to: 'home#success'
-  get 'catalog', to: 'home#catalog'
 
   get  'login', to: 'home#login'
   get 'logout', to: 'home#logout'
