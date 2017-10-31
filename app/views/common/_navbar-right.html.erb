@@ -5,14 +5,14 @@
     <a class="dropdown-toggle non-admin btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
       Donate to Program <span class="caret"></span>
     </a>
-    <ul class="dropdown-menu">
+    <!--ul class="dropdown-menu">
         <li><a href="search">My Home Library General</a></li>
         <% orgs.each do |org| %>
         <li>
           <%= link_to(org.name, search_url(org.slug)) %>
         </li>
         <% end %>
-    </ul>
+    </ul-->
   </li>
 </div>
 
@@ -22,14 +22,14 @@
     <a class="dropdown-toggle non-admin btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
       Sponsor a Child <span class="caret"></span>
     </a>
-    <!--ul class="dropdown-menu">
-        <li><a href="search">Sponsor Any Child</a></li>
+    <ul class="dropdown-menu">
+        <!--li><a href="search">Sponsor Any Child</a></li-->
         <% orgs.each do |org| %>
         <li>
           <%= link_to(org.name, search_url(org.slug)) %>
         </li>
         <% end %>
-    </ul-->
+    </ul>
   </li>
 </div>
 <% end -%>
