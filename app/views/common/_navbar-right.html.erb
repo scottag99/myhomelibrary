@@ -1,8 +1,23 @@
+<% orgs = Organization.where("is_included = ?", true) %>
+
 <div class="nav navbar-nav navbar-right">
+  <li role="presentation" class="dropdown">
+    <a class="dropdown-toggle non-admin btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+      Donate to Program <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+        <li><a href="search">My Home Library General</a></li>
+        <% orgs.each do |org| %>
+        <li>
+          <%= link_to(org.name, search_url(org.slug)) %>
+        </li>
+        <% end %>
+    </ul>
+  </li>
+</div>
 
-  <% orgs = Organization.where("is_included = ?", true)
-
-  if orgs.count > 0 %>
+<% if orgs.count > 0 %>
+<div class="nav navbar-nav navbar-right">
   <li role="presentation" class="dropdown">
     <a class="dropdown-toggle non-admin btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
       Sponsor a Child <span class="caret"></span>
@@ -16,18 +31,5 @@
         <% end %>
     </ul>
   </li>
-  <% end if -%>
-  <li role="presentation" class="dropdown">
-    <a class="dropdown-toggle non-admin btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-      Donate to Program <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-        <li><a href="search">My Home Library General</a></li>
-        <% Organization.where("is_included = ?", true).each do |org| %>
-        <li>
-          <%= link_to(org.name, search_url(org.slug)) %>
-        </li>
-        <% end %>
-    </ul>
-  </li>
 </div>
+<% end -%>

@@ -64,7 +64,7 @@
       <!-- <h2 class="featurette-heading">Home Libraries<%= " for #{@organization.name}" unless @organization.nil? %></h2> -->
       <!-- <p class="lead"><%= live_campaigns? ? @content['sponsor_lead'] : @content['sponsor_lead_no_campaign'] %></p> -->
       <h4 id="specific-child">Children affected by <strong>Hurricane Harvey</strong> and from low-income families will soon be selecting new books to
-        rebuild their home libraries. You can support them by making a general donation to the <strong>My Home Library</strong>. For every $5 you donate, 
+        rebuild their home libraries. You can support them by making a general donation to the <strong>My Home Library</strong>. For every $5 you donate,
         we will place a brand-new book in the hands of a child. Your tax-deductible gift will help uplift and inspire children in this
         great time of need. Thank you for your generous support!</h4>
       <% if @organization.nil? -%>
@@ -72,10 +72,10 @@
           <%= link_to 'Program Donation', donate_url(:id_list => ""), :class => 'btn btn-primary', :id => 'program-checkout' %>
         </p>
       <% else -%>
-        <p class="donation" data-toggle="tooltip" title="Make a general donation here if you’re not sponsoring any specific children.  If you'd like to add a general donation to your specific child sponsorship, please click Complete My Donation on the left side and add that amount to your total.">
+        <!--p class="donation" data-toggle="tooltip" title="Make a general donation here if you’re not sponsoring any specific children.  If you'd like to add a general donation to your specific child sponsorship, please click Complete My Donation on the left side and add that amount to your total.">
           <%= link_to "Program Donation to #{@organization.name}", donate_url(:campaign_id => @organization.current_campaign), :class => 'btn btn-primary', :id => 'program-checkout' if live_campaigns? %>
           <%= link_to "Program Donation to #{@organization.name}", donate_url(:organization_id => @organization.id), :class => 'btn btn-primary', :id => 'program-checkout' unless live_campaigns? %>
-        </p>
+        </p-->
       <% end -%>
     </div>
   </div>
