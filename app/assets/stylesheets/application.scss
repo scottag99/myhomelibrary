@@ -383,7 +383,12 @@ ul.right-admin {
   margin: 2%;
   padding: 0;
   text-align: center;
-  flex-basis: 25%;
+  @media (max-width: 768px) {
+    flex-basis: 100%;
+  }
+  @media (min-width: 767px) {
+    flex-basis: 25%;
+  }
   // flex-grow: 0;
   // flex-shrink: 0;
   box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
@@ -506,16 +511,22 @@ ul.right-admin {
 }
 
 // SPONSOR SHOPPING CART
-
-#sponsor-list-affix.top {
-  margin-top: 20px;
-  margin-left: 10%;
+@media (max-width: 767px) {
+    .affix {
+        position: static;
+    }
 }
+@media (min-width: 768px) {
+  #sponsor-list-affix.top {
+    margin-top: 20px;
+    margin-left: 10%;
+  }
 
-#sponsor-list.affix {
-  top: 200px;
-  width: 20.8%;
-  margin-left: 2.4%;
+  #sponsor-list.affix {
+    top: 200px;
+    width: 20.8%;
+    margin-left: 2.4%;
+  }
 }
 
 // #sponsor-list.affix-top {
