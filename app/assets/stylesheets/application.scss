@@ -32,6 +32,11 @@
 
  img[srcset] { width: 100%; }
 
+ .k_shareThisFormBlock {display:none !important}
+ .share-btn-box {display: none;}
+ .share-btn {display: inline-block;}
+ .share-btn iframe {vertical-align: bottom;}
+
  @media print {
     table {
       page-break-after: always;
@@ -156,6 +161,16 @@ ul.right-admin {
     image-url('navbar-bg-search.jpg') center 15% no-repeat;
   background-size: cover;
   height: 500px;
+}
+
+.bg-image-donate {
+  background: linear-gradient(
+      rgba(72, 37, 157, 0.4),
+      rgba(72, 37, 157, 0.4)
+    ),
+    image-url('navbar-bg-search.jpg') center 15% no-repeat;
+  background-size: cover;
+  height: 150px;
 }
 
 .bg-image-about {

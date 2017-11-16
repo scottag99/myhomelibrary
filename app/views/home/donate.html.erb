@@ -1,5 +1,27 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
 
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
 
+  return t;
+}(document, "script", "twitter-wjs"));</script>
  <script>
 var Campaign = "<%= @Campaign %>"; //Campaign name
 var SchoolName = "<%= @schoolname %>"; //Organization name
@@ -12,7 +34,8 @@ function kimbiaSuccess(kimbiaResponse) {
   var initCharge = kimbiaResponse.initialCharge.replace("$", "");
   var confCode = kimbiaResponse.confirmationCode;
   var wishlistId = getValueByLabel(kimbiaResponse.answers[0], 'Wishlist ID');
-
+  $('.k_footer,.k_navigationSpan,.back-wishlist-btn').hide();
+  $('.share-btn-box').show();
   $.ajax({
     url: '<%= success_url %>',
     dataType: 'json',
@@ -52,10 +75,49 @@ function kimbiaResponse(f) {
   $(f.view.theForm.getElementsByTagName('button')[0]).find('#spinner').remove();
 }
 </script>
+<div class="container-fluid">
+  <div class="row">
+      <nav class="main navbar navbar-default bg-image-donate">
+        <div class="social-media">
+          <a href="mailto:info@myhomelibraryhouston.org?subject=I'd like more information">Contact Us</a>
+          <a href="https://www.facebook.com/bushhoustonliteracy/" target="_blank"><img src="<%= asset_path('facebook.png') %>" /></a>
+          <a href="https://twitter.com/BushHoustonLit" target="_blank"><img src="<%= asset_path('twitter.png') %>" /></a>
+        </div>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="non-admin"><img class="non-admin" src="<%= asset_path('my-home-library.png') %>" alt="Barbara Bush Houston Literacy Foundation" /></a>
+          </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+              <li><%= link_to 'About Us', scrivito_path(Obj.find_by_permalink('about')) %></li>
+              <li><%= link_to 'FAQ', scrivito_path(Obj.find_by_permalink('faq')) %></li>
+              <li><%= link_to 'Our Partners', scrivito_path(Obj.find_by_permalink('sponsors')) %></li>
+              <li><%= link_to 'Our Impact', scrivito_path(Obj.find_by_permalink('impact')) %></li>
+              <% unless session[:userinfo].nil?  -%>
+              <% if user_is_admin? -%>
+              <li><%= link_to 'Admin', '/admin' %></li>
+              <% end -%>
+              <li>
+                <a class="non-admin" href="#"><img class="avatar" src="<%= session[:userinfo]['info']['image'] %>" alt="<%= session[:userinfo]['info']['name'] %>" />
+                  <span class="hidden-sm"><%= session[:userinfo]['info']['name'] %></span>
+                </a>
+              </li>
+              <li><a class="non-admin" href="/logout?returnTo=<%= request.base_url %>&client_id=<%= Rails.application.secrets.auth0_client_id %>">Logout</a></li>
+              <% end -%>
+            </ul>
+          </div>
+      </nav>
+  </div>
+</div>
 
 <div class="container">
   <p>&nbsp;</p>
-  <p>
+  <p class="back-wishlist-btn">
     <%= link_to 'Wish Lists', search_url(@slug), class: 'btn btn-primary btn-lg' %> Back to wish list search
   </p>
 <!-- script to populate form tag -->
@@ -64,4 +126,16 @@ function kimbiaResponse(f) {
 <% else %>
 <script src='https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrivetest&onshow=showPayment&oncomplete=kimbiaSuccess&onbeforesubmit=kimbiaSubmit&onplatformresponse=kimbiaResponse'></script>
 <% end %>
+  <div class="share-btn-box">
+    <p>Help spread the word about My Home Library and connect others to more children in need by sharing below</p>
+    <div class="share-btn">
+      <div class="fb-share-button" data-href="https://myhomelibraryhouston.org/search" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmyhomelibraryhouston.org%2Fsearch&amp;src=sdkpreparse">Share</a></div>
+    </div>
+    <div class="share-btn">
+      <a class="twitter-share-button"
+      href="https://twitter.com/intent/tweet?text=I%20just%20sponsored%20a%20home%20library!&url=https%3A%2F%2Fmyhomelibraryhouston.org%2Fsearch"
+      data-size="large">
+    Tweet</a>
+    </div>
+  </div>
 </div>
