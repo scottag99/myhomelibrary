@@ -129,11 +129,15 @@ function kimbiaResponse(f) {
   <div class="share-btn-box">
     <p>Help spread the word about My Home Library and connect others to more children in need by sharing below</p>
     <div class="share-btn">
-      <div class="fb-share-button" data-href="https://myhomelibraryhouston.org/search" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmyhomelibraryhouston.org%2Fsearch&amp;src=sdkpreparse">Share</a></div>
+      <div class="fb-share-button" data-href="<%= search_url(@slug) %>"
+        data-layout="button" 
+        data-size="large"
+        data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank"
+        href="https://www.facebook.com/sharer/sharer.php?u=<%= search_url(@slug).to_param %>&amp;src=sdkpreparse">Share</a></div>
     </div>
     <div class="share-btn">
       <a class="twitter-share-button"
-      href="https://twitter.com/intent/tweet?text=I%20just%20sponsored%20a%20home%20library!&url=https%3A%2F%2Fmyhomelibraryhouston.org%2Fsearch"
+      href="https://twitter.com/intent/tweet?text=I%20just%20sponsored%20a%20home%20library!&url=<%= search_url(@slug).to_param %>"
       data-size="large">
     Tweet</a>
     </div>
