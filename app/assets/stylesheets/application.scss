@@ -168,9 +168,9 @@ ul.right-admin {
       rgba(72, 37, 157, 0.4),
       rgba(72, 37, 157, 0.4)
     ),
-    image-url('navbar-bg-search.jpg') center 15% no-repeat;
+    image-url('navbar-bg-search.jpg') center 25% no-repeat;
   background-size: cover;
-  height: 150px;
+  height: 400px;
 }
 
 .bg-image-about {
@@ -452,7 +452,19 @@ ul.right-admin {
     padding: 5px 20px;
   }
 }
-
+@media(min-width: 767px) {
+  .wishlist-book-list.collapse
+  {
+    display: block !important;
+  }
+}
+#wishlist-book-list-toggle {
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+  padding: 6px;
+}
 // .flexbox {
 //   display: -webkit-flex;
 //   display: -ms-flexbox;
@@ -1335,9 +1347,6 @@ ul.right-admin {
     .general-donation-option {
       text-align: center;
       margin-top: 10px;
-      input {
-        width: 25%;
-      }
       a {
         color: #fff;
         background-color: #264692;
@@ -1358,7 +1367,9 @@ ul.right-admin {
     padding-bottom: 20px;
   }
   input {
-    width: 50%;
+    @media (min-width: 768px) {
+      width: 50%;
+    }
     float: none;
   }
   span {
