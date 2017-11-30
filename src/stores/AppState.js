@@ -136,7 +136,14 @@ class AppState {
   }
 
   filterByChapters(book) {
-    if(appState.chapters == book.is_chapter) {
+    if(appState.chapters){
+      if (book.is_chapter) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    } else {
       return true;
     }
   }
