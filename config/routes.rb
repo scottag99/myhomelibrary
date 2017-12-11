@@ -41,6 +41,7 @@ Rails.application.routes.draw do
           get 'order_sheet'
           get 'pick_list'
           get 'export'
+          get 'book_count'
           get 'exportroster'
           get 'readers'
           put 'donations'

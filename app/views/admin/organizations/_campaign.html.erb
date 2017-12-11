@@ -21,12 +21,19 @@
   <td><%= number_to_currency(WishlistEntry.where('wishlist_id' => campaign.wishlists).sum(:price)) %></td>
   <td><%= number_to_currency(Donation.where(:wishlist_id => campaign.wishlists).sum(:amount)) %></td>
   <td>
-    <%= link_to "Edit", edit_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-xs btn-warning" %>
-    <%= link_to "Delete", admin_organization_campaign_url(campaign.organization, campaign),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'This action cannot be undone. Are you sure?'} %>
-    <%= link_to "Order Sheet", order_sheet_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-info btn-xs" %>
-    <%= link_to "Pick List", pick_list_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-info btn-xs" %>
-    <%= link_to "Label Sheet", download_admin_organization_campaign_wishlists_url(campaign.organization, campaign), class: "btn btn-info btn-xs" %>
-    <%= link_to "Wish List Report", export_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-success btn-xs" %>
-    <%= link_to "Class Roster Report", exportroster_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-success btn-xs" %>
+    <p>
+      <%= link_to "Edit", edit_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-sm btn-warning" %>
+      <%= link_to "Delete", admin_organization_campaign_url(campaign.organization, campaign),  method: :delete, class: "btn btn-danger btn-sm", data: {confirm: 'This action cannot be undone. Are you sure?'} %>
+    </p>
+    <p>
+      <%= link_to "Order Sheet", order_sheet_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-info btn-sm" %>
+      <%= link_to "Pick List", pick_list_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-info btn-sm" %>
+      <%= link_to "Label Sheet", download_admin_organization_campaign_wishlists_url(campaign.organization, campaign), class: "btn btn-info btn-sm" %>
+    </p>
+    <p>
+      <%= link_to "Wish List Report", export_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-success btn-sm" %>
+      <%= link_to "Book Count Report", book_count_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-success btn-sm" %>
+      <%= link_to "Class Roster Report", exportroster_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-success btn-sm" %>
+    </p>
   </td>
 </tr>

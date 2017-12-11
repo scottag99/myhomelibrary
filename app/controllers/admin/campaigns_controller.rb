@@ -77,6 +77,20 @@ class Admin::CampaignsController < Admin::BaseController
     send_data data, filename: "#{@organization.name}-#{campaign.name}-WishListReport.csv"
   end
 
+  def book_count
+    campaign = @organization.campaigns.find(params[:id])
+    records = Wishlist.joins(wishlist_entries: [{catalog_entry: [:book, :catalog]}]).where(:campaign => campaign).group(:source, :isbn, :title, :author, 'wishlist_entries.price').order('catalogs.source', 'books.title').count
+
+    data = CSV.generate(headers: true) do |csv|
+      csv << ['School_Name', 'Campaign_name', 'Title', 'Author', 'Catalog', 'ISBN', 'Order_QTY', 'Unit_Price']
+
+      records.each do |key, count|
+        csv << [@organization.name, campaign.name, key[2], key[3], key[0], key[1], count, key[4]]
+      end
+    end
+    send_data data, filename: "#{@organization.name}-#{campaign.name}-BookCountReport.csv"
+  end
+
   # def export
   #   campaign = @organization.campaigns.find(params[:id])
   #   records = Wishlist.joins(wishlist_entries: [{catalog_entry: [:book, :catalog]}]).where(:campaign => campaign).group(:source, :teacher, :grade, :isbn, :title, 'wishlist_entries.price').order('catalogs.source', 'wishlists.grade', 'wishlists.teacher', 'books.title').count
