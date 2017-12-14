@@ -26,7 +26,7 @@ class HomeController < ApplicationController
     addl_donation_slug = params[:addl_donation_slug].nil? ? 0.0 : params[:addl_donation_slug].to_d
     if params[:id_list].nil?
       @wishlists = []
-      @donationLevel = addl_donation + addl_donation_slug + 30.0
+      @donationLevel = addl_donation + addl_donation_slug
       @schoolname = "None"
       @Campaign = "General"
       @reader_name = ""
