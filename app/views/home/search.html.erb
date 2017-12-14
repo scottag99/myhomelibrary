@@ -103,7 +103,9 @@ if(preselected.length > 0){
   });
 }
 
-$('body').on('click', '.donation a', function(){
+$('body').on('click', '.donation a', completeDonation);
+
+function completeDonation(){
   var modalDonation = '<div><button type="button" class="btn btn-default" data-dismiss="modal">Sponsor a Child</button></div>\
   <div class="input-group"><span>Please input your amount:</span>\
   <input type="number" step="1.00" id="addl_donation_slug" class="form-control" placeholder="Enter dollar amount" /></div>\
@@ -118,7 +120,7 @@ $('body').on('click', '.donation a', function(){
   $('#globalModalShopping').modal();
 
   return false;
-});
+}
 
 $('body').on("click", '.search-entry a', function() {
   if (!$('#sponsor-list').is(':visible')) return true;
@@ -234,6 +236,10 @@ $('body').on("change", '#addl_donation', function() {
 
 $('body').on("change", '#addl_donation_slug', function() {
   var link = $("#program-checkout").attr('href');
+  if (!link)
+  {
+    link = $("#checkout-btn").attr('href'); //handle case where user came straight in to program donation
+  }
   $("#checkout-btn-3").attr("href", link + '&addl_donation=' + $(this).val());
 });
 
@@ -272,5 +278,9 @@ $('body').on("change", '#addl_donation_slug', function() {
 <script type="text/javascript">
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
+    if (location.search.toLowerCase().indexOf("complete") > -1)
+    {
+      completeDonation();
+    }
 });
 </script>
