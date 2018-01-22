@@ -238,7 +238,7 @@ $('body').on("change", '#addl_donation_slug', function() {
   var link = $("#program-checkout").attr('href');
   if (!link)
   {
-    link = $("#checkout-btn").attr('href'); //handle case where user came straight in to program donation
+    link = $("#checkout-btn-3").attr('href').replace(/&addl_donation\=[\d\.]*/, ''); //handle case where user came straight in to program donation
   }
   $("#checkout-btn-3").attr("href", link + '&addl_donation=' + $(this).val());
 });
