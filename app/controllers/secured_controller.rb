@@ -40,8 +40,9 @@ class SecuredController < ApplicationController
 
     # if this isn't an admin user, check to see if they are assigned as a partner for an organization
     if role.blank?
-      if Organization.joins(:partners).where('partners.email = ? and partners.active = ?', session[:userinfo]['info']['email'], true).count() > 0
-        role = 'partner'
+      partners = Organization.joins(:partners).where('partners.email = ? and partners.active = ?', session[:userinfo]['info']['email'], true).all
+      if partners.count() > 0
+        role = partners.exists{|p| p.is_coordinator} ? 'coordinator' : 'partner'
       end
     end
     role

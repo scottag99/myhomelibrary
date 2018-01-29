@@ -70,12 +70,47 @@ module CommonWishlistActions
     redirect_to get_campaign_url
   end
 
+  def edit_upload
+    @campaign = current_campaign
+    respond_to do |format|
+      format.js { render 'common/wishlists/edit_upload' }
+    end
+  end
+
+  def upload
+    uploaded_io = params[:wishlist][:upload]
+
+    parser = Roo::Spreadsheet.open(uploaded_io.path)
+    header = parser.row(1)
+    (2..parser.last_row).each do |i|
+      row = Hash[[header, parser.row(i)].transpose]
+      row.each{|k,v| row[k] = v.strip if v.is_a? String }
+      current_campaign.wishlists.create!(row.to_hash)
+    end
+
+    respond_to do |format|
+      format.html { redirect_to url_for([get_namespace, current_organization, current_campaign]) }
+    end
+  end
+
   def toggle_delivered
     @wishlist = current_campaign.wishlists.find(params[:id])
     @wishlist.is_delivered = !@wishlist.is_delivered
     @wishlist.save
     redirect_to get_campaign_url
   end
+
+  def download
+    file_name = "#{current_campaign.organization.name.parameterize}-#{current_campaign.name.parameterize}-LabelSheet.csv"
+    content = "#{current_campaign.organization.name},#{current_campaign.name}\r\n"
+    content += "Teacher Name,Student Name,Grade\r\n"
+    current_campaign.wishlists.each do |w|
+      content += "\"#{w.teacher}\",\"#{w.reader_name}\",#{w.grade}\r\n"
+    end
+
+    send_data content, :filename => file_name
+  end
+
 private
   def wishlist_params
     params.require(:wishlist).permit(:reader_name, :reader_age, :reader_gender, :teacher, :grade, :grl, :external_id, :is_delivered)

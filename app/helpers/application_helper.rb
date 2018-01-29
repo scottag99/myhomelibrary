@@ -31,6 +31,19 @@ module ApplicationHelper
     return false
   end
 
+  def user_is_coordinator?
+    if session[:userinfo] && session[:userinfo]['extra'] && session[:userinfo]['extra']['raw_info']
+      if session[:userinfo]['extra']['raw_info']['role'] == 'partner' && session[:userinfo]['extra']['raw_info']['email_verified']
+        return Organization.joins(:partners).where('partners.email = ? and partners.active = ? and partners.is_coordinator', session[:userinfo]['info']['email'], true).count() > 0
+      end
+    end
+    return false
+  end
+
+  def is_coordinator?(organization)
+    organization.partners.any?{|p| p.active && p.email == session[:userinfo]['info']['email'] && p.is_coordinator }
+  end
+
   def live_campaigns?
     Campaign.where("deadline > ? and ready_for_donations = ?", 1.day.from_now.at_midnight, true).count > 0
   end

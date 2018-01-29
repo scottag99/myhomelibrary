@@ -22,32 +22,40 @@
         <thead>
         <tr>
           <th>&nbsp;</th>
+          <% if user_is_admin? %>
           <th>Included</th>
+          <% end %>
           <th>Name</th>
           <th>Slug</th>
           <th>Campaigns</th>
           <th>Wish Lists</th>
           <th>Student Count</th>
           <th>Sponsored Wish Lists</th>
+          <% if user_is_admin? %>
           <th>Sponsored Wish Lists Donations Made</th>
           <th>Program Donations</th>
+          <% end %>
           <th>&nbsp;</th>
           <th>&nbsp;</th>
         </tr>
         </thead>
         <tbody>
-        <%= render :partial => 'organization', :collection => @organizations %>
+        <%= render :partial => 'common/organizations/organization', :collection => @organizations %>
         <tr>
           <th>Totals</th><!--name - keep empty-->
+          <% if user_is_admin? %>
           <th>&nbsp;</th><!--included - keep empty-->
+          <% end %>
           <th>&nbsp;</th><!--name - keep empty-->
           <th>&nbsp;</th><!--slug - keep empty-->
           <th id="campaign-count"><%= @org_campaign_count %></th><!--campaign count-->
           <th id="wishlist-count"><%= @org_wishlist_count %></th><!--wish lists count-->
           <th id="student-count"><%= @org_student_count %></th><!--student count-->
           <th id="wishlist-donation-count"><%= @org_donation_count %></th><!--wish list donations count-->
+          <% if user_is_admin? %>
           <th id="wishlist-donation-total"><%= number_to_currency(@org_donation_sum) %></th><!--wish list donations money total-->
           <th id="program-donation-amount"><%= number_to_currency(@org_programdonation_sum) %></th><!--program donations total-->
+          <% end %>
           <th>&nbsp;</th><!--edit button - keep empty-->
           <th>&nbsp;</th>
         </tr>

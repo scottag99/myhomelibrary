@@ -5,4 +5,9 @@ class ApplicationController < ActionController::Base
   def json_request?
     request.format.json?
   end
+
+  def get_namespace
+    controller_path.split('/').first
+  end
+
 end

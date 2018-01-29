@@ -2,17 +2,6 @@ class Admin::PartnersController < Admin::BaseController
   include CommonPartnerActions
   before_action :set_organization
 
-  def update
-    @partner = @organization.partners.find(params[:id])
-    @partner.update!(partner_params)
-    @partners = @organization.partners
-    flash[:success] = "Thank you! Your volunteer was updated successfully."
-    respond_to do |format|
-      format.html { redirect_to admin_organization_url(@organization) }
-      format.json { render json: @partner }
-    end
-  end
-
   def new
     @partner = @organization.partners.new
     @partner.active = true
@@ -32,14 +21,14 @@ class Admin::PartnersController < Admin::BaseController
     end
   end
 
-  def destroy
-    @organization.partners.destroy(params[:id])
-    @partners = @organization.partners
-    flash[:success] = "Thank you! Your volunteer was deleted successfully."
-
+  def toggle_coordinator
+    @partner = @organization.partners.find(params[:id])
+    @partner.is_coordinator = !@partner.is_coordinator
+    @partner.save!
+    flash[:success] = "Thank you! Your volunteer was updated successfully."
     respond_to do |format|
       format.html { redirect_to admin_organization_url(@organization) }
-      format.json { render json: @organization.partners.all}
+      format.json { render json: @partner }
     end
   end
 
@@ -49,6 +38,6 @@ private
   end
 
   def partner_params
-    params.require(:partner).permit(:name, :email, :active)
+    params.require(:partner).permit(:name, :email, :active, :is_coordinator)
   end
 end

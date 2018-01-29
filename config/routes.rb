@@ -35,7 +35,11 @@ Rails.application.routes.draw do
       member do
         put 'included'
       end
-      resources :partners
+      resources :partners do
+        member do
+          put 'toggle_coordinator'
+        end
+      end
       resources :campaigns do
         member do
           get 'order_sheet'
@@ -68,9 +72,17 @@ Rails.application.routes.draw do
   namespace :partner, :path => 'volunteer' do
     root to: 'home#index'
     resources :organizations do
+      resources :partners
       resources :campaigns do
         member do
+          get 'order_sheet'
+          get 'pick_list'
+          get 'export'
+          get 'book_count'
+          get 'exportroster'
           get 'readers'
+          put 'donations'
+          put 'wishlists'
         end
         resources :wishlists do
           member do
@@ -78,8 +90,11 @@ Rails.application.routes.draw do
             put 'toggle_delivered'
           end
           collection do
-            get 'edit_multiple'
+            get  'edit_multiple'
             put  'update_multiple'
+            get  'edit_upload'
+            post 'upload'
+            get  'download'
           end
           resources :wishlist_entries
         end
