@@ -6,6 +6,12 @@ class HomeController < ApplicationController
   def index
   end
 
+  def give
+  end
+
+  def bookdrive
+  end
+
   def login
     respond_to do |format|
       format.html
