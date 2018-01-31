@@ -48,7 +48,7 @@ module CommonCampaignActions
     @campaign = @organization.campaigns.find(params[:id])
     @wishlists = @campaign.wishlists.order(:teacher, :reader_name)
     respond_to do |format|
-      format.html
+      format.html { render 'common/campaigns/pick_list' }
       format.json { render json: @campaign }
     end
   end
