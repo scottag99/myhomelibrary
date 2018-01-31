@@ -106,8 +106,7 @@ if(preselected.length > 0){
 $('body').on('click', '.donation a', completeDonation);
 
 function completeDonation(){
-  var modalDonation = '<div><button type="button" class="btn btn-default" data-dismiss="modal">Sponsor a Child</button></div>\
-  <div class="input-group"><span>Please input your amount:</span>\
+  var modalDonation = '<div class="input-group"><span>Please input your amount:</span>\
   <input type="number" step="1.00" id="addl_donation_slug" class="form-control" placeholder="Enter dollar amount" /></div>\
   <div><% if @organization.nil? -%>\
   <%= link_to "Complete Donation", donate_url(), :class => "btn btn-warning btn-lg focus", :id => "checkout-btn-3" %></div>\
