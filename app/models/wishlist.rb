@@ -6,6 +6,8 @@ class Wishlist < ApplicationRecord
 
   scope :has_books, -> { where('wishlist_entry_count > 0') }
 
+  validates :teacher, :presence => true
+
   def public_name
     firstNameLast = reader_name =~ /,/
     if firstNameLast.nil?
