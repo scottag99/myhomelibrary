@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   root to: redirect('/home')
   get 'home/library'
   get 'donate', to: 'home#donate'
+  get 'give', to: 'home#give'
+  get 'bookdrive', to: 'home#bookdrive'
   get 'search/(:slug)', to: 'home#search', as: 'search'
   get 'wishlists', to: 'home#wishlists'
   post 'success', to: 'home#success'
