@@ -35,8 +35,10 @@
       <% if user_is_admin? %>
       <%= link_to "Order Sheet", order_sheet_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-info btn-sm" %>
       <% end %>
+      <% if user_is_admin? || user_is_coordinator? %>
       <%= link_to "Pick List", url_for([:pick_list, get_namespace, campaign.organization, campaign]), class: "btn btn-info btn-sm" %>
       <%= link_to "Label Sheet", url_for([:download, get_namespace, campaign.organization, campaign, :wishlists]), class: "btn btn-info btn-sm" %>
+      <% end %>
     </p>
     <% if user_is_admin? %>
     <p>
