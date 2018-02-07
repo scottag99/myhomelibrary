@@ -6,10 +6,10 @@
   <td><input type=checkbox disabled <%= partner.is_coordinator ? 'checked' : '' %> /></td>
   <td><input type=checkbox disabled <%= partner.active ? 'checked' : '' %> /></td>
   <td>
-    <%= link_to "Edit", url_for([:edit, get_namespace, partner.organization, partner]), class: "btn btn-xs btn-warning" %>
     <% if user_is_admin? %>
+    <%= link_to "Edit", url_for([:edit, get_namespace, partner.organization, partner]), class: "btn btn-xs btn-warning" %>
     <%= link_to "Toggle Coordinator", toggle_coordinator_admin_organization_partner_url(partner.organization, partner),  method: :put, class: "btn btn-danger btn-xs" %>
-    <% end %>
     <%= link_to "Delete", url_for([get_namespace, partner.organization, partner]),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'This action cannot be undone. Are you sure?'} %>
+    <% end %>
   </td>
 </tr>

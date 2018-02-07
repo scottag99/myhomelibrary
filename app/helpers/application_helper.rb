@@ -33,8 +33,8 @@ module ApplicationHelper
 
   def user_is_coordinator?
     if session[:userinfo] && session[:userinfo]['extra'] && session[:userinfo]['extra']['raw_info']
-      if session[:userinfo]['extra']['raw_info']['role'] == 'partner' && session[:userinfo]['extra']['raw_info']['email_verified']
-        return Organization.joins(:partners).where('partners.email = ? and partners.active = ? and partners.is_coordinator', session[:userinfo]['info']['email'], true).count() > 0
+      if session[:userinfo]['extra']['raw_info']['email_verified']
+        return Organization.joins(:partners).where('partners.email = ? and partners.active = ? and partners.is_coordinator = ?', session[:userinfo]['info']['email'], true, true).count() > 0
       end
     end
     return false

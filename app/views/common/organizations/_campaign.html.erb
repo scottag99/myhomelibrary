@@ -38,10 +38,12 @@
       <%= link_to "Pick List", url_for([:pick_list, get_namespace, campaign.organization, campaign]), class: "btn btn-info btn-sm" %>
       <%= link_to "Label Sheet", url_for([:download, get_namespace, campaign.organization, campaign, :wishlists]), class: "btn btn-info btn-sm" %>
     </p>
+    <% if user_is_admin? %>
     <p>
       <%= link_to "Wish List Report", url_for([:export, get_namespace, campaign.organization, campaign]), class: "btn btn-success btn-sm" %>
       <%= link_to "Book Count Report", url_for([:book_count, get_namespace, campaign.organization, campaign]), class: "btn btn-success btn-sm" %>
       <%= link_to "Class Roster Report", url_for([:exportroster, get_namespace, campaign.organization, campaign]), class: "btn btn-success btn-sm" %>
     </p>
+    <% end %>
   </td>
 </tr>
