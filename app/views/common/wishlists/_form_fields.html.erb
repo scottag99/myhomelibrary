@@ -34,7 +34,8 @@
 <div class="form-group">
   <%= f.label :grade, class: "col-md-1 control-label" %>
   <div class="col-md-4">
-    <%= f.select :grade, [
+    <%= f.text_field :grade, class: "form-control" %>
+    <%#= f.select :grade, [
       ['Not Assigned', ''],
       ['PreK', 'PreK'],
       ['K', 'K'],

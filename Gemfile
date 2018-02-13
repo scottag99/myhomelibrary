@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+gem 'rails', '~> 5.1.4'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
@@ -33,6 +33,8 @@ gem 'omniauth-auth0', '~> 1.4.1'
 # https://github.com/auth0/ruby-auth0 For API access
 gem 'auth0'
 
+gem 'google-api-client'
+
 # Scrivito
 gem "scrivito", "~> 1.9"
 gem 'scrivito_two_column_widget'
@@ -53,7 +55,7 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
 
 group :development, :production do
-  gem 'pg'
+  gem 'pg', '~> 0.21'
 end
 
 group :development, :test do

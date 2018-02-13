@@ -15,6 +15,8 @@
       <dd><input type=checkbox disabled <%= @campaign.can_edit_wishlists ? 'checked' : '' %> /></dd>
       <dt>Book Limit</dt>
       <dd><%= @campaign.book_limit %></dd>
+      <dt>Roster Data Reference</dt>
+      <dd><%= link_to_if @campaign.roster_data_reference, @campaign.roster_data_reference, @campaign.roster_data_reference, target: '_blank' %></dd>
     </dl>
   </div>
 

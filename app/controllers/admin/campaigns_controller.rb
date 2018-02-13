@@ -1,5 +1,6 @@
 class Admin::CampaignsController < Admin::BaseController
   include CommonCampaignActions
+  include GoogleSpreadsheet
   before_action :set_organization
 
   def update
@@ -25,6 +26,17 @@ class Admin::CampaignsController < Admin::BaseController
 
   def create
     @campaign = @organization.campaigns.create!(campaign_params)
+    begin
+      auth = login()
+      ss = new_sheet("Roster Load for #{@organization.name}-#{@campaign.name}")
+      data = [['teacher', 'reader_name', 'reader_age', 'reader_gender', 'grade', 'external_id']]
+      range = 'A1:F1'
+      add_data(ss, range, data, auth)
+      @campaign.roster_data_reference = ss.spreadsheet_url
+      @campaign.save
+    rescue => ex
+      Rails.logger.error(ex)
+    end
     @campaigns = @organization.campaigns
     flash[:success] = "Thank you! Your Campaign was added successfully."
     respond_to do |format|
@@ -34,6 +46,16 @@ class Admin::CampaignsController < Admin::BaseController
   end
 
   def destroy
+    @campaign = @organization.campaigns.find(params[:id])
+    unless @campaign.roster_data_reference.nil?
+      begin
+        id = @campaign.roster_data_reference.split("/").reverse[1]
+        auth = login()
+        delete(id, auth)
+      rescue => ex
+        Rails.logger.error(ex)
+      end
+    end
     @organization.campaigns.destroy(params[:id])
     @campaigns = @organization.campaigns
     flash[:success] = "Thank you! Your Campaign was deleted successfully."

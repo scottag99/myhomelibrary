@@ -1,40 +1,10 @@
 
 <%= form_for :wishlist, url: url_for([:upload, get_namespace, @campaign.organization, @campaign, :wishlists]) do |f| %>
 <div class="form-group">
-  <h4>Excel</h4>
-  <p>Upload an Excel file in the following format:</p>
-  <table class="table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>teacher</th>
-        <th>reader_name</th>
-        <th>reader_age</th>
-        <th>reader_gender</th>
-        <th>external_id</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>Harrington</td><td>Joe Pesci</td><td>9</td><td>M</td><td>234567</td></tr>
-      <tr><td>Harrington</td><td>Susan Sarandon</td><td>11</td><td>F</td><td>347234</td></tr>
-      <tr><td>O'Malley</td><td>Mike Meyers</td><td>13</td><td>M</td><td>793346</td></tr>
-      <tr><td>O'Malley</td><td>Witherspoon, Reese</td><td>12</td><td>F</td><td>237345</td></tr>
-    </tbody>
-  </table>
-
-  <h4>CSV</h4>
-  <p>Upload a CSV file in the following format (note that <code>commas</code> cannot appear in the text to upload, so if you want to do last name first, you'll have to use Excel importing described above):</p>
-  <pre width="50%">
-  teacher,reader_name,reader_age,reader_gender,external_id
-  Harrington, Joe Pesci, 9, M, 234567
-  Harrington, Susan Sarandon, 11, F, 347234
-  O'Malley, Mike Meyers, 13, M, 793346
-  O'Malley, Reese Witherspoon, 12, F, 237345
-  </pre>
-</div>
-<div class="form-group">
-  <%= f.label "File", class: "col-md-1 control-label" %>
-    <%= f.file_field :upload %>
-</div>
+  <h4>Instructions</h4>
+  <p>Use the <strong>Roster Data Reference</strong> link to open a Google Spreadsheet to add roster data. Once complete, use the button below to upload that data to the My Home Library system.</p>
+  <p>The upload function can be called multiple times <strong>BUT IT DOES NOT CHECK FOR DUPLICATES!</strong>. If you want to upload new data, clear the existing data from the sheet and upload to add to the current imported roster.</p>
+  
 <!-- Needed to add this as a hidden field b/c Chrome would not submit the file in the post otherwise -->
 <%= f.submit "Submit", class: "btn btn-default btn-primary hidden" %>
 <% end %>

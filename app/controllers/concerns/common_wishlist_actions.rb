@@ -1,3 +1,5 @@
+include GoogleSpreadsheet
+
 module CommonWishlistActions
   extend ActiveSupport::Concern
 
@@ -78,15 +80,31 @@ module CommonWishlistActions
   end
 
   def upload
-    uploaded_io = params[:wishlist][:upload]
-
-    parser = Roo::Spreadsheet.open(uploaded_io.path)
-    header = parser.row(1)
-    (2..parser.last_row).each do |i|
-      row = Hash[[header, parser.row(i)].transpose]
-      row.each{|k,v| row[k] = v.strip if v.is_a? String }
-      current_campaign.wishlists.create!(row.to_hash)
+    unless current_campaign.roster_data_reference.nil?
+      begin
+        id = current_campaign.roster_data_reference.split("/").reverse[1]
+        auth = login()
+        ss = get_sheet(id, auth)
+        rows = get_data(ss, 'A1:Z')
+        header = rows.values.shift
+        rows.values.each do |row_data|
+          row = Hash[[header, row_data].transpose]
+          row.each{|k,v| row[k] = v.strip if v.is_a? String }
+          current_campaign.wishlists.create!(row.to_hash)
+        end
+      rescue => ex
+        Rails.logger.error(ex)
+      end
     end
+    #uploaded_io = params[:wishlist][:upload]
+
+    #parser = Roo::Spreadsheet.open(uploaded_io.path)
+    # header = parser.row(1)
+    # (2..parser.last_row).each do |i|
+    #   row = Hash[[header, parser.row(i)].transpose]
+    #   row.each{|k,v| row[k] = v.strip if v.is_a? String }
+    #   current_campaign.wishlists.create!(row.to_hash)
+    # end
 
     respond_to do |format|
       format.html { redirect_to url_for([get_namespace, current_organization, current_campaign]) }
