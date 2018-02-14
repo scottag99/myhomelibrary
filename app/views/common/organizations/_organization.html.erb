@@ -20,7 +20,9 @@
   <% end %>
   <!-- <td><%= Wishlist.includes([:donations, :campaign]).where("campaigns.organization_id = ?", organization).where.not(donations: {id: nil}).count() %></td> -->
   <td>
+    <% if user_is_admin? || user_is_coordinator? %>
     <%= link_to "Edit", url_for(['edit', get_namespace, organization]), class: "btn btn-warning btn-xs" %>
+    <% end %>
     <% if user_is_admin? %>
     <%= link_to "Delete", admin_organization_url(organization),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'This action cannot be undone. Are you sure?'} %>
     <% end %>
