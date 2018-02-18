@@ -46,6 +46,35 @@ module GoogleSpreadsheet
 		get_sheet_service(auth).get_spreadsheet_values(sheet.spreadsheet_id, range)
 	end
 
+	def hide_column(sheet, column, auth = nil)
+		hide_column_request = Google::Apis::SheetsV4::UpdateDimensionPropertiesRequest.new
+		hide_column_request.properties = Google::Apis::SheetsV4::DimensionProperties.new(hidden_by_user: true)
+		hide_column_request.range = Google::Apis::SheetsV4::DimensionRange.new(sheet_id: 0,
+      dimension: 'COLUMNS',
+      start_index: column-1,
+      end_index: column)
+		hide_column_request.fields = 'hiddenByUser'
+		r = Google::Apis::SheetsV4::Request.new(update_dimension_properties: hide_column_request)
+		requests = Google::Apis::SheetsV4::BatchUpdateSpreadsheetRequest.new(requests: [r])
+		get_sheet_service(auth).batch_update_spreadsheet(sheet.spreadsheet_id, requests)
+	end
+
+	def color_row(sheet, row_index, start_column_index, end_column_index, red, green, blue, alpha, auth = nil)
+		repeat_cell_request = Google::Apis::SheetsV4::RepeatCellRequest.new
+		color = Google::Apis::SheetsV4::Color.new(red: red, green: green, blue: blue, alpha: alpha)
+		fmt = Google::Apis::SheetsV4::CellFormat.new(background_color: color)
+		repeat_cell_request.cell = Google::Apis::SheetsV4::CellData.new(user_entered_format: fmt)
+		repeat_cell_request.range = Google::Apis::SheetsV4::GridRange.new(sheet_id: 0,
+			start_row_index: row_index,
+			end_row_index: row_index+1,
+			start_column_index: start_column_index,
+			end_column_index: end_column_index)
+		repeat_cell_request.fields = 'userEnteredFormat(backgroundColor)'
+		r = Google::Apis::SheetsV4::Request.new(repeat_cell: repeat_cell_request)
+		requests = Google::Apis::SheetsV4::BatchUpdateSpreadsheetRequest.new(requests: [r])
+		get_sheet_service(auth).batch_update_spreadsheet(sheet.spreadsheet_id, requests)
+	end
+
 	def list(auth = nil, query = nil)
     drive = get_drive_service(auth)
 

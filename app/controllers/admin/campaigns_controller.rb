@@ -29,8 +29,14 @@ class Admin::CampaignsController < Admin::BaseController
     begin
       auth = login()
       ss = new_sheet("Roster Load for #{@organization.name}-#{@campaign.name}")
-      data = [['teacher', 'reader_name', 'reader_age', 'reader_gender', 'grade', 'external_id']]
-      range = 'A1:F1'
+      hide_column(ss, 7)
+      data = [['teacher*', 'reader_name*', 'grade*', 'reader_age', 'reader_gender', 'external_id', 'id'],
+              ['','','','','','','','Instructions'],
+              ['','','','','','','',"Use the table to the left to enter your roster data. Fields with a '*' are required."],
+              ['','','','','','','','You can copy/paste and edit here until you are ready to upload.'],
+              ['','','','','','','','When ready, return to My Home Library to finish the upload process from the Campaign page.']
+      ]
+      range = 'A1:I5'
       add_data(ss, range, data, auth)
       @campaign.roster_data_reference = ss.spreadsheet_url
       @campaign.save

@@ -85,15 +85,34 @@ module CommonWishlistActions
         id = current_campaign.roster_data_reference.split("/").reverse[1]
         auth = login()
         ss = get_sheet(id, auth)
-        rows = get_data(ss, 'A1:Z')
-        header = rows.values.shift
-        rows.values.each do |row_data|
+        rows = get_data(ss, 'A1:Z1', auth)
+        header = rows.values.shift.collect{|v| v.gsub(/\*/, '').strip}
+        range = "A2:#{('A'..'Z').to_a[header.size-1]}"
+        roster = get_data(ss, range, auth)
+        idx = 0
+        roster.values.each do |row_data|
+          idx += 1
+          while(row_data.size < header.size)
+            row_data << ""
+          end
           row = Hash[[header, row_data].transpose]
-          row.each{|k,v| row[k] = v.strip if v.is_a? String }
-          current_campaign.wishlists.create!(row.to_hash)
+          # Only process rows without an ID
+          if row['id'].empty?
+            row.each{|k,v| row[k] = v.strip if v.is_a? String }
+            w = current_campaign.wishlists.create(row.to_hash)
+            if w.save
+              row_data[header.index('id')] = w.id
+              color_row(ss, idx, 0, row_data.size, 0.8509804, 0.91764706, 0.827451, 1.0, auth)
+            else
+              flash[:notice] = "Some rows had errors, please correct and upload again to fix."
+              color_row(ss, idx, 0, row_data.size, 0.9019608, 0.72156864, 0.6862745, 1.0, auth) #plus 1 b/c we aren't starting with the header row
+            end
+          end
         end
+        add_data(ss, range, roster.values, auth)
       rescue => ex
         Rails.logger.error(ex)
+        flash[:notice] = ex.message
       end
     end
     #uploaded_io = params[:wishlist][:upload]
