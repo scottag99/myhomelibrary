@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180213160612) do
+ActiveRecord::Schema.define(version: 20180218233259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20180213160612) do
     t.boolean "can_edit_wishlists", default: true
     t.integer "book_limit"
     t.string "roster_data_reference"
+    t.string "notes"
     t.index ["organization_id"], name: "index_campaigns_on_organization_id"
   end
 

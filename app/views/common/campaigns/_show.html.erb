@@ -17,6 +17,8 @@
       <dd><%= @campaign.book_limit %></dd>
       <dt>Roster Data Reference</dt>
       <dd><%= link_to_if @campaign.roster_data_reference, @campaign.roster_data_reference, @campaign.roster_data_reference, target: '_blank' %></dd>
+      <dt>Notes</dt>
+      <dd><%= h(@campaign.notes).gsub(/\n/, '<br/>').html_safe %></dd>
     </dl>
   </div>
 
