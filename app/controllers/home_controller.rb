@@ -59,7 +59,7 @@ class HomeController < ApplicationController
       @wishlists.each{|w|
         school[w.campaign.organization.name] = true
         campaign[w.campaign.name] = true
-        reader[w.reader_name] = true
+        reader[w.public_name] = true
         slug[w.campaign.organization.slug] = true
       }
       @schoolname = school.keys.join(",")
