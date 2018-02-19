@@ -35,7 +35,7 @@ function kimbiaSuccess(kimbiaResponse) {
   var confCode = kimbiaResponse.confirmationCode;
   var wishlistId = getValueByLabel(kimbiaResponse.answers[0], 'Wishlist ID');
   $('.k_footer,.k_navigationSpan,.back-wishlist-btn').hide();
-  $('.share-btn-box').show();
+  $('.share-btn-box').removeClass('share-btn-box-hide').addClass('share-btn-box-show');
   $.ajax({
     url: '<%= success_url %>',
     dataType: 'json',
@@ -126,7 +126,7 @@ function kimbiaResponse(f) {
 <% else %>
 <script src='https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrivetest&onshow=showPayment&oncomplete=kimbiaSuccess&onbeforesubmit=kimbiaSubmit&onplatformresponse=kimbiaResponse'></script>
 <% end %>
-  <div class="share-btn-box">
+  <div class="share-btn-box share-btn-box-hide">
     <p>Help spread the word about My Home Library and connect others to more children in need by sharing below</p>
     <div class="share-btn">
       <div class="fb-share-button" data-href="<%= search_url(@slug) %>"

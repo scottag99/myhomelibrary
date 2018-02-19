@@ -33,7 +33,14 @@
  img[srcset] { width: 100%; }
 
  .k_shareThisFormBlock {display:none !important}
- .share-btn-box {display: none;}
+ .share-btn-box-hide {
+    opacity: 0;
+    filter:alpha(opacity=0);
+  }
+  .share-btn-box-show {
+    opacity: 1.0;
+    filter:alpha(opacity=100);
+  }
  .share-btn {display: inline-block;}
  .share-btn iframe {vertical-align: bottom;}
 
