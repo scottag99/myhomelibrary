@@ -10,6 +10,13 @@ class Wishlist < ApplicationRecord
   validates :reader_name, :presence => true
   validates :grade, :presence => true
 
+  after_initialize do
+    if self.new_record?
+      # values will be available for new record forms.
+      self.external_id = [*('a'..'z'),*('0'..'9')].shuffle[0,8].join
+    end
+  end
+
   def public_name
     firstNameLast = reader_name =~ /,/
     if firstNameLast.nil?
