@@ -1,12 +1,12 @@
 <div class="form-group row">
-  <%= f.label :teacher, class: "col-md-1 control-label" %>
+  <%= f.label :teacher, class: "col-md-1 control-label" %> (required)
   <div class="col-md-4">
     <%= f.text_field :teacher, class: "form-control" %>
   </div>
 </div>
 
 <div class="form-group">
-  <%= f.label :reader_name, class: "col-md-1 control-label" %>
+  <%= f.label :reader_name, class: "col-md-1 control-label" %> (required)
   <div class="col-md-4">
     <%= f.text_field :reader_name, class: "form-control" %>
   </div>
@@ -32,7 +32,7 @@
 </div>
 
 <div class="form-group">
-  <%= f.label :grade, class: "col-md-1 control-label" %>
+  <%= f.label :grade, class: "col-md-1 control-label" %> (required)
   <div class="col-md-4">
     <%= f.text_field :grade, class: "form-control" %>
     <%#= f.select :grade, [
