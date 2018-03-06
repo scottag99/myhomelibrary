@@ -11,7 +11,7 @@ class Wishlist < ApplicationRecord
   validates :grade, :presence => true
 
   after_initialize do
-    if self.new_record?
+    if self.new_record? && self.external_id.blank?
       # values will be available for new record forms.
       self.external_id = [*('a'..'z'),*('0'..'9')].shuffle[0,8].join
     end
