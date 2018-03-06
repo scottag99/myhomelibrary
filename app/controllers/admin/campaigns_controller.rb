@@ -26,17 +26,19 @@ class Admin::CampaignsController < Admin::BaseController
 
   def create
     @campaign = @organization.campaigns.create!(campaign_params)
+    headers = ['teacher*', 'reader_name*', 'grade*', 'reader_age', 'reader_gender', 'external_id', 'id']
     begin
       auth = login()
       ss = new_sheet("Roster Load for #{@organization.name}-#{@campaign.name}")
-      hide_column(ss, 7)
-      data = [['teacher*', 'reader_name*', 'grade*', 'reader_age', 'reader_gender', 'external_id', 'id'],
-              ['','','','','','','','Instructions'],
-              ['','','','','','','',"Use the table to the left to enter your roster data. Fields with a '*' are required."],
-              ['','','','','','','','You can copy/paste and edit here until you are ready to upload.'],
-              ['','','','','','','','When ready, return to My Home Library to finish the upload process from the Campaign page.']
+      hide_column(ss, headers.size)
+      data = [headers,
+              Array.new(headers.size)<<'Instructions',
+              Array.new(headers.size)<<"Use the table to the left to enter your roster data. Fields with a '*' are required.",
+              Array.new(headers.size)<<'You can copy/paste and edit here until you are ready to upload.',
+              Array.new(headers.size)<<'All changes to this sheet are saved automatically. You can stop and return to continue your work at any time.',
+              Array.new(headers.size)<<'When ready, close this sheet and return to My Home Library to finish the upload process from the Campaign page.'
       ]
-      range = 'A1:I5'
+      range = 'A1:Z15'
       add_data(ss, range, data, auth)
       @campaign.roster_data_reference = ss.spreadsheet_url
       @campaign.save
