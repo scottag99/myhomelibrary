@@ -36,7 +36,6 @@
   <div class="col-md-4">
     <%#= f.text_field :grade, class: "form-control", required: true %>
     <%= f.select :grade, [
-      ['Not Assigned', ''],
       ['PreK', 'PreK'],
       ['K', 'K'],
       ['1st', '1st'],
@@ -47,7 +46,7 @@
       ['6th', '6th'],
       ['7th', '7th'],
       ['8th', '8th']
-    ] %>
+    ], {}, {class: "form-control", required: true} %>
   </div>
 </div>
 
