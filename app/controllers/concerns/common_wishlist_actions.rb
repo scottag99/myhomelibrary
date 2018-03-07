@@ -90,6 +90,8 @@ module CommonWishlistActions
         range = "A2:#{('A'..'Z').to_a[header.size-1]}"
         roster = get_data(ss, range, auth)
         idx = 0
+        valid_rows = []
+        error_rows = []
         roster.values.each do |row_data|
           idx += 1
           while(row_data.size < header.size)
@@ -102,14 +104,34 @@ module CommonWishlistActions
             w = current_campaign.wishlists.create(row.to_hash)
             if w.save
               row_data[header.index('id')] = w.id
-              color_row(ss, idx, 0, row_data.size, 0.8509804, 0.91764706, 0.827451, 1.0, auth)
+              valid_rows << idx
             else
               flash[:notice] = "Some rows had errors, please correct and upload again to fix."
-              color_row(ss, idx, 0, row_data.size, 0.9019608, 0.72156864, 0.6862745, 1.0, auth) #plus 1 b/c we aren't starting with the header row
+              error_rows << idx
             end
           end
         end
         add_data(ss, range, roster.values, auth)
+
+        i = 0
+        start_row = valid_rows[i]
+        while i < valid_rows.size
+          if i+1 == valid_rows.size || (valid_rows[i+1] - valid_rows[i] != 1)
+            color_rows(ss, start_row, valid_rows[i], 0, header.size, 0.8509804, 0.91764706, 0.827451, 1.0, auth)
+            start_row = valid_rows[i+1]
+          end
+          i += 1
+        end
+
+        i = 0
+        start_row = error_rows[i]
+        while i < error_rows.size
+          if i+1 == error_rows.size || (error_rows[i+1] - error_rows[i] != 1)
+            color_rows(ss, start_row, error_rows[i], 0, header.size, 0.9019608, 0.72156864, 0.6862745, 1.0, auth)
+            start_row = error_rows[i+1]
+          end
+          i += 1
+        end
       rescue => ex
         Rails.logger.error(ex)
         flash[:notice] = ex.message
