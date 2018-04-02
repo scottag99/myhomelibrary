@@ -44,28 +44,6 @@
  .share-btn {display: inline-block;}
  .share-btn iframe {vertical-align: bottom;}
 
- @media print {
-    table {
-      page-break-after: always;
-    }
-    nav, #breadcrumb {
-      display: none;
-    }
-    .book-summary {
-      display: inline-block !important;
-    }
-    .book-cover {
-      max-height: 3em;
-    }
-    .row-books {
-      max-height: 3em;
-      font-size: 0.5em;
-    }
-    .toggle-show {
-      display: none;
-    }
-}
-
 html,body
 {
     width: 100%;
@@ -1441,8 +1419,27 @@ ul.right-admin {
   }
 }
 
-// * {
-//   background: #000 !important;
-//   color: #0f0 !important;
-//   outline: solid #f00 1px !important;
-// }
+@media print {
+  .panel:nth-child(2n), #order-sheet {
+     page-break-after: always;
+   }
+   nav, #breadcrumb {
+     display: none;
+   }
+   .book-summary {
+     display: inline-block !important;
+   }
+   .book-cover {
+     max-height: 3em;
+   }
+   .row-books {
+     max-height: 3em;
+     font-size: 0.5em;
+   }
+   .toggle-show {
+     display: none;
+   }
+   .admin-template {
+     padding: 1em;
+   }
+}
