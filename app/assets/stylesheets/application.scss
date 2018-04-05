@@ -1420,7 +1420,7 @@ ul.right-admin {
 }
 
 @media print {
-  .panel:nth-child(2n), #order-sheet {
+  .outer-panel:nth-child(1n), #order-sheet {
      page-break-after: always;
    }
    nav, #breadcrumb {
