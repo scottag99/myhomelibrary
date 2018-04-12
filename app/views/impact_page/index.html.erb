@@ -1,13 +1,15 @@
 <div class="container-fluid">
-  <div class="row bg-image-about">
+  <div class="row <%=scrivito_value(@obj.header_class) %>">
     <%= render 'common/navbar' %>
+
     <div class="page-headline">
-      <h1>Our Impact</h1>
-      <h3>How we help the community</h3>
+      <%= scrivito_tag :h1, @obj, :title %>
+      <%= scrivito_tag :h3, @obj, :subtitle %>
     </div>
     <div class="col-md-0 col-md-offset-6 col-sm-offset-6 col-xs-offset-6 mouse">
       <img src="<%= asset_path('scroll-button.png') %>" />
     </div>
+
   </div>
 </div>
 
@@ -17,5 +19,7 @@
   <% end %>
 <% end %>
 
-<%= scrivito_tag :h1, @obj, :title %>
 <%= scrivito_tag :div, @obj, :body %>
+<!-- bg-image-about -->
+<!--Our Impact -->
+<!-- How we help the community -->

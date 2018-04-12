@@ -1,28 +1,26 @@
 <div class="container-fluid">
-  <div class="row bg-image-home">
+  <div class="row <%=scrivito_value(@obj.header_class) %>">
     <%= render 'common/navbar' %>
+
     <div class="page-headline">
-      <h1>Inspiring Readers By Providing Home Libraries To Children In Need</h1>
-      <h3>An initiative of the Barbara Bush Houston Literacy Foundation</h3>
-      <a href="about">Learn More</a>
+      <%= scrivito_tag :h1, @obj, :title %>
+      <%= scrivito_tag :h3, @obj, :subtitle %>
+      <a href="about" target="_self">Learn More</a>
     </div>
+    <div class="col-md-0 col-md-offset-6 col-sm-offset-6 col-xs-offset-6 mouse">
+      <img src="<%= asset_path('scroll-button.png') %>" />
+    </div>
+
   </div>
 </div>
 
-<div class="container-fluid">
-
-  <!-- <p><%= link_to 'Home', scrivito_path(Obj.root) %></p> -->
-
-  <%= scrivito_tag_list :ul, Obj.root, :toclist do |list, page| %>
-    <%= list.tag :li do %>
-      <%= link_to page.display_title, scrivito_path(page) %>
-    <% end %>
+<%= scrivito_tag_list :ul, @obj, :toclist do |list, child| %>
+  <%= list.tag :li do %>
+    <%= link_to child.display_title, scrivito_path(child) %>
   <% end %>
+<% end %>
 
-  <% if Obj.root.toclist.empty? && scrivito_in_editable_view? %>
-    <p>(Hint: Click on the Scrivito icon to the right to create the first subpage.)</p>
-  <% end %>
-</div>
-
-<%= scrivito_tag :h1, @obj, :title %>
 <%= scrivito_tag :div, @obj, :body %>
+<!-- bg-image-home -->
+<!--INSPIRING READERS BY PROVIDING HOME LIBRARIES TO CHILDREN IN NEED -->
+<!-- An initiative of the Barbara Bush Houston Literacy Foundation -->
