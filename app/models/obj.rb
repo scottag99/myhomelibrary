@@ -1,5 +1,14 @@
 class Obj < Scrivito::BasicObj
 
+  attribute :header_class, :string
+  attribute :show_in_menu, :enum, values: %w[true false], default: 'true'
+  attribute :menu_order, :integer, default: 1000
+  attribute :menu_text, :string
+
+  def get_menu_order
+    return menu_order.presence || 1000
+  end 
+
   # def self.valid_page_classes_beneath(parent_path)
   #   [Page, BlogPage, BlogPostPage]
   # end

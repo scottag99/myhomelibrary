@@ -7,7 +7,6 @@
     <%= scrivito_tag :div, @obj, :tags %>
   <% end %>
 
-  <%= scrivito_details_for 'Permalink' do %>
-    <%= scrivito_tag :div, @obj, :_permalink %>
-  <% end %>
+  <%= render 'scrivito/common_details' %>
+  
 <% end %>

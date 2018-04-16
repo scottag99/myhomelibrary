@@ -47,4 +47,8 @@ module ApplicationHelper
   def live_campaigns?
     Campaign.where("deadline > ? and ready_for_donations = ?", 1.day.from_now.at_midnight, true).count > 0
   end
+
+  def get_scrivito_menu_items
+    Obj.all.select{|obj|obj.permalink}.select{|obj| obj.show_in_menu == 'true' }.sort_by(&:get_menu_order)
+  end
 end
