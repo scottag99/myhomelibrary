@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       member do
         get 'export'
         put 'active'
+        post 'upload'
       end
       resources :catalog_entries
     end

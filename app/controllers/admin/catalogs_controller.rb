@@ -1,5 +1,7 @@
 require 'nokogiri'
 class Admin::CatalogsController < Admin::BaseController
+  include GoogleSpreadsheet
+
   def index
     @catalogs = Catalog.all
     respond_to do |format|
@@ -45,30 +47,25 @@ class Admin::CatalogsController < Admin::BaseController
 
   def create
     @catalog = Catalog.create!(catalog_params)
-    uploaded_io = params[:catalog][:upload]
-    doc = File.open(uploaded_io.path) { |f| Nokogiri::XML(f) }
-
-    doc.xpath('//product').each do |elem|
-      isbn = elem.xpath('./isbn').first.text
-
-      b = Book.where(isbn: isbn).first_or_initialize
-      b.title = elem.xpath('./name').first.text
-      b.author = elem.xpath('./author').first.text
-      b.description = elem.xpath('./description').first.inner_html
-      b.isbn = isbn
-      b.level = elem.xpath('./grade').first.text
-      b.cover_image_url = elem.xpath('./coverimage/image').attr('href')
-      b.ar_points = elem.at_xpath('./ar_points').nil? ? nil : elem.xpath('./ar_points').first.text
-      b.ar_level = elem.at_xpath('./ar_level').nil? ? nil : elem.xpath('./ar_level').first.text
-      b.grl = elem.at_xpath('./grl').nil? ? nil : elem.xpath('./grl').first.text
-      b.dra = elem.at_xpath('./dra').nil? ? nil : elem.xpath('./dra').first.text
-      b.is_bilingual = elem.at_xpath('./is_bilingual').nil? ? false : elem.xpath('.is_bilingual').first.text.downcase == 'true'
-      b.save
-
-      entry = @catalog.catalog_entries.new
-      entry.book = b
-      entry.price = elem.xpath('./cost').first.inner_html.sub('$', '')
-      entry.save
+    headers = ['title*', 'author*', 'description*', 'isbn*', 'level', 'cover_image_url*', 'price*',
+      'is_bilingual', 'is_chapter', 'year', 'ar_points', 'ar_level', 'grl', 'dra', 'id']
+    begin
+      auth = login()
+      ss = new_sheet("Book Load for #{@catalog.name} (#{@catalog.source})")
+      hide_column(ss, headers.size)
+      data = [headers,
+              Array.new(headers.size)<<'Instructions',
+              Array.new(headers.size)<<"Use the table to the left to enter your book data. Fields with a '*' are required.",
+              Array.new(headers.size)<<'You can copy/paste and edit here until you are ready to upload.',
+              Array.new(headers.size)<<'All changes to this sheet are saved automatically. You can stop and return to continue your work at any time.',
+              Array.new(headers.size)<<'When ready, close this sheet and return to My Home Library to finish the upload process from the Catalog page.'
+      ]
+      range = 'A1:Z15'
+      add_data(ss, range, data, auth)
+      @catalog.book_data_reference = ss.spreadsheet_url
+      @catalog.save
+    rescue => ex
+      Rails.logger.error(ex)
     end
 
     respond_to do |format|
@@ -103,6 +100,74 @@ class Admin::CatalogsController < Admin::BaseController
     @catalog = Catalog.find(params[:id])
     @catalog.active = !@catalog.active
     @catalog.save
+  end
+
+  def upload
+    @catalog = Catalog.find(params[:id])
+    unless @catalog.book_data_reference.nil?
+      begin
+        id = @catalog.book_data_reference.split("/").reverse[1]
+        auth = login()
+        ss = get_sheet(id, auth)
+        rows = get_data(ss, 'A1:Z1', auth)
+        header = rows.values.shift.collect{|v| v.gsub(/\*/, '').strip}
+        range = "A2:#{('A'..'Z').to_a[header.size-1]}"
+        books = get_data(ss, range, auth)
+        idx = 0
+        valid_rows = []
+        error_rows = []
+        books.values.each do |row_data|
+          idx += 1
+          while(row_data.size < header.size)
+            row_data << ""
+          end
+          row = Hash[[header, row_data].transpose]
+          # Only process rows without an ID
+          if row['id'].empty?
+            row.each{|k,v| row[k] = v.strip if v.is_a? String }
+            book = Book.where(isbn: row['isbn']).first_or_initialize
+            book.attributes = row.to_hash.except('price', 'id')
+            book.save
+            w = @catalog.catalog_entries.create(book: book, price: row['price'])
+            if w.save
+              row_data[header.index('id')] = w.id
+              valid_rows << idx
+            else
+              flash[:notice] = "Some rows had errors, please correct and upload again to fix."
+              error_rows << idx
+            end
+          end
+        end
+        add_data(ss, range, books.values, auth)
+
+        i = 0
+        start_row = valid_rows[i]
+        while i < valid_rows.size
+          if i+1 == valid_rows.size || (valid_rows[i+1] - valid_rows[i] != 1)
+            color_rows(ss, start_row, valid_rows[i], 0, header.size, 0.8509804, 0.91764706, 0.827451, 1.0, auth)
+            start_row = valid_rows[i+1]
+          end
+          i += 1
+        end
+
+        i = 0
+        start_row = error_rows[i]
+        while i < error_rows.size
+          if i+1 == error_rows.size || (error_rows[i+1] - error_rows[i] != 1)
+            color_rows(ss, start_row, error_rows[i], 0, header.size, 0.9019608, 0.72156864, 0.6862745, 1.0, auth)
+            start_row = error_rows[i+1]
+          end
+          i += 1
+        end
+      rescue => ex
+        Rails.logger.error(ex)
+        flash[:notice] = ex.message
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to url_for([get_namespace, @catalog]) }
+    end
   end
 
 private

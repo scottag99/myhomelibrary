@@ -9,6 +9,12 @@
       <dd><%= @catalog.source %></dd>
       <dt>Active</dt>
       <dd><%= @catalog.active %>
+      <dt>Book Data Reference</dt>
+      <dd><%= link_to_if @catalog.book_data_reference, @catalog.book_data_reference, @catalog.book_data_reference, target: '_blank' %>
+        <%= form_for :catalog, url: url_for([:upload, get_namespace, @catalog]) do |f| %>
+          <%= f.submit "Upload", class: "btn btn-default btn-primary" %>
+        <% end %>
+      </dd>
     </dl>
   </div>
   <div class="panel panel-default">
