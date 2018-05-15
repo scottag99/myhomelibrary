@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'donate', to: 'home#donate'
   get 'give', to: 'home#give'
   get 'bookdrive', to: 'home#bookdrive'
-  get 'search/(:slug)', to: 'home#search', as: 'search'
+  get 'search/:slug', to: redirect('/search?slug=%{slug}'), as: 'search'
   get 'wishlists', to: 'home#wishlists'
   post 'success', to: 'home#success'
 
@@ -109,6 +109,7 @@ Rails.application.routes.draw do
   # See the documentation of 'scrivito_route' for a detailed description.
   scrivito_route '/', using: 'homepage'
   scrivito_route '(/)(*slug-):id', using: 'slug_id'
-  scrivito_route '/*permalink', using: 'permalink', format: false
+  scrivito_route '/(*permalink)/(:slug)', using: 'permalink', format: false
+
 
 end
