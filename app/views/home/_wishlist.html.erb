@@ -1,5 +1,9 @@
 <%
   unique_id = 1 + rand(10000)
+  has_price = !@wishlist_prices[wishlist.id].nil?
+  has_donation = !@donations[wishlist.id].nil?
+  funded = has_price && has_donation && @wishlist_prices[wishlist.id] <= @donations[wishlist.id]
+  is_classroom_sponsored = @classroom_sponsored.include?(wishlist.id)
 %>
 <div class="search-entry" data-wishlist-id=<%= wishlist.id %>>
   <div>
@@ -9,8 +13,9 @@
          - Age <%= wishlist.reader_age %>
          <% end %></h3>
       <h4>Grade - <%= wishlist.grade %></h4>
-      <h4 class="text-muted"><%= wishlist.campaign.organization.name %></h5>
-      <h5 class="text-muted">Teacher: <%= wishlist.teacher %></h4>
+      <h4 class="text-muted"><%= wishlist.campaign.organization.name %></h4>
+      <h4 class="text-muted">Teacher: <%= wishlist.teacher %></h4>
+      <%= button_to 'Sponsor Classroom', sponsor_classroom_url(:teacher => wishlist.teacher, :campaign_id => wishlist.campaign.id), remote: true, :class => 'btn btn-primary btn-notsponsored-class' unless is_classroom_sponsored %>
     </div>
     <div class="visible-xs" id="wishlist-book-list-toggle">
       <button class="btn btn-default btn-xs" data-toggle="collapse" data-target="#book-list-<%= unique_id%>" aria-expanded="false" aria-controls="book-list-<%= unique_id%>">
@@ -19,13 +24,8 @@
     </div>
     <div class="list-group wishlist-book-list collapse" id="book-list-<%= unique_id%>">
 
-      <%= render partial: 'wishlist_entry', collection: wishlist.wishlist_entries %>
+      <%= render partial: 'home/wishlist_entry', collection: wishlist.wishlist_entries %>
     </div>
-    <%
-    has_price = !@wishlist_prices[wishlist.id].nil?
-    has_donation = !@donations[wishlist.id].nil?
-    funded = has_price && has_donation && @wishlist_prices[wishlist.id] <= @donations[wishlist.id]
-    %>
     <p><%= link_to 'Sponsor This Child', donate_url({:id_list => wishlist.id}), :class => 'btn btn-primary btn-notsponsored' if !funded %>
        <%= link_to 'Sponsored', '#', :class => 'btn btn-default disabled btn-sponsored', :disabled => true if funded %></p>
   </div>

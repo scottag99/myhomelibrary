@@ -437,6 +437,15 @@ ul.right-admin {
     border-radius: 30px;
     padding: 5px 20px;
   }
+
+  .btn-notsponsored-class {
+    color: #ff;
+    background-color: transparent;
+    border: 2px solid #fff;
+    border-radius: 30px;
+    padding: 5px 20px;
+  }
+
 }
 @media(min-width: 767px) {
   .wishlist-book-list.collapse

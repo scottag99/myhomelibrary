@@ -7,9 +7,10 @@ Rails.application.routes.draw do
   root to: redirect('/home')
   get 'home/library'
   get 'donate', to: 'home#donate'
+  post 'sponsor_classroom', to: 'home#sponsor_classroom'
   get 'give', to: 'home#give'
   get 'bookdrive', to: 'home#bookdrive'
-  get 'search/:slug', to: redirect('/search?slug=%{slug}'), as: 'search'
+  get 'search/:slug', to: redirect('/search?slug=%{slug}'), as: 'old_search'
   get 'wishlists', to: 'home#wishlists'
   post 'success', to: 'home#success'
 
@@ -110,6 +111,10 @@ Rails.application.routes.draw do
   scrivito_route '/', using: 'homepage'
   scrivito_route '(/)(*slug-):id', using: 'slug_id'
   scrivito_route '/(*permalink)/(:slug)', using: 'permalink', format: false
+
+  #work around to get search_url working...this route should not actually match
+  #b/c scrivito above will catch it
+  get 'search/(:slug)', to: redirect('/search?slug=%{slug}'), as: 'search'
 
 
 end

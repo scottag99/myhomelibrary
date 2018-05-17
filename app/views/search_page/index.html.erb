@@ -102,150 +102,150 @@ These great companies make it possible
 var preselected = "<%= session[:wishlist_cart] %>";
 
 if(preselected.length > 0){
-$(document).ready(function() {
-  $.each(preselected.split(','), function(idx, id){
-    addIdToCart(id);
+  $(document).ready(function() {
+    $.each(preselected.split(','), function(idx, id){
+      addIdToCart(id);
+    });
   });
-});
 }
 
 $('body').on('click', '.donation a', completeDonation);
 
 function completeDonation(){
-var modalDonation = '<div class="input-group">\
-<input type="number" step="1.00" id="addl_donation_slug" class="form-control" placeholder="Enter dollar amount" /></div>\
-<div><% if @organization.nil? -%>\
-<%= link_to "Complete Donation", donate_url(), :class => "btn btn-warning btn-lg focus", :id => "checkout-btn-3" %></div>\
-<% else -%>\
-<%= link_to "Complete Donation to #{@organization.name}", donate_url(:campaign_id => @organization.current_campaign), :id => "checkout-btn-3", :class => 'btn btn-warning btn-lg focus' if live_campaigns? %>\
-<%= link_to "Complete Donation to #{@organization.name}", donate_url(:organization_id => @organization.id), :id => "checkout-btn-3", :class => 'btn btn-warning btn-lg focus' unless live_campaigns? %>\
-<% end -%>'
+  var modalDonation = '<div class="input-group">\
+  <input type="number" step="1.00" id="addl_donation_slug" class="form-control" placeholder="Enter dollar amount" /></div>\
+  <div><% if @organization.nil? -%>\
+  <%= link_to "Complete Donation", donate_url(), :class => "btn btn-warning btn-lg focus", :id => "checkout-btn-3" %></div>\
+  <% else -%>\
+  <%= link_to "Complete Donation to #{@organization.name}", donate_url(:campaign_id => @organization.current_campaign), :id => "checkout-btn-3", :class => 'btn btn-warning btn-lg focus' if live_campaigns? %>\
+  <%= link_to "Complete Donation to #{@organization.name}", donate_url(:organization_id => @organization.id), :id => "checkout-btn-3", :class => 'btn btn-warning btn-lg focus' unless live_campaigns? %>\
+  <% end -%>'
 
-$("#globalModalShopping .modal-body").html(modalDonation);
-$('#globalModalShopping').modal();
+  $("#globalModalShopping .modal-body").html(modalDonation);
+  $('#globalModalShopping').modal();
 
-return false;
+  return false;
 }
 
 $('body').on("click", '.search-entry a', function() {
-if (!$('#sponsor-list').is(':visible')) return true;
-var entry = $(this).closest('.search-entry');
-addToCart(entry);
+  if (!$('#sponsor-list').is(':visible')) return true;
+  var entry = $(this).closest('.search-entry');
+  addToCart(entry);
 
-var template = $('#place-inside-template').html()
+  var template = $('#place-inside-template').html()
 
-var names = $('.donation-info strong').slice(0,2).map(function(){ return $(this).text(); }).get().join('and ')
+  var names = $('.donation-info strong').slice(0,2).map(function(){ return $(this).text(); }).get().join('and ')
 
-$("#globalModalShopping .modal-body").html(template);
+  $("#globalModalShopping .modal-body").html(template);
 
-var list = $('#sponsor-list');
-var idList = list.data('id-list');
-var checkoutBtn = $('#checkout-btn-2');
-var href = checkoutBtn.attr('href');
-if (href) {
-  href = href.replace(/\?.+/, "") + "?id_list=" + idList;
-  checkoutBtn.attr('href', href);
-}
+  var list = $('#sponsor-list');
+  var idList = list.data('id-list');
+  var checkoutBtn = $('#checkout-btn-2');
+  var href = checkoutBtn.attr('href');
+  if (href) {
+    href = href.replace(/\?.+/, "") + "?id_list=" + idList;
+    checkoutBtn.attr('href', href);
+  }
 
-$('#globalModalShopping').modal();
-$(".sponsor-shoppingcart").clone().appendTo(".modal-shopping-info");
-$(".kid-names").html(names);
+  $('#globalModalShopping').modal();
+  $(".sponsor-shoppingcart").clone().appendTo(".modal-shopping-info");
+  $(".kid-names").html(names);
 
-return false;
+  return false;
 });
 
 $('body').on("click", '.list-group-item button', function() {
-var entry = $(this).closest('li');
-var id = entry.data('wishlist-id');
-var idList = updateIdList(id, null, true);
-entry.remove();
+  var entry = $(this).closest('li');
+  var id = entry.data('wishlist-id');
+  var idList = updateIdList(id, null, true);
+  entry.remove();
 
-return false;
+  return false;
 });
 
 function updateIdList(id, text, isRemove) {
-var list = $('#sponsor-list');
-var idList = list.data('id-list');
+  var list = $('#sponsor-list');
+  var idList = list.data('id-list');
 
-if (idList.length == 0) {
-  idList = [];
-}
+  if (idList.length == 0) {
+    idList = [];
+  }
 
-if (!isRemove && idList.indexOf(id) >= 0) {
+  if (!isRemove && idList.indexOf(id) >= 0) {
+    return idList;
+  }
+
+  if (isRemove) {
+    idList.splice(idList.indexOf(id), 1);
+  } else {
+    idList[idList.length] = id;
+  }
+
+
+  updateCheckoutUrl(idList);
+  list.data('id-list', idList);
+
+  $('#subtotal').html('Your Subtotal: <p class="dollars">$' + Number(idList.length*(30)).toFixed(2)) + '</p>';
+  if (!isRemove) {
+    var li = $('<li class="list-group-item donation-group"><p class="donation-info"><strong>' + text.split('-')[0] + '</strong></p><p class="donation-amt dollars">$30.00</p><button class="sponsor-btn close btn-sm">Remove</button></li>');
+    li.data('wishlist-id', id);
+    list.find('ul').append(li);
+  } else {
+    $(".search-entry[data-wishlist-id=" + id + "] a").removeClass('disabled');
+    $(".search-entry[data-wishlist-id=" + id + "] a").removeClass('btn-sponsored');
+    $(".search-entry[data-wishlist-id=" + id + "] a").addClass('btn-notsponsored');
+    $(".search-entry[data-wishlist-id=" + id + "] a").html('Sponsor This Child');
+
+  }
+
   return idList;
 }
 
-if (isRemove) {
-  idList.splice(idList.indexOf(id), 1);
-} else {
-  idList[idList.length] = id;
-}
-
-
-updateCheckoutUrl(idList);
-list.data('id-list', idList);
-
-$('#subtotal').html('Your Subtotal: <p class="dollars">$' + Number(idList.length*(30)).toFixed(2)) + '</p>';
-if (!isRemove) {
-  var li = $('<li class="list-group-item donation-group"><p class="donation-info"><strong>' + text.split('-')[0] + '</strong></p><p class="donation-amt dollars">$30.00</p><button class="sponsor-btn close btn-sm">Remove</button></li>');
-  li.data('wishlist-id', id);
-  list.find('ul').append(li);
-} else {
-  $(".search-entry[data-wishlist-id=" + id + "] a").removeClass('disabled');
-  $(".search-entry[data-wishlist-id=" + id + "] a").removeClass('btn-sponsored');
-  $(".search-entry[data-wishlist-id=" + id + "] a").addClass('btn-notsponsored');
-  $(".search-entry[data-wishlist-id=" + id + "] a").html('Sponsor This Child');
-
-}
-
-return idList;
-}
-
 function addIdToCart(id) {
-var wishlist = $('.search-entry[data-wishlist-id=' + id + ']');
-addToCart(wishlist);
+  var wishlist = $('.search-entry[data-wishlist-id=' + id + ']');
+  addToCart(wishlist);
 }
 
 function addToCart(entry) {
-//console.log(entry)
-var idList = updateIdList(entry.data('wishlist-id'), entry.find('h3').html());
-entry.find('a').addClass('disabled');
-entry.find('a').addClass('btn-sponsored');
-entry.find('a').removeClass('btn-notsponsored');
-entry.find('a').html('Selected');
+  //console.log(entry)
+  var idList = updateIdList(entry.data('wishlist-id'), entry.find('h3').html());
+  entry.find('a').addClass('disabled');
+  entry.find('a').addClass('btn-sponsored');
+  entry.find('a').removeClass('btn-notsponsored');
+  entry.find('a').html('Selected');
 }
 
 function updateCheckoutUrl(idList) {
-var checkoutBtn = $('#checkout-btn');
-if (idList.length == 0) {
-  $('#empty-list-message').show();
-  checkoutBtn.addClass('disabled');
-  $('#program-checkout').removeClass('disabled');
-} else {
-  $('#empty-list-message').hide();
-  checkoutBtn.removeClass('disabled');
-  $('#program-checkout').addClass('disabled');
-}
+  var checkoutBtn = $('#checkout-btn');
+  if (idList.length == 0) {
+    $('#empty-list-message').show();
+    checkoutBtn.addClass('disabled');
+    $('#program-checkout').removeClass('disabled');
+  } else {
+    $('#empty-list-message').hide();
+    checkoutBtn.removeClass('disabled');
+    $('#program-checkout').addClass('disabled');
+  }
 
-var href = checkoutBtn.attr('href');
-if (href) {
-  href = href.replace(/\?.+/, "") + "?id_list=" + idList;
-  checkoutBtn.attr('href', href);
-}
+  var href = checkoutBtn.attr('href');
+  if (href) {
+    href = href.replace(/\?.+/, "") + "?id_list=" + idList;
+    checkoutBtn.attr('href', href);
+  }
 }
 
 $('body').on("change", '#addl_donation', function() {
-var link = $("#checkout-btn").attr('href');
-$("#checkout-btn-2").attr("href", link + '&addl_donation=' + $(this).val());
+  var link = $("#checkout-btn").attr('href');
+  $("#checkout-btn-2").attr("href", link + '&addl_donation=' + $(this).val());
 });
 
 $('body').on("change", '#addl_donation_slug', function() {
-var link = $("#program-checkout").attr('href');
-if (!link)
-{
-  link = $("#checkout-btn-3").attr('href').replace(/&addl_donation\=[\d\.]*/, ''); //handle case where user came straight in to program donation
-}
-$("#checkout-btn-3").attr("href", link + '&addl_donation=' + $(this).val());
+  var link = $("#program-checkout").attr('href');
+  if (!link)
+  {
+    link = $("#checkout-btn-3").attr('href').replace(/&addl_donation\=[\d\.]*/, ''); //handle case where user came straight in to program donation
+  }
+  $("#checkout-btn-3").attr("href", link + '&addl_donation=' + $(this).val());
 });
 
 </script>
@@ -276,6 +276,41 @@ $("#checkout-btn-3").attr("href", link + '&addl_donation=' + $(this).val());
     <div class="input-group"><h3>You can also add a general donation as well!</h3>
     <input type="number" step="1.00" id="addl_donation" class="form-control" placeholder="Enter dollar amount" /></div>
     <%= link_to "Complete My Sponsorship", donate_url(:id_list => ""), :class => "btn btn-md", :id => "checkout-btn-2" %>
+  </div>
+</div>
+</script>
+
+<script type="text/template" id="sponsor-classroom-template">
+<div class="container-fluid">
+  <div class="row">
+    <div><h3>Ready to Complete your Sponsorship?</h3></div>
+    <div class="col-md-6 col-xs-12 modal-shopping-info">
+      <div class="sponsor-shoppingcart">
+        <div class="sponsor-header">
+          <h4 class="sponsor-title">Classroom Selected</h4>
+        </div>
+
+        <ul class="list-group" id="sponsor-unordered-list">
+          <li class="list-group-item donation-group"><p class="donation-info"><strong id="classroom-teacher"></strong></p></li>
+        </ul>
+        <span id="subtotal">Your Subtotal: <p class="dollars" id="classroom-dollars"></p></span>
+      </div>
+    </div>
+    <div class="col-md-6 col-xs-12 modal-shopping-description">
+      <div class="row">
+        <div class="col-md-6 col-xs-12" style="padding-left: 0;">
+          <h4>Thank you!</h4>
+          <p>Your generous donation will give <span id="classroom-wishlist-count"></span> students their very own home library!</p>
+        </div>
+        <div class="col-md-6 hidden-xs" style="padding-bottom: 0;">
+            <img src="<%= asset_path('kids6.jpg') %>" />
+            <img src="<%= asset_path('kids8.png') %>" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="general-donation-option">
+    <%= link_to "Complete My Sponsorship", donate_url(:id_list => ""), :class => "btn btn-md", :id => "classroom-checkout-btn" %>
   </div>
 </div>
 </script>

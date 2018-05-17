@@ -29,6 +29,7 @@ var WishlistID = "<%= @wishListID %>"; // org wishlist ID
 var DonationLevel = <%= @donationLevel %>; // org donationlevel
 var ReaderName = "<%= @reader_name %>"; // reader name
 var CampaignId = "<%= @campaign_id %>"; // campaign id
+var is_classroom_sponsored = <%= @is_classroom_sponsored %>;
 
 function kimbiaSuccess(kimbiaResponse) {
   var initCharge = kimbiaResponse.initialCharge.replace("$", "");
@@ -40,7 +41,7 @@ function kimbiaSuccess(kimbiaResponse) {
     url: '<%= success_url %>',
     dataType: 'json',
     method: 'POST',
-    data: {'id_list': wishlistId, 'amount': initCharge, 'confirmation_code': confCode, 'campaign_id': CampaignId},
+    data: {'id_list': wishlistId, 'amount': initCharge, 'confirmation_code': confCode, 'campaign_id': CampaignId, 'is_classroom_sponsored': is_classroom_sponsored},
     success: function(data) {
 
     }

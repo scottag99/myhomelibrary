@@ -30,6 +30,7 @@ class HomeController < ApplicationController
   def donate
     addl_donation = params[:addl_donation].nil? ? 0.0 : params[:addl_donation].to_d
     addl_donation_slug = params[:addl_donation_slug].nil? ? 0.0 : params[:addl_donation_slug].to_d
+    @is_classroom_sponsored = params[:classroom] == 'true'
     if params[:id_list].nil?
       @wishlists = []
       @donationLevel = addl_donation + addl_donation_slug
@@ -72,6 +73,10 @@ class HomeController < ApplicationController
     end
   end
 
+  def sponsor_classroom
+    @wishlist_ids = Wishlist.joins('LEFT JOIN donations on donations.wishlist_id = wishlists.id').where("teacher = ? and wishlists.campaign_id = ? and donations.id is NULL", params[:teacher], params[:campaign_id]).pluck(:id)
+  end
+
   def search
   end
 
@@ -86,7 +91,7 @@ class HomeController < ApplicationController
     if @wishlists.count > 0
       amt = params[:amount].to_d/@wishlists.count unless params[:amount].nil? || @wishlists.count == 0
       @wishlists.each do |w|
-        @donation = w.donations.create!({:confirmation_code => params[:confirmation_code], :amount => amt})
+        @donation = w.donations.create!({:confirmation_code => params[:confirmation_code], :amount => amt, :is_classroom_sponsorship => params[:is_classroom_sponsored]})
       end
     elsif campaign = Campaign.find(params[:campaign_id])
       @donation = campaign.donations.create!({:confirmation_code => params[:confirmation_code], :amount => params[:amount]})

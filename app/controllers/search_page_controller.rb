@@ -6,7 +6,6 @@ class SearchPageController < CmsController
 private
 
   def find_organization
-    Rails.logger.info("SLUGGGGGGG: #{params}")
     unless params[:slug].nil?
       @organization = Organization.find_by_slug(params[:slug])
     end
@@ -43,6 +42,7 @@ private
     wishlist_ids = @wishlists.collect{|w| w.id}
     @wishlist_prices = WishlistEntry.group("wishlist_id").where("wishlist_id in (?)", wishlist_ids).sum(:price)
     @donations = Donation.group("wishlist_id").where("wishlist_id in (?)", wishlist_ids).sum(:amount)
+    @classroom_sponsored = Donation.where("wishlist_id in (?)", wishlist_ids).pluck(:wishlist_id)
   end
 
   def find_content

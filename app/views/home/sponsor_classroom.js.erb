@@ -1,0 +1,16 @@
+var template = $('#sponsor-classroom-template').html()
+
+$("#globalModalShopping .modal-body").html(template);
+
+var idList = <%= @wishlist_ids %>;
+var checkoutBtn = $('#classroom-checkout-btn');
+var href = checkoutBtn.attr('href');
+if (href) {
+  href = href.replace(/\?.+/, "") + "?classroom=true&id_list=" + idList;
+  checkoutBtn.attr('href', href);
+}
+
+$('#globalModalShopping').modal();
+$("#classroom-dollars").html('<%= number_to_currency(30*@wishlist_ids.size) %>');
+$("#classroom-wishlist-count").html('<%= @wishlist_ids.size %>');
+$("#classroom-teacher").html('<%= params[:teacher] %>');
