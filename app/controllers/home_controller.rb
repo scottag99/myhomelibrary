@@ -81,6 +81,7 @@ class HomeController < ApplicationController
   end
 
   def wishlists
+    @is_classroom_sponsored = false
     respond_to do |format|
       format.js {}
     end
