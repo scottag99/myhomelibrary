@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div class="row <%=scrivito_value(@obj.header_class) %>">
+    <%= render 'common/navbar' %>
+
+    <div class="page-headline">
+      <%= scrivito_tag :h1, @obj, :title %>
+      <%= scrivito_tag :h3, @obj, :subtitle %>
+      <a href="about" target="_self">Learn More</a>
+    </div>
+    <div class="col-md-0 col-md-offset-6 col-sm-offset-6 col-xs-offset-6 mouse">
+      <img src="<%= asset_path('scroll-button.png') %>" />
+    </div>
+
+  </div>
+</div>
+
+<%= scrivito_tag_list :ul, @obj, :toclist do |list, child| %>
+  <%= list.tag :li do %>
+    <%= link_to child.display_title, scrivito_path(child) %>
+  <% end %>
+<% end %>
+
+<%= scrivito_tag :div, @obj, :body %>
+<!-- bg-image-home -->
+<!--INSPIRING READERS BY PROVIDING HOME LIBRARIES TO CHILDREN IN NEED -->
+<!-- An initiative of the Barbara Bush Houston Literacy Foundation -->

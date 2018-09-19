@@ -1,0 +1,77 @@
+<nav class="main navbar navbar-default">
+  <div class="social-media">
+    <a href="mailto:info@myhomelibraryhouston.org?subject=I'd like more information">Contact Us</a>
+    <a href="https://www.facebook.com/bushhoustonliteracy/" target="_blank"><img src="<%= asset_path('facebook.png') %>" /></a>
+    <a href="https://twitter.com/BushHoustonLit" target="_blank"><img src="<%= asset_path('twitter.png') %>" /></a>
+  </div>
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a href="/" class="non-admin"><img class="non-admin" src="<%= asset_path('my-home-library.png') %>" alt="Barbara Bush Houston Literacy Foundation" /></a>
+  </div>
+  <div id="navbar" class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-left">
+      <% get_scrivito_menu_items.each do |menu| %>
+      <li><%= link_to menu.menu_text || menu.permalink.titleize, scrivito_path(menu) %></li>
+      <% end %>
+
+      <% unless session[:userinfo].nil?  -%>
+      <% if user_is_admin? -%>
+      <li><%= link_to 'Admin', '/admin' %></li>
+      <% end -%>
+
+      <li>
+        <a href="#"><img class="avatar" src="<%= session[:userinfo]['info']['image'] %>" alt="<%= session[:userinfo]['info']['name'] %>" />
+          <span class="hidden-sm"><%= session[:userinfo]['info']['name'] %></span>
+        </a>
+      </li>
+
+      <li><a href="/logout?returnTo=<%= request.base_url %>&client_id=<%= Rails.application.secrets.auth0_client_id %>">Logout</a></li>
+      <% end -%>
+    </ul>
+    <% orgs = Organization.where("is_included = ?", true) %>
+
+    <div class="nav navbar-nav navbar-right">
+      <li role="presentation" class="dropdown">
+        <a href="search?complete=true" class="non-admin btn">
+          Donate to Program
+        </a>
+        <!--ul class="dropdown-menu">
+            <li><a href="search">My Home Library General</a></li>
+            <% orgs.each do |org| %>
+            <li>
+              <%= link_to(org.name, search_url(org.slug)) %>
+            </li>
+            <% end %>
+        </ul-->
+      </li>
+    </div>
+
+    <% if orgs.count > 0 %>
+    <div class="nav navbar-nav navbar-right">
+      <li role="presentation" class="dropdown">
+        <a class="dropdown-toggle non-admin btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          Sponsor a Child <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <!--li><a href="search">Sponsor Any Child</a></li-->
+            <% orgs.each do |org| %>
+            <li>
+              <%= link_to(org.name, search_url(org.slug)) %>
+            </li>
+            <% end %>
+        </ul>
+      </li>
+    </div>
+    <% end -%>
+  </div>
+
+  <!-- <div class="col-md-0 col-md-offset-6 col-sm-offset-6 col-xs-offset-6 mouse">
+    <img src="<%= asset_path('scroll-button.png') %>" />
+  </div> -->
+
+</nav>

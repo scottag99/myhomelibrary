@@ -1,0 +1,2 @@
+class ImpactPageController < CmsController
+end

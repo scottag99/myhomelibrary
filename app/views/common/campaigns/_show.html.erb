@@ -7,14 +7,18 @@
       <dd><%= @campaign.name %></dd>
       <dt>Deadline</dt>
       <dd><%= @campaign.deadline %></dd>
-      <dt>Ready for Donations</dt>
-      <dd><input type=checkbox disabled <%= @campaign.ready_for_donations ? 'checked' : '' %> /></dd>
       <dt>Address</dt>
       <dd><address><%= h(@campaign.address).gsub(/\n/, '<br/>').html_safe %></address></dd>
+      <dt>Ready for Donations</dt>
+      <dd><input type=checkbox disabled <%= @campaign.ready_for_donations ? 'checked' : '' %> /></dd>
       <dt>Can Edit Wish Lists</dt>
       <dd><input type=checkbox disabled <%= @campaign.can_edit_wishlists ? 'checked' : '' %> /></dd>
       <dt>Book Limit</dt>
       <dd><%= @campaign.book_limit %></dd>
+      <dt>Roster Data Reference</dt>
+      <dd><%= link_to_if @campaign.roster_data_reference, @campaign.roster_data_reference, @campaign.roster_data_reference, target: '_blank' %></dd>
+      <dt>Notes</dt>
+      <dd><%= h(@campaign.notes).gsub(/\n/, '<br/>').html_safe %></dd>
     </dl>
   </div>
 
@@ -26,9 +30,9 @@
     <%= link_to '<i class="glyphicon glyphicon-plus"></i> New Wishlist'.html_safe, url_for([:new, get_namespace, @campaign.organization, @campaign, :wishlist]), :class => "btn btn-xs btn-primary" %>
     <% end %>
     <input placeholder="Filter..." type="text" oninput="onFilterChanged(this.value)" id="filterTerm" />
-    <% if @campaign.can_edit_wishlists %>
+    <% if @campaign.can_edit_wishlists && (user_is_admin? || user_is_coordinator?) %>
     <%= link_to 'Bulk Edit', url_for([:edit_multiple, get_namespace, @campaign.organization, @campaign, :wishlists, :wishlists_ids => '']), :class => "btn btn-xs btn-warning", :onclick => 'bulkEdit()', :remote => true, :id => 'bulk-edit' %>
-    <%= link_to 'Bulk Upload', url_for([:edit_upload, get_namespace, @campaign.organization, @campaign, :wishlists]), :class => "btn btn-xs btn-primary", :remote => true, :id => 'bulk-upload' if admin? %>
+    <%= link_to 'Bulk Upload', url_for([:edit_upload, get_namespace, @campaign.organization, @campaign, :wishlists]), :class => "btn btn-xs btn-primary", :remote => true, :id => 'bulk-upload' if admin? || is_coordinator?(@campaign.organization) %>
     <% end %>
     </div>
     <div id="myGrid" style="height: 450px;" class="ag-bootstrap"></div>
@@ -101,7 +105,9 @@ function editButton(val) {
   } else {
     var del = is_admin ? '<a class="btn btn-danger btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id ) + '" data-method="delete" data-confirm="This action cannot be undone. Are you sure?">Delete</a>' : '';
     return '<a class="btn btn-info btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/manage') + '">Pick Books</a> ' +
-      '<a class="btn btn-warning btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/edit') + '">Edit</a> ' + del;
+      '<a class="btn btn-info btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/toggle_delivered') + '" data-method="put">Delivered</a> ' +
+      '<a class="btn btn-warning btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/edit') + '">Edit</a> ' +
+      del;
       ;
   }
 }
@@ -117,14 +123,15 @@ var gridOptions = {
         {headerName: 'Grade', field: 'grade', width: 75, cellClass: 'mhl-ag-grid-cell'},
         //{headerName: 'GRL', field: 'grl', width: 75, cellClass: 'mhl-ag-grid-cell'},
         {headerName: 'ID', field: 'external_id', width: 75, cellClass: 'mhl-ag-grid-cell'},
-        {headerName: 'Book Count', field: 'book_count', width: 100, cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right'}
+        {headerName: 'Book Count', field: 'book_count', width: 100, cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right'},
+        {headerName: 'Delivered', field: 'is_delivered', width: 100, cellClass: 'mhl-ag-grid-cell'}
         <% if admin? %>
         ,
         {headerName: 'Wish List Total ($)', field: 'wishlist_total', cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right', cellFormatter: asMoney},
         {headerName: 'Donation Total ($)', field: 'donation_total', cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right', cellFormatter: asMoney}
         <% end -%>
         ,
-        {headerName: '&nbsp;', field: 'actions', cellRenderer: editButton }
+        {headerName: '&nbsp;', field: 'actions', width: 300, cellRenderer: editButton }
 
     ],
 

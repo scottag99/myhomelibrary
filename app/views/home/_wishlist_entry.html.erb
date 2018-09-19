@@ -1,1 +1,4 @@
-<li class="list-group-item"><%= wishlist_entry.catalog_entry.book.title.html_safe %></li>
+<div class="list-group-item book-entry">
+  <div id="book-cover"><img src="<%= wishlist_entry.catalog_entry.book.cover_image_url.html_safe %>" /></div>
+  <div id="book-title"><%= wishlist_entry.catalog_entry.book.title.html_safe %></div>
+</div>

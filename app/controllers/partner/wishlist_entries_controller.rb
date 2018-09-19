@@ -1,6 +1,6 @@
 class Partner::WishlistEntriesController < Partner::BaseController
   include CommonWishlistEntryActions
-  before_action :set_organization
+  before_action :find_organization
 
   def update
     @wishlist_entry = current_wishlist.wishlist_entries.find(params[:id])

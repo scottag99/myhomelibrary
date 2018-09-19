@@ -1,3 +1,5 @@
+include GoogleSpreadsheet
+
 module CommonWishlistActions
   extend ActiveSupport::Concern
 
@@ -69,8 +71,107 @@ module CommonWishlistActions
     flash[:notice] = "Updated wishlists!"
     redirect_to get_campaign_url
   end
+
+  def edit_upload
+    @campaign = current_campaign
+    respond_to do |format|
+      format.js { render 'common/wishlists/edit_upload' }
+    end
+  end
+
+  def upload
+    unless current_campaign.roster_data_reference.nil?
+      begin
+        id = current_campaign.roster_data_reference.split("/").reverse[1]
+        auth = login()
+        ss = get_sheet(id, auth)
+        rows = get_data(ss, 'A1:Z1', auth)
+        header = rows.values.shift.collect{|v| v.gsub(/\*/, '').strip}
+        range = "A2:#{('A'..'Z').to_a[header.size-1]}"
+        roster = get_data(ss, range, auth)
+        idx = 0
+        valid_rows = []
+        error_rows = []
+        roster.values.each do |row_data|
+          idx += 1
+          while(row_data.size < header.size)
+            row_data << ""
+          end
+          row = Hash[[header, row_data].transpose]
+          # Only process rows without an ID
+          if row['id'].empty?
+            row.each{|k,v| row[k] = v.strip if v.is_a? String }
+            w = current_campaign.wishlists.create(row.to_hash)
+            if w.save
+              row_data[header.index('id')] = w.id
+              valid_rows << idx
+            else
+              flash[:notice] = "Some rows had errors, please correct and upload again to fix."
+              error_rows << idx
+            end
+          end
+        end
+        add_data(ss, range, roster.values, auth)
+
+        i = 0
+        start_row = valid_rows[i]
+        while i < valid_rows.size
+          if i+1 == valid_rows.size || (valid_rows[i+1] - valid_rows[i] != 1)
+            color_rows(ss, start_row, valid_rows[i], 0, header.size, 0.8509804, 0.91764706, 0.827451, 1.0, auth)
+            start_row = valid_rows[i+1]
+          end
+          i += 1
+        end
+
+        i = 0
+        start_row = error_rows[i]
+        while i < error_rows.size
+          if i+1 == error_rows.size || (error_rows[i+1] - error_rows[i] != 1)
+            color_rows(ss, start_row, error_rows[i], 0, header.size, 0.9019608, 0.72156864, 0.6862745, 1.0, auth)
+            start_row = error_rows[i+1]
+          end
+          i += 1
+        end
+      rescue => ex
+        Rails.logger.error(ex)
+        flash[:notice] = ex.message
+      end
+    end
+    #uploaded_io = params[:wishlist][:upload]
+
+    #parser = Roo::Spreadsheet.open(uploaded_io.path)
+    # header = parser.row(1)
+    # (2..parser.last_row).each do |i|
+    #   row = Hash[[header, parser.row(i)].transpose]
+    #   row.each{|k,v| row[k] = v.strip if v.is_a? String }
+    #   current_campaign.wishlists.create!(row.to_hash)
+    # end
+
+    respond_to do |format|
+      format.html { redirect_to url_for([get_namespace, current_organization, current_campaign]) }
+    end
+  end
+
+  def toggle_delivered
+    @wishlist = current_campaign.wishlists.find(params[:id])
+    @wishlist.is_delivered = !@wishlist.is_delivered
+    @wishlist.save
+    redirect_to get_campaign_url
+  end
+
+  def download
+    file_name = "#{current_campaign.organization.name.parameterize}-#{current_campaign.name.parameterize}-LabelSheet.csv"
+    content = "#{current_campaign.organization.name},#{current_campaign.name}\r\n"
+    content += "Teacher Name,Student Name,Grade\r\n"
+    current_campaign.wishlists.each do |w|
+      content += "\"#{w.teacher}\",\"#{w.reader_name}\",#{w.grade}\r\n"
+    end
+
+    send_data content, :filename => file_name
+  end
+
 private
   def wishlist_params
-    params.require(:wishlist).permit(:reader_name, :reader_age, :reader_gender, :teacher, :grade, :grl, :external_id)
+    params.require(:wishlist).permit(:reader_name, :reader_age, :reader_gender, :teacher, :grade, :grl, :external_id, :is_delivered)
   end
 end

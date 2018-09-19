@@ -35,9 +35,21 @@ class Admin::OrganizationsController < Admin::BaseController
       format.json { render json: Organization.all}
     end
   end
+
+  def included
+    @organization = Organization.find(params[:id])
+    @organization.is_included = !@organization.is_included
+    @organization.save
+    calculate_org_total()
+  end
+
 private
   def find_organizations
-    Organization.all
+    if params[:begin_date] && params[:end_date]
+      Organization.joins(:campaigns).where('campaigns.deadline between ? and ?', params[:begin_date], params[:end_date]).all
+    else
+      Organization.all
+    end
   end
 
   def find_organization
@@ -47,4 +59,5 @@ private
   def org_params
     params.require(:organization).permit(:name, :contact_name, :contact_email, :slug)
   end
+
 end

@@ -12,6 +12,7 @@
   <td>
     <% if wishlist.can_edit_wishlists %>
     <%= link_to "Pick Books", url_for([:manage, get_namespace, wishlist.campaign.organization, wishlist.campaign, wishlist]), class: "btn btn-info btn-xs" %>
+    <%= link_to "Toggle Delivered", url_for(['toggle_delivered', get_namespace, wishlist.campaign.organization, wishlist.campaign, wishlist])  method: :put, class: "btn btn-danger btn-xs", remote: true %>
     <%= link_to "Edit", url_for([:edit, get_namespace, wishlist.campaign.organization, wishlist.campaign, wishlist]), class: "btn btn-warning btn-xs" %>
     <%= link_to "Delete", url_for([get_namespace, wishlist.campaign.organization, wishlist.campaign, wishlist]),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'This action cannot be undone. Are you sure?'} %>
     <% end %>

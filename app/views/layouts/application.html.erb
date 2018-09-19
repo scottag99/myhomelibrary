@@ -21,61 +21,35 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png?v2=true">
     <meta name="theme-color" content="#ffffff">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@BushHoustonLit" />
+    <meta name="twitter:image" content="<%= asset_url('twitter-card-image.jpg') %>" />
+    <meta property="og:url"           content="<%= request.original_url %>" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="My Home Library" />
+    <meta property="og:description"   content="You can make a difference in a child’s life by sponsoring a home library with your tax-deductible donation. The My Home Library program of the Barbara Bush Houston Literacy Foundation empowers children to become strong readers by providing them access to books in their home." />
+    <meta property="og:image"         content="<%= asset_url('facebook-card-image.jpg') %>" />
+    <meta property="og:image:width"   content="1200" />
+    <meta property="og:image:height"  content="630" />
+    <meta property="og:image:alt"     content="Two students showing off books from their home library" />
+
     <title>My Home Library - Barbara Bush Houston Literacy Foundation</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= scrivito_head_tags %>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="https://use.typekit.net/dkz4tle.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
   </head>
 
   <body>
-    <!-- Fixed navbar -->
-    <nav class="main navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/"><img src="<%= asset_path('logo.png') %>" alt="Barbara Bush Houston Literacy Foundation" /></a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a target="_blank" href="http://www.bushhoustonliteracy.org/my-home-library/">About</a>
-            </li>
-            <li>
-              <a target="_blank" href="https://static1.squarespace.com/static/5731ee0840261d67c7155483/t/58d01d94d482e982a9e673c4/1490034069207/My+Home+Library+FAQ+FINAL.pdf">FAQ</a>
-            </li>
-            <li>
-              <a href="mailto:info@myhomelibraryhouston.org">Inquiries or Help</a>
-            </li>
-            <% unless session[:userinfo].nil?  -%>
-            <% if user_is_admin? -%>
-            <li>
-              <%= link_to 'Admin', '/admin' %>
-            </li>
-            <% end -%>
-            <li>
-              <a href="#"><img class="avatar" src="<%= session[:userinfo]['info']['image'] %>" alt="<%= session[:userinfo]['info']['name'] %>" />
-                <span class="hidden-sm"><%= session[:userinfo]['info']['name'] %></span>
-              </a>
-            </li>
-            <li><a href="/logout?returnTo=<%= request.base_url %>&client_id=<%= Rails.application.secrets.auth0_client_id %>">Logout</a></li>
-            <% end -%>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+    <!-- <%= yield :header %> -->
+    <%= scrivito_body_tags %>
 
     <div class="container-fluid">
       <% flash.each do |name, msg| -%>
@@ -84,8 +58,8 @@
           <%= msg %>
         </div>
       <% end -%>
-      <%= yield %>
-    </div><!-- /.container -->
+    </div>
+    <!-- /.container -->
 
     <%= javascript_include_tag 'application' %>
     <%= yield :foot %>
@@ -97,8 +71,26 @@
 
       ga('create', '<%=ENV["ANALYTICS_TRACKING_ID"] %>', 'auto');
       ga('send', 'pageview');
-
     </script>
+
+    <%= yield %>
+    <div class="container-fluid">
+      <div class="row featurette hero-bottom">
+        <div class="col-sm-6 col-sm-offset-3">
+          <a class="center-block text-center" href="http://www.bushhoustonliteracy.org/" target=_BLANK>
+            <img class="logo" src="<%= asset_path('my-home-library.png') %>" alt="Barbara Bush Houston Literacy Foundation" />
+          </a>
+          <div class="links">
+            <span><%= link_to 'Home', scrivito_path(Obj.find_by_permalink('home')) %></span>
+            <% get_scrivito_menu_items.each do |obj| %>
+              <span><%= link_to obj.menu_text || "*", scrivito_path(obj) %></span>
+            <% end %>
+            <span><a href="search">Be a Donor</a></span>
+          </div>
+          <p>Copyright My Home Library 2017-<%= Date.today.year %> All Rights Reserved</p>
+        </div>
+      </div>
+    </div>
 
   </body>
 </html>

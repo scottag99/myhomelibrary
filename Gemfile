@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+gem 'rails', '~> 5.1.4'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
@@ -17,8 +17,7 @@ gem 'coffee-rails', '~> 4.2'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-#gem 'turbolinks', '~> 5'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -34,6 +33,21 @@ gem 'omniauth-auth0', '~> 1.4.1'
 # https://github.com/auth0/ruby-auth0 For API access
 gem 'auth0'
 
+gem 'google-api-client'
+
+# Scrivito
+gem "scrivito", "~> 1.9"
+gem 'scrivito_two_column_widget'
+gem 'scrivito_three_column_widget'
+gem 'scrivito_linklist_widget'
+gem 'scrivito_elastic_slider_widget'
+gem 'scrivito_section_widgets', '~> 1.1'
+gem 'scrivito_content_box_widget'
+gem 'scrivito_column_widget', '~> 0.1.2'
+# gem 'scrivito_quote_widget', '~> 0.4.4'
+gem 'scrivito_text_image_widget', '~> 0.1.0'
+gem 'scrivito_picture_widget', '~> 0.1.1'
+
 gem 'roo', "~> 2.7.0"
 
 gem 'bootstrap-sass', '~> 3.3.6'
@@ -41,7 +55,7 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
 
 group :development, :production do
-  gem 'pg'
+  gem 'pg', '~> 0.21'
 end
 
 group :development, :test do

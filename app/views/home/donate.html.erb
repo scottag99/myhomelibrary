@@ -1,22 +1,47 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
 
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
 
+  return t;
+}(document, "script", "twitter-wjs"));</script>
  <script>
 var Campaign = "<%= @Campaign %>"; //Campaign name
 var SchoolName = "<%= @schoolname %>"; //Organization name
 var WishlistID = "<%= @wishListID %>"; // org wishlist ID
 var DonationLevel = <%= @donationLevel %>; // org donationlevel
 var ReaderName = "<%= @reader_name %>"; // reader name
+var CampaignId = "<%= @campaign_id %>"; // campaign id
+var is_classroom_sponsored = <%= @is_classroom_sponsored %>;
 
 function kimbiaSuccess(kimbiaResponse) {
   var initCharge = kimbiaResponse.initialCharge.replace("$", "");
   var confCode = kimbiaResponse.confirmationCode;
   var wishlistId = getValueByLabel(kimbiaResponse.answers[0], 'Wishlist ID');
-
+  $('.k_footer,.k_navigationSpan,.back-wishlist-btn').hide();
+  $('.share-btn-box').removeClass('share-btn-box-hide').addClass('share-btn-box-show');
   $.ajax({
     url: '<%= success_url %>',
     dataType: 'json',
     method: 'POST',
-    data: {'id_list': wishlistId, 'amount': initCharge, 'confirmation_code': confCode},
+    data: {'id_list': wishlistId, 'amount': initCharge, 'confirmation_code': confCode, 'campaign_id': CampaignId, 'is_classroom_sponsored': is_classroom_sponsored},
     success: function(data) {
 
     }
@@ -36,6 +61,11 @@ function getValueByLabel(aSignup, labelText, sublabelText){
   return '';
 }
 
+function showPayment() {
+  $("input[name=DonationLevel_FEE]").focus();
+  $("input[name=DonationLevel_FEE]").blur();
+}
+
 function kimbiaSubmit(f) {
   $(f.view.theForm.getElementsByTagName('button')[0]).hide();
   $(f.view.theForm.getElementsByTagName('button')[0]).after($('<span id="spinner">Submitting...</span>'))
@@ -46,16 +76,37 @@ function kimbiaResponse(f) {
   $(f.view.theForm.getElementsByTagName('button')[0]).find('#spinner').remove();
 }
 </script>
+<div class="container-fluid">
+  <div class="row bg-image-donate">
+    <%= render 'common/navbar' %>
+  </div>
+</div>
 
 <div class="container">
   <p>&nbsp;</p>
-  <p>
+  <p class="back-wishlist-btn">
     <%= link_to 'Wish Lists', search_url(@slug), class: 'btn btn-primary btn-lg' %> Back to wish list search
   </p>
 <!-- script to populate form tag -->
 <% if ENV['IS_PRODUCTION'] %>
-<script src="https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrive&oncomplete=kimbiaSuccess&onbeforesubmit=kimbiaSubmit&onplatformresponse=kimbiaResponse"></script>
+<script src="https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrive&onshow=showPayment&oncomplete=kimbiaSuccess&onbeforesubmit=kimbiaSubmit&onplatformresponse=kimbiaResponse"></script>
 <% else %>
-<script src='https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrivetest&oncomplete=kimbiaSuccess&onbeforesubmit=kimbiaSubmit&onplatformresponse=kimbiaResponse'></script>
+<script src='https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrivetest&onshow=showPayment&oncomplete=kimbiaSuccess&onbeforesubmit=kimbiaSubmit&onplatformresponse=kimbiaResponse'></script>
 <% end %>
+  <div class="share-btn-box share-btn-box-hide">
+    <p>Help spread the word about My Home Library and connect others to more children in need by sharing below</p>
+    <div class="share-btn">
+      <div class="fb-share-button" data-href="<%= search_url(@slug) %>"
+        data-layout="button"
+        data-size="large"
+        data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank"
+        href="https://www.facebook.com/sharer/sharer.php?u=<%= search_url(@slug).to_param %>&amp;src=sdkpreparse">Share</a></div>
+    </div>
+    <div class="share-btn">
+      <a class="twitter-share-button"
+      href="https://twitter.com/intent/tweet?text=Join%20me%20in%20sponsoring%20a%20home%20library%20for%20a%20child%20in%20need%20at&url=<%= search_url(@slug).to_param %>"
+      data-size="large">
+    Tweet</a>
+    </div>
+  </div>
 </div>

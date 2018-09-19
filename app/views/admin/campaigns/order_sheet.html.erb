@@ -1,8 +1,10 @@
+<%= content_for :breadcrumb do %>
 <%= breadcrumb([
   @campaign.organization.name,
     {href: admin_organization_url(@campaign.organization), label: 'Campaigns'}
   ])
 %>
+<% end %>
 <%
 catalogs = @books.keys.uniq{|u| u[0]}.collect{|u|u[0]}
 
@@ -16,7 +18,7 @@ catalogs.each do |catalog|
 <h4 class="pull-right">Deadline: <%= @campaign.deadline %></h4>
 <h5>Ship to:</h5>
 <address><%= h(@campaign.address).gsub(/\n/, '<br/>').html_safe %></address>
-<table class="table table-striped table-condensed">
+<table class="table table-striped table-condensed" id="order-sheet">
   <thead>
     <tr>
       <th>ISBN</th>

@@ -12,31 +12,1074 @@
  *
  */
  // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+
+ /*
+*= require scrivito
+*= require scrivito_three_column_widget
+*= require scrivito_two_column_widget
+*= require scrivito_section_widgets
+*= require scrivito_content_box_widget
+*/
+
  @import "bootstrap-sprockets";
  @import "bootstrap";
  @import 'bootstrap-datetimepicker';
+ @import "scrivito_section_widgets/base_section";
+ @import "scrivito_section_widgets/parallax_section";
+ @import "scrivito_section_widgets/colors";
 
- @media print {
-    table {page-break-after: always;}
-    nav, #breadcrumb {display: none;}
+ @import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,700');
+
+ img[srcset] { width: 100%; }
+
+ .k_shareThisFormBlock {display:none !important}
+ .share-btn-box-hide {
+    opacity: 0;
+    filter:alpha(opacity=0);
+  }
+  .share-btn-box-show {
+    opacity: 1.0;
+    filter:alpha(opacity=100);
+  }
+ .share-btn {display: inline-block;}
+ .share-btn iframe {vertical-align: bottom;}
+
+html,body
+{
+    width: 100%;
+    // height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+    // overflow-y: visible;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+h3 {
+  font-size: 28px;
 }
 
 body {
   color: #5a5a5a;
-  padding-top: 50px;
+  font-family: 'Work Sans', sans-serif;
+  // margin: 0 -15px;
 }
-nav.main {
+
+p {
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  p {
+    font-size: 14px;
+  }
+  h3 {
+    font-size: 24px;
+  }
+}
+
+// NAV BAR
+
+nav.admin-nav {
   background: #fff;
-  box-shadow: 0 1px 5px 1px rgba(0,0,0,.2);
 }
-.navbar-brand { padding: 0px; }
-.navbar-brand img { height: 100%; }
+
+ul.right-admin {
+  padding-top: 0;
+}
+
+#breadcrumb {
+  padding-left: 20px;
+}
+
+// nav header info
+.page-headline {
+    text-align: center;
+    color: #fff;
+    padding: 5%;
+    width: 50%;
+    margin: 0 auto;
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+    h1 {
+      text-transform: uppercase;
+      font-family: "astounder-squared-bb",sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 5rem;
+    }
+    h3 {
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+    a {
+      border-radius: 20px;
+      border: 2px solid #fff;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 5px 20px;
+      background-color: transparent;
+      color: #fff;
+    }
+}
+
+// search page header image
+.bg-image-home {
+  background: linear-gradient(
+      rgba(72, 37, 157, 0.4),
+      rgba(72, 37, 157, 0.4)
+    ),
+    image-url('navbar-bg.jpg') center top no-repeat;
+  background-size: cover;
+  height: 500px;
+}
+
+.bg-image-search {
+  background: linear-gradient(
+      rgba(72, 37, 157, 0.4),
+      rgba(72, 37, 157, 0.4)
+    ),
+    image-url('navbar-bg-search.jpg') center 15% no-repeat;
+  background-size: cover;
+  height: 500px;
+}
+
+.bg-image-donate {
+  background: linear-gradient(
+      rgba(72, 37, 157, 0.4),
+      rgba(72, 37, 157, 0.4)
+    ),
+    image-url('navbar-bg-search.jpg') center 25% no-repeat;
+  background-size: cover;
+  height: 400px;
+}
+
+.bg-image-about {
+  background: linear-gradient(
+      rgba(72, 37, 157, 0.4),
+      rgba(72, 37, 157, 0.4)
+    ),
+    image-url('navbar-bg-about.jpg') center 15% no-repeat;
+  background-size: cover;
+  height: 500px;
+}
+
+.bg-image-faq {
+  background: linear-gradient(
+      rgba(72, 37, 157, 0.4),
+      rgba(72, 37, 157, 0.4)
+    ),
+    image-url('navbar-bg-faq.jpg') center 15% no-repeat;
+  background-size: cover;
+  height: 500px;
+}
+
+#navbar {
+  ul {
+    li {
+      color: #fff !important;
+      text-transform: uppercase;
+      a.non-admin {
+        color: #fff;
+        text-transform: uppercase;
+      }
+    }
+  }
+  .dropdown-menu {
+    a {
+      color: #fff;
+      &:hover {
+        background: #ccc;
+      }
+    }
+  }
+}
+.navbar-left {
+  transform: translateY(60%);
+  a {
+    color: #fff !important;
+  }
+}
+.navbar-right {
+  padding: 30px 0 5px;
+  a.non-admin {
+    background-color: #E38A45;
+    padding: 10px 10px !important;
+    border-radius: 20px;
+    margin-right: 5px;
+  }
+  li {
+    a {
+      color: #fff !important;
+      text-transform: uppercase;
+    }
+  }
+}
+.admin-nav .navbar-right li a { color: #777 !important }
+.navbar-default {
+  background-color: transparent;
+  border: none;
+}
+.nav {
+  text-align: center;
+}
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand img {
+  height: 100%;
+}
+.navbar-header {
+  a.non-admin {
+    background-color: #fff;
+    height: 85px;
+    width: 130px;
+    display: block;
+    border-radius: 0 45px 45px 0;
+    // margin-left: -15px;
+    margin-top: 15px;
+  }
+  img.non-admin {
+    width: 100px;
+  }
+}
+
+.mouse {
+  bottom: 10px;
+  position: absolute;
+  img {
+    width: 40px;
+  }
+}
+
+@media (max-width: 800px) {
+  .mouse {
+    display: none;
+  }
+}
+
+.dropdown-menu {
+  background-color: #E38A45;
+  border-radius: 20px;
+  color: #fff;
+}
+
+.social-media {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 10px;
+  text-align: right;
+  margin: 5px 5px -15px 0;
+  a {
+    color: #fff;
+  }
+  img {
+    width: 25px;
+  }
+  span {
+    padding-right: 20px;
+  }
+  @media (max-width: 768px) {
+    text-align: center;
+    padding-top: 5px;
+  }
+}
+
+.navbar-toggle {
+  margin-top: 30px;
+}
+
+// FOOTER
+
+.hero-bottom {
+  img {
+    width: 100px;
+  }
+  .links {
+    text-align: center;
+    margin-top: 30px;
+    a {
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0 5px;
+    }
+  }
+  p {
+    margin: 20px 0 10px;
+    text-align: center;
+    color: lightgray;
+    font-size: 10px;
+  }
+}
+
+
+.wireframe {
+  border: 1px solid gray;
+}
+
+#banner {
+  min-height: 300px;
+}
+
+// ************SEARCH PAGE***************
+
+.donation {
+  text-align: center;
+  margin-bottom: 30px;
+  display: block;
+  a {
+    font-size: 2rem;
+    padding: 15px 30px;
+    margin-top: 0;
+  }
+}
+
+.search-bar {
+  padding-bottom: 30px;
+}
+
+.book-summary {
+  display: none;
+}
+
+.search-bg-teacher {
+  width: 100%;
+}
+
+// program donation button
+
+#program-checkout {
+    background-color: #E38A45;
+    color: #fff;
+    border-radius: 30px;
+    padding: 0 10px;
+}
+
+// wishlist results
+
+.search {
+  display: flex;
+  flex-direction: column;
+  margin-left: 325px;
+}
+.search-header {
+  padding: 0 2em 2em;
+}
+.search-results {
+  flex: 1;
+  padding-bottom: 100px;
+}
+
+.wishlist-flex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+.search-entry {
+  // width: 20%;
+  margin: 2%;
+  padding: 0;
+  text-align: center;
+  @media (max-width: 768px) {
+    flex-basis: 100%;
+  }
+  @media (min-width: 767px) {
+    flex-basis: 25%;
+  }
+  // flex-grow: 0;
+  // flex-shrink: 0;
+  box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
+  border-radius: 40px;
+  padding-bottom: 20px;
+  // .pull-left {
+  //   box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
+  //   border-radius: 40px;
+  //   padding-bottom: 20px;
+  //   @media (max-width: 800px) {
+  //     float: none !important;
+  //   }
+  // }
+  .search-entry-header {
+    background-color: #E38A45;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    padding: 10px;
+    color: #fff;
+    .text-muted {
+      color: #fff;
+    }
+  }
+  h3 {
+    margin: 0;
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
+  }
+  h4 {
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+  }
+  .btn-notsponsored {
+    color: #E38A45;
+    background-color: transparent;
+    border: 2px solid #E38A45;
+    border-radius: 30px;
+    padding: 5px 20px;
+  }
+  .btn-sponsored {
+    background-color: #264692;
+    color: #fff;
+    border-radius: 30px;
+    padding: 5px 20px;
+  }
+
+  .btn-notsponsored-class {
+    color: #ff;
+    background-color: transparent;
+    border: 2px solid #fff;
+    border-radius: 30px;
+    padding: 5px 20px;
+  }
+
+}
+@media(min-width: 767px) {
+  .wishlist-book-list.collapse
+  {
+    display: block !important;
+  }
+}
+#wishlist-book-list-toggle {
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+  padding: 6px;
+}
+// .flexbox {
+//   display: -webkit-flex;
+//   display: -ms-flexbox;
+//   display: flex;
+//   overflow: hidden;
+//   .search-entry {
+//     flex: 1;
+//   }
+// }
+
+.list-group {
+  .list-group-item {
+    border: none;
+    // display: flex;
+    padding: 5px 5px;
+    margin: 5px 0px;
+    text-align: left;
+    @media (max-width: 800px) {
+      display: block;
+    }
+    span {
+      // flex: 1;
+      text-align: left;
+      // @media (max-width: 800px) {
+      //   display: block;
+      // }
+      img {
+        width: 60px;
+        // @media (max-width: 800px) {
+        //   width: 40px;
+        // }
+      }
+    }
+    #book-title {
+      margin-left: 10px;
+    }
+    #book-cover {
+      img {
+        width: 75px;
+      }
+    }
+    .close {
+      font-size: 14px;
+    }
+  }
+  .book-entry {
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+  }
+}
+
+#load-more {
+  margin: 5% auto;
+  display: block;
+  width: 200px;
+  background-color: #264692;
+  color: #fff;
+  border-radius: 30px;
+  padding: 10px 20px;
+}
+
+.search-description {
+  margin-top: 5%;
+  text-align: center;
+  .banner {
+    h2 {
+      width: 70% !important;
+    }
+  }
+}
+
+// SPONSOR SHOPPING CART
+@media (max-width: 767px) {
+    .affix {
+        position: static;
+    }
+}
+@media (min-width: 768px) {
+  #sponsor-list-affix.top {
+    margin-top: 20px;
+    margin-left: 10%;
+  }
+
+  #sponsor-list.affix {
+    top: 200px;
+    width: 20.8%;
+    margin-left: 2.4%;
+  }
+}
+
+// #sponsor-list.affix-top {
+//   width: 300px;
+//   margin-left: 30px;
+// }
+
+// #sponsor-list.affix-bottom {
+//   position: absolute;
+// }
+
+.sponsor-shoppingcart {
+  .sponsor-header {
+    h4 {
+      text-transform: uppercase;
+      color: #264692;
+    }
+  }
+  .sponsor-btn {
+    font-size: 10px !important;
+    margin-left: 5px;
+  }
+  .donation-amt {
+    // color: #E38A45;
+    // font-weight: 700;
+  }
+  .donation-info {
+    text-transform: uppercase;
+    margin-right: 5px;
+    display: inline-block;
+  }
+  .donation-group {
+    margin-left: 0;
+    padding-left: 0;
+    // margin-right: 90px;
+  }
+  #sponsor-unordered-list {
+    border-bottom: 2px solid #264692;
+  }
+  .dollars {
+    color: #E38A45;
+    font-weight: 700;
+    display: inline-block;
+  }
+}
+
+#checkout-btn {
+  background-color: #264692;
+  color: #fff;
+  border-radius: 30px;
+  margin-top: 30px;
+}
+
+#subtotal {
+  font-weight: 700;
+  padding: 10px 0;
+  // margin: 5px 30px;
+}
+
+
+// Scrivito CSS
+
+// HOMEPAGE
+
+.banner {
+  h2 {
+  font-family: "astounder-squared-lc-bb", sans-serif;
+   width: 40%;
+   position: relative;
+   background: #325BA3;
+   color: #fff;
+   text-align: center;
+   padding: 15px 2em; /* Adjust to suit */
+   margin: 1em auto 2em; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
+  }
+  h2:before, h2:after {
+   content: "";
+   position: absolute;
+   display: block;
+   bottom: -20px;
+   border: 30px solid #264692;
+   z-index: -1;
+  }
+  h2:before {
+   left: -2em;
+   border-right-width: 1.5em;
+   border-left-color: transparent;
+  }
+  h2:after {
+   right: -2em;
+   border-left-width: 1.5em;
+   border-right-color: transparent;
+  }
+  h2 h2:before, h2 h2:after {
+   content: "";
+   position: absolute;
+   display: block;
+   border-style: solid;
+   border-color: #325BA3 transparent transparent transparent;
+   bottom: -1em;
+  }
+  h2 h2:before {
+   left: 0;
+   border-width: 1em 0 0 1em;
+  }
+  h2 h2:after {
+   right: 0;
+   border-width: 1em 1em 0 0;
+  }
+}
+
+
+.did-you-know {
+    padding: 30px 5%;
+  h3 {
+    font-family: "astounder-squared-bb",sans-serif;
+    color: #E38A45;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  p {
+    text-align: center;
+  }
+  .ImageWidget {
+    text-align: center;
+    img {
+      width: 60%;
+      @media (max-width: 800px) {
+        width: 100%;
+      }
+    }
+  }
+
+
+}
+
+.what-is-mhl {
+    padding: 30px 5%;
+  h3 {
+    color: #264692;
+    font-family: "astounder-squared-bb",sans-serif;
+  }
+
+  a {
+    background: #E38A45;
+    color: #fff;
+    border-radius: 30px;
+    margin-top: 30px;
+    // border: 2px solid #E38A45;
+    float: none !important;
+  }
+}
+
+.how-it-works {
+    padding: 30px 5%;
+  padding-bottom: 30px;
+  .ImageWidget {
+    text-align: center;
+  }
+  h3 {
+    color: #264692;
+    font-family: "astounder-squared-bb",sans-serif;
+  }
+  img {
+    width: 60%;
+    @media (max-width: 800px) {
+      width: 100%;
+    }
+  }
+}
+
+.picture-slider {
+  padding: 30px 0;
+  img {
+    width: 100%;
+  }
+}
+
+.get-involved {
+    margin: 0 5%;
+    // border-right: 1px solid #ccc;
+    padding: 30px 5%;
+  p {
+    padding-top: 20px;
+  }
+  a {
+    font-size: 18px;
+    display: block;
+    float: none !important;
+  }
+  @media (max-width: 991px) {
+    .ImageWidget {
+      text-align: center;
+      img {
+        width: 30%;
+      }
+    }
+  }
+
+}
+
+.our-impact {
+  background: linear-gradient(
+      rgba(72, 37, 157, 0.4),
+      rgba(72, 37, 157, 0.4)
+    ),
+    image-url('kid_book_2.jpg') center 20% no-repeat;
+  background-size: cover;
+  padding-bottom: 30px;
+  h2 {
+    text-align: center;
+    color: #fff;
+    font-family: "astounder-squared-lc-bb",sans-serif;
+  }
+  p {
+    text-transform: uppercase;
+    font-size: 22px;
+    text-align: center;
+    color: #fff;
+    font-family: "astounder-squared-bb",sans-serif;
+    font-weight: 100;
+    width: 50%;
+    margin: 0 auto;
+  }
+  .stat-numbers {
+    p {
+      font-size: 7em;
+      font-family: "astounder-squared-bb",sans-serif;
+    }
+  }
+  .stat-numbers-left {
+    border-right: 2px solid #fff;
+  }
+}
+
+.signature-sponsor {
+    padding: 30px 5%;
+    a {
+      font-family: "astounder-squared-bb",sans-serif;
+      color: #E38A45;
+      text-transform: uppercase;
+      text-align: center;
+
+      padding-left: 0;
+      font-size: 28px;
+      margin-top: 30px;
+      border-width: 0px;
+      float: none !important;
+    }
+    a:hover {
+      background: transparent;
+    }
+    p {
+      width: 70%;
+      @media (max-width: 991px) {
+        margin: 0 auto;
+      }
+    }
+    // @media (max-width: 991px) {
+    //   p {
+    //     margin: 0 auto;
+    //   }
+    //   a {
+    //     margin: 0 auto;
+    //   }
+    // }
+}
+
+// ABOUT PAGE
+
+.about-mhl {
+  .ImageWidget {
+    text-align: center;
+    img {
+      // margin: 0 auto;
+      width: 30%;
+      @media (max-width: 700px) {
+        width: 100%;
+      }
+    }
+  }
+
+  p {
+    width: 50%;
+    margin: 0 auto;
+    padding-bottom: 30px;
+    @media (max-width: 700px) {
+      width: 100%;
+    }
+  }
+  a {
+    // background: image-url('logo.png') center center no-repeat;
+    // width: 400px;
+    // background-size: cover;
+  }
+}
+
+.logo-area {
+  background: image-url('kids_bg_4.jpg') center top no-repeat;
+  background-size: cover;
+  height: 500px;
+  a {
+    color: #E38A45;
+    border-radius: 30px;
+    margin-top: 30px;
+    border: 2px solid #E38A45;
+    width: 150px;
+  }
+  p {
+    text-align: center;
+    font-style: italic;
+    color: #264692;
+  }
+}
+.books-are-essential {
+  text-align: center;
+  padding: 30px 0;
+  h3 {
+    font-family: "astounder-squared-lc-bb",sans-serif;
+    color: #264692;
+  }
+  p {
+    color: #E38A45;
+    text-transform: uppercase;
+  }
+}
+
+.solve-the-problem {
+  padding: 30px 5%;
+  p {
+    width: 70%;
+    margin: 0 auto;
+  }
+  a {
+    background: #E38A45;
+    color: #fff;
+    border-radius: 30px;
+    margin-top: 30px;
+    width: 150px;
+    text-transform: uppercase;
+  }
+  .ImageWidget {
+    text-align: center;
+    img {
+      @media (max-width: 991px){
+        width: 25%;
+      }
+    }
+  }
+}
+
+// @media (max-width: 991px) {
+//   .solve-the-problem {
+//     .img-responsive {
+//       width: 50%;
+//       margin: 0 auto;
+//     }
+//   }
+// }
+
+// FAQ PAGE
+
+.faq {
+  padding: 0 15%;
+  line-height: 2;
+  h3 {
+    color: #264692;
+    font-size: 26px;
+    @media (max-width: 768px) {
+      font-size: 22px;
+    }
+  }
+}
+
+.faq-picture {
+  background: image-url('kids_bg_4.jpg') center top no-repeat;
+  background-size: cover;
+  height: 450px;
+}
+
+// SPONSORS PAGE
+
+.signature-sponsor {
+  .ImageWidget {
+    padding-bottom: 30px;
+    text-align: center;
+    img {
+      width: 60%;
+      @media (max-width: 991px){
+        width: 40%;
+      }
+      @media (max-width: 600px){
+        width: 90%;
+      }
+    }
+  }
+}
+
+.program-sponsors {
+  padding: 30px 5%;
+  .ImageWidget {
+    padding-bottom: 30px;
+    text-align: center;
+    img {
+      @media (max-width: 991px){
+        width: 25%;
+      }
+      @media (max-width: 600px){
+        width: 50%;
+      }
+    }
+  }
+}
+
+.publishing-partners {
+  padding: 30px 5%;
+  a {
+    background-color: #E38A45;
+    padding: 10px 10px !important;
+    border-radius: 20px;
+    color: #fff;
+    margin: 30px auto 0;
+    text-transform: uppercase;
+    width: 250px;
+  }
+  .ImageWidget {
+    padding-bottom: 30px;
+    text-align: center;
+    img {
+      @media (max-width: 991px){
+        width: 25%;
+      }
+      @media (max-width: 600px){
+        width: 50%;
+      }
+    }
+  }
+}
+
+.sponsor-image-kids {
+  background: image-url('kids_bg_1.jpg') center top no-repeat;
+  background-size: cover;
+  height: 450px;
+}
+
+.sponsor-page-main-logo {
+  // width: 60%;
+}
+
+// OUR IMPACT PAGE
+
+.donation-impact {
+  .banner {
+    h2 {
+      width: 40%;
+      @media (max-width: 600px) {
+        width: 80%;
+      }
+    }
+  }
+  p {
+    width: 40%;
+    margin: 0 auto;
+    @media (max-width: 600px) {
+      width: 80%;
+    }
+  }
+}
+
+// RESPONSIVE FOR SCRIVITO
+
+@media (max-width: 768px) {
+  .banner {
+    padding: 20px 0;
+    h2 {
+      width: 70%;
+    }
+  }
+}
+
+@media (max-width: 568px) {
+  .banner {
+    h2 {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .our-impact {
+    .stat-numbers-left {
+      border-right: none !important;
+    }
+    .col-md-6 {
+      border-bottom: 2px solid #fff;
+      margin: 0 100px;
+      padding: 30px 0;
+    }
+  }
+  .signature-sponsor {
+    img {
+      margin: 0 auto;
+      padding-bottom: 30px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .our-impact {
+    p {
+      width: 100%;
+      font-size: 2em;
+    }
+  }
+  .banner {
+    h2 {
+      font-size: 20px;
+      width: 80%;
+    }
+  }
+}
+
+
+
+
 .starter-template {
   padding: 40px 15px;
   text-align: center;
 }
 .admin-template {
-  padding: 40px 15px;
+  padding: 130px 15px;
 }
 .avatar { margin: 0px; padding: 0px; height: 18px; width: 18px;}
 
@@ -65,8 +1108,7 @@ nav.main {
 ------------------------- */
 
 .featurette {
-  padding: 5% 0;
-  border-top: 1px solid #eee;
+  padding: 5% 20px 20px;
 
   &.hero2{
     background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
@@ -75,6 +1117,21 @@ nav.main {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
   }
 
+  input {
+    height: 40px;
+    border-radius: 40px;
+    padding: 10px 10px;
+    text-align: center;
+  }
+  #specific-child {
+    padding-top: 20px;
+    display: block;
+    width: 100%;
+    text-align: justify;
+  }
+  h4 {
+    display: inline;
+  }
 }
 
 
@@ -87,7 +1144,21 @@ nav.main {
   text-align:center;
 }
 .featurette .btn {
-  box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
+  // box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
+  // border: none;
+}
+
+.input-group-btn {
+  .btn {
+    height: 40px;
+    border-left: none;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+  }
+}
+
+.input-group {
+  border-radius: 20px;
 }
 
 .featurette .mhl-logo {
@@ -122,10 +1193,6 @@ nav.main {
     font-size: 50px;
   }
   .hero-top {
-    background-image: image-url('hero-top.png');
-    background-repeat: no-repeat;
-    background-position: 100% 100%;
-    background-size: contain;
   }
   .hero1 {
     background-image: image-url('hero1.png');
@@ -139,11 +1206,32 @@ nav.main {
     background-size: cover;
   }
   .hero-bottom {
-    background-image: image-url('hero-bottom.png');
-    background-repeat: no-repeat;
-    background-position: 0 0;
-    background-size: cover;
-    padding: 120px 0;
+    // font-family: Calibri-Bold;
+  }
+  .modal-dialog {
+    width: 900px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-left {
+    transform: none;
+  }
+  .navbar-right {
+    transform: none;
+  }
+  .navbar-collapse {
+    width: 50%;
+    margin: 0 auto;
+    // background-color: rgba(227,138,69,0.3);
+    background-color: #E38A45;
+  }
+  .dropdown-menu {
+    background-color: #E38A45;
+    border-radius: 20px;
+    a {
+      color: #fff !important;
+    }
   }
 }
 
@@ -165,15 +1253,17 @@ nav.main {
   overflow: hidden;
 }
 .book-title {
-  font-size: 1.2em;
+  font-size: 18px;
   margin: 0;
+  height: 2em;
+  font-weight: bolder;
 }
 .book-author {
 }
 .book-cover {
   float: left;
   max-width: 150px;
-  max-height: 10em;
+  max-height: 7em;
   margin: 0 1em .25em 0;
   border: 1px solid #ccc;
   box-shadow: 1px 1px 4px #ccc;
@@ -188,7 +1278,7 @@ nav.main {
 }
 .book-description {
   position: relative;
-  height: 9em;
+  height: 11em;
   overflow: hidden;
 }
 .book:hover .book-description {
@@ -208,25 +1298,88 @@ nav.main {
   width: 23%;
 }
 
-.search {
-  display: flex;
-  flex-direction: column;
-  margin-left: 325px;
-}
-.search-header {
-  padding: 0 2em 2em;
-}
-.search-results {
-  flex: 1;
-  padding-bottom: 100px;
+
+// **********MODAL************
+
+#globalModalShopping {
+  .modal-body {
+    text-align: center;
+    h2 {
+      text-align: center;
+    }
+    h3 {
+      margin-bottom: 20px;
+    }
+    .row {
+      padding: 0 30px;
+      text-align: left;
+    }
+    .modal-shopping-description {
+      padding-left: 10px;
+      border-left: 1px solid #ccc;
+      img {
+        width: 100px;
+        height: auto;
+      }
+      h4 {
+        text-transform: uppercase;
+        color: #264692;
+      }
+      .kid-names {
+        font-size: 16px;
+        display: inline;
+        font-weight: 700;
+      }
+    }
+    .select-children {
+      color: #E38A45;
+      border: 2px solid #E38A45;
+      padding: 10px 20px;
+      border-radius: 20px;
+      margin-right: 5px;
+      margin-bottom: 10px;
+    }
+    .general-donation-option {
+      text-align: center;
+      margin-top: 10px;
+      a {
+        color: #fff;
+        background-color: #264692;
+        // border: 2px solid #264692;
+        padding: 10px 20px;
+        border-radius: 20px;
+        margin-right: 5px;
+        margin-bottom: 10px;
+      }
+    }
+    .donation-group {
+      font-size: 20px;
+    }
+  }
+
+  div {
+    display: block;
+    padding-bottom: 20px;
+  }
+  input {
+    @media (min-width: 768px) {
+      width: 50%;
+    }
+    float: none;
+  }
+  span {
+    font-size: 20px;
+    display: block;
+    padding-bottom: 10px;
+  }
 }
 
-#sponsor-list.affix {
-  width: 250px;
-}
-
-#sponsor-list.affix-bottom {
-  position: absolute;
+.modal-shopping-info {
+  .donation-group {
+    button {
+      display: none;
+    }
+  }
 }
 
 .profile {
@@ -270,4 +1423,35 @@ nav.main {
   }
   &.phillips {
   }
+  &.superbowl {
+    width: 300px;
+  }
+}
+
+@media print {
+  body {
+    font-size: 14pt;
+  }
+  .outer-panel:nth-child(1n), #order-sheet {
+     page-break-after: always;
+   }
+   nav, #breadcrumb {
+     display: none;
+   }
+   .book-summary {
+     display: inline-block !important;
+   }
+   .book-cover {
+     max-height: 3em;
+   }
+   .row-books {
+     max-height: 3em;
+     font-size: 0.5em;
+   }
+   .toggle-show {
+     display: none;
+   }
+   .admin-template {
+     padding: 1em;
+   }
 }

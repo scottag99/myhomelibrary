@@ -1,20 +1,20 @@
 <%= form_for [:admin, @campaign.organization, @campaign], :html => {:class => "form-horizontal"} do |f| %>
 
   <div class="form-group">
-    <%= f.label :name, class: "col-md-1 control-label" %>
+    <%= f.label :name, class: "col-md-1 control-label" %> (required)
     <div class="col-md-4">
       <%= f.text_field :name, class: "form-control", :required => true %>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :deadline, class: "col-md-1 control-label" %>
+    <%= f.label :deadline, class: "col-md-1 control-label" %> (required)
     <div class="col-md-4">
       <%= f.text_field :deadline, :class => 'form-control', :required => true %>
     </div>
   </div>
 
-  <div class="form-group">
+  <!-- <div class="form-group">
     <div class="col-md-offset-1 col-md-4">
       <div class="checkbox">
         <label>
@@ -34,7 +34,7 @@
         </label>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="form-group">
     <%= f.label :address, class: "col-md-1 control-label" %>
@@ -54,6 +54,13 @@
     <%= f.label :catalogs, class: "col-md-1 control-label" %>
     <div class="col-md-4">
       <%= f.collection_select :catalog_ids, Catalog.all, :id, :name, {}, {:multiple => true} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :notes, class: "col-md-1 control-label" %>
+    <div class="col-md-4">
+      <%= f.text_area :notes, :class => 'form-control', :rows => 3 %>
     </div>
   </div>
 

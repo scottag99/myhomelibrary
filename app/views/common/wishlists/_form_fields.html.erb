@@ -1,14 +1,14 @@
 <div class="form-group row">
-  <%= f.label :teacher, class: "col-md-1 control-label" %>
+  <%= f.label :teacher, class: "col-md-1 control-label" %> (required)
   <div class="col-md-4">
-    <%= f.text_field :teacher, class: "form-control" %>
+    <%= f.text_field :teacher, class: "form-control", required: true %>
   </div>
 </div>
 
 <div class="form-group">
-  <%= f.label :reader_name, class: "col-md-1 control-label" %>
+  <%= f.label :reader_name, class: "col-md-1 control-label" %> (required)
   <div class="col-md-4">
-    <%= f.text_field :reader_name, class: "form-control" %>
+    <%= f.text_field :reader_name, class: "form-control", required: true %>
   </div>
 </div>
 
@@ -32,10 +32,10 @@
 </div>
 
 <div class="form-group">
-  <%= f.label :grade, class: "col-md-1 control-label" %>
+  <%= f.label :grade, class: "col-md-1 control-label" %> (required)
   <div class="col-md-4">
+    <%#= f.text_field :grade, class: "form-control", required: true %>
     <%= f.select :grade, [
-      ['Not Assigned', ''],
       ['PreK', 'PreK'],
       ['K', 'K'],
       ['1st', '1st'],
@@ -45,12 +45,8 @@
       ['5th', '5th'],
       ['6th', '6th'],
       ['7th', '7th'],
-      ['8th', '8th'],
-      ['9th', '9th'],
-      ['10th', '10th'],
-      ['11th', '11th'],
-      ['12th', '12th']
-    ] %>
+      ['8th', '8th']
+    ], {}, {class: "form-control", required: true} %>
   </div>
 </div>
 
@@ -60,13 +56,14 @@
     <%= f.select :grl, ("A".."Z").collect{|ltr| [ltr, ltr]}, :prompt => true %>
   </div>
 </div-->
-
+<% if user_is_admin? %>
 <div class="form-group">
-  <%= f.label :external_id, class: "col-md-1 control-label" %>
+  <%= f.label "MHL ID", class: "col-md-1 control-label" %>
   <div class="col-md-4">
     <%= f.text_field :external_id, class: "form-control" %>
   </div>
 </div>
+<% end %>
 
 <div class="form-group">
   <div class="col-md-offset-1 col-md-4">

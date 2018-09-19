@@ -9,29 +9,37 @@
       <dd><%= @catalog.source %></dd>
       <dt>Active</dt>
       <dd><%= @catalog.active %>
+      <dt>Book Data Reference</dt>
+      <dd><%= link_to_if @catalog.book_data_reference, @catalog.book_data_reference, @catalog.book_data_reference, target: '_blank' %>
+        <%= form_for :catalog, url: url_for([:upload, get_namespace, @catalog]) do |f| %>
+          <%= f.submit "Upload", class: "btn btn-default btn-primary" %>
+        <% end %>
+      </dd>
     </dl>
   </div>
   <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading"><h3 class="panel-title">Books</h3></div>
     <table class="table table-striped table-condensed">
-      <caption>
+      <caption class="toggle-show">
         <%= link_to '<i class="glyphicon glyphicon-plus"></i> New Book'.html_safe, new_admin_catalog_catalog_entry_url(@catalog), :class => "btn btn-xs btn-primary", :remote => true %>
       </caption>
       <thead>
-        <tr>
+        <tr class="row-books">
           <th>Title</th>
           <th>Author</th>
+          <th class="book-summary">Summary</th>
           <th>Level</th>
-          <th>Price</th>
-          <th>ISBN</th>
-          <th>AR Level</th>
-          <th>AR Points</th>
+          <th class="toggle-show">Price</th>
+          <th class="toggle-show">ISBN</th>
+          <th class="toggle-show">AR Level</th>
+          <th class="toggle-show">AR Points</th>
           <th>GRL</th>
           <th>DRA</th>
           <th>Bilingual?</th>
-          <th>Disabled</th>
-          <th>&nbsp;</th>
+          <th>Chapters?</th>
+          <th class="toggle-show">Disabled</th>
+          <th class="toggle-show">&nbsp;</th>
         </tr>
       </thead>
       <tbody>

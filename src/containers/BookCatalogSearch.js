@@ -12,7 +12,9 @@ export default function({store}) {
       <div id="modal-container"></div>
       <Row>
         <Col lg={3}>
-          <WishList store={store} />
+         { store.wishlist &&
+            <WishList store={store} />
+          }
         </Col>
         <Col lg={9} sm={9} smOffset={3}>
           <BookFilter store={store} />

@@ -1,0 +1,9 @@
+<% img = scrivito_image_tag widget, :image, { class: 'image-widget', srcset: srcset_for(widget.image)} %>
+
+<div class="<%= widget.class %>">
+  <% if widget[:link_to].present? %>
+    <%= link_to(widget[:link_to], target: '_blank') { img } %>
+  <% else %>
+    <%= img %>
+  <% end %>
+</div>

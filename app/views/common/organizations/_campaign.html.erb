@@ -1,0 +1,51 @@
+<tr>
+  <td>
+    <%= link_to campaign.name, [get_namespace, campaign.organization, campaign] %>
+  </td>
+  <td><%= campaign.deadline %></td>
+  <!-- <td><input type=checkbox disabled <%= campaign.ready_for_donations ? 'checked' : '' %> /></td> -->
+  <% if user_is_admin? %>
+  <td><%= check_box_tag 'donations', campaign.id, campaign.ready_for_donations,
+            data: {
+              remote: true,
+              url: donations_admin_organization_campaign_url(campaign.organization, campaign),
+              method: "PUT"
+              } %></td>
+  <td><%= check_box_tag 'wishlists', campaign.id, campaign.can_edit_wishlists,
+            data: {
+              remote: true,
+              url: wishlists_admin_organization_campaign_url(campaign.organization, campaign),
+              method: "PUT"
+              } %></td>
+  <% end %>
+  <td><%= campaign.wishlists.count %></td>
+  <td><%= campaign.book_limit %></td>
+  <% if user_is_admin? %>
+  <td><%= number_to_currency(WishlistEntry.where('wishlist_id' => campaign.wishlists).sum(:price)) %></td>
+  <td><%= number_to_currency(Donation.where(:wishlist_id => campaign.wishlists).sum(:amount)) %></td>
+  <% end %>
+  <td>
+    <% if user_is_admin? %>
+    <p>
+      <%= link_to "Edit", edit_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-sm btn-warning" %>
+      <%= link_to "Delete", admin_organization_campaign_url(campaign.organization, campaign),  method: :delete, class: "btn btn-danger btn-sm", data: {confirm: 'This action cannot be undone. Are you sure?'} %>
+    </p>
+    <% end %>
+    <p>
+      <% if user_is_admin? %>
+      <%= link_to "Order Sheet", order_sheet_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-info btn-sm" %>
+      <% end %>
+      <% if user_is_admin? || user_is_coordinator? %>
+      <%= link_to "Pick List", url_for([:pick_list, get_namespace, campaign.organization, campaign]), class: "btn btn-info btn-sm" %>
+      <%= link_to "Label Sheet", url_for([:download, get_namespace, campaign.organization, campaign, :wishlists]), class: "btn btn-info btn-sm" %>
+      <% end %>
+    </p>
+    <% if user_is_admin? %>
+    <p>
+      <%= link_to "Wish List Report", url_for([:export, get_namespace, campaign.organization, campaign]), class: "btn btn-success btn-sm" %>
+      <%= link_to "Book Count Report", url_for([:book_count, get_namespace, campaign.organization, campaign]), class: "btn btn-success btn-sm" %>
+      <%= link_to "Class Roster Report", url_for([:exportroster, get_namespace, campaign.organization, campaign]), class: "btn btn-success btn-sm" %>
+    </p>
+    <% end %>
+  </td>
+</tr>

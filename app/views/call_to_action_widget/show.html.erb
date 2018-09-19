@@ -1,0 +1,48 @@
+<%
+  css_size =
+    case widget.size
+    when "small"
+      "btn-xs"
+    when "large"
+      "btn-lg"
+    end
+
+  css_button_style =
+    case widget.button_style
+    when "primary"
+      "btn-primary"
+    when "success"
+      "btn-success"
+    when "info"
+      "btn-info"
+    when "warning"
+      "btn-warning"
+    when "danger"
+      "btn-danger"
+    when "link"
+      "btn-link"
+    else
+      "btn-default"
+    end
+
+  css_alignment =
+    case widget.alignment
+    when "center"
+      "center-block"
+    when "right"
+      "pull-right"
+    else
+      "pull-left"
+    end
+
+  css_classes = [
+    "btn",
+    css_alignment,
+    css_size,
+    css_button_style,
+  ].reject(&:blank?).join(" ")
+
+  action_link = widget.action_link || Scrivito::Link.new(url: "#", title: "Click here")
+%>
+
+<%= link_to(action_link.display_title, scrivito_url(action_link), class: css_classes) %>

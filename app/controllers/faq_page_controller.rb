@@ -1,0 +1,2 @@
+class FaqPageController < CmsController
+end

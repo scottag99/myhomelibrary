@@ -35,7 +35,7 @@
 
   <body>
     <!-- Fixed navbar -->
-    <nav class="main navbar navbar-default navbar-fixed-top">
+    <nav class="main navbar navbar-default navbar-fixed-top admin-nav">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -54,7 +54,7 @@
             <li><%= link_to 'Content', admin_contents_url if admin? %></li>
             <li><%= link_to 'Campaigns', '/volunteer' if partner? %></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right right-admin">
             <% unless session[:userinfo].nil?  -%>
             <% if user_is_admin? -%>
             <li>
@@ -71,6 +71,7 @@
           </ul>
         </div><!--/.nav-collapse -->
       </div>
+      <%= yield :breadcrumb %>
     </nav>
 
     <div class="container-fluid">

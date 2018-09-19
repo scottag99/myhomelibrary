@@ -1,0 +1,19 @@
+
+  <%= scrivito_details_for 'Header Class' do %>
+    <%= scrivito_tag :div, @obj, :header_class %>
+  <% end %>
+
+  <%= scrivito_details_for 'Show in Menu' do %>
+  <p>Setting this value to true will show this page in the navigation menu links</p>
+    <%= scrivito_tag :div, @obj, :show_in_menu %>
+  <% end %>
+
+  <%= scrivito_details_for 'Menu Order' do %>
+    <p>Enter a number order value for the menu item.</p>
+    <%= scrivito_tag :div, @obj, :menu_order %>
+  <% end %>
+
+  <%= scrivito_details_for 'Menu Text' do %>
+    <p>Enter the text used for the menu link.</p>
+    <%= scrivito_tag :div, @obj, :menu_text %>
+  <% end %>
