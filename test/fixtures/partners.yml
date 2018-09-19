@@ -4,16 +4,19 @@ one:
   name: Active Partner
   email: test@example.com
   active: true
+  is_coordinator: true
   organization: one
 
 two:
   name: Inactive Partner
   email: test@example.com
   active: false
+  is_coordinator: false
   organization: two
 
 three:
   name: Partner Three
   email: three@example.com
   active: true
+  is_coordinator: false
   organization: three
