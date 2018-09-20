@@ -46,8 +46,8 @@ class Admin::OrganizationsController < Admin::BaseController
 private
   def find_organizations
     if params[:begin_date] && params[:end_date]
-      Organization.joins(:campaigns).where('campaigns.deadline between ? and ?', params[:begin_date], params[:end_date]).order('organizations.name ASC')
-    else
+      Organization.joins(:campaigns).where('campaigns.deadline between ? and ?', params[:begin_date], params[:end_date]).order('organizations.name ASC').all.uniq{|x| x.id}
+   else
       Organization.order('name ASC')
     end
   end
