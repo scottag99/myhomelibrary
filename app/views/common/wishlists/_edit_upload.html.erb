@@ -4,7 +4,14 @@
   <h4>Instructions</h4>
   <p>Use the <strong>Roster Data Reference</strong> link to open a Google Spreadsheet to add roster data. Once complete, use the button below to upload
     that data to the My Home Library system.</p>
-  <p>The upload function can be called multiple times. Previously successful entries will not be re-added. Error entries can be corrected.</p>
+     <b><p id="msg"></p></b>
+ 
+  <script type="text/javascript">
+  $('#globalModalSave').click(function(){
+   $(this).prop('disabled', true);
+    document.getElementById("msg").innerHTML = "Give us a minute , we are uploading your data !";
+   });
+  </script>
 
 <!-- Needed to add this as a hidden field b/c Chrome would not submit the file in the post otherwise -->
 <%= f.submit "Submit", class: "btn btn-default btn-primary hidden" %>
