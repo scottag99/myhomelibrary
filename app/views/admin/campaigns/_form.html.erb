@@ -51,12 +51,39 @@
   </div>
 
   <div class="form-group">
+  <div id="hidelabel">
     <%= f.label :catalogs, class: "col-md-1 control-label" %>
+	</div>
     <div class="col-md-4">
-      <%= f.collection_select :catalog_ids, Catalog.all, :id, :name, {}, {:multiple => true} %>
+    <%= f.collection_select :catalog_ids, Catalog.all, :id, :name, {}, {:style => "height: 110%; width: 45%;" ,:multiple => true} %>
     </div>
   </div>
-
+  
+  <div class="form-group">
+  
+	<%= f.label :catalogs, class: "col-md-1 control-label" %>
+	<div class="col-md-4">
+		<div class="subject-info-box-1">
+		  <select multiple="multiple" id='lstBox1' class="form-control">
+			<%= options_from_collection_for_select(Catalog.all,'id','name')%>
+		  </select>
+		</div>
+		<div class="subject-info-arrows text-center">
+		  <input type="button" id="btnAllRight" value=">>" class="btn btn-default" /><br />
+		  <input type="button" id="btnRight" value=">" class="btn btn-default" /><br />
+		  <input type="button" id="btnLeft" value="<" class="btn btn-default" /><br />
+		  <input type="button" id="btnAllLeft" value="<<" class="btn btn-default" />
+		</div>
+		<div class="subject-info-box-2">
+		  <select multiple="multiple" id='lstBox2' class="form-control">
+		
+		  </select>
+		</div>
+	</div>
+  </div>
+  
+  
+  
   <div class="form-group">
     <%= f.label :notes, class: "col-md-1 control-label" %>
     <div class="col-md-4">
@@ -73,9 +100,79 @@
 </div>
   <% content_for :foot do %>
   <script type="text/javascript">
+  
+  $( "#campaign_catalog_ids" ).hide();
+  $('#hidelabel').hide();
+  
   $(function () {
     $('#campaign_deadline').datetimepicker({defaultDate: "<%= @campaign.deadline %>", format: "YYYY-MM-DD"});
   });
+  
+    $(function () {
+     var selected = $('#campaign_catalog_ids option:selected');
+      $('#lstBox2').append($(selected).clone());
+	 });
+    $(function () {
+		$('#campaign_catalog_ids option:selected').each(function(idx, opt){
+			$('#lstBox1 option[value=' + opt.value + ']').remove();
+		});
+    });
+   (function () {
+    $('#btnRight').click(function (e) {
+        var selectedOpts = $('#lstBox1 option:selected');
+        var $select = $('#campaign_catalog_ids');
+		var currSelected = $select.val() || [];
+		currSelected.push(selectedOpts.val());
+		$select.val(currSelected);
+		
+		if (selectedOpts.length == 0) {
+            e.preventDefault();
+        }
+        $('#lstBox2').append($(selectedOpts).clone());
+        $(selectedOpts).remove();
+        e.preventDefault();
+    });
+    $('#btnAllRight').click(function (e) {
+        var selectedOpts = $('#lstBox1 option');
+       
+	   $("#campaign_catalog_ids").find("option").each(function() {
+       $(this).prop('selected', true);
+      });
+		if (selectedOpts.length == 0) {
+            e.preventDefault();
+        }
+        $('#lstBox2').append($(selectedOpts).clone());
+        $(selectedOpts).remove();
+        e.preventDefault();
+    });
+    $('#btnLeft').click(function (e) {
+        var selectedOpts = $('#lstBox2 option:selected');
+		console.log(selectedOpts.val());
+        $('#campaign_catalog_ids option[value=' + selectedOpts.val() + ']').prop('selected', false);
+		
+		if (selectedOpts.length == 0) {
+            e.preventDefault();
+        }
+        $('#lstBox1').append($(selectedOpts).clone());
+        $(selectedOpts).remove();
+        e.preventDefault();
+    });
+    $('#btnAllLeft').click(function (e) {
+        var selectedOpts = $('#lstBox2 option');
+        $("#campaign_catalog_ids").find("option").each(function() {
+        $(this).prop('selected', false);
+       });
+		if (selectedOpts.length == 0) {
+            e.preventDefault();
+        }
+        $('#lstBox1').append($(selectedOpts).clone());
+        $(selectedOpts).remove();
+        e.preventDefault();
+    });
+}(jQuery));
+
+
+
   </script>
   <% end %>
 <% end %>
