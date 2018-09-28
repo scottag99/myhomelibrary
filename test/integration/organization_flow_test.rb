@@ -47,7 +47,7 @@ class OrganizationFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     post admin_organization_partners_url(organizations(:one)),
-      params: { partner: { name: "Test Volunteer", email: "volunteer@example.com", active: true } }
+      params: { partner: { name: "Test Volunteer", email: "volunteer@example.com", active: true, is_coordinator: false } }
     assert_response :redirect
     follow_redirect!
     assert_response :success
