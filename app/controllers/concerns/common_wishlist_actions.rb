@@ -101,7 +101,12 @@ module CommonWishlistActions
           # Only process rows without an ID
           if row['id'].empty?
             row.each{|k,v| row[k] = v.strip if v.is_a? String }
-            w = current_campaign.wishlists.create(row.to_hash)
+            w = current_campaign.wishlists.find_by(reader_name: row['reader_name'], teacher: row['teacher'])
+            if w.nil?
+              w = current_campaign.wishlists.create(row.to_hash)
+            else
+              w.update(row.to_hash.except('id'))
+            end
             if w.save
               row_data[header.index('id')] = w.id
               valid_rows << idx
