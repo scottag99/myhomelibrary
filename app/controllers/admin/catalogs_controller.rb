@@ -75,7 +75,13 @@ class Admin::CatalogsController < Admin::BaseController
   end
 
   def destroy
-    Catalog.destroy(params[:id])
+    @catalog = Catalog.find(params[:id])
+    @catalog.destroy()
+    if @catalog.errors.any?
+      @catalog.errors.full_messages.each do |message|
+        flash[:warning] = message
+      end
+    end
     @catalogs = Catalog.all
     respond_to do |format|
       format.html { render "index" }
