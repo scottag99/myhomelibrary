@@ -84,13 +84,13 @@ $(document).ready(function(){
 	
 	$("#filtering").keyup(function(){
 		// When value of the input is not blank
-        var term=$(this).val()
+        var term=$(this).val().toLowerCase();
 		if( term != "")
 		{
 			// Show only matching TR, hide rest of them
 			$("table tbody>tr").hide();
-            $("td a").filter(function(){
-                   return $(this).text().toLowerCase().indexOf(term ) >-1
+            $("td a.nf").filter(function(){
+                   return $(this).text().toLowerCase().indexOf(term )>-1
             }).closest("tr").show();
 		}
 		else
