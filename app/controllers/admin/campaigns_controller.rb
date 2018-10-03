@@ -26,7 +26,7 @@ class Admin::CampaignsController < Admin::BaseController
 
   def create
     @campaign = @organization.campaigns.create!(campaign_params)
-    headers = ['teacher*', 'reader_name*', 'grade*', 'reader_age', 'reader_gender', 'external_id', 'id']
+    headers = ['teacher*', 'reader_name*', 'grade*', 'reader_age', 'reader_gender', 'id']
     begin
       auth = login()
       ss = new_sheet("Roster Load for #{@organization.name}-#{@campaign.name}")
