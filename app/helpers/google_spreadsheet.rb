@@ -75,6 +75,21 @@ module GoogleSpreadsheet
 		get_sheet_service(auth).batch_update_spreadsheet(sheet.spreadsheet_id, requests)
 	end
 
+	def protect_rows(sheet, start_row_index, end_row_index, start_column_index, end_column_index, auth = nil)
+        grid_range = Google::Apis::SheetsV4::GridRange.new(sheet_id: 0,
+            start_row_index: start_row_index,
+            end_row_index: end_row_index+1,
+            start_column_index: start_column_index,
+            end_column_index: end_column_index)
+		editors = Google::Apis::SheetsV4::Editors.new(users:["webservice@my-home-library-194020.iam.gserviceaccount.com"])
+       
+	    protected_range = Google::Apis::SheetsV4::ProtectedRange.new(range: grid_range,editors:editors )
+        protected_range_request = Google::Apis::SheetsV4::AddProtectedRangeRequest.new(protected_range: protected_range)
+        r = Google::Apis::SheetsV4::Request.new(add_protected_range: protected_range_request)
+        requests = Google::Apis::SheetsV4::BatchUpdateSpreadsheetRequest.new(requests: [r])
+        get_sheet_service(auth).batch_update_spreadsheet(sheet.spreadsheet_id, requests)
+    end
+	
 	# def add_value_list(sheet, column_index, start_column_index, end_column_index, red, green, blue, alpha, auth = nil)
 	# 	repeat_cell_request = Google::Apis::SheetsV4::RepeatCellRequest.new
 	# 	color = Google::Apis::SheetsV4::Color.new(red: red, green: green, blue: blue, alpha: alpha)

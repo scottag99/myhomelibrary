@@ -55,7 +55,7 @@
     <%= f.label :catalogs, class: "col-md-1 control-label" %>
 	</div>
     <div class="col-md-4">
-    <%= f.collection_select :catalog_ids, Catalog.all, :id, :name, {}, {:style => "height: 110%; width: 45%;" ,:multiple => true} %>
+    <%= f.collection_select :catalog_ids, Catalog.order('name ASC'), :id, :name, {}, {:style => "height: 110%; width: 45%;" ,:multiple => true} %>
     </div>
   </div>
   

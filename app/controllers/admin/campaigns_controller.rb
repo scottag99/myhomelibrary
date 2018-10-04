@@ -26,7 +26,7 @@ class Admin::CampaignsController < Admin::BaseController
 
   def create
     @campaign = @organization.campaigns.create!(campaign_params)
-    headers = ['teacher*', 'reader_name*', 'grade*', 'reader_age', 'reader_gender', 'external_id', 'id']
+    headers = ['teacher*', 'reader_name*', 'grade*', 'reader_age', 'reader_gender', 'id']
     begin
       auth = login()
       ss = new_sheet("Roster Load for #{@organization.name}-#{@campaign.name}")
@@ -40,6 +40,7 @@ class Admin::CampaignsController < Admin::BaseController
       ]
       range = 'A1:Z15'
       add_data(ss, range, data, auth)
+	  protect_rows(ss, 0 , 0 , 0, headers.size, auth)
       @campaign.roster_data_reference = ss.spreadsheet_url
       @campaign.save
     rescue => ex

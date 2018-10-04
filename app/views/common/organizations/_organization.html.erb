@@ -8,7 +8,7 @@
               method: "PUT"
               } %></td>
   <% end %>
-  <td><%= link_to organization.name, url_for([get_namespace, organization]) %></td>
+  <td><%= link_to organization.name, url_for([get_namespace, organization]),class:"nf" %></td>
   <td><%= organization.slug %></td>
   <td><%= organization.campaigns.count %></td>
   <td><%= Wishlist.joins(:campaign).where("campaigns.organization_id = ?",  organization).count %></td>
