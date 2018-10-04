@@ -33,6 +33,7 @@
     <% if @campaign.can_edit_wishlists && (user_is_admin? || user_is_coordinator?) %>
     <%= link_to 'Bulk Edit', url_for([:edit_multiple, get_namespace, @campaign.organization, @campaign, :wishlists, :wishlists_ids => '']), :class => "btn btn-xs btn-warning", :onclick => 'bulkEdit()', :remote => true, :id => 'bulk-edit' %>
     <%= link_to 'Bulk Upload', url_for([:edit_upload, get_namespace, @campaign.organization, @campaign, :wishlists]), :class => "btn btn-xs btn-primary", :remote => true, :id => 'bulk-upload' if admin? || is_coordinator?(@campaign.organization) %>
+    <%= link_to 'Bulk Delete', url_for([:destroy_multiple, get_namespace, @campaign.organization, @campaign, :wishlists, :wishlists_ids => '']), method: "delete", confirm: "This action cannot be undone. Are you sure?", :class => "btn btn-xs btn-danger", :onclick => 'bulkDelete()', :remote => true, :id => 'bulk-delete' %>
     <% end %>
     </div>
     <div id="myGrid" style="height: 450px;" class="ag-bootstrap"></div>
@@ -69,6 +70,18 @@ function bulkEdit() {
   if (ids.length == 0) return false;
   var href = $('#bulk-edit').attr('href');
   $('#bulk-edit').attr('href', href.substring(0, href.lastIndexOf('?')) + "?wishlists_ids=" + ids);
+}
+
+function bulkDelete() {
+  var ids = "";
+  $.each(gridOptions.api.getSelectedRows(), function(idx, row) {
+    if (ids.length > 0) { ids += "," }
+    ids += row.id;
+  });
+
+  if (ids.length == 0) return false;
+  var href = $('#bulk-delete').attr('href');
+  $('#bulk-delete').attr('href', href.substring(0, href.lastIndexOf('?')) + "?wishlists_ids=" + ids);
 }
 
 // Datasource used by both PaginationController and VirtualPageRowModel
