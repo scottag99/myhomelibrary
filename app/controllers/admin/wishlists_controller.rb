@@ -28,6 +28,15 @@ class Admin::WishlistsController < Admin::BaseController
     end
   end
 
+  def destroy_multiple
+    @wishlists = current_campaign.wishlists.find(params[:wishlists_ids].split(',').map(&:to_i))
+    @wishlists.each{|w| w.destroy()}
+    respond_to do |format|
+      format.js { render 'common/wishlists/destroy_multiple' }
+      format.json { render json: @wishlists }
+    end
+  end
+
 private
     def current_organization
       Organization.find(params[:organization_id])

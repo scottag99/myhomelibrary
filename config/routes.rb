@@ -63,6 +63,7 @@ Rails.application.routes.draw do
           collection do
             get  'edit_multiple'
             put  'update_multiple'
+            delete 'destroy_multiple'
             get  'edit_upload'
             post 'upload'
             get  'download'
