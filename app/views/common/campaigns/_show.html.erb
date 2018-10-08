@@ -34,7 +34,7 @@
     <%= link_to 'Bulk Edit', url_for([:edit_multiple, get_namespace, @campaign.organization, @campaign, :wishlists, :wishlists_ids => '']), :class => "btn btn-xs btn-warning", :onclick => 'bulkEdit()', :remote => true, :id => 'bulk-edit' %>
     <%= link_to 'Bulk Upload', url_for([:edit_upload, get_namespace, @campaign.organization, @campaign, :wishlists]), :class => "btn btn-xs btn-primary", :remote => true, :id => 'bulk-upload' if admin? || is_coordinator?(@campaign.organization) %>
       <% if admin? %>
-      <%= link_to 'Bulk Delete', url_for([:destroy_multiple, get_namespace, @campaign.organization, @campaign, :wishlists, :wishlists_ids => '']), method: "delete", confirm: "This action cannot be undone. Are you sure?", :class => "btn btn-xs btn-danger", :onclick => 'bulkDelete()', :remote => true, :id => 'bulk-delete' %>
+      <%= link_to 'Bulk Delete', url_for([:destroy_multiple, get_namespace, @campaign.organization, @campaign, :wishlists, :wishlists_ids => '']), method: "delete", data: {confirm: "This action cannot be undone. Are you sure?"}, :class => "btn btn-xs btn-danger", :onclick => 'bulkDelete()', :remote => true, :id => 'bulk-delete' %>
       <% end %>
     <% end %>
       
