@@ -29,6 +29,7 @@ class Admin::WishlistsController < Admin::BaseController
   end
 
   def destroy_multiple
+    @campaign = current_campaign
     @wishlists = current_campaign.wishlists.find(params[:wishlists_ids].split(',').map(&:to_i))
     @wishlists.each{|w| w.destroy()}
     respond_to do |format|
