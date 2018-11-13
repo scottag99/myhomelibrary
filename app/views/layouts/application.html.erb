@@ -18,6 +18,7 @@
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png?v2=true">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v2=true">
     <link rel="manifest" href="/manifest.json">
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png?v2=true">
     <meta name="theme-color" content="#ffffff">
@@ -80,6 +81,11 @@
           <a class="center-block text-center" href="http://www.bushhoustonliteracy.org/" target=_BLANK>
             <img class="logo" src="<%= asset_path('my-home-library.png') %>" alt="Barbara Bush Houston Literacy Foundation" />
           </a>
+		      <div class="social-media">
+            <a href="https://www.facebook.com/bushhoustonliteracy/" class="fa fa-facebook"></a>
+            <a href="mailto:info@myhomelibraryhouston.org?subject=I'd like more information">Contact Us</a>
+            <a href="https://twitter.com/BushHoustonLit" class="fa fa-twitter"></a>
+          </div>
           <div class="links">
             <span><%= link_to 'Home', scrivito_path(Obj.find_by_permalink('home')) %></span>
             <% get_scrivito_menu_items.each do |obj| %>

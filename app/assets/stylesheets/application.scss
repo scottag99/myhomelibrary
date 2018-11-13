@@ -101,7 +101,7 @@ ul.right-admin {
     color: #fff;
     padding: 5%;
     width: 50%;
-    margin: 0 auto;
+    margin: 75px auto;
     @media (max-width: 600px) {
       width: 100%;
     }
@@ -179,12 +179,14 @@ ul.right-admin {
 }
 
 #navbar {
+	 margin-left :12rem;
   ul {
     li {
       color: #fff !important;
       text-transform: uppercase;
       a.non-admin {
         color: #fff;
+		 position: relative;
         text-transform: uppercase;
       }
     }
@@ -199,30 +201,35 @@ ul.right-admin {
   }
 }
 .navbar-left {
-  transform: translateY(60%);
+  transform: translateY(30%);
   a {
     color: #fff !important;
   }
 }
 .navbar-right {
-  padding: 30px 0 5px;
+  padding: 0 0 0;
+  border-radius: 45px 0 0 45px;
+  background-color: #E38A45;
+	
   a.non-admin {
-    background-color: #E38A45;
-    padding: 10px 10px !important;
-    border-radius: 20px;
-    margin-right: 5px;
+    padding: 26px 12px !important;
   }
   li {
     a {
+	  display: block;
       color: #fff !important;
       text-transform: uppercase;
     }
   }
 }
-.admin-nav .navbar-right li a { color: #777 !important }
+.admin-nav .navbar-right li a { position:fixed;color: #777 !important }
 .navbar-default {
-  background-color: transparent;
-  border: none;
+    z-index: 1;
+    width:100%;
+    position: fixed;
+    background:#325BA3;
+    border: none;
+  
 }
 .nav {
   text-align: center;
@@ -236,12 +243,12 @@ ul.right-admin {
 .navbar-header {
   a.non-admin {
     background-color: #fff;
-    height: 85px;
+    height: 75px;
     width: 130px;
     display: block;
+	position: fixed;
     border-radius: 0 45px 45px 0;
     // margin-left: -15px;
-    margin-top: 15px;
   }
   img.non-admin {
     width: 100px;
@@ -297,12 +304,13 @@ ul.right-admin {
 .social-media {
   color: #fff;
   text-transform: uppercase;
-  font-size: 10px;
-  text-align: right;
+  font-size: 20px;
+  text-align: center;
   margin: 5px 5px -15px 0;
   a {
-    color: #fff;
+    margin-right: 8px;
   }
+
   img {
     width: 25px;
   }

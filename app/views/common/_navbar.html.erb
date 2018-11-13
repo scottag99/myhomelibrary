@@ -1,9 +1,5 @@
 <nav class="main navbar navbar-default">
-  <div class="social-media">
-    <a href="mailto:info@myhomelibraryhouston.org?subject=I'd like more information">Contact Us</a>
-    <a href="https://www.facebook.com/bushhoustonliteracy/" target="_blank"><img src="<%= asset_path('facebook.png') %>" /></a>
-    <a href="https://twitter.com/BushHoustonLit" target="_blank"><img src="<%= asset_path('twitter.png') %>" /></a>
-  </div>
+  
   <div class="navbar-header">
     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
       <span class="sr-only">Toggle navigation</span>
@@ -36,6 +32,21 @@
     <% orgs = Organization.where("is_included = ?", true) %>
 
     <div class="nav navbar-nav navbar-right">
+    <% if orgs.count > 0 %>
+      <li role="presentation" class="dropdown">
+        <a class="dropdown-toggle non-admin btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          Sponsor a Child <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <!--li><a href="search">Sponsor Any Child</a></li-->
+            <% orgs.each do |org| %>
+            <li>
+              <%= link_to(org.name, search_url(org.slug)) %>
+            </li>
+            <% end %>
+        </ul>
+      </li>
+      <% end -%>
       <li role="presentation" class="dropdown">
         <a href="search?complete=true" class="non-admin btn">
           Donate to Program
@@ -50,24 +61,6 @@
         </ul-->
       </li>
     </div>
-
-    <% if orgs.count > 0 %>
-    <div class="nav navbar-nav navbar-right">
-      <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle non-admin btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-          Sponsor a Child <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <!--li><a href="search">Sponsor Any Child</a></li-->
-            <% orgs.each do |org| %>
-            <li>
-              <%= link_to(org.name, search_url(org.slug)) %>
-            </li>
-            <% end %>
-        </ul>
-      </li>
-    </div>
-    <% end -%>
   </div>
 
   <!-- <div class="col-md-0 col-md-offset-6 col-sm-offset-6 col-xs-offset-6 mouse">
