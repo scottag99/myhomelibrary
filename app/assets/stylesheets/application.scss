@@ -101,7 +101,7 @@ ul.right-admin {
     color: #fff;
     padding: 5%;
     width: 50%;
-    margin: 0 auto;
+    margin: 75px auto;
     @media (max-width: 600px) {
       width: 100%;
     }
@@ -208,16 +208,15 @@ ul.right-admin {
 }
 .navbar-right {
   padding: 0 0 0;
-   
-  a.non-admin {
-    background-color: #E38A45;
+  border-radius: 45px 0 0 45px;
+  background-color: #E38A45;
 	
+  a.non-admin {
     padding: 26px 12px !important;
-	border-radius: 45px 0 0 45px;
   }
   li {
     a {
-	 display: block;
+	  display: block;
       color: #fff !important;
       text-transform: uppercase;
     }
@@ -305,12 +304,13 @@ ul.right-admin {
 .social-media {
   color: #fff;
   text-transform: uppercase;
-  font-size: 10px;
-  text-align: right;
+  font-size: 20px;
+  text-align: center;
   margin: 5px 5px -15px 0;
   a {
-    color: #fff;
+    margin-right: 8px;
   }
+
   img {
     width: 25px;
   }
