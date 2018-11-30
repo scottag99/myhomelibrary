@@ -224,7 +224,7 @@ ul.right-admin {
 }
 .admin-nav .navbar-right li a { position:fixed;color: #777 !important }
 .navbar-default {
-    z-index: 1;
+    z-index: 10;
     width:100%;
     position: fixed;
     background:#325BA3;
@@ -573,6 +573,9 @@ ul.right-admin {
     }
 }
 @media (min-width: 768px) {
+  #sponsor-list {
+    margin-left: 3em;
+  }
   #sponsor-list-affix.top {
     margin-top: 20px;
     margin-left: 10%;
