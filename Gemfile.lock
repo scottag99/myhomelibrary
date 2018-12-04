@@ -161,6 +161,7 @@ GEM
       omniauth (~> 1.2)
     os (0.9.6)
     pg (0.21.0)
+    projekktor-rails (0.0.7)
     public_suffix (3.0.2)
     puma (3.11.2)
     rack (2.0.4)
@@ -223,6 +224,8 @@ GEM
       scrivito_editors (= 1.12.0)
       scrivito_sdk (= 1.12.0)
       scrivito_ui (= 1.12.0)
+    scrivito_accordion_widget (1.2.1)
+      scrivito
     scrivito_column_widget (0.1.2)
       scrivito
     scrivito_content_box_widget (0.1.0)
@@ -267,6 +270,9 @@ GEM
       scrivito
     scrivito_ui (1.12.0)
       railties
+    scrivito_video_widget (1.0.14)
+      projekktor-rails
+      scrivito
     signet (0.8.1)
       addressable (~> 2.3)
       faraday (~> 0.9)
@@ -326,6 +332,7 @@ DEPENDENCIES
   roo (~> 2.7.0)
   sass-rails (~> 5.0)
   scrivito (~> 1.9)
+  scrivito_accordion_widget
   scrivito_column_widget (~> 0.1.2)
   scrivito_content_box_widget
   scrivito_elastic_slider_widget
@@ -335,6 +342,7 @@ DEPENDENCIES
   scrivito_text_image_widget (~> 0.1.0)
   scrivito_three_column_widget
   scrivito_two_column_widget
+  scrivito_video_widget
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
