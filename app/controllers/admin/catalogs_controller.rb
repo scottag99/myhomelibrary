@@ -98,7 +98,7 @@ class Admin::CatalogsController < Admin::BaseController
 
       @catalog.catalog_entries.each do |ce|
         csv << [ce.book.title, ce.book.author, ce.book.description, ce.book.isbn, ce.book.level, ce.book.cover_image_url, ce.price, 
-          ce.book.is_bilingual, ce.book.is_chapter, ce.book.year, ce.book.ar_points, ce.book.ar_level, ce.book.dra, ce.book.gra]
+          ce.book.is_bilingual, ce.book.is_chapter, ce.book.year, ce.book.ar_points, ce.book.ar_level, ce.book.grl, ce.book.dra]
       end
     end
     send_data data, filename: "#{@catalog.name}-CatalogReport.csv"
