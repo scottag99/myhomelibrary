@@ -94,7 +94,7 @@ class Admin::CatalogsController < Admin::BaseController
 
     data = CSV.generate(headers: true) do |csv|
       csv << ['title*', 'author*', 'description*', 'isbn*', 'level', 'cover_image_url*', 'price*',
-        'is_bilingual', 'is_chapter', 'year', 'ar_points', 'ar_level', 'grl', 'dra', 'id']
+        'is_bilingual', 'is_chapter', 'year', 'ar_points', 'ar_level', 'grl', 'dra']
 
       @catalog.catalog_entries.each do |ce|
         csv << [ce.book.title, ce.book.author, ce.book.description, ce.book.isbn, ce.book.level, ce.book.cover_image_url, ce.price, 
