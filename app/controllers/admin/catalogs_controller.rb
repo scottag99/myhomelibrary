@@ -93,10 +93,12 @@ class Admin::CatalogsController < Admin::BaseController
     @catalog = Catalog.find(params[:id])
 
     data = CSV.generate(headers: true) do |csv|
-      csv << ['Title', 'Author', 'Description', 'Publisher', 'DRA', 'Bilingual', 'Chapters']
+      csv << ['title*', 'author*', 'description*', 'isbn*', 'level', 'cover_image_url*', 'price*',
+        'is_bilingual', 'is_chapter', 'year', 'ar_points', 'ar_level', 'grl', 'dra', 'id']
 
       @catalog.catalog_entries.each do |ce|
-        csv << [ce.book.title, ce.book.author, ce.book.description, @catalog.source, ce.book.dra, ce.book.is_bilingual, ce.book.is_chapter]
+        csv << [ce.book.title, ce.book.author, ce.book.description, ce.book.isbn, ce.book.level, ce.book.cover_image_url, ce.price, 
+          ce.book.is_bilingual, ce.book.is_chapter, ce.book.year, ce.book.ar_points, ce.book.ar_level, ce.book.dra, ce.book.gra]
       end
     end
     send_data data, filename: "#{@catalog.name}-CatalogReport.csv"
