@@ -3,10 +3,19 @@ require "uri"
 require "net/http"
 
 class Admin::UsersController < Admin::BaseController
+  before_action :set_pagination
 
   def index
     auth0 = get_auth0_client
-    @users = auth0.get_users
+    q = {
+      page: @pagination[:page] - 1, # auth0 is zero-index based for pages
+      per_page: @pagination[:per_page],
+      sort: 'name:1',
+      include_totals: true
+    }
+    r = auth0.users q
+    @users = r["users"]
+    @is_last_page = r["start"] + r["length"] == r["total"]
   end
 
   def toggle_admin
@@ -16,17 +25,18 @@ class Admin::UsersController < Admin::BaseController
     app_meta['role'] = app_meta['role'].empty? ? 'admin' : ''
     auth0.patch_user(params[:id], {'app_metadata' => app_meta})
     flash[:success] = 'User updated. This change takes a few seconds to take effect. Refresh this page to see change.'
-    redirect_to admin_users_url
+    redirect_to admin_users_url(@pagination)
   end
 
   def destroy
     auth0 = get_auth0_client
     auth0.delete_user(params[:id])
     flash[:success] = 'User deleted. This change takes a few seconds to take effect. Refresh this page to see change.'
-    redirect_to admin_users_url
+    redirect_to admin_users_url(@pagination)
   end
 
-  private
+private
+
   def get_auth0_client
     return Auth0Client.new(
       :client_id => Rails.application.secrets.auth0_client_id,
@@ -57,5 +67,13 @@ class Admin::UsersController < Admin::BaseController
       token = body["access_token"]
       return token
     end
+  end
+
+  def set_pagination
+    @pagination = {
+      page: (params[:page] || 1).to_i,
+      per_page: (params[:per_page] || 50).to_i.abs # force positive value
+    }
+    @pagination[:page] = 1 if @pagination[:page] < 1
   end
 end
