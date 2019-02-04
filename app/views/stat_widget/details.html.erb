@@ -1,0 +1,21 @@
+<%= scrivito_medium_dialog do %>
+  <%= scrivito_details_for("Stat Detail Type") do %>
+    <%= scrivito_tag(:div, widget, :metric) %>
+  <% end %>
+
+  <%= scrivito_details_for("Show Previous Year Only") do %>
+    <%= scrivito_tag(:div, widget, :previous_year_only) %>
+  <% end %>
+
+  <%= scrivito_details_for("Offline Count") do %>
+    <%= scrivito_tag(:div, widget, :offline_count) %>
+  <% end %>
+
+  <%= scrivito_details_for("Style Class Name") do %>
+    <%= scrivito_tag(:div, widget, :classname) %>
+  <% end %>
+
+  <%= scrivito_details_for("CSS") do %>
+    <%= scrivito_tag(:div, widget, :css_style) %>
+  <% end %>
+<% end %>
