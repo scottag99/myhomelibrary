@@ -82,7 +82,7 @@ p {
 }
 
 // NAV BAR
-
+.navbar { min-height: 75px }
 nav.admin-nav {
   background: #fff;
 }
@@ -238,7 +238,7 @@ ul.right-admin {
   padding: 0px;
 }
 .navbar-brand img {
-  height: 100%;
+  width: 100px;
 }
 .navbar-header {
   a.non-admin {
@@ -328,10 +328,10 @@ ul.right-admin {
 }
 
 // FOOTER
-
+.bbhl-log {font-size: 1.5em}
 .hero-bottom {
   img {
-    width: 100px;
+    width: 400px;
   }
   .links {
     text-align: center;
