@@ -82,7 +82,6 @@ p {
 }
 
 // NAV BAR
-.navbar { min-height: 75px }
 nav.admin-nav {
   background: #fff;
 }
@@ -238,7 +237,7 @@ ul.right-admin {
   padding: 0px;
 }
 .navbar-brand img {
-  width: 100px;
+  height: 100%;
 }
 .navbar-header {
   a.non-admin {
