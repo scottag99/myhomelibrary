@@ -43,6 +43,8 @@
   ].reject(&:blank?).join(" ")
 
   action_link = widget.action_link || Scrivito::Link.new(url: "#", title: "Click here")
+
+  target = widget.target == 'New Tab' ? '_blank' : '_top'
 %>
 
-<%= link_to(action_link.display_title, scrivito_url(action_link), class: css_classes) %>
+<%= link_to(action_link.display_title, scrivito_url(action_link), class: css_classes, target: target) %>
