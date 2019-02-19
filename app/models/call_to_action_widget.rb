@@ -4,6 +4,7 @@ class CallToActionWidget < Widget
   attribute :alignment, :enum, values: alignments, default: alignments.first
   attribute :button_style, :enum, values: button_styles, default: button_styles.first
   attribute :size, :enum, values: sizes, default: sizes.second
+  attribute :target, :enum, values: ['New Tab', 'Current Tab'], default: 'New Tab'
 
   default_for(:action) do
     Scrivito::Link.new(url: "#", title: "Click here")
