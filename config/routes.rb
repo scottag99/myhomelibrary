@@ -69,6 +69,7 @@ Rails.application.routes.draw do
             get  'download'
           end
           resources :wishlist_entries
+          resources :appreciation_notes
         end
       end
     end
@@ -102,6 +103,7 @@ Rails.application.routes.draw do
             get  'download'
           end
           resources :wishlist_entries
+          resources :appreciation_notes
         end
       end
     end
