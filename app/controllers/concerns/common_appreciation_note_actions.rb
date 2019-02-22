@@ -22,6 +22,7 @@ module CommonAppreciationNoteActions
     flash[:success] = "Thank you! Your note has been added."
     respond_to do |format|
       format.html { render "show" }
+      format.js
       format.json { render json: @appreciation_note }
     end
   end

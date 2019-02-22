@@ -21,11 +21,15 @@
       </dl>
     </div>
 
-    <div class="col-sm-6">
+    <% if @wishlist.campaign.use_appreciation_notes %>
+    <div class="col-sm-6" id="note-container">
       <% if @wishlist.appreciation_notes.empty? %>
         <%= link_to "Add Note", url_for(['new', get_namespace, @wishlist.campaign.organization, @wishlist.campaign, @wishlist, 'appreciation_note']), class: "btn btn-xs btn-primary", remote: true %>
+      <% else %>
+        <img src="<%= @wishlist.appreciation_notes.last.note %>" class="appreciation-note">
       <% end %>
     </div>
+    <% end %>
   </div>
 
   <div class="panel panel-default">

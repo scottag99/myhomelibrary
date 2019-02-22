@@ -19,6 +19,8 @@
       <dd><%= link_to_if @campaign.roster_data_reference, @campaign.roster_data_reference, @campaign.roster_data_reference, target: '_blank' %></dd>
       <dt>Notes</dt>
       <dd><%= h(@campaign.notes).gsub(/\n/, '<br/>').html_safe %></dd>
+      <dt>Use Appreciation Notes</dt>
+      <dd><input type=checkbox disabled <%= @campaign.use_appreciation_notes ? 'checked' : '' %> /></dd>
     </dl>
   </div>
 
@@ -126,6 +128,7 @@ function editButton(val) {
     return '<a class="btn btn-info btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/manage') + '">Pick Books</a> ' +
       '<a class="btn btn-info btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/toggle_delivered') + '" data-method="put">Delivered</a> ' +
       '<a class="btn btn-warning btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/edit') + '">Edit</a> ' +
+      '<a class="btn btn-default btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id) + '">View</a> ' +
       del;
       ;
   }

@@ -1,4 +1,5 @@
-<%= form_for [get_namespace, @appreciation_note.wishlist.campaign.organization, @appreciation_note.wishlist.campaign, @appreciation_note.wishlist, @appreciation_note], :html => {:class => "form-horizontal"} do |f| %>
+<%= form_for [get_namespace, @appreciation_note.wishlist.campaign.organization, @appreciation_note.wishlist.campaign, @appreciation_note.wishlist, @appreciation_note], 
+:html => {:class => "form-horizontal"}, remote: true do |f| %>
   <p>Use your mouse to write an appreciation note in the box below.</p>
   <div class="form-group">
     <%= f.label :note, class: "col-md-1 control-label" %>
@@ -10,15 +11,29 @@
     <label class="col-md-1 control-label">&nbsp;</label>
     <div class="col-md-11">
       <div class="btn-group" role="group" aria-label="Note controls">
-        <button type="button" class="btn btn-secondary">Clear</button>
-        <button type="button" class="btn btn-secondary">Undo</button>
+        <button type="button" class="btn btn-default" id="clear-note">Clear</button>
+        <button type="button" class="btn btn-default" id="undo-note">Undo</button>
       </div>
     </div>
 </div>
-
+    <%= f.hidden_field :note %>
 <% end %>
 <script>
 var canvas = document.querySelector("#noteCanvas");
 var signaturePad = new SignaturePad(canvas);
+$('#clear-note').on('click', function() {
+  signaturePad.clear();
+});
 
+$('#undo-note').on('click', function() {
+  var data = signaturePad.toData();
+
+  if (data) {
+    data.pop(); // remove the last dot or line
+    signaturePad.fromData(data);
+  }
+});
+$('.modal-body form').on('submit', function() {
+  $('#appreciation_note_note').val(signaturePad.toDataURL());
+});
 </script>
