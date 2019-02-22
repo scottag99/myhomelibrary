@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180516091141) do
+ActiveRecord::Schema.define(version: 20190222194841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "appreciation_notes", force: :cascade do |t|
+    t.bigint "wishlist_id"
+    t.binary "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["wishlist_id"], name: "index_appreciation_notes_on_wishlist_id"
+  end
 
   create_table "books", id: :serial, force: :cascade do |t|
     t.string "title"
@@ -54,6 +62,7 @@ ActiveRecord::Schema.define(version: 20180516091141) do
     t.integer "book_limit"
     t.string "roster_data_reference"
     t.string "notes"
+    t.boolean "use_appreciation_notes", default: false
     t.index ["organization_id"], name: "index_campaigns_on_organization_id"
   end
 
@@ -145,6 +154,7 @@ ActiveRecord::Schema.define(version: 20180516091141) do
     t.index ["teacher"], name: "index_wishlists_on_teacher"
   end
 
+  add_foreign_key "appreciation_notes", "wishlists"
   add_foreign_key "campaign_catalogs", "campaigns"
   add_foreign_key "campaign_catalogs", "catalogs"
   add_foreign_key "campaigns", "organizations"

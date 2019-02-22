@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'donate', to: 'home#donate'
   post 'sponsor_classroom', to: 'home#sponsor_classroom'
   get 'give', to: 'home#give'
-  get 'bookdrive', to: 'home#bookdrive'
+  get 'bookdrive', to: redirect('https://www.bushhoustonliteracy.org/book-drive', status: 302)
   get 'search/:slug', to: redirect('/search?slug=%{slug}'), as: 'old_search'
   get 'wishlists', to: 'home#wishlists'
   post 'success', to: 'home#success'
@@ -69,6 +69,7 @@ Rails.application.routes.draw do
             get  'download'
           end
           resources :wishlist_entries
+          resources :appreciation_notes
         end
       end
     end
@@ -102,6 +103,7 @@ Rails.application.routes.draw do
             get  'download'
           end
           resources :wishlist_entries
+          resources :appreciation_notes
         end
       end
     end

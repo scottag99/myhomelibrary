@@ -1,23 +1,35 @@
 <div class="panel panel-default outer-panel panel-info">
   <!-- Default panel contents -->
   <div class="panel-heading"><h3 class="panel-title">Wishlist Detail</h3></div>
-  <div class="panel-body">
-    <dl class="dl-horizontal">
-      <dt>Teacher</dt>
-      <dd><%= @wishlist.teacher %></dd>
-      <dt>Reader Name</dt>
-      <dd><%= @wishlist.reader_name %></dd>
-      <dt>Reader Age</dt>
-      <dd><%= @wishlist.reader_age %></dd>
-      <dt>Reader Gender</dt>
-      <dd><%= @wishlist.reader_gender %></dd>
-      <dt>Grade Level</dt>
-      <dd><%= @wishlist.grade %></dd>
-      <dt>Delivered</dt>
-      <dd><input type=checkbox disabled <%= @wishlist.is_delivered ? 'checked' : '' %> /></dd>
-      <dt>MHL ID</dt>
-      <dd><%= @wishlist.external_id %></dd>
-    </dl>
+  <div class="panel-body row">
+    <div class="col-sm-6">
+      <dl class="dl-horizontal">
+        <dt>Teacher</dt>
+        <dd><%= @wishlist.teacher %></dd>
+        <dt>Reader Name</dt>
+        <dd><%= @wishlist.reader_name %></dd>
+        <dt>Reader Age</dt>
+        <dd><%= @wishlist.reader_age %></dd>
+        <dt>Reader Gender</dt>
+        <dd><%= @wishlist.reader_gender %></dd>
+        <dt>Grade Level</dt>
+        <dd><%= @wishlist.grade %></dd>
+        <dt>Delivered</dt>
+        <dd><input type=checkbox disabled <%= @wishlist.is_delivered ? 'checked' : '' %> /></dd>
+        <dt>MHL ID</dt>
+        <dd><%= @wishlist.external_id %></dd>
+      </dl>
+    </div>
+
+    <% if @wishlist.campaign.use_appreciation_notes %>
+    <div class="col-sm-6" id="note-container">
+      <% if @wishlist.appreciation_notes.empty? %>
+        <%= link_to "Add Note", url_for(['new', get_namespace, @wishlist.campaign.organization, @wishlist.campaign, @wishlist, 'appreciation_note']), class: "btn btn-xs btn-primary", remote: true %>
+      <% else %>
+        <img src="<%= @wishlist.appreciation_notes.last.note %>" class="appreciation-note">
+      <% end %>
+    </div>
+    <% end %>
   </div>
 
   <div class="panel panel-default">

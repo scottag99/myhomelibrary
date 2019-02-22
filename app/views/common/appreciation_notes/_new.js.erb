@@ -1,0 +1,3 @@
+$("#globalModal .modal-title").html('Add Appreciation Note');
+$("#globalModal .modal-body").html($("<%= escape_javascript(render :partial => 'common/appreciation_notes/form') %>"));
+$('#globalModal').modal();
