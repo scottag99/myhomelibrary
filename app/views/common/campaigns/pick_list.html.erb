@@ -34,7 +34,7 @@
             </tr>
           </thead>
           <tbody>
-            <% wishlist.catalog_entries.joins(:book, :catalog).order(["books.title"]).each do |catalog_entry| %>
+            <% wishlist.catalog_entries.includes(:book, :catalog).order(["books.title"]).each do |catalog_entry| %>
             <tr>
               <td><%= catalog_entry.book.title %></td>
               <td><%= catalog_entry.book.author %></td>
