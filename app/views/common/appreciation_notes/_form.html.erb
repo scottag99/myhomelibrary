@@ -4,7 +4,7 @@
   <div class="form-group">
     <%= f.label :note, class: "col-md-1 control-label" %>
     <div class="col-md-11">
-      <canvas id="noteCanvas" width="600" height="450" style="box-shadow: 5px 5px grey; border: 1px solid gray; background: khaki;"></canvas>
+      <canvas id="noteCanvas" width="600" height="450" style="cursor: crosshair; box-shadow: 5px 5px grey; border: 1px solid gray; background-image: url('<%= asset_path('notebook-paper.png') %>');"></canvas>
     </div>
   </div>
   <div class="form-group">
@@ -13,6 +13,27 @@
       <div class="btn-group" role="group" aria-label="Note controls">
         <button type="button" class="btn btn-default" id="clear-note">Clear</button>
         <button type="button" class="btn btn-default" id="undo-note">Undo</button>
+        <div class="color-option btn" data-color="rgb(0,0,0)">
+          <%= image_tag 'black-crayon.png' %>
+        </div>
+        <div class="color-option btn" data-color="rgb(39,95,198)">
+          <%= image_tag 'blue-crayon.png' %>
+        </div>
+        <div class="color-option btn" data-color="rgb(105,163,49)">
+          <%= image_tag 'green-crayon.png' %>
+        </div>
+        <div class="color-option btn" data-color="rgb(221,55,47)">
+          <%= image_tag 'red-crayon.png' %>
+        </div>
+        <div class="color-option btn" data-color="rgb(236,169,62)">
+          <%= image_tag 'orange-crayon.png' %>
+        </div>
+        <div class="color-option btn" data-color="rgb(134,78,158)">
+          <%= image_tag 'purple-crayon.png' %>
+        </div>
+        <div class="color-option btn" data-color="rgb(239,219,73)">
+          <%= image_tag 'yellow-crayon.png' %>
+        </div>
       </div>
     </div>
 </div>
@@ -20,7 +41,11 @@
 <% end %>
 <script>
 var canvas = document.querySelector("#noteCanvas");
-var signaturePad = new SignaturePad(canvas);
+var signaturePad = new SignaturePad(canvas, {
+  minWidth: 2.5,
+  maxWidth: 6
+});
+
 $('#clear-note').on('click', function() {
   signaturePad.clear();
 });
@@ -35,5 +60,9 @@ $('#undo-note').on('click', function() {
 });
 $('.modal-body form').on('submit', function() {
   $('#appreciation_note_note').val(signaturePad.toDataURL());
+});
+
+$('.color-option').on('click', function() {
+  signaturePad.penColor = $(this).data('color');
 });
 </script>
