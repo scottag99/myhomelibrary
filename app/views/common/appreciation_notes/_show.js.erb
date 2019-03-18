@@ -1,1 +1,3 @@
-<img src="<%= @appreciation_note.note %>" class="appreciation-note">
+<%= link_to(url_for(['edit', get_namespace, @appreciation_note.wishlist.campaign.organization, @appreciation_note.wishlist.campaign, @appreciation_note.wishlist, @appreciation_note]), remote: true) do %>
+    <img src="<%= @appreciation_note.note %>" class="appreciation-note">
+<% end %>

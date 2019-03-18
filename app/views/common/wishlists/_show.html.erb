@@ -26,7 +26,9 @@
       <% if @wishlist.appreciation_notes.empty? %>
         <%= link_to "Add Note", url_for(['new', get_namespace, @wishlist.campaign.organization, @wishlist.campaign, @wishlist, 'appreciation_note']), class: "btn btn-xs btn-primary", remote: true %>
       <% else %>
-        <img src="<%= @wishlist.appreciation_notes.last.note %>" class="appreciation-note">
+        <%= link_to(url_for(['edit', get_namespace, @wishlist.campaign.organization, @wishlist.campaign, @wishlist, @wishlist.appreciation_notes.last]), remote: true) do %>
+          <img src="<%= @wishlist.appreciation_notes.last.note %>" class="appreciation-note">
+        <% end %>
       <% end %>
     </div>
     <% end %>

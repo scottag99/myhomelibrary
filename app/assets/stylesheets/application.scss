@@ -352,7 +352,8 @@ ul.right-admin {
 .appreciation-note {
   width: 200px;
   border: 1px solid gray;
-  background-color: gainsboro;
+  background-image: asset-url('notebook-paper.png');
+  background-size: cover;
 }
 
 .wireframe {
@@ -1467,6 +1468,15 @@ ul.right-admin {
   &.superbowl {
     width: 300px;
   }
+}
+
+.color-option {
+  height: 60px;
+}
+
+.color-option img {
+  height: 100%;
+  max-width: auto;
 }
 
 @media print {
