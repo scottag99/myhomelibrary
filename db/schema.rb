@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190222194841) do
+ActiveRecord::Schema.define(version: 20190320170450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20190222194841) do
     t.binary "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "data"
     t.index ["wishlist_id"], name: "index_appreciation_notes_on_wishlist_id"
   end
 
