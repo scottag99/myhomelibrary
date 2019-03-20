@@ -76,7 +76,7 @@ module CommonAppreciationNoteActions
     end
 
     def appreciation_note_params
-      params.require(:appreciation_note).permit(:note)
+      params.require(:appreciation_note).permit(:note, :data)
     end
 
 end

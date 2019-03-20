@@ -1479,6 +1479,11 @@ ul.right-admin {
   max-width: auto;
 }
 
+.selected {
+  background-color: aliceblue;
+  border: 1px solid gainsboro;
+}
+
 @media print {
   body {
     font-size: 14pt;

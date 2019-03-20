@@ -13,7 +13,7 @@
       <div class="btn-group" role="group" aria-label="Note controls">
         <button type="button" class="btn btn-default" id="clear-note">Clear</button>
         <button type="button" class="btn btn-default" id="undo-note">Undo</button>
-        <div class="color-option btn" data-color="rgb(0,0,0)">
+        <div class="color-option btn selected" data-color="rgb(0,0,0)">
           <%= image_tag 'black-crayon.png' %>
         </div>
         <div class="color-option btn" data-color="rgb(39,95,198)">
@@ -34,10 +34,14 @@
         <div class="color-option btn" data-color="rgb(239,219,73)">
           <%= image_tag 'yellow-crayon.png' %>
         </div>
+        <div class="color-option btn" data-color="rgb(255,255,255)">
+          <%= image_tag 'eraser.png' %>
+        </div>
       </div>
     </div>
 </div>
     <%= f.hidden_field :note %>
+    <%= f.hidden_field :data %>
 <% end %>
 <script>
 var canvas = document.querySelector("#noteCanvas");
@@ -45,6 +49,12 @@ var signaturePad = new SignaturePad(canvas, {
   minWidth: 2.5,
   maxWidth: 6
 });
+<% if @appreciation_note.data %>
+try {
+  var data = JSON.parse('<%= @appreciation_note.data.html_safe %>');
+  signaturePad.fromData(data);
+} catch(err) {}
+<% end %>
 
 $('#clear-note').on('click', function() {
   signaturePad.clear();
@@ -60,9 +70,12 @@ $('#undo-note').on('click', function() {
 });
 $('.modal-body form').on('submit', function() {
   $('#appreciation_note_note').val(signaturePad.toDataURL());
+  $('#appreciation_note_data').val(JSON.stringify(signaturePad.toData()));
 });
 
 $('.color-option').on('click', function() {
   signaturePad.penColor = $(this).data('color');
+  $('.selected').removeClass('selected');
+  $(this).addClass('selected');
 });
 </script>
