@@ -3,8 +3,9 @@
   <p>Use your mouse to write an appreciation note in the box below.</p>
   <div class="form-group">
     <%= f.label :note, class: "col-md-1 control-label" %>
-    <div class="col-md-11">
-      <canvas id="noteCanvas" width="600" height="450" style="cursor: crosshair; box-shadow: 5px 5px grey; border: 1px solid gray; background-image: url('<%= asset_path('notebook-paper.png') %>');"></canvas>
+    <div class="col-md-11" id="canvas-container">
+      <canvas id="noteCanvas" width="600" height="450" style="position:relative; background-size: cover; cursor: crosshair; box-shadow: 5px 5px grey; border: 1px solid gray; background-image: url('<%= asset_path('thank-you-bg.png') %>');"></canvas>
+      <div style="position: absolute; width: 25px; height: 35px; background-size: cover; z-index: 1000; display: none;background-image: url('<%= asset_path('black-crayon.png') %>'" id="nib" >
     </div>
   </div>
   <div class="form-group">
@@ -16,25 +17,25 @@
         <div class="color-option btn selected" data-color="rgb(0,0,0)">
           <%= image_tag 'black-crayon.png' %>
         </div>
-        <div class="color-option btn" data-color="rgb(39,95,198)">
+        <div class="color-option btn" data-color="rgb(39,95,198)" data-size="2.5">
           <%= image_tag 'blue-crayon.png' %>
         </div>
-        <div class="color-option btn" data-color="rgb(105,163,49)">
+        <div class="color-option btn" data-color="rgb(105,163,49)" data-size="2.5">
           <%= image_tag 'green-crayon.png' %>
         </div>
-        <div class="color-option btn" data-color="rgb(221,55,47)">
+        <div class="color-option btn" data-color="rgb(221,55,47)" data-size="2.5">
           <%= image_tag 'red-crayon.png' %>
         </div>
-        <div class="color-option btn" data-color="rgb(236,169,62)">
+        <div class="color-option btn" data-color="rgb(236,169,62)" data-size="2.5">
           <%= image_tag 'orange-crayon.png' %>
         </div>
-        <div class="color-option btn" data-color="rgb(134,78,158)">
+        <div class="color-option btn" data-color="rgb(134,78,158)" data-size="2.5">
           <%= image_tag 'purple-crayon.png' %>
         </div>
-        <div class="color-option btn" data-color="rgb(239,219,73)">
+        <div class="color-option btn" data-color="rgb(239,219,73)" data-size="2.5">
           <%= image_tag 'yellow-crayon.png' %>
         </div>
-        <div class="color-option btn" data-color="rgb(255,255,255)">
+        <div class="color-option btn" data-color="rgb(255,255,255)" data-size="10">
           <%= image_tag 'eraser.png' %>
         </div>
       </div>
@@ -75,7 +76,13 @@ $('.modal-body form').on('submit', function() {
 
 $('.color-option').on('click', function() {
   signaturePad.penColor = $(this).data('color');
+  signaturePad.minWidth = $(this).data('size');
   $('.selected').removeClass('selected');
   $(this).addClass('selected');
+  $('#nib').css('background-image', 'url("' + $(this).find('img').attr('src') + '")');
+});
+$('body').on('mousemove', function(e) {
+  $('#nib').show();
+  $('#nib').offset({left: e.pageX+2, top: e.pageY+2});
 });
 </script>
