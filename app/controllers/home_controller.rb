@@ -95,7 +95,7 @@ class HomeController < ApplicationController
       @wishlists.each do |w|
         @donation = w.donations.create!({:confirmation_code => params[:confirmation_code], :amount => amt, :is_classroom_sponsorship => params[:is_classroom_sponsored]})
       end
-    elsif campaign = Campaign.find(params[:campaign_id])
+    elsif campaign = Campaign.find_by_id(params[:campaign_id])
       @donation = campaign.donations.create!({:confirmation_code => params[:confirmation_code], :amount => params[:amount]})
     end
 
