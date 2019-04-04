@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190320170450) do
+ActiveRecord::Schema.define(version: 20190404191956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,9 @@ ActiveRecord::Schema.define(version: 20190320170450) do
     t.datetime "updated_at", null: false
     t.integer "campaign_id"
     t.boolean "is_classroom_sponsorship"
+    t.boolean "is_in_kind"
+    t.string "in_name_of"
+    t.string "in_kind_message"
     t.index ["campaign_id"], name: "index_donations_on_campaign_id"
     t.index ["wishlist_id"], name: "index_donations_on_wishlist_id"
   end

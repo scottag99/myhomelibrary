@@ -35,15 +35,30 @@ function kimbiaSuccess(kimbiaResponse) {
   var initCharge = kimbiaResponse.initialCharge.replace("$", "");
   var confCode = kimbiaResponse.confirmationCode;
   var wishlistId = getValueByLabel(kimbiaResponse.answers[0], 'Wishlist ID');
+  var is_in_kind = $('#chk-in-kind').is(':checked');
   $('.k_footer,.k_navigationSpan,.back-wishlist-btn').hide();
   $('.share-btn-box').removeClass('share-btn-box-hide').addClass('share-btn-box-show');
   $.ajax({
     url: '<%= success_url %>',
     dataType: 'json',
     method: 'POST',
-    data: {'id_list': wishlistId, 'amount': initCharge, 'confirmation_code': confCode, 'campaign_id': CampaignId, 'is_classroom_sponsored': is_classroom_sponsored},
+    data: {'id_list': wishlistId, 
+    'amount': initCharge, 
+    'confirmation_code': confCode, 
+    'campaign_id': CampaignId, 
+    'is_classroom_sponsored': is_classroom_sponsored,
+    'is_in_kind': is_in_kind,
+    'in_name_of': $('#in-name-of').val(),
+    'in_kind_message': $('#in-kind-message').val()
+    },
     success: function(data) {
-
+      if (is_in_kind) {
+        $('#in-kind-link-container').toggleClass('hidden');
+        var href = $('#in-kind-link').attr('href');
+        href += confCode;
+        $('#in-kind-link').attr('href', href);
+        $('#in-kind-link').html(href);
+      }
     }
   });
 }
@@ -68,13 +83,15 @@ function showPayment() {
 
 function kimbiaSubmit(f) {
   $(f.view.theForm.getElementsByTagName('button')[0]).hide();
-  $(f.view.theForm.getElementsByTagName('button')[0]).after($('<span id="spinner">Submitting...</span>'))
+  $(f.view.theForm.getElementsByTagName('button')[0]).after($('<span id="spinner">Submitting...</span>'));
+  $('#in-kind-container .form-group').hide();
 }
 
 function kimbiaResponse(f) {
   $(f.view.theForm.getElementsByTagName('button')[0]).show();
   $(f.view.theForm.getElementsByTagName('button')[0]).find('#spinner').remove();
 }
+
 </script>
 <div class="container-fluid">
   <div class="row bg-image-donate">
@@ -87,6 +104,29 @@ function kimbiaResponse(f) {
   <p class="back-wishlist-btn">
     <%= link_to 'Wish Lists', search_url(@slug), class: 'btn btn-primary btn-lg' %> Back to wish list search
   </p>
+
+  <div class="panel panel-default" id="in-kind-container">
+    <div class="panel-body">
+      <h4>In Kind Donation Option</h4>
+      <div class="checkbox form-group">
+        <label>
+          <input type="checkbox" id="chk-in-kind"> Make this an <strong>In Kind Donation</strong>
+        </label>
+      </div>
+      <div class="form-group hidden in-kind">
+        <label for="in-name-of">In Name Of</label>
+        <input type="text" class="form-control" id="in-name-of" placeholder="Name">
+      </div>
+      <div class="form-group hidden in-kind">
+        <label for="in-kind-message">Message</label>
+        <textarea class="form-control" rows="3" id="in-kind-message"></textarea>
+      </div>
+    </div>
+  </div>
+  
+
+  
+
 <!-- script to populate form tag -->
 <% if ENV['IS_PRODUCTION'] %>
 <script src="https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrive&onshow=showPayment&oncomplete=kimbiaSuccess&onbeforesubmit=kimbiaSubmit&onplatformresponse=kimbiaResponse"></script>
@@ -94,6 +134,13 @@ function kimbiaResponse(f) {
 <script src='https://widgets.kimbia.com/widgets/form.js?channel=barbarabushhoustonliteracyfoundation/bbhlvirtualbookdrivetest&onshow=showPayment&oncomplete=kimbiaSuccess&onbeforesubmit=kimbiaSubmit&onplatformresponse=kimbiaResponse'></script>
 <% end %>
   <div class="share-btn-box share-btn-box-hide">
+    <div class="panel panel-default hidden" id="in-kind-link-container">
+      <div class="panel-body">
+        <h4>In Kind Donation Link</h4>
+        <p>Your in-kind donation link is: <a id="in-kind-link" href="<%= request.protocol + request.host_with_port %>/donation/"><%= request.protocol + request.host_with_port %>/donation/</a>
+        </p>
+      </div>
+    </div>
     <p>Help spread the word about My Home Library and connect others to more children in need by sharing below</p>
     <div class="share-btn">
       <div class="fb-share-button" data-href="<%= search_url(@slug) %>"
@@ -110,3 +157,9 @@ function kimbiaResponse(f) {
     </div>
   </div>
 </div>
+
+<script>
+$('#chk-in-kind').on('change', function(){
+  $('.in-kind').toggleClass('hidden');
+});
+</script>

@@ -88,15 +88,28 @@ class HomeController < ApplicationController
     end
   end
 
+  def in_kind
+    @donation = Donation.find_by_confirmation_code(params[:code])
+  end
+
   def success
     @wishlists = Wishlist.joins([{:campaign => :organization}]).where("wishlists.id in (?)", params[:id_list].split(",").map(&:to_i)).all
     if @wishlists.count > 0
       amt = params[:amount].to_d/@wishlists.count unless params[:amount].nil? || @wishlists.count == 0
       @wishlists.each do |w|
-        @donation = w.donations.create!({:confirmation_code => params[:confirmation_code], :amount => amt, :is_classroom_sponsorship => params[:is_classroom_sponsored]})
+        @donation = w.donations.create!({:confirmation_code => params[:confirmation_code], 
+          :amount => amt, 
+          :is_classroom_sponsorship => params[:is_classroom_sponsored],
+          :is_in_kind => params[:is_in_kind],
+          :in_name_of => params[:in_name_of],
+          :in_kind_message => params[:in_kind_message]})
       end
     elsif campaign = Campaign.find(params[:campaign_id])
-      @donation = campaign.donations.create!({:confirmation_code => params[:confirmation_code], :amount => params[:amount]})
+      @donation = campaign.donations.create!({:confirmation_code => params[:confirmation_code], 
+        :amount => params[:amount],
+        :is_in_kind => params[:is_in_kind],
+        :in_name_of => params[:in_name_of],
+        :in_kind_message => params[:in_kind_message]})
     end
 
     session[:wishlist_cart] = nil

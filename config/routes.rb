@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root to: redirect('/home')
   get 'home/library'
   get 'donate', to: 'home#donate'
+  get 'donation/:code', to: 'home#in_kind'
   post 'sponsor_classroom', to: 'home#sponsor_classroom'
   get 'give', to: 'home#give'
   get 'bookdrive', to: redirect('https://www.bushhoustonliteracy.org/book-drive', status: 302)
