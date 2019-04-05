@@ -1511,3 +1511,17 @@ ul.right-admin {
      padding: 1em;
    }
 }
+
+#in-kind-display {
+  background: asset-url('kids_bg_4.jpg') no-repeat center top; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 800px;
+  margin: 0 auto;
+  padding-top: 250px;
+}
+#in-kind-display > div {
+  padding: 12px;
+}
