@@ -1514,14 +1514,18 @@ ul.right-admin {
 
 #in-kind-display {
   background: asset-url('kids_bg_4.jpg') no-repeat center top; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  -webkit-background-size: 100% auto;
+  -moz-background-size: 100% auto;
+  -o-background-size: 100% auto;
+  background-size: 100% auto;
   width: 800px;
   margin: 0 auto;
   padding-top: 250px;
 }
 #in-kind-display > div {
   padding: 12px;
+}
+
+#in-kind-display > div blockquote {
+  white-space: pre;
 }
