@@ -89,7 +89,7 @@ class HomeController < ApplicationController
   end
 
   def in_kind
-    @donation = Donation.find_by_confirmation_code(params[:code])
+    @donations = Donation.where(confirmation_code: params[:code], is_in_kind: true)
   end
 
   def success
