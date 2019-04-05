@@ -103,6 +103,6 @@ private
   end
 
   def campaign_params
-    params.require(:campaign).permit(:name, :deadline, :ready_for_donations, :address, :can_edit_wishlists, :book_limit, {:catalog_ids => []}, :notes)
+    params.require(:campaign).permit(:name, :deadline, :ready_for_donations, :address, :can_edit_wishlists, :book_limit, {:catalog_ids => []}, :notes, :use_appreciation_notes)
   end
 end

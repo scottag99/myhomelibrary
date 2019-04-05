@@ -27,7 +27,6 @@ class Partner::WishlistEntriesController < Partner::BaseController
     end
   end
   private
-    #TODO: restrict to partner orgs if not admin
     def current_organization
       @organization
     end

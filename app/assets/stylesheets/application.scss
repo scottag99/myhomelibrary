@@ -349,6 +349,12 @@ ul.right-admin {
   }
 }
 
+.appreciation-note {
+  width: 200px;
+  border: 1px solid gray;
+  background-image: asset-url('thank-you-bg.png');
+  background-size: cover;
+}
 
 .wireframe {
   border: 1px solid gray;
@@ -1464,6 +1470,20 @@ ul.right-admin {
   }
 }
 
+.color-option {
+  height: 60px;
+}
+
+.color-option img {
+  height: 100%;
+  max-width: auto;
+}
+
+.selected {
+  background-color: aliceblue;
+  border: 1px solid gainsboro;
+}
+
 @media print {
   body {
     font-size: 14pt;
@@ -1490,4 +1510,22 @@ ul.right-admin {
    .admin-template {
      padding: 1em;
    }
+}
+
+#in-kind-display {
+  background: asset-url('kids_bg_4.jpg') no-repeat center top; 
+  -webkit-background-size: 100% auto;
+  -moz-background-size: 100% auto;
+  -o-background-size: 100% auto;
+  background-size: 100% auto;
+  width: 800px;
+  margin: 0 auto;
+  padding-top: 250px;
+}
+#in-kind-display > div {
+  padding: 12px;
+}
+
+#in-kind-display > div blockquote {
+  white-space: pre;
 }

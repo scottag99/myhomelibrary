@@ -1,0 +1,20 @@
+<div id="in-kind-display">
+    <div>
+    <% unless @donations.size == 0 %>
+        <h1 class="text-center" style="">A Donation on Your Behalf!</h1>
+        <h2><%= @donations.first.in_name_of %>,</h2>
+        <p>A donation of <%= number_to_currency(@donations.sum(:amount)) %> was made in your name to the <strong>My Home Library</strong> program. 
+        This donation provides home libraries for <%= pluralize(@donations.size, 'kid') %>  in the Houston area.
+        </p>
+        <blockquote><%= @donations.first.in_kind_message %></blockquote>
+        <p>
+    <% else %>
+        <h2 class="text-center">No donation found</h2>
+    <% end %>
+        <h3>What is My Home Library?</h3>
+        <p>My Home Library is a program that uses a web-based tool hosted by the Barbara Bush Houston Literacy Foundation. Through the My 
+        Home Library web-based tool, community members are able to sponsor a home library for an economically disadvantaged child. 
+        My Home Library was developed in late 2016 in partnership with Credera and a team of volunteer technologist from across the Houston community.
+        </p>
+    </div>
+</div>
