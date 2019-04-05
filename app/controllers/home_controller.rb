@@ -110,6 +110,12 @@ class HomeController < ApplicationController
         :is_in_kind => params[:is_in_kind],
         :in_name_of => params[:in_name_of],
         :in_kind_message => params[:in_kind_message]})
+    else
+      @donation = Donation.create!({:confirmation_code => params[:confirmation_code], 
+        :amount => params[:amount],
+        :is_in_kind => params[:is_in_kind],
+        :in_name_of => params[:in_name_of],
+        :in_kind_message => params[:in_kind_message]})
     end
 
     session[:wishlist_cart] = nil
