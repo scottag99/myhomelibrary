@@ -1,4 +1,16 @@
+<style>
+    @page {
+        margin: 0.5in;
+    }
+    @media print {
+        body {
+            width: 7in;
+            height: 5in;
+        }
+    }
+</style>
 <div id="in-kind-display">
+    <%= image_tag 'kids_bg_4.jpg', id: 'bg-image' %>
     <div>
     <% unless @donations.size == 0 %>
         <h1 class="text-center" style="">A Donation on Your Behalf!</h1>
@@ -12,7 +24,8 @@
         <h2 class="text-center">No donation found</h2>
     <% end %>
         <h3>What is My Home Library?</h3>
-        <p>My Home Library is a program that uses a web-based tool hosted by the Barbara Bush Houston Literacy Foundation. Through the My 
+        <p id="mhl-desc"><%= image_tag 'my-home-library.png', class: "mhl-logo", align: 'right' %>
+        My Home Library is a program that uses a web-based tool hosted by the Barbara Bush Houston Literacy Foundation. Through the My 
         Home Library web-based tool, community members are able to sponsor a home library for an economically disadvantaged child. 
         My Home Library was developed in late 2016 in partnership with Credera and a team of volunteer technologist from across the Houston community.
         </p>
