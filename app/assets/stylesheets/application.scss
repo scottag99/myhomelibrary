@@ -1484,7 +1484,61 @@ ul.right-admin {
   border: 1px solid gainsboro;
 }
 
+#in-kind-display {
+  position: relative;
+  width: 800px;
+  margin: 0 auto;
+  padding-top: 250px;
+
+  .mhl-logo {
+    width: 250px;
+  }
+  #bg-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    top: 0;
+  }
+}
+#in-kind-display > div {
+  padding: 12px;
+  z-index: 100;
+  position: relative;
+}
+
+#in-kind-display > div blockquote {
+  white-space: pre;
+}
+
 @media print {
+  .hero-bottom {
+    display: none;
+  }
+  #in-kind-display {
+    padding-top: 1in;
+    width: unset;
+
+    h2 {
+      font-size: 1.2em;
+    }
+    p {
+      font-size: 0.8em;
+    }
+    h3 {
+      font-size: 0.7em;
+    }
+    #mhl-desc {
+      font-size: 0.5em;
+    }
+
+    blockquote {
+      border-left: 1px solid #999;
+    }
+    .mhl-logo {
+      width: 1in;
+    }
+  }
   body {
     font-size: 14pt;
   }
@@ -1510,22 +1564,4 @@ ul.right-admin {
    .admin-template {
      padding: 1em;
    }
-}
-
-#in-kind-display {
-  background: asset-url('kids_bg_4.jpg') no-repeat center top; 
-  -webkit-background-size: 100% auto;
-  -moz-background-size: 100% auto;
-  -o-background-size: 100% auto;
-  background-size: 100% auto;
-  width: 800px;
-  margin: 0 auto;
-  padding-top: 250px;
-}
-#in-kind-display > div {
-  padding: 12px;
-}
-
-#in-kind-display > div blockquote {
-  white-space: pre;
 }
