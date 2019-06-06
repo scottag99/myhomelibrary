@@ -107,20 +107,21 @@ function kimbiaResponse(f) {
 
   <div class="panel panel-default" id="in-kind-container">
     <div class="panel-body">
-      <h4>In Kind Donation Option</h4>
+      <h4>Donate in honor of option. <small>(limit 1 honoree per donation)</small></h4>
       <div class="checkbox form-group">
         <label>
-          <input type="checkbox" id="chk-in-kind"> Make this an <strong>In Kind Donation</strong>
+          <input type="checkbox" id="chk-in-kind"> Make this donation in honor of someone
         </label>
       </div>
       <div class="form-group hidden in-kind">
-        <label for="in-name-of">In Name Of</label>
+        <label for="in-name-of">Honoree Name</label>
         <input type="text" class="form-control" id="in-name-of" placeholder="Name">
       </div>
       <div class="form-group hidden in-kind">
-        <label for="in-kind-message">Message</label>
-        <textarea class="form-control" rows="3" id="in-kind-message"></textarea>
+        <label for="in-kind-message">Special Message</label>
+        <textarea class="form-control" rows="3" id="in-kind-message" maxlength="255"></textarea>
       </div>
+      <p>Upon checkout, a certificate with the honoree’s name and your special message will open on a new page that you can print and mail. </p>
     </div>
   </div>
   
@@ -136,8 +137,8 @@ function kimbiaResponse(f) {
   <div class="share-btn-box share-btn-box-hide">
     <div class="panel panel-default hidden" id="in-kind-link-container">
       <div class="panel-body">
-        <h4>In Kind Donation Link</h4>
-        <p>Your in-kind donation link is: <a id="in-kind-link" href="<%= request.protocol + request.host_with_port %>/donation/"><%= request.protocol + request.host_with_port %>/donation/</a>
+        <h4>In Honor of Certificate Link</h4>
+        <p>Your in honor of donation link is: <a target="_blank" id="in-kind-link" href="<%= request.protocol + request.host_with_port %>/donation/"><%= request.protocol + request.host_with_port %>/donation/</a>
         </p>
       </div>
     </div>

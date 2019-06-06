@@ -4,8 +4,8 @@
     }
     @media print {
         body {
-            width: 7in;
-            height: 5in;
+            width: 7.5in;
+            height: 10in;
         }
     }
 </style>
@@ -13,12 +13,11 @@
     <%= image_tag 'kids_bg_4.jpg', id: 'bg-image' %>
     <div>
     <% unless @donations.size == 0 %>
-        <h1 class="text-center" style="">A Donation on Your Behalf!</h1>
-        <h2><%= @donations.first.in_name_of %>,</h2>
+        <h3><%= @donations.first.in_name_of %>,</h3>
         <p>A donation of <%= number_to_currency(@donations.sum(:amount)) %> was made in your name to the <strong>My Home Library</strong> program. 
-        This donation provides home libraries for <%= pluralize(@donations.size, 'kid') %>  in the Houston area.
+        This donation provides home libraries for <%= pluralize(@donations.sum(:amount).to_i/30, 'kid') %>  in the Houston area.
         </p>
-        <blockquote><%= @donations.first.in_kind_message %></blockquote>
+        <blockquote><%= @donations.first.in_kind_message %>Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! </blockquote>
         <p>
     <% else %>
         <h2 class="text-center">No donation found</h2>
