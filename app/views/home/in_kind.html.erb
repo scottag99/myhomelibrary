@@ -17,7 +17,7 @@
         <p>A donation of <%= number_to_currency(@donations.sum(:amount)) %> was made in your name to the <strong>My Home Library</strong> program. 
         This donation provides home libraries for <%= pluralize(@donations.sum(:amount).to_i/30, 'kid') %>  in the Houston area.
         </p>
-        <blockquote><%= @donations.first.in_kind_message %>Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! Happy Birthday, Sam! </blockquote>
+        <blockquote><%= @donations.first.in_kind_message %></blockquote>
         <p>
     <% else %>
         <h2 class="text-center">No donation found</h2>
