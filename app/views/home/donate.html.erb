@@ -84,7 +84,7 @@ function showPayment() {
 function kimbiaSubmit(f) {
   $(f.view.theForm.getElementsByTagName('button')[0]).hide();
   $(f.view.theForm.getElementsByTagName('button')[0]).after($('<span id="spinner">Submitting...</span>'));
-  $('#in-kind-container .form-group').hide();
+  $('#in-kind-container').hide();
 }
 
 function kimbiaResponse(f) {
