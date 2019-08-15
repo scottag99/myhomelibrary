@@ -16,6 +16,7 @@
       <h4 class="text-muted"><%= wishlist.campaign.organization.name %></h4>
       <h4 class="text-muted">Teacher: <%= wishlist.teacher %></h4>
       <%= button_to 'Sponsor Classroom', sponsor_classroom_url(:teacher => wishlist.teacher, :campaign_id => wishlist.campaign.id), remote: true, :class => 'btn btn-primary btn-notsponsored-class' unless is_classroom_sponsored %>
+	  <%= button_to 'Sponsor Grade', sponsor_grade_url(:teacher => wishlist.grade, :campaign_id => wishlist.campaign.id), remote: true, :grade => 'btn btn-primary btn-notsponsored-grade' unless is_grade_sponsored %>
     </div>
     <div class="visible-xs" id="wishlist-book-list-toggle">
       <button class="btn btn-default btn-xs" data-toggle="collapse" data-target="#book-list-<%= unique_id%>" aria-expanded="false" aria-controls="book-list-<%= unique_id%>">

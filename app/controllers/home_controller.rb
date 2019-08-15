@@ -78,6 +78,10 @@ class HomeController < ApplicationController
     @wishlist_ids = Wishlist.joins('LEFT JOIN donations on donations.wishlist_id = wishlists.id').where("teacher = ? and wishlists.campaign_id = ? and donations.id is NULL", params[:teacher], params[:campaign_id]).pluck(:id)
   end
 
+  def sponsor_grade
+    @wishlist_ids = Wishlist.joins('LEFT JOIN donations on donations.wishlist_id = wishlists.id').where("grade = ? and wishlists.campaign_id = ? and donations.id is NULL", params[:grade], params[:campaign_id]).pluck(:id)
+  end
+
   def search
   end
 
