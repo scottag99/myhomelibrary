@@ -1,0 +1,16 @@
+var template = $('#sponsor-grade-template').html()
+
+$("#globalModalShopping .modal-body").html(template);
+
+var idList = <%= @wishlist_ids %>;
+var checkoutBtn = $('#grade-checkout-btn');
+var href = checkoutBtn.attr('href');
+if (href) {
+  href = href.replace(/\?.+/, "") + "?grade=true&id_list=" + idList;
+  checkoutBtn.attr('href', href);
+}
+
+$('#globalModalShopping').modal();
+$("#grade-dollars").html('<%= number_to_currency(30*@wishlist_ids.size) %>');
+$("#grade-wishlist-count").html('<%= @wishlist_ids.size %>');
+$("#grade").html('<%= params[:grade] %>');
