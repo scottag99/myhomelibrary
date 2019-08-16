@@ -30,6 +30,7 @@ var DonationLevel = <%= @donationLevel %>; // org donationlevel
 var ReaderName = "<%= @reader_name %>"; // reader name
 var CampaignId = "<%= @campaign_id %>"; // campaign id
 var is_classroom_sponsored = <%= @is_classroom_sponsored %>;
+var is_grade_sponsored = <%= @is_grade_sponsored %>;
 
 function kimbiaSuccess(kimbiaResponse) {
   var initCharge = kimbiaResponse.initialCharge.replace("$", "");
@@ -47,6 +48,7 @@ function kimbiaSuccess(kimbiaResponse) {
     'confirmation_code': confCode, 
     'campaign_id': CampaignId, 
     'is_classroom_sponsored': is_classroom_sponsored,
+    'is_grade_sponsored': is_grade_sponsored,
     'is_in_kind': is_in_kind,
     'in_name_of': $('#in-name-of').val(),
     'in_kind_message': $('#in-kind-message').val()

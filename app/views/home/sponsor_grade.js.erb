@@ -11,6 +11,6 @@ if (href) {
 }
 
 $('#globalModalShopping').modal();
-$("#classroom-dollars").html('<%= number_to_currency(30*@wishlist_ids.size) %>');
-$("#classroom-wishlist-count").html('<%= @wishlist_ids.size %>');
-$("#classroom-grade").html('<%= params[:grade] %>');
+$("#grade-dollars").html('<%= number_to_currency(30*@wishlist_ids.size) %>');
+$("#grade-wishlist-count").html('<%= @wishlist_ids.size %>');
+$("#grade").html('<%= params[:grade] %>');

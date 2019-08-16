@@ -315,6 +315,41 @@ $('body').on("change", '#addl_donation_slug', function() {
 </div>
 </script>
 
+<script type="text/template" id="sponsor-grade-template">
+<div class="container-fluid">
+  <div class="row">
+    <div><h3>Ready to Complete your Sponsorship?</h3></div>
+    <div class="col-md-6 col-xs-12 modal-shopping-info">
+      <div class="sponsor-shoppingcart">
+        <div class="sponsor-header">
+          <h4 class="sponsor-title">Grade Selected</h4>
+        </div>
+
+        <ul class="list-group" id="sponsor-unordered-list">
+          <li class="list-group-item donation-group"><p class="donation-info"><strong id="grade"></strong></p></li>
+        </ul>
+        <span id="subtotal">Your Subtotal: <p class="dollars" id="grade-dollars"></p></span>
+      </div>
+    </div>
+    <div class="col-md-6 col-xs-12 modal-shopping-description">
+      <div class="row">
+        <div class="col-md-6 col-xs-12" style="padding-left: 0;">
+          <h4>Thank you!</h4>
+          <p>Your generous donation will give <span id="grade-wishlist-count"></span> students their very own home library!</p>
+        </div>
+        <div class="col-md-6 hidden-xs" style="padding-bottom: 0;">
+            <img src="<%= asset_path('kids6.jpg') %>" />
+            <img src="<%= asset_path('kids8.png') %>" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="general-donation-option">
+    <%= link_to "Complete My Sponsorship", donate_url(:id_list => ""), :class => "btn btn-md", :id => "grade-checkout-btn" %>
+  </div>
+</div>
+</script>
+
 <script type="text/javascript">
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip();

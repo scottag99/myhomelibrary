@@ -32,6 +32,7 @@ class HomeController < ApplicationController
     addl_donation = params[:addl_donation].nil? ? 0.0 : params[:addl_donation].to_d
     addl_donation_slug = params[:addl_donation_slug].nil? ? 0.0 : params[:addl_donation_slug].to_d
     @is_classroom_sponsored = params[:classroom] == 'true'
+    @is_grade_sponsored = params[:grade] == 'true'
     if params[:id_list].nil?
       @wishlists = []
       @donationLevel = addl_donation + addl_donation_slug
@@ -87,6 +88,7 @@ class HomeController < ApplicationController
 
   def wishlists
     @is_classroom_sponsored = false
+    @is_grade_sponsored = false
     respond_to do |format|
       format.js {}
     end
@@ -104,6 +106,7 @@ class HomeController < ApplicationController
         @donation = w.donations.create!({:confirmation_code => params[:confirmation_code], 
           :amount => amt, 
           :is_classroom_sponsorship => params[:is_classroom_sponsored],
+          :is_grade_sponsorship => params[:is_grade_sponsored],
           :is_in_kind => params[:is_in_kind],
           :in_name_of => params[:in_name_of],
           :in_kind_message => params[:in_kind_message]})
