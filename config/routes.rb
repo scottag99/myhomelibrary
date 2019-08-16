@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'donate', to: 'home#donate'
   get 'donation/:code', to: 'home#in_kind'
   post 'sponsor_classroom', to: 'home#sponsor_classroom'
+  post 'sponsor_grade', to: 'home#sponsor_grade'
   get 'give', to: 'home#give'
   get 'bookdrive', to: redirect('https://www.bushhoustonliteracy.org/book-drive', status: 302)
   get 'search/:slug', to: redirect('/search?slug=%{slug}'), as: 'old_search'
