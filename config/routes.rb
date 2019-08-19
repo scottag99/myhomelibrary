@@ -54,6 +54,8 @@ Rails.application.routes.draw do
           get 'book_count'
           get 'exportroster'
           get 'readers'
+          get 'new_grade_sponsorship'
+          post 'create_grade_sponsorship'
           put 'donations'
           put 'wishlists'
         end

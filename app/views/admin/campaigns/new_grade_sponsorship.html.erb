@@ -1,0 +1,37 @@
+<%= content_for :breadcrumb do %>
+<%= breadcrumb([
+  @campaign.organization.name,
+    {href: admin_organization_url(@campaign.organization), label: 'Campaigns'}
+  ])
+%>
+<% end %>
+<%= form_tag [:create_grade_sponsorship, :admin, @campaign.organization, @campaign], {:class => "form-horizontal"} do |f| %>
+  <div class="form-group">
+    <p class="col-md-4">Add a grade sponsorhip by selecting the grade and amount of the donation. Keep in mind that if the donation amount is less than the minimum needed, then the wishlists will still show in the search as available to sponsor. Minimum is calculated at $30 per wishlist.</p>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :grade, nil, class: "col-md-1 control-label" %>
+    <div class="col-md-2">
+      <%= select_tag :grade, options_for_select(@grades) %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :amount, nil, class: "col-md-1 control-label" %> (required)
+    <div class="col-md-2">
+      <div class="input-group">
+        <div class="input-group-addon">$</div>
+        <%= number_field_tag :amount, nil, class: "form-control", :required => true %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+      <div class="col-md-offset-1 col-md-4 ">
+          <%= submit_tag 'Submit'.html_safe, :class => 'btn btn-primary' %>
+          <%= link_to 'Back', admin_organization_url(@campaign.organization), :class => "btn btn-default"%>
+      </div>
+  </div>
+
+<% end %>
