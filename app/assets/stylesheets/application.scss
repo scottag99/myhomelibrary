@@ -349,6 +349,12 @@ ul.right-admin {
   }
 }
 
+.appreciation-note {
+  width: 200px;
+  border: 1px solid gray;
+  background-image: asset-url('thank-you-bg.png');
+  background-size: cover;
+}
 
 .wireframe {
   border: 1px solid gray;
@@ -477,6 +483,7 @@ ul.right-admin {
     border: 2px solid #fff;
     border-radius: 30px;
     padding: 5px 20px;
+    margin-bottom: 4px;
   }
 
 }
@@ -1464,7 +1471,62 @@ ul.right-admin {
   }
 }
 
+.color-option {
+  height: 60px;
+}
+
+.color-option img {
+  height: 100%;
+  max-width: auto;
+}
+
+.selected {
+  background-color: aliceblue;
+  border: 1px solid gainsboro;
+}
+
+#in-kind-display {
+  position: relative;
+  width: 800px;
+  margin: 0 auto;
+  padding-top: 150px;
+
+  .mhl-logo {
+    width: 250px;
+  }
+  #bg-image {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    z-index: -1;
+    top: 0;
+  }
+}
+#in-kind-display > div {
+  padding: 12px;
+  z-index: 100;
+  position: relative;
+}
+
+#in-kind-display > div blockquote {
+  white-space: pre-wrap;
+}
+
 @media print {
+  .social-media, .links {
+    display: none;
+  }
+  #in-kind-display {
+    padding-top: 1.5in;
+    width: unset;
+
+    blockquote {
+      border-left: 1px solid #999;
+    }
+    .mhl-logo {
+      width: 1in;
+    }
+  }
   body {
     font-size: 14pt;
   }

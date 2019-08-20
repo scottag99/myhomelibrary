@@ -97,12 +97,35 @@ class Admin::CampaignsController < Admin::BaseController
     campaign.save
   end
 
+  def new_grade_sponsorship
+    @campaign = @organization.campaigns.find(params[:id])
+    @grades = @campaign.wishlists.group(:grade).count.map{|k,v| ["#{k} - Minimum: $#{30.0*v}", k]}
+  end
+
+  def create_grade_sponsorship
+    @campaign = @organization.campaigns.find(params[:id])
+    @wishlists = @campaign.wishlists.where(grade: params[:grade])
+    if @wishlists.count > 0
+      amt = params[:amount].to_d/@wishlists.count unless params[:amount].nil? || @wishlists.count == 0
+      @wishlists.each do |w|
+        @donation = w.donations.create!({:confirmation_code => "Offline Donation - #{Date.today.to_s(:db)}",
+          :amount => amt,
+          :is_classroom_sponsorship => false,
+          :is_grade_sponsorship => true})
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to admin_organization_url(@organization) }
+    end
+  end
+
 private
   def set_organization
     @organization = Organization.find(params[:organization_id])
   end
 
   def campaign_params
-    params.require(:campaign).permit(:name, :deadline, :ready_for_donations, :address, :can_edit_wishlists, :book_limit, {:catalog_ids => []}, :notes)
+    params.require(:campaign).permit(:name, :deadline, :ready_for_donations, :address, :can_edit_wishlists, :book_limit, {:catalog_ids => []}, :notes, :use_appreciation_notes)
   end
 end

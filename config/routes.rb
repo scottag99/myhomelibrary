@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   root to: redirect('/home')
   get 'home/library'
   get 'donate', to: 'home#donate'
+  get 'donation/:code', to: 'home#in_kind'
   post 'sponsor_classroom', to: 'home#sponsor_classroom'
+  post 'sponsor_grade', to: 'home#sponsor_grade'
   get 'give', to: 'home#give'
   get 'bookdrive', to: redirect('https://www.bushhoustonliteracy.org/book-drive', status: 302)
   get 'search/:slug', to: redirect('/search?slug=%{slug}'), as: 'old_search'
@@ -52,6 +54,8 @@ Rails.application.routes.draw do
           get 'book_count'
           get 'exportroster'
           get 'readers'
+          get 'new_grade_sponsorship'
+          post 'create_grade_sponsorship'
           put 'donations'
           put 'wishlists'
         end
@@ -69,6 +73,7 @@ Rails.application.routes.draw do
             get  'download'
           end
           resources :wishlist_entries
+          resources :appreciation_notes
         end
       end
     end
@@ -102,6 +107,7 @@ Rails.application.routes.draw do
             get  'download'
           end
           resources :wishlist_entries
+          resources :appreciation_notes
         end
       end
     end
