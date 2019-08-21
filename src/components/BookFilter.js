@@ -9,9 +9,9 @@ export default observer(({store}) => (
       <ControlLabel>Filter by Grade Level</ControlLabel>
       <FormControl componentClass="select" placeholder="Select" onChange={store.handleGradeLevel} value={store.lvlFilter}>
         <option value="">Select</option>
-        <option value="PreK-K">PreK-K</option>
-        <option value="G1-G2">G1-G2</option>
-        <option value="G3-G5">G3-G5</option>
+        <option value="PreK-G1">PreK-1</option>
+        <option value="G2-G3">2-3</option>
+        <option value="G4-G5">4-5</option>
       </FormControl>
 
       <Checkbox checked={store.chapters} onChange={store.handleChapterFilter}>
