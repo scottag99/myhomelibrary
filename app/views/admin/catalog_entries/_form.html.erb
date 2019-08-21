@@ -27,9 +27,12 @@
       <div class="col-md-10">
         <%= f.select :level, [
           ['PreK-G2', 'PreK-G2', { 'disabled' => 'true' }],
-          ['PreK-K', 'PreK-K'],
-          ['G1-G2', 'G1-G2'],
-          ['G3-G5', 'G3-G5']
+          ['PreK-K', 'PreK-K', { 'disabled' => 'true' }],
+          ['G1-G2', 'G1-G2', { 'disabled' => 'true' }],
+          ['G3-G5', 'G3-G5', { 'disabled' => 'true' }],
+          ['PreK-G1', 'PreK-G1'],
+          ['G2-G3', 'G2-G3'],
+          ['G4-G5', 'G4-G5']
         ] %>
       </div>
     </div>
