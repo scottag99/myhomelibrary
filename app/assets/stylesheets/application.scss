@@ -209,7 +209,7 @@ ul.right-admin {
   padding: 0 0 0;
   border-radius: 45px 0 0 45px;
   background-color: #E38A45;
-	
+
   a.non-admin {
     padding: 26px 12px !important;
   }
@@ -228,7 +228,7 @@ ul.right-admin {
     position: fixed;
     background:#325BA3;
     border: none;
-  
+
 }
 .nav {
   text-align: center;
@@ -278,7 +278,7 @@ ul.right-admin {
 .subject-info-box-2 {
     float: left;
     width: 45%;
-    
+
     select {
         height: 200px;
         padding: 0;
@@ -293,11 +293,11 @@ ul.right-admin {
 .subject-info-arrows {
     float: left;
     width: 10%;
-   
+
     input {
         width: 70%;
         margin-bottom: 5px;
-       
+
     }
 }
 .social-media {
@@ -1561,4 +1561,18 @@ ul.right-admin {
   td {
     font-size: 18px;
   }
+}
+
+.gadget {
+  background-color: white;
+  padding: 1em;
+  box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
+  margin: 1em;
+}
+.gadget h4 {
+
+}
+.gadget p {
+  text-align: center;
+  font-size: 2.5em;
 }

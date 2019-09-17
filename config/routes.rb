@@ -21,7 +21,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'home#index'
-    get 'admin/organizations', to: 'admin/organizations#index', as: 'admin_organizations_path'
+    get 'reports', to: 'home#reports', as: 'reports_path'
+    #get 'organizations', to: 'admin/organizations#index', as: 'admin_organizations_path'
     resources :users do
       member do
         put 'toggle_admin'

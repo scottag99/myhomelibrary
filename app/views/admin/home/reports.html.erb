@@ -1,0 +1,123 @@
+<form action="reports">
+  <div class="row">
+    <div class="form-group col-sm-2">
+      <label for="startDate">Start Date</label>
+      <input type="date" class="form-control" id="startDate" name="startDate" placeholder="Start Date" value="<%= params[:startDate] %>">
+    </div>
+    <div class="form-group col-sm-2">
+      <label for="endDate">End Date</label>
+      <input type="date" class="form-control" id="endDate" name="endDate" placeholder="End Date" value="<%= params[:endDate] %>">
+    </div>
+
+    <div class="form-group col-sm-2">
+      <label for="sponsorshipType">Sponsorship Type</label>
+      <select class="form-control" id="sponsorshipType" name="sponsorshipType">
+        <option value="All"<%= params[:sponsorshipType] == 'All' ? ' selected' : '' %>>All</option>
+        <option value="Classroom"<%= params[:sponsorshipType] == 'Classroom' ? ' selected' : '' %>>Classroom Donations Only</option>
+        <option value="Grade"<%= params[:sponsorshipType] == 'Grade' ? ' selected' : '' %>>Grade Level Donations Only</option>
+      </select>
+    </div>
+
+
+  </div>
+
+  <label>Included Organizations</label>
+  <div class="row form-inline">
+    <div class="form-group col-sm-12">
+      <% @data[:organizations].each do |org| %>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="<%= org.id %>" id="includedOrganizations" name="includedOrganizations[]"<%= params[:includedOrganizations].nil? || params[:includedOrganizations].include?(org.id.to_s) ? ' checked' : '' %>> <%= org.name %>
+        </label>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+  <label>Included Campaigns</label>
+  <div class="row form-inline">
+    <div class="form-group col-sm-12">
+      <% @data[:campaigns].each do |campaign| %>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="<%= campaign.id %>" id="includedCampaigns" name="includedCampaigns[]"<%= params[:includedCampaigns].nil? || params[:includedCampaigns].include?(campaign.id.to_s) ? ' checked' : '' %>> <%= campaign.name %>
+        </label>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-2">
+      <label> </label>
+      <button type="submit" class="btn btn-primary form-control">Update</button>
+    </div>
+  </div>
+</form>
+
+<div class="row">
+  <div class="col-sm-2">
+    <div class="gadget">
+      <h4>Campaigns</h4>
+      <p><%= @data[:campaigns].count %></p>
+    </div>
+  </div>
+
+  <div class="col-sm-2">
+    <div class="gadget">
+      <h4>Wish Lists Created</h4>
+      <p><%= @data[:wishlists_total] %></p>
+    </div>
+  </div>
+
+  <div class="col-sm-2">
+    <div class="gadget">
+      <h4>Donations Made</h4>
+      <p><%= number_to_currency(@data[:donations_total]) %></p>
+    </div>
+  </div>
+
+  <div class="col-sm-2">
+    <div class="gadget">
+      <h4>Wish Lists Sponsored</h4>
+      <p><%= @data[:sponsored_wishlists_total] %> out of <%= @data[:wishlists_total] %></p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-8">
+    <h3>Totals by Organization</h3>
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th>Organization</th>
+          <th>Campaigns</th>
+          <th>Wish Lists Created</th>
+          <th>Donations Made</th>
+          <th>Wish Lists Sponsored</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @data[:organizations].each do |org| %>
+        <tr>
+          <td><%= org.name %></td>
+          <td><%= @data[:campaigns].select{|c| c.organization_id == org.id}.count %></td>
+          <td><%= @data[:wishlists][org.id] || 0 %></td>
+          <td><%= number_to_currency(@data[:donations][org.id] || 0) %></td>
+          <td><%= @data[:sponsored_wishlists][org.id] || 0 %></td>
+        </tr>
+      <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Total:</td>
+          <td><%= @data[:campaigns].count %></td>
+          <td><%= @data[:wishlists_total] %></td>
+          <td><%= @data[:donations_total] %></td>
+          <td><%= @data[:sponsored_wishlists_total] %></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
