@@ -8,7 +8,8 @@ class Admin::HomeController < Admin::BaseController
     wishlist = wishlist.where("wishlists.created_at > ?", params[:startDate]) unless params[:startDate].blank?
     wishlist = wishlist.where("wishlists.created_at < ?", params[:endDate]) unless params[:endDate].blank?
 
-    donation = Donation.joins(wishlist: {campaign: :organization})
+
+    donation = Donation
     donation = donation.where("donations.created_at > ?", params[:startDate]) unless params[:startDate].blank?
     donation = donation.where("donations.created_at < ?", params[:endDate]) unless params[:endDate].blank?
 
@@ -34,9 +35,34 @@ class Admin::HomeController < Admin::BaseController
       donation = donation.where("campaigns.id in (?)", params[:includedCampaigns])
     end
 
+    # First get all Donations where no wishlist or campaign is set for the date range
+    donations = {
+      0 => donation.where("campaign_id is null and wishlist_id is null").sum(:amount)
+    }
+
+    # Next get all campaign specific donations
+    d2 = donation.joins(campaign: :organization)
+    if params[:includedOrganizations]
+      d2 = d2.where("campaigns.organization_id in (?)", params[:includedOrganizations])
+    end
+    if params[:includedCampaigns]
+      d2 = d2.where("campaign_id in (?)", params[:includedCampaigns])
+    end
+    donations.merge!(d2.group(:organization_id).sum(:amount))
+
+    # Finally get all wishlist donations donations
+    d3 = donation.joins(wishlist: {campaign: :organization})
+    if params[:includedOrganizations]
+      d3 = d3.where("campaigns.organization_id in (?)", params[:includedOrganizations])
+    end
+    if params[:includedCampaigns]
+      d3 = d3.where("campaigns.id in (?)", params[:includedCampaigns])
+    end
+    donations.merge!(d3.group(:organization_id).sum(:amount))
+
     @data = {
       :wishlists => wishlist.group(:organization_id).count,
-      :donations => donation.group(:organization_id).sum(:amount),
+      :donations => donations,
       :sponsored_wishlists => wishlist.includes(:donations).where.not(donations: {id: nil}).group(:organization_id).count(),
       :campaigns => campaigns,
       :organizations => organizations

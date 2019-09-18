@@ -24,10 +24,18 @@
   <label>Included Organizations</label>
   <div class="row form-inline">
     <div class="form-group col-sm-12">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="true"
+          id="includedOrganizationsAll"
+          data-select-all="organizations"
+          name="includedOrganizationsAll"<%= params[:includedOrganizations].nil? || params[:includedOrganizations].size == @data[:organizations].size ? ' checked' : '' %>> Select All
+        </label>
+      </div>
       <% @data[:organizations].each do |org| %>
       <div class="checkbox">
         <label>
-          <input type="checkbox" value="<%= org.id %>" id="includedOrganizations" name="includedOrganizations[]"<%= params[:includedOrganizations].nil? || params[:includedOrganizations].include?(org.id.to_s) ? ' checked' : '' %>> <%= org.name %>
+          <input type="checkbox" data-select-all-item="organizations" value="<%= org.id %>" id="includedOrganizations" name="includedOrganizations[]"<%= params[:includedOrganizations].nil? || params[:includedOrganizations].include?(org.id.to_s) ? ' checked' : '' %>> <%= org.name %>
         </label>
       </div>
       <% end %>
@@ -37,10 +45,18 @@
   <label>Included Campaigns</label>
   <div class="row form-inline">
     <div class="form-group col-sm-12">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="true"
+          id="includedCampaignsAll"
+          data-select-all="campaigns"
+          name="includedCampaignsAll"<%= params[:includedCampaigns].nil? || params[:includedCampaigns].size == @data[:campaigns].size ? ' checked' : '' %>> Select All
+        </label>
+      </div>
       <% @data[:campaigns].each do |campaign| %>
       <div class="checkbox">
         <label>
-          <input type="checkbox" value="<%= campaign.id %>" id="includedCampaigns" name="includedCampaigns[]"<%= params[:includedCampaigns].nil? || params[:includedCampaigns].include?(campaign.id.to_s) ? ' checked' : '' %>> <%= campaign.name %>
+          <input type="checkbox" data-select-all-item="campaigns" value="<%= campaign.id %>" id="includedCampaigns" name="includedCampaigns[]"<%= params[:includedCampaigns].nil? || params[:includedCampaigns].include?(campaign.id.to_s) ? ' checked' : '' %>> <%= campaign.name %>
         </label>
       </div>
       <% end %>
@@ -80,7 +96,7 @@
   <div class="col-sm-2">
     <div class="gadget">
       <h4>Wish Lists Sponsored</h4>
-      <p><%= @data[:sponsored_wishlists_total] %> out of <%= @data[:wishlists_total] %></p>
+      <p><%= @data[:sponsored_wishlists_total] %></p>
     </div>
   </div>
 </div>
@@ -114,10 +130,25 @@
           <td>Total:</td>
           <td><%= @data[:campaigns].count %></td>
           <td><%= @data[:wishlists_total] %></td>
-          <td><%= @data[:donations_total] %></td>
+          <td><%= number_to_currency(@data[:donations_total]) %></td>
           <td><%= @data[:sponsored_wishlists_total] %></td>
         </tr>
       </tfoot>
     </table>
   </div>
 </div>
+<%= content_for :foot do %>
+<script>
+  $('[data-select-all]').on('click', function() {
+    if (this.checked) {
+      $('input[data-select-all-item=' + $(this).data('select-all') + ']').prop('checked', true);
+    }
+  });
+
+  $('[data-select-all-item]').on('click', function() {
+    if (!this.checked) {
+      $('input[data-select-all=' + $(this).data('select-all-item') + ']').prop('checked', false);
+    }
+  });
+</script>
+<% end %>
