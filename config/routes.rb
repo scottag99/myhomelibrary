@@ -57,6 +57,8 @@ Rails.application.routes.draw do
           get 'readers'
           get 'new_grade_sponsorship'
           post 'create_grade_sponsorship'
+          get 'new_external_donation'
+          post 'create_external_donation'
           put 'donations'
           put 'wishlists'
         end

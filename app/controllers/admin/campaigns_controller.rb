@@ -120,6 +120,23 @@ class Admin::CampaignsController < Admin::BaseController
     end
   end
 
+  def new_external_donation
+    @campaign = @organization.campaigns.find(params[:id])
+  end
+
+  def create_external_donation
+    @campaign = @organization.campaigns.find(params[:id])
+    Donation.create!({:confirmation_code => "Offline Donation - #{Date.today.to_s(:db)}",
+          :amount => params[:amount],
+          :campaign_id => @campaign.id,
+          :is_classroom_sponsorship => false,
+          :is_grade_sponsorship => false})
+
+    respond_to do |format|
+      format.html { redirect_to admin_organization_url(@organization) }
+    end
+  end
+
 private
   def set_organization
     @organization = Organization.find(params[:organization_id])
