@@ -8,6 +8,7 @@ class Admin::HomeController < Admin::BaseController
     wishlist = wishlist.where("wishlists.created_at > ?", params[:startDate]) unless params[:startDate].blank?
     wishlist = wishlist.where("wishlists.created_at < ?", params[:endDate]) unless params[:endDate].blank?
 
+
     donation = Donation
     donation = donation.where("donations.created_at > ?", params[:startDate]) unless params[:startDate].blank?
     donation = donation.where("donations.created_at < ?", params[:endDate]) unless params[:endDate].blank?
