@@ -27,12 +27,10 @@ class Admin::HomeController < Admin::BaseController
 
     if params[:includedOrganizations]
       wishlist = wishlist.where("campaigns.organization_id in (?)", params[:includedOrganizations])
-      donation = donation.where("campaigns.organization_id in (?)", params[:includedOrganizations])
     end
 
     if params[:includedCampaigns]
       wishlist = wishlist.where("campaigns.id in (?)", params[:includedCampaigns])
-      donation = donation.where("campaigns.id in (?)", params[:includedCampaigns])
     end
 
     # First get all Donations where no wishlist or campaign is set for the date range
