@@ -140,9 +140,7 @@
 <%= content_for :foot do %>
 <script>
   $('[data-select-all]').on('click', function() {
-    if (this.checked) {
-      $('input[data-select-all-item=' + $(this).data('select-all') + ']').prop('checked', true);
-    }
+    $('input[data-select-all-item=' + $(this).data('select-all') + ']').prop('checked', this.checked);
   });
 
   $('[data-select-all-item]').on('click', function() {
