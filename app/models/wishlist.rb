@@ -48,4 +48,20 @@ class Wishlist < ApplicationRecord
       reader_name
     end
   end
+
+  def grade=(value)
+    case value
+    when /^k/i
+      super("K")
+    when /^prek/i
+      super("PreK")
+    else
+      super(value.to_i.ordinalize)
+    end
+  end
+
+  def teacher=(value)
+    #Removes Mr., Ms., and Mrs. from the start of the teacher name
+    super(value.gsub(/^M[rs]{1,2}\./, "").strip)
+  end
 end
