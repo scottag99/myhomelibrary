@@ -22,7 +22,7 @@
   <td><%= campaign.book_limit %></td>
   <% if user_is_admin? %>
   <td><%= number_to_currency(WishlistEntry.where('wishlist_id' => campaign.wishlists).sum(:price)) %></td>
-  <td><%= number_to_currency(Donation.where(:wishlist_id => campaign.wishlists).sum(:amount)) %></td>
+  <td><%= number_to_currency(Donation.where(:wishlist_id => campaign.wishlists).or(Donation.where(:campaign_id => campaign.id)).sum(:amount)) %></td>
   <% end %>
   <td>
     <% if user_is_admin? %>

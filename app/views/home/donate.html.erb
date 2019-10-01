@@ -79,8 +79,9 @@ function getValueByLabel(aSignup, labelText, sublabelText){
 }
 
 function showPayment() {
-  $("input[name=DonationLevel_FEE]").focus();
-  $("input[name=DonationLevel_FEE]").blur();
+  //$("input[name=DonationLevel_FEE]").focus();
+  //$("input[name=DonationLevel_FEE]").blur();
+  $("input[name=DonationLevel_FEE]").prop("disabled", true);
 }
 
 function kimbiaSubmit(f) {
