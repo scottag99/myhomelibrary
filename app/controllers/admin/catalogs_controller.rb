@@ -97,7 +97,7 @@ class Admin::CatalogsController < Admin::BaseController
         'is_bilingual', 'is_chapter', 'year', 'ar_points', 'ar_level', 'grl', 'dra']
 
       @catalog.catalog_entries.each do |ce|
-        csv << [ce.book.title, ce.book.author, ce.book.description, ce.book.isbn, ce.book.level, ce.book.cover_image_url, ce.price, 
+        csv << [ce.book.title, ce.book.author, ce.book.description, ce.book.isbn, ce.book.level, ce.book.cover_image_url, ce.price,
           ce.book.is_bilingual, ce.book.is_chapter, ce.book.year, ce.book.ar_points, ce.book.ar_level, ce.book.grl, ce.book.dra]
       end
     end
@@ -134,7 +134,10 @@ class Admin::CatalogsController < Admin::BaseController
           if row['id'].empty?
             row.each{|k,v| row[k] = v.strip if v.is_a? String }
             book = Book.where(isbn: row['isbn']).first_or_initialize
-            book.attributes = row.to_hash.except('price', 'id')
+            # grab the entered values in the row as a hash and remove all the nil values on booleans
+            # so that we don't overwrite default values
+            google_attrs = row.to_hash.except('price', 'id').delete_if{|k,v| k.starts_with?('is_') && v.blank?}
+            book.attributes = google_attrs
             book.save
             w = @catalog.catalog_entries.create(book: book, price: row['price'])
             if w.save
