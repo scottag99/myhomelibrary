@@ -43,10 +43,10 @@ function kimbiaSuccess(kimbiaResponse) {
     url: '<%= success_url %>',
     dataType: 'json',
     method: 'POST',
-    data: {'id_list': wishlistId, 
-    'amount': initCharge, 
-    'confirmation_code': confCode, 
-    'campaign_id': CampaignId, 
+    data: {'id_list': wishlistId,
+    'amount': initCharge,
+    'confirmation_code': confCode,
+    'campaign_id': CampaignId,
     'is_classroom_sponsored': is_classroom_sponsored,
     'is_grade_sponsored': is_grade_sponsored,
     'is_in_kind': is_in_kind,
@@ -79,8 +79,8 @@ function getValueByLabel(aSignup, labelText, sublabelText){
 }
 
 function showPayment() {
-  //$("input[name=DonationLevel_FEE]").focus();
-  //$("input[name=DonationLevel_FEE]").blur();
+  $("input[name=DonationLevel_FEE]").focus();
+  $("input[name=DonationLevel_FEE]").blur();
   $("input[name=DonationLevel_FEE]").prop("disabled", true);
 }
 
@@ -127,9 +127,9 @@ function kimbiaResponse(f) {
       <p>Upon checkout, a certificate with the honoree’s name and your special message will open on a new page that you can print and mail. </p>
     </div>
   </div>
-  
 
-  
+
+
 
 <!-- script to populate form tag -->
 <% if ENV['IS_PRODUCTION'] %>
