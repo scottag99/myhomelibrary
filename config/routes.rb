@@ -22,7 +22,13 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'home#index'
     get 'reports', to: 'home#reports', as: 'reports_path'
-    #get 'organizations', to: 'admin/organizations#index', as: 'admin_organizations_path'
+    resources :surveys do
+      member do
+        get 'export'
+        put 'is_disabled'
+      end
+      resources :survey_questions
+    end
     resources :users do
       member do
         put 'toggle_admin'
@@ -62,10 +68,13 @@ Rails.application.routes.draw do
           put 'donations'
           put 'wishlists'
         end
+        resources :campaign_survey_configs
         resources :wishlists do
           member do
             get 'manage'
             put 'toggle_delivered'
+            get 'take_survey'
+            post 'save_response'
           end
           collection do
             get  'edit_multiple'
@@ -101,6 +110,8 @@ Rails.application.routes.draw do
           member do
             get 'manage'
             put 'toggle_delivered'
+            get 'take_survey'
+            post 'save_response'
           end
           collection do
             get  'edit_multiple'

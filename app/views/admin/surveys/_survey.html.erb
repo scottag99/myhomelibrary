@@ -1,0 +1,16 @@
+<tr>
+  <td><%= link_to survey.name, [:admin, survey] %></td>
+  <td><%= survey.description %></td>
+  <td><%= check_box_tag 'is_disabled', survey.id, survey.is_disabled,
+            data: {
+              remote: true,
+              url: is_disabled_admin_survey_url(survey),
+              method: "PUT"
+              } %></td>
+
+  <td>
+    <%= link_to "Edit", edit_admin_survey_url(survey), class: "btn btn-warning btn-xs" %>
+    <%= link_to "Export Survey", export_admin_survey_url(survey), class: "btn btn-success btn-xs" %>
+    <%= link_to "Delete", admin_survey_url(survey),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'This action cannot be undone. Are you sure?'} %>
+  </td>
+</tr>

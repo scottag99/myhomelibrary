@@ -39,12 +39,35 @@
       <%= link_to 'Bulk Delete', url_for([:destroy_multiple, get_namespace, @campaign.organization, @campaign, :wishlists, :wishlists_ids => '']), method: "delete", data: {confirm: "This action cannot be undone. Are you sure?"}, :class => "btn btn-xs btn-danger", :onclick => 'bulkDelete()', :remote => true, :id => 'bulk-delete' %>
       <% end %>
     <% end %>
-      
+
     </div>
     <div style="margin-left: 1rem;">
         <input type="checkbox" onclick="$(this).prop('checked') ? gridOptions.api.selectAll() : gridOptions.api.deselectAll()"> Select all
       </div>
     <div id="myGrid" style="height: 450px;" class="ag-bootstrap"></div>
+  </div>
+
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading"><h3 class="panel-title">Survey Setup</h3></div>
+    <table class="table table-striped table-condensed">
+      <caption class="toggle-show">
+        <% if admin? %>
+        <%= link_to '<i class="glyphicon glyphicon-plus"></i> New Survey Config'.html_safe, url_for([:new, :admin, @campaign.organization, @campaign, :campaign_survey_config]), :class => "btn btn-xs btn-primary", remote: true %>
+        <% end %>
+      </caption>
+      <thead>
+        <tr>
+          <th>Teacher</th>
+          <th>Survey</th>
+          <th>Disabled?</th>
+          <th class="toggle-show">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+    <%= render :partial => 'common/campaigns/campaign_survey_config', :collection => @campaign.campaign_survey_configs %>
+      </tbody>
+    </table>
   </div>
 
 </div>

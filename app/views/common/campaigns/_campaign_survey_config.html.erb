@@ -1,0 +1,11 @@
+<tr id="campaign-survey-config-<%= campaign_survey_config.id %>">
+  <td><%= campaign_survey_config.teacher %></td>
+  <td><%= campaign_survey_config.survey.name %></td>
+  <td><%= campaign_survey_config.is_disabled %></td>
+  <td class="toggle-show">
+    <% if admin? %>
+    <%= link_to "Edit", edit_admin_organization_campaign_campaign_survey_config_url(campaign_survey_config.campaign.organization, campaign_survey_config.campaign, campaign_survey_config), class: "btn btn-warning btn-xs", remote: true %>
+    <%= link_to "Delete", admin_organization_campaign_campaign_survey_config_url(campaign_survey_config.campaign.organization, campaign_survey_config.campaign, campaign_survey_config),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'This action cannot be undone. Are you sure?'}, remote: true %>
+    <% end %>
+  </td>
+</tr>

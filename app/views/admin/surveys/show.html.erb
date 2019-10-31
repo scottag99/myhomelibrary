@@ -1,0 +1,34 @@
+<div class="panel panel-default outer-panel panel-info">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h3 class="panel-title">Survey Detail</h3></div>
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+      <dt>Name</dt>
+      <dd><%= @survey.name %></dd>
+      <dt>Descripton</dt>
+      <dd><%= @survey.description %></dd>
+      <dt>Disabled?</dt>
+      <dd><%= @survey.is_disabled %>
+    </dl>
+  </div>
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading"><h3 class="panel-title">Questions</h3></div>
+    <table class="table table-striped table-condensed">
+      <caption class="toggle-show">
+        <%= link_to '<i class="glyphicon glyphicon-plus"></i> New Question'.html_safe, new_admin_survey_survey_question_url(@survey), :class => "btn btn-xs btn-primary", :remote => true %>
+      </caption>
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th class="toggle-show">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+    <%= render :partial => 'common/surveys/survey_question', :collection => @survey.survey_questions %>
+      </tbody>
+    </table>
+  </div>
+</div>

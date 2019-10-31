@@ -3,6 +3,10 @@ include GoogleSpreadsheet
 module CommonWishlistActions
   extend ActiveSupport::Concern
 
+  included do
+    before_action :check_for_survey, only: :manage
+  end
+
   def index
     @wishlists = current_campaign.wishlists
     @campaign = current_campaign
@@ -34,6 +38,34 @@ module CommonWishlistActions
     respond_to do |format|
       format.html { render 'common/wishlists/manage'}
       format.json { render json: @wishlist }
+    end
+  end
+
+  def take_survey
+    @wishlist = current_campaign.wishlists.find(params[:id])
+    config = current_campaign.campaign_survey_configs.where("teacher ilike ? and (is_disabled = ? or is_disabled is NULL)", @wishlist.teacher, false).first
+    @survey = config.survey
+    @survey_response = @wishlist.build_survey_response(survey_answers: @survey.survey_questions.collect{|q| SurveyAnswer.new(survey_question: q)})
+
+    respond_to do |format|
+      format.html { render layout: 'survey', template: 'common/wishlists/take_survey' }
+      format.json { render json: @survey }
+    end
+  end
+
+  def save_response
+    @wishlist = current_campaign.wishlists.find(params[:id])
+    @survey_response = @wishlist.build_survey_response(survey_response_params)
+    if @survey_response.save
+      respond_to do |format|
+        format.html { redirect_to url_for([:manage, get_namespace, current_organization, current_campaign, @wishlist]) }
+        format.json { render json: @survey_response }
+      end
+    else
+      respond_to do |format|
+        format.html { render 'common/wishlists/take_survey' }
+        format.json { render json: @survey_response }
+      end
     end
   end
 
@@ -178,5 +210,17 @@ module CommonWishlistActions
 private
   def wishlist_params
     params.require(:wishlist).permit(:reader_name, :reader_age, :reader_gender, :teacher, :grade, :grl, :external_id, :is_delivered)
+  end
+
+  def survey_response_params
+    params.require(:survey_response).permit(:survey_id, survey_answer_ids: [], survey_answers_attributes: [:value, :survey_question_id])
+  end
+
+  def check_for_survey
+    w = Wishlist.find(params[:id])
+    c = current_campaign.campaign_survey_configs.where("teacher ilike ? and (is_disabled = ? or is_disabled is NULL)", w.teacher, false).count
+    if c > 0 && w.survey_response.nil?
+      redirect_to get_take_survey_url(w)
+    end
   end
 end
