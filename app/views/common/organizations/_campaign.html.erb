@@ -47,6 +47,7 @@
       <%= link_to "Wish List Report", url_for([:export, get_namespace, campaign.organization, campaign]), class: "btn btn-success btn-sm" %>
       <%= link_to "Book Count Report", url_for([:book_count, get_namespace, campaign.organization, campaign]), class: "btn btn-success btn-sm" %>
       <%= link_to "Class Roster Report", url_for([:exportroster, get_namespace, campaign.organization, campaign]), class: "btn btn-success btn-sm" %>
+      <%= link_to "Export Survey Data", url_for([:export_survey, get_namespace, campaign.organization, campaign]), class: "btn btn-success btn-sm" %>
     </p>
     <% end %>
   </td>

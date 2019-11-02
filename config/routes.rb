@@ -24,7 +24,6 @@ Rails.application.routes.draw do
     get 'reports', to: 'home#reports', as: 'reports_path'
     resources :surveys do
       member do
-        get 'export'
         put 'is_disabled'
       end
       resources :survey_questions
@@ -67,6 +66,7 @@ Rails.application.routes.draw do
           post 'create_external_donation'
           put 'donations'
           put 'wishlists'
+          get 'export_survey'
         end
         resources :campaign_survey_configs
         resources :wishlists do

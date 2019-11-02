@@ -65,7 +65,7 @@ module CommonCampaignActions
           headers << 'Unit_Price'
         end
         csv << headers
-  
+
         records.each do |we|
           row = [@organization.name, campaign.name, we.wishlist.teacher, we.wishlist.reader_name, we.wishlist.grade, we.wishlist.reader_age, we.catalog_entry.book.title, we.catalog_entry.book.author, we.catalog_entry.catalog.source, we.catalog_entry.book.isbn]
           if get_role == 'admin'
@@ -80,7 +80,7 @@ module CommonCampaignActions
       # when un-commented...downloads fail
       #temp_csv.unlink   # deletes the temp file
     end
-    
+
   end
 
   def book_count
@@ -130,5 +130,47 @@ module CommonCampaignActions
       # when un-commented...downloads fail
       #temp_csv.unlink   # deletes the temp file
     end
+  end
+
+  def export_survey
+    campaign = @organization.campaigns.find(params[:id])
+    # this quirky looking thing in front of student is the BOM to force Excel to honor the UTF-8 encoding
+    base_header = ["\uFEFF" + 'Student', 'Teacher', 'School', 'Campaign', 'Campaign date', 'Books', 'Survey']
+    wishlists = Wishlist.joins(:survey_response).includes([wishlist_entries: {catalog_entry: :book}, survey_response: [:survey, survey_answers: :survey_question]]).where(campaign_id: campaign.id)
+    grouped = {}
+    wishlists.each do |wishlist|
+      key = wishlist.survey_response.survey.name
+      unless grouped.has_key?(key)
+        header = base_header + wishlist.survey_response.survey_answers.order(:survey_question_id).collect{|answer| answer.survey_question.question}
+        grouped = {key => {header: header, data: []}}.merge(grouped)
+      end
+      base_values = [wishlist.reader_name, wishlist.teacher, @organization.name, campaign.name, campaign.deadline, wishlist.wishlist_entries.collect{|e| e.catalog_entry.book.title}.join(','), key]
+      grouped[key][:data] << base_values + wishlist.survey_response.survey_answers.order(:survey_question_id).collect{|answer| answer.value}
+    end
+
+    zip_file = Tempfile.new
+    begin
+      Zip::File.open(zip_file, Zip::File::CREATE) do |zipfile|
+        grouped.each do |key, value|
+          temp_csv = Tempfile.new
+          begin
+            CSV.open(temp_csv.path, mode = "wb", headers: true) do |csv|
+              csv << value[:header]
+
+              value[:data].each do |row|
+                csv << row
+              end
+            end
+            zipfile.add("#{key.parameterize}.csv", temp_csv.path)
+          ensure
+            temp_csv.close
+          end
+        end
+      end
+      send_file zip_file, filename: "#{@organization.name}-#{campaign.name}-SurveyData.zip", type: 'application/zip'
+    ensure
+      zip_file.close
+    end
+
   end
 end
