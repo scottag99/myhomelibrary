@@ -72,6 +72,18 @@ class Admin::SurveysController < Admin::BaseController
     @survey.save
   end
 
+  def reorder
+    @survey = Survey.find(params[:id])
+    params[:sorted].each_with_index do |id, idx|
+      @survey.survey_questions.find(id.gsub(/\D+/, '').to_i).update(sequence: idx)
+    end
+    respond_to do |format|
+      format.html { render "show" }
+      format.js
+      format.json { render json: @survey}
+    end
+  end
+
 private
   def survey_params
     params.require(:survey).permit(:name, :description, :is_disabled)

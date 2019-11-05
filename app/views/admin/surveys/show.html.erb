@@ -35,7 +35,17 @@
 <% content_for :foot do %>
 <script type="text/javascript">
 $(function() {
-  $('.sortable').railsSortable();
+  $('.sortable').sortable({update: function() {
+    $.ajax({
+        type: 'POST',
+        url: '<%= params[:id] %>/reorder',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({
+          sorted: $(this).sortable('toArray'),
+        }),
+      });
+  }});
 });
 </script>
 <% end %>

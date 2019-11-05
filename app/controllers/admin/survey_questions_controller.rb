@@ -65,15 +65,15 @@ class Admin::SurveyQuestionsController < Admin::BaseController
   end
 
   def destroy
-    q = @survey.survey_questions.find(params[:id])
-    @survey_question_id = q.sortable_id
-    q.destroy
+    @survey_question_id = params[:id]
+    @survey.survey_questions.destroy(params[:id])
     respond_to do |format|
       format.html { render "index" }
       format.js
       format.json { render json: @survey.survey_questions.all}
     end
   end
+
 private
   def find_survey
     @survey = Survey.find(params[:survey_id])

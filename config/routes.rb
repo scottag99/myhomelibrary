@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :surveys do
       member do
         put 'is_disabled'
+        post 'reorder'
       end
       resources :survey_questions
     end
