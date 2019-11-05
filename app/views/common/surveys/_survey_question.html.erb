@@ -1,9 +1,10 @@
-<tr id="survey-question-<%= survey_question.id %>">
+<tr id="<%= survey_question.sortable_id %>">
   <td><%= survey_question.question %></td>
   <td><%= survey_question.description %></td>
   <td><%= survey_question.question_type.name %></td>
   <td class="toggle-show">
     <%= link_to "Edit", edit_admin_survey_survey_question_url(survey_question.survey, survey_question), class: "btn btn-warning btn-xs", remote: true %>
     <%= link_to "Delete", admin_survey_survey_question_url(survey_question.survey, survey_question),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'This action cannot be undone. Are you sure?'}, remote: true %>
+    <span class="dragger">&#x283F;</span>
   </td>
 </tr>

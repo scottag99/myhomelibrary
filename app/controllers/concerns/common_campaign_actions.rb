@@ -135,17 +135,19 @@ module CommonCampaignActions
   def export_survey
     campaign = @organization.campaigns.find(params[:id])
     # this quirky looking thing in front of student is the BOM to force Excel to honor the UTF-8 encoding
-    base_header = ["\uFEFF" + 'Student', 'Teacher', 'School', 'Campaign', 'Campaign date', 'Books', 'Survey']
+    base_header = ["\uFEFF" + 'Student', 'Teacher', 'School', 'Campaign', 'Campaign date', 'Survey']
     wishlists = Wishlist.joins(:survey_response).includes([wishlist_entries: {catalog_entry: :book}, survey_response: [:survey, survey_answers: :survey_question]]).where(campaign_id: campaign.id)
     grouped = {}
     wishlists.each do |wishlist|
       key = wishlist.survey_response.survey.name
+      books = wishlist.wishlist_entries.collect{|e| e.catalog_entry.book.isbn}
       unless grouped.has_key?(key)
         header = base_header + wishlist.survey_response.survey_answers.order(:survey_question_id).collect{|answer| answer.survey_question.question}
-        grouped = {key => {header: header, data: []}}.merge(grouped)
+        grouped = {key => {header: header, data: [], book_count: books.size}}.merge(grouped)
       end
-      base_values = [wishlist.reader_name, wishlist.teacher, @organization.name, campaign.name, campaign.deadline, wishlist.wishlist_entries.collect{|e| e.catalog_entry.book.title}.join(','), key]
-      grouped[key][:data] << base_values + wishlist.survey_response.survey_answers.order(:survey_question_id).collect{|answer| answer.value}
+      base_values = [wishlist.reader_name, wishlist.teacher, @organization.name, campaign.name, campaign.deadline, key]
+      grouped[key][:data] << (base_values + wishlist.survey_response.survey_answers.order(:survey_question_id).collect{|answer| answer.value} + books)
+      grouped[key][:book_count] = [books.size, grouped[key][:book_count]].max
     end
 
     zip_file = Tempfile.new
@@ -155,7 +157,7 @@ module CommonCampaignActions
           temp_csv = Tempfile.new
           begin
             CSV.open(temp_csv.path, mode = "wb", headers: true) do |csv|
-              csv << value[:header]
+              csv << (value[:header] + value[:book_count].times.inject([]){|arr, idx| arr << "Book #{idx+1}"})
 
               value[:data].each do |row|
                 csv << row

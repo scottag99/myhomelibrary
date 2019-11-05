@@ -44,8 +44,18 @@ $('.survey-btn').on('click', function() {
   </div>
   <div class="panel panel-default">
     <div class="panel-body">
-      <p>Before picking your books, please take a few seconds to answer some questions for us.</p>
-      <h3>Thanks!</h3>
+      <div class="row">
+        <div class="col-md-10">
+          <p>Before picking your books, please take a few seconds to answer some questions for us.</p>
+          <h3>Thanks!</h3>
+          <div class="text-center">
+            <%= image_tag 'my-home-library.png', width: 200 %>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <%= image_tag 'kids8.png', class: 'img-responsive' %>
+        </div>
+      </div>
     </div>
     <div class="panel-footer">
       <button type="button" class="survey-btn btn btn-warning" data-btn-action='next'>Begin Survey</button>
@@ -81,7 +91,7 @@ $('.survey-btn').on('click', function() {
             </div>
           <% else %>
           <div class="form-group">
-            <%= answer.label :value, answer.object.survey_question.description, class: "control-label" %>
+            <%= answer.label :value, answer.object.survey_question.description.blank? ? '&nbsp;'.html_safe : answer.object.survey_question.description, class: "control-label" %>
             <%= answer.text_area :value, class: 'form-control', rows: 6, required: true %>
           </div>
         <% end %>

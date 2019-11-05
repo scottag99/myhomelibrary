@@ -1,2 +1,2 @@
 $('#globalModal').modal('hide');
-$("#survey-question-<%= @survey_question.id %>").replaceWith($("<%= escape_javascript(render :partial => 'common/surveys/survey_question', object: @survey_question) %>"));
+$("#<%= @survey_question.sortable_id %>").replaceWith($("<%= escape_javascript(render :partial => 'common/surveys/survey_question', object: @survey_question) %>"));

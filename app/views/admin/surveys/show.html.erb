@@ -26,9 +26,16 @@
           <th class="toggle-show">&nbsp;</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="sortable">
     <%= render :partial => 'common/surveys/survey_question', :collection => @survey.survey_questions %>
       </tbody>
     </table>
   </div>
 </div>
+<% content_for :foot do %>
+<script type="text/javascript">
+$(function() {
+  $('.sortable').railsSortable();
+});
+</script>
+<% end %>

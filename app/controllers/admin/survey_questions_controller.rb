@@ -48,7 +48,7 @@ class Admin::SurveyQuestionsController < Admin::BaseController
   end
 
   def create
-    @survey_question = @survey.survey_questions.new(survey_question_params)
+    @survey_question = @survey.survey_questions.new({sequence: @survey.survey_questions.count+1}.merge(survey_question_params))
     if @survey_question.save
       respond_to do |format|
         format.html { render "show" }
@@ -65,8 +65,9 @@ class Admin::SurveyQuestionsController < Admin::BaseController
   end
 
   def destroy
-    @survey_question_id = params[:id]
-    @survey.survey_questions.destroy(params[:id])
+    q = @survey.survey_questions.find(params[:id])
+    @survey_question_id = q.sortable_id
+    q.destroy
     respond_to do |format|
       format.html { render "index" }
       format.js
@@ -83,6 +84,6 @@ private
   end
 
   def survey_question_params
-    params.require(:survey_question).permit(:question, :description, :question_type_id, :answer_options)
+    params.require(:survey_question).permit(:question, :description, :question_type_id, :answer_options, :sequence)
   end
 end
