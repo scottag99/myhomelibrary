@@ -287,6 +287,9 @@ GEM
     scrivito_video_widget (1.0.14)
       projekktor-rails
       scrivito
+    seed_dump (3.3.1)
+      activerecord (>= 4)
+      activesupport (>= 4)
     signet (0.12.0)
       addressable (~> 2.3)
       faraday (~> 0.9)
@@ -361,6 +364,7 @@ DEPENDENCIES
   scrivito_three_column_widget
   scrivito_two_column_widget
   scrivito_video_widget
+  seed_dump
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
