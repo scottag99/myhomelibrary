@@ -22,7 +22,7 @@
 
         <h3><%= @donations.first.in_name_of %>,</h3>
         <p>A donation of <%= number_to_currency(@donations.sum(:amount)) %> was made in your name to the <strong>My Home Library</strong> program.
-        This donation provides home libraries for <%= kids.size > 0 ? kids.join(',') : pluralize([donation_count, potential].max, 'kid') %>  in the Houston area.
+        This donation provides home libraries for <%= kids.size > 0 ? kids.join(', ') : pluralize([donation_count, potential].max, 'kid') %>  in the Houston area.
         </p>
         <blockquote><%= @donations.first.in_kind_message %></blockquote>
         <p>
