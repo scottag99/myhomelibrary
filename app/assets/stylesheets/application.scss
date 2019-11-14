@@ -1486,13 +1486,15 @@ ul.right-admin {
 }
 
 #in-kind-display {
+  @media (min-width: 768px) {
+    width: 800px;
+  }
   position: relative;
-  width: 800px;
   margin: 0 auto;
   padding-top: 150px;
 
   .mhl-logo {
-    width: 250px;
+    width: 30%;
   }
   #bg-image {
     position: absolute;
