@@ -76,6 +76,7 @@ Rails.application.routes.draw do
             put 'toggle_delivered'
             get 'take_survey'
             post 'save_response'
+            get 'survey_complete'
           end
           collection do
             get  'edit_multiple'
@@ -113,6 +114,7 @@ Rails.application.routes.draw do
             put 'toggle_delivered'
             get 'take_survey'
             post 'save_response'
+            get 'survey_complete'
           end
           collection do
             get  'edit_multiple'

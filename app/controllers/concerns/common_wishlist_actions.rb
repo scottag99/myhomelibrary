@@ -43,7 +43,7 @@ module CommonWishlistActions
 
   def take_survey
     @wishlist = current_campaign.wishlists.find(params[:id])
-    config = current_campaign.campaign_survey_configs.where("teacher ilike ? and (is_disabled = ? or is_disabled is NULL)", @wishlist.teacher, false).first
+    config = find_survey_config(@wishlist).first
     @survey = config.survey
     @survey_response = @wishlist.build_survey_response(survey_answers: @survey.survey_questions.collect{|q| SurveyAnswer.new(survey_question: q)})
 
@@ -53,12 +53,25 @@ module CommonWishlistActions
     end
   end
 
+  def survey_complete
+    respond_to do |format|
+      format.html { render layout: 'survey', template: 'common/wishlists/survey_complete' }
+      format.json { render json: @survey }
+    end
+  end
+
   def save_response
     @wishlist = current_campaign.wishlists.find(params[:id])
     @survey_response = @wishlist.build_survey_response(survey_response_params)
     if @survey_response.save
+      config = find_survey_config(@wishlist)
+      if !config.first.nil? && config.first.is_control_group
+        survey_complete_dest = url_for([:survey_complete, get_namespace, current_organization, current_campaign, @wishlist])
+      else
+        survey_complete_dest = url_for([:manage, get_namespace, current_organization, current_campaign, @wishlist])
+      end
       respond_to do |format|
-        format.html { redirect_to url_for([:manage, get_namespace, current_organization, current_campaign, @wishlist]) }
+        format.html { redirect_to survey_complete_dest }
         format.json { render json: @survey_response }
       end
     else
@@ -218,9 +231,17 @@ private
 
   def check_for_survey
     w = Wishlist.find(params[:id])
-    c = current_campaign.campaign_survey_configs.where("teacher ilike ? and (is_disabled = ? or is_disabled is NULL)", w.teacher, false).count
-    if c > 0 && w.survey_response.nil?
-      redirect_to get_take_survey_url(w)
+    configs = find_survey_config(w)
+    if configs.count > 0
+      if w.survey_response.nil?
+        redirect_to get_take_survey_url(w)
+      elsif configs.first.is_control_group
+        redirect_to url_for([:survey_complete, get_namespace, current_organization, current_campaign, w])
+      end
     end
+  end
+
+  def find_survey_config(wishlist)
+    current_campaign.campaign_survey_configs.where("teacher ilike ? and (is_disabled = ? or is_disabled is NULL)", wishlist.teacher, false)
   end
 end

@@ -88,6 +88,6 @@ private
   end
 
   def campaign_survey_config_params
-    params.require(:campaign_survey_config).permit(:survey_id, :teacher, :is_disabled)
+    params.require(:campaign_survey_config).permit(:survey_id, :teacher, :is_disabled, :is_control_group)
   end
 end

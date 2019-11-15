@@ -1,6 +1,7 @@
 <tr id="campaign-survey-config-<%= campaign_survey_config.id %>">
   <td><%= campaign_survey_config.teacher %></td>
   <td><%= campaign_survey_config.survey.name %></td>
+  <td><%= campaign_survey_config.is_control_group %></td>
   <td><%= campaign_survey_config.is_disabled %></td>
   <td class="toggle-show">
     <% if admin? %>
