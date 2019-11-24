@@ -29,6 +29,10 @@ $('.survey-btn').on('click', function() {
     $('.survey-question .panel-footer').hide();
   }
 });
+
+function answered(e) {
+  $(e).closest('.panel').find('button[data-btn-action=next]').prop('disabled', false);
+}
 </script>
 <% end %>
 <%= form_for @survey_response, url: url_for([:save_response, get_namespace, @wishlist.campaign.organization, @wishlist.campaign, @wishlist]) do |f| %>
@@ -73,7 +77,7 @@ $('.survey-btn').on('click', function() {
               <% answer.object.survey_question.answer_options.split("\n").each do |opt| %>
               <div class="radio">
                 <label>
-                  <%= answer.radio_button :value, opt.strip, required: true %>
+                  <%= answer.radio_button :value, opt.strip, required: true, onchange: 'answered(this)' %>
                   <%= opt.strip %>
                 </label>
               </div>
@@ -85,14 +89,14 @@ $('.survey-btn').on('click', function() {
               <% answer.object.survey_question.answer_options.split("\n").each do |opt| %>
               <div class="rating-option">
                   <%= answer.label :value, opt.strip %>
-                  <%= answer.radio_button :value, opt.strip, required: true %>
+                  <%= answer.radio_button :value, opt.strip, required: true, onchange: 'answered(this)' %>
               </div>
               <% end %>
             </div>
           <% else %>
           <div class="form-group">
             <%= answer.label :value, answer.object.survey_question.description.blank? ? '&nbsp;'.html_safe : answer.object.survey_question.description, class: "control-label" %>
-            <%= answer.text_area :value, class: 'form-control', rows: 6, required: true %>
+            <%= answer.text_area :value, class: 'form-control', rows: 6, required: true, onkeypress: 'answered(this)' %>
           </div>
         <% end %>
       </div>
@@ -100,7 +104,7 @@ $('.survey-btn').on('click', function() {
         <% if answer.index > 0 %>
         <button type="button" class="btn btn-warning survey-btn" data-btn-action='back'>Back</button>
         <% end %>
-        <button type="button" class="btn btn-warning survey-btn" data-btn-action='next'>Next</button>
+        <button type="button" class="btn btn-warning survey-btn" data-btn-action='next' disabled="disabled">Next</button>
       </div>
     </div>
   <% end %>

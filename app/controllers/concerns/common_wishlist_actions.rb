@@ -222,7 +222,7 @@ module CommonWishlistActions
 
 private
   def wishlist_params
-    params.require(:wishlist).permit(:reader_name, :reader_age, :reader_gender, :teacher, :grade, :grl, :external_id, :is_delivered)
+    params.require(:wishlist).permit(:reader_name, :reader_age, :reader_gender, :teacher, :grade, :grl, :external_id, :is_delivered, :is_consent_given)
   end
 
   def survey_response_params
@@ -231,12 +231,14 @@ private
 
   def check_for_survey
     w = Wishlist.find(params[:id])
-    configs = find_survey_config(w)
-    if configs.count > 0
-      if w.survey_response.nil?
-        redirect_to get_take_survey_url(w)
-      elsif configs.first.is_control_group
-        redirect_to url_for([:survey_complete, get_namespace, current_organization, current_campaign, w])
+    if w.is_consent_given
+      configs = find_survey_config(w)
+      if configs.count > 0
+        if w.survey_response.nil?
+          redirect_to get_take_survey_url(w)
+        elsif configs.first.is_control_group
+          redirect_to url_for([:survey_complete, get_namespace, current_organization, current_campaign, w])
+        end
       end
     end
   end
