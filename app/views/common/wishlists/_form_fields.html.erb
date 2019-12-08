@@ -1,7 +1,14 @@
+<%= content_for :foot do %>
+<script>
+  $('.combobox-teacher').combobox({bsVersion: '3', clearIfNoMatch: false});
+  $('select#wishlist_teacher').removeAttr('required');
+</script>
+<% end %>
 <div class="form-group row">
   <%= f.label :teacher, class: "col-md-1 control-label" %> (required)
   <div class="col-md-4">
-    <%= f.text_field :teacher, class: "form-control", required: true %>
+    <%#= f.text_field :teacher, class: "form-control combobox", required: true %>
+    <%= f.select :teacher, @wishlist.campaign.wishlists.select(:teacher).distinct.order(:teacher).pluck(:teacher).collect{|t| [t, t]}, {}, {class: "form-control combobox-teacher", required: true, novalidate: true} %>
   </div>
 </div>
 
@@ -61,6 +68,17 @@
   <%= f.label "MHL ID", class: "col-md-1 control-label" %>
   <div class="col-md-4">
     <%= f.text_field :external_id, class: "form-control" %>
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="col-md-offset-1 col-md-4">
+    <div class="checkbox">
+      <label>
+        <%= f.check_box :is_consent_given %>
+        Is Consent Given
+      </label>
+    </div>
   </div>
 </div>
 <% end %>

@@ -4,6 +4,7 @@ class Wishlist < ApplicationRecord
   has_many :donations, :dependent => :destroy
   has_many :catalog_entries, through: :wishlist_entries
   has_many :appreciation_notes, :dependent => :destroy
+  has_one :survey_response, :dependent => :destroy
 
   scope :has_books, -> { where('wishlist_entry_count > 0') }
 

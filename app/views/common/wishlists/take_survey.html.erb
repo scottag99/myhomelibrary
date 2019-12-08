@@ -1,0 +1,111 @@
+<style media="screen">
+.survey-question, #review-message { display: none; }
+.rating-option {
+  display: inline-block;
+  text-align: center;
+  margin-right: 1em;
+}
+.rating-option label {
+  display: block;
+}
+
+
+</style>
+<% content_for :foot do %>
+<script>
+$('.survey-btn').on('click', function() {
+  var currentPanel = $(this).closest('.panel');
+  var action = $(this).data('btn-action');
+  var next = action == 'next' ? currentPanel.next('.panel') : currentPanel.prev('.panel');
+  if (next.length > 0) {
+    currentPanel.hide('fast', function(){
+      //no-op for reasons i don't to investigate
+    });
+
+    next.show('fast');
+  } else {
+    $('#review-message').show('fast');
+    $('.survey-question').show();
+    $('.survey-question .panel-footer').hide();
+  }
+});
+
+function answered(e) {
+  $(e).closest('.panel').find('button[data-btn-action=next]').prop('disabled', false);
+}
+</script>
+<% end %>
+<%= form_for @survey_response, url: url_for([:save_response, get_namespace, @wishlist.campaign.organization, @wishlist.campaign, @wishlist]) do |f| %>
+  <%= f.hidden_field :survey_id, value: @survey.id %>
+  <div class="panel panel-default" id="review-message">
+    <div class="panel-body">
+      <p>You're almost done! Please review your responses and press submit when complete.</p>
+      <h3>Thanks!</h3>
+    </div>
+    <div class="panel-footer">
+      <button type="submit" class="btn btn-warning">Submit</button>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-10">
+          <p>Before picking your books, please take a few seconds to answer some questions for us.</p>
+          <h3>Thanks!</h3>
+          <div class="text-center">
+            <%= image_tag 'my-home-library.png', width: 200 %>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <%= image_tag 'kids8.png', class: 'img-responsive' %>
+        </div>
+      </div>
+    </div>
+    <div class="panel-footer">
+      <button type="button" class="survey-btn btn btn-warning" data-btn-action='next'>Begin Survey</button>
+    </div>
+  </div>
+  <%= f.fields_for :survey_answers do |answer| %>
+    <div class="panel panel-default survey-question">
+      <div class="panel-body">
+        <h3><%= answer.object.survey_question.question %></h3>
+        <%= answer.hidden_field :survey_question_id %>
+        <% case answer.object.survey_question.question_type.name %>
+          <% when 'Multiple' then %>
+            <p><%= answer.object.survey_question.description %></p>
+            <div class="form-group">
+              <% answer.object.survey_question.answer_options.split("\n").each do |opt| %>
+              <div class="radio">
+                <label>
+                  <%= answer.radio_button :value, opt.strip, required: true, onchange: 'answered(this)' %>
+                  <%= opt.strip %>
+                </label>
+              </div>
+              <% end %>
+            </div>
+          <% when 'Rating' then %>
+            <p><%= answer.object.survey_question.description %></p>
+            <div class="form-group">
+              <% answer.object.survey_question.answer_options.split("\n").each do |opt| %>
+              <div class="rating-option">
+                  <%= answer.label :value, opt.strip %>
+                  <%= answer.radio_button :value, opt.strip, required: true, onchange: 'answered(this)' %>
+              </div>
+              <% end %>
+            </div>
+          <% else %>
+          <div class="form-group">
+            <%= answer.label :value, answer.object.survey_question.description.blank? ? '&nbsp;'.html_safe : answer.object.survey_question.description, class: "control-label" %>
+            <%= answer.text_area :value, class: 'form-control', rows: 6, required: true, onkeypress: 'answered(this)' %>
+          </div>
+        <% end %>
+      </div>
+      <div class="panel-footer">
+        <% if answer.index > 0 %>
+        <button type="button" class="btn btn-warning survey-btn" data-btn-action='back'>Back</button>
+        <% end %>
+        <button type="button" class="btn btn-warning survey-btn" data-btn-action='next' disabled="disabled">Next</button>
+      </div>
+    </div>
+  <% end %>
+<% end %>

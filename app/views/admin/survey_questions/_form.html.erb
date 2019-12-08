@@ -1,0 +1,32 @@
+<%= form_for [:admin, @survey, @survey_question], html: {class: 'form-horizontal'}, remote: true do |question_form| %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+  <div class="form-group">
+    <%= question_form.label :question, class: "col-md-2 control-label" %>
+    <div class="col-md-10">
+      <%= question_form.text_field :question, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= question_form.label :description, class: "col-md-2 control-label" %>
+    <div class="col-md-10">
+      <%= question_form.text_area :description, class: "form-control", :rows => 6 %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= question_form.label :question_type, class: "col-md-2 control-label" %>
+    <div class="col-md-10">
+      <%= question_form.collection_select :question_type_id, @question_types, :id, :name, :prompt => true %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= question_form.label :answer_options, class: "col-md-2 control-label" %>
+    <div class="col-md-10">
+      <%= question_form.text_area :answer_options, class: "form-control", :rows => 6 %>
+      This field is used for Multiple and Rating question types only. For Multiple, list each option on its own line. For Rating, put the lowest value on line 1 and the highest value on line 2.
+    </div>
+  </div>
+<% end %>

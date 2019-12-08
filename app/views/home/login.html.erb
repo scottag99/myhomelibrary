@@ -1,3 +1,13 @@
-<script type="text/javascript">
-  window.location = '<%= "https://#{Rails.application.config.auth0_endpoint}/authorize?response_type=code&client_id=#{Rails.application.secrets.auth0_client_id}&scope=openid%20email&redirect_uri=".html_safe %>' + window.location.protocol + '//' + window.location.host + '/auth/auth0/callback';
-</script>
+<div class="row">
+  <div class="col-md-2 col-md-offset-5">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Login Needed</h3>
+      </div>
+      <div class="panel-body">
+        This area is for authorized users only. Please login to proceed.
+        <%= link_to 'Login', 'auth/auth0', method: :post, class: 'btn btn-warning' %>
+      </div>
+    </div>
+  </div>
+</div>

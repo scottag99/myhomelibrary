@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="google" content="notranslate">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png?v2=true">
@@ -53,6 +55,7 @@
             <li><%= link_to 'Users', admin_users_url if admin? %></li>
             <li><%= link_to 'Content', admin_contents_url if admin? %></li>
             <li><%= link_to 'Campaigns', '/volunteer' if partner? %></li>
+            <li><%= link_to 'Surveys', admin_surveys_url if admin? %></li>
             <li><%= link_to 'Report', admin_reports_path_url if admin? %></li>
           </ul>
           <ul class="nav navbar-nav navbar-right right-admin">

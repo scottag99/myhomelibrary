@@ -1,0 +1,3 @@
+$("#globalModal .modal-title").html('Edit Survey Config');
+$("#globalModal .modal-body").html($("<%= escape_javascript(render :partial => 'form') %>"));
+$('#globalModal').modal();
