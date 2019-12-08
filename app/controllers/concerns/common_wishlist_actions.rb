@@ -54,6 +54,8 @@ module CommonWishlistActions
   end
 
   def survey_complete
+    @organization = current_organization
+    @campaign = current_campaign
     respond_to do |format|
       format.html { render layout: 'survey', template: 'common/wishlists/survey_complete' }
       format.json { render json: @survey }
