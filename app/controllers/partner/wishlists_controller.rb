@@ -43,4 +43,8 @@ private
     def get_campaign_url
       partner_organization_campaign_url(current_organization, current_campaign)
     end
+
+    def get_take_survey_url(wishlist)
+      take_survey_partner_organization_campaign_wishlist_url(current_organization, current_campaign, wishlist)
+    end
 end

@@ -15,7 +15,7 @@ class SecuredController < ApplicationController
   def logged_in_using_omniauth?
     unless session[:userinfo].present?
       session[:original_url] = request.original_url
-      redirect_to '/login'
+      redirect_to login_path
     end
 
     if session[:userinfo].present? && session[:userinfo]['extra'] && session[:userinfo]['extra']['raw_info'] && !session[:userinfo]['extra']['raw_info']['email_verified']
@@ -29,7 +29,7 @@ class SecuredController < ApplicationController
 
     if role.blank? || !self.class::ALLOWED_ROLES.include?(role)
       flash[:error] = "You must have one of the following roles #{self.class::ALLOWED_ROLES} in order to access this section. Your role: #{role}"
-      redirect_to "/"
+      redirect_to logout_path
     end
   end
 

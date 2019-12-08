@@ -1,0 +1,2 @@
+$('#globalModal').modal('hide');
+$("#campaign-survey-config-<%= @campaign_survey_config.id %>").replaceWith($("<%= escape_javascript(render :partial => 'common/campaigns/campaign_survey_config', object: @campaign_survey_config) %>"));

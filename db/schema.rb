@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190816010201) do
+ActiveRecord::Schema.define(version: 2019_11_24_002128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,18 @@ ActiveRecord::Schema.define(version: 20190816010201) do
     t.datetime "updated_at", null: false
     t.index ["campaign_id"], name: "index_campaign_catalogs_on_campaign_id"
     t.index ["catalog_id"], name: "index_campaign_catalogs_on_catalog_id"
+  end
+
+  create_table "campaign_survey_configs", force: :cascade do |t|
+    t.bigint "campaign_id"
+    t.bigint "survey_id"
+    t.string "teacher"
+    t.boolean "is_disabled", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "is_control_group"
+    t.index ["campaign_id"], name: "index_campaign_survey_configs_on_campaign_id"
+    t.index ["survey_id"], name: "index_campaign_survey_configs_on_survey_id"
   end
 
   create_table "campaigns", id: :serial, force: :cascade do |t|
@@ -131,6 +143,61 @@ ActiveRecord::Schema.define(version: 20190816010201) do
     t.index ["organization_id"], name: "index_partners_on_organization_id"
   end
 
+  create_table "question_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string "session_id", null: false
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
+    t.index ["updated_at"], name: "index_sessions_on_updated_at"
+  end
+
+  create_table "survey_answers", force: :cascade do |t|
+    t.bigint "survey_question_id"
+    t.bigint "survey_response_id"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["survey_question_id"], name: "index_survey_answers_on_survey_question_id"
+    t.index ["survey_response_id"], name: "index_survey_answers_on_survey_response_id"
+  end
+
+  create_table "survey_questions", force: :cascade do |t|
+    t.string "question"
+    t.text "description"
+    t.bigint "survey_id"
+    t.bigint "question_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.json "answer_options"
+    t.integer "sequence", default: 1
+    t.index ["question_type_id"], name: "index_survey_questions_on_question_type_id"
+    t.index ["survey_id"], name: "index_survey_questions_on_survey_id"
+  end
+
+  create_table "survey_responses", force: :cascade do |t|
+    t.bigint "wishlist_id"
+    t.bigint "survey_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["survey_id"], name: "index_survey_responses_on_survey_id"
+    t.index ["wishlist_id"], name: "index_survey_responses_on_wishlist_id"
+  end
+
+  create_table "surveys", force: :cascade do |t|
+    t.string "name"
+    t.boolean "is_disabled", default: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "wishlist_entries", id: :serial, force: :cascade do |t|
     t.integer "wishlist_id"
     t.integer "catalog_entry_id"
@@ -154,6 +221,7 @@ ActiveRecord::Schema.define(version: 20190816010201) do
     t.string "external_id"
     t.integer "wishlist_entry_count"
     t.boolean "is_delivered", default: false
+    t.boolean "is_consent_given", default: true
     t.index ["campaign_id"], name: "index_wishlists_on_campaign_id"
     t.index ["reader_name"], name: "index_wishlists_on_reader_name"
     t.index ["teacher"], name: "index_wishlists_on_teacher"
@@ -162,6 +230,8 @@ ActiveRecord::Schema.define(version: 20190816010201) do
   add_foreign_key "appreciation_notes", "wishlists"
   add_foreign_key "campaign_catalogs", "campaigns"
   add_foreign_key "campaign_catalogs", "catalogs"
+  add_foreign_key "campaign_survey_configs", "campaigns"
+  add_foreign_key "campaign_survey_configs", "surveys"
   add_foreign_key "campaigns", "organizations"
   add_foreign_key "catalog_entries", "books"
   add_foreign_key "catalog_entries", "catalog_entries", column: "related_entry_id"
@@ -169,6 +239,12 @@ ActiveRecord::Schema.define(version: 20190816010201) do
   add_foreign_key "donations", "campaigns"
   add_foreign_key "donations", "wishlists"
   add_foreign_key "partners", "organizations"
+  add_foreign_key "survey_answers", "survey_questions"
+  add_foreign_key "survey_answers", "survey_responses"
+  add_foreign_key "survey_questions", "question_types"
+  add_foreign_key "survey_questions", "surveys"
+  add_foreign_key "survey_responses", "surveys"
+  add_foreign_key "survey_responses", "wishlists"
   add_foreign_key "wishlist_entries", "catalog_entries"
   add_foreign_key "wishlist_entries", "wishlists"
   add_foreign_key "wishlists", "campaigns"

@@ -5,10 +5,10 @@ $init = <<SCRIPT
   # Upgrade rbenv to get latest ruby versions
   cd /home/vagrant/.rbenv/plugins/ruby-build && git pull
 
-  # install ruby 2.3.0 (this is what we are using on Heroku)
-  sudo -H -u vagrant bash -i -c 'rbenv install 2.3.0'
+  # install ruby 2.6.5 (this is what we are using on Heroku)
+  sudo -H -u vagrant bash -i -c 'rbenv install 2.6.5'
   sudo -H -u vagrant bash -i -c 'rbenv rehash'
-  sudo -H -u vagrant bash -i -c 'rbenv global 2.3.0'
+  sudo -H -u vagrant bash -i -c 'rbenv global 2.6.5'
   sudo -H -u vagrant bash -i -c 'gem install bundler --no-ri --no-rdoc'
 
   # some missing dependencies

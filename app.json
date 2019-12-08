@@ -1,0 +1,67 @@
+{
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ],
+  "env": {
+    "ANALYTICS_TRACKING_ID": {
+      "required": true
+    },
+    "AUTH0_CLIENT_ID": {
+      "required": true
+    },
+    "AUTH0_CLIENT_SECRET": {
+      "required": true
+    },
+    "GOOGLE_ACCOUNT_TYPE": {
+      "required": true
+    },
+    "GOOGLE_CLIENT_EMAIL": {
+      "required": true
+    },
+    "GOOGLE_PRIVATE_KEY": {
+      "required": true
+    },
+    "LANG": {
+      "required": true
+    },
+    "LOG_ENTRIES_TOKEN": {
+      "required": true
+    },
+    "RACK_ENV": {
+      "required": true
+    },
+    "RAILS_ENV": {
+      "required": true
+    },
+    "RAILS_LOG_TO_STDOUT": {
+      "required": true
+    },
+    "RAILS_SERVE_STATIC_FILES": {
+      "required": true
+    },
+    "SCRIVITO_API_KEY": {
+      "required": true
+    },
+    "SCRIVITO_TENANT": {
+      "required": true
+    },
+    "SECRET_KEY_BASE": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "name": "myhomelibrary",
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate"
+  },
+  "stack": "cedar-14"
+}

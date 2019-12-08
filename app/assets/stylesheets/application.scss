@@ -19,6 +19,7 @@
 *= require scrivito_two_column_widget
 *= require scrivito_section_widgets
 *= require scrivito_content_box_widget
++= require combobox
 */
 
  @import "bootstrap-sprockets";
@@ -1577,4 +1578,7 @@ ul.right-admin {
 .gadget p {
   text-align: center;
   font-size: 2.5em;
+}
+.dragger {
+  cursor: grab;
 }

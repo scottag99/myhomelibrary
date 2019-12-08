@@ -12,8 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/widgets/sortable
 //= require scrivito
 // require_tree .
 //= require bootstrap-sprockets
 //= require moment
 //= require bootstrap-datetimepicker
+//= require bootstrap-combobox
