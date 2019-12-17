@@ -163,22 +163,22 @@ var gridOptions = {
         {headerName: 'Teacher', field: 'teacher', checkboxSelection: true, sort: 'asc', sortAt: 0},
         {headerName: 'Name', field: 'reader_name', sort: 'asc', sortAt: 1},
         <% if admin? %>
-        {headerName: 'Age', field: 'reader_age', cellClass: 'mhl-ag-grid-cell', maxWidth: 65},
+        {headerName: 'Age', field: 'reader_age', cellClass: 'mhl-ag-grid-cell'},
         <% end -%>
-        {headerName: 'Gender', field: 'reader_gender', cellClass: 'mhl-ag-grid-cell', maxWidth: 75},
-        {headerName: 'Grade', field: 'grade', cellClass: 'mhl-ag-grid-cell', maxWidth: 65},
+        {headerName: 'Gender', field: 'reader_gender', cellClass: 'mhl-ag-grid-cell'},
+        {headerName: 'Grade', field: 'grade', cellClass: 'mhl-ag-grid-cell'},
         //{headerName: 'GRL', field: 'grl', width: 75, cellClass: 'mhl-ag-grid-cell'},
-        {headerName: 'ID', field: 'external_id', cellClass: 'mhl-ag-grid-cell', maxWidth: 65},
-        {headerName: 'Book Count', field: 'book_count', cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right', maxWidth: 105},
-        {headerName: 'Delivered', field: 'is_delivered', cellClass: 'mhl-ag-grid-cell', maxWidth: 85}
+        {headerName: 'ID', field: 'external_id', cellClass: 'mhl-ag-grid-cell'},
+        {headerName: 'Book Count', field: 'book_count', cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right'},
+        {headerName: 'Delivered', field: 'is_delivered', cellClass: 'mhl-ag-grid-cell'}
         <% if admin? %>
         ,
-        {headerName: 'Consent', field: 'is_consent_given', cellClass: 'mhl-ag-grid-cell', maxWidth: 85},
-        {headerName: 'Wish List Total ($)', field: 'wishlist_total', cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right', cellFormatter: asMoney, maxWidth: 115},
-        {headerName: 'Donation Total ($)', field: 'donation_total', cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right', cellFormatter: asMoney, maxWidth: 115}
+        {headerName: 'Consent', field: 'is_consent_given', cellClass: 'mhl-ag-grid-cell'},
+        {headerName: 'Wish List Total ($)', field: 'wishlist_total', cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right', cellFormatter: asMoney},
+        {headerName: 'Donation Total ($)', field: 'donation_total', cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right', cellFormatter: asMoney}
         <% end -%>
         ,
-        {headerName: '&nbsp;', field: 'actions', cellRenderer: editButton }
+        {headerName: '&nbsp;', field: 'actions', cellRenderer: editButton, minWidth: 340 }
 
     ],
 
