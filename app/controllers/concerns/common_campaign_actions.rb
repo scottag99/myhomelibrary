@@ -135,7 +135,7 @@ module CommonCampaignActions
   def export_survey
     campaign = @organization.campaigns.find(params[:id])
     # this quirky looking thing in front of student is the BOM to force Excel to honor the UTF-8 encoding
-    base_header = ["\uFEFF" + 'Student', 'Gender', 'Grade', 'Teacher', 'School', 'Campaign', 'Campaign date', 'Survey']
+    base_header = ["\uFEFF" + 'Student', 'Gender', 'Grade', 'Student ID', 'Teacher', 'School', 'Campaign', 'Campaign date', 'Survey']
     wishlists = Wishlist.joins(:survey_response).includes([wishlist_entries: {catalog_entry: :book}, survey_response: [:survey, survey_answers: :survey_question]]).where(campaign_id: campaign.id)
     grouped = {}
     wishlists.each do |wishlist|
@@ -145,7 +145,7 @@ module CommonCampaignActions
         header = base_header + wishlist.survey_response.survey_answers.order(:survey_question_id).collect{|answer| answer.survey_question.question}
         grouped = {key => {header: header, data: [], book_count: books.size}}.merge(grouped)
       end
-      base_values = [wishlist.reader_name, wishlist.reader_gender, wishlist.grade, wishlist.teacher, @organization.name, campaign.name, campaign.deadline, key]
+      base_values = [wishlist.reader_name, wishlist.reader_gender, wishlist.grade, wishlist.external_id, wishlist.teacher, @organization.name, campaign.name, campaign.deadline, key]
       grouped[key][:data] << (base_values + wishlist.survey_response.survey_answers.order(:survey_question_id).collect{|answer| answer.value} + books)
       grouped[key][:book_count] = [books.size, grouped[key][:book_count]].max
     end
