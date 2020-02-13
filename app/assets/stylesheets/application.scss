@@ -1553,7 +1553,13 @@ ul.right-admin {
      display: none;
    }
    .admin-template {
-     padding: 1em;
+     padding: 0;
+   }
+   .panel {
+     margin-bottom: 0;
+   }
+   .outer-panel {
+     margin-bottom: 10px;
    }
 }
 

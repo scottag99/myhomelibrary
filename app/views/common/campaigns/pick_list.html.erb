@@ -8,46 +8,65 @@
 <% @wishlists.each do |wishlist| %>
 <div class="panel panel-default outer-panel">
   <!-- Default panel contents -->
-  <div class="panel-heading"><h3 class="panel-title"><%= @campaign.organization.name %></h3></div>
-    <div class="panel-body">
-      <dl class="dl-horizontal">
-        <dt>Teacher</dt>
-        <dd><%= wishlist.teacher %></dd>
-        <dt>Reader Name</dt>
-        <dd><%= wishlist.reader_name %></dd>
-        <dt>Reader Age</dt>
-        <dd><%= wishlist.reader_age %></dd>
-        <dt>Reader Gender</dt>
-        <dd><%= wishlist.reader_gender %></dd>
-        <dt>Grade Level</dt>
-        <dd><%= wishlist.grade %></dd>
-      </dl>
-      <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <table id="pick-list" class="table table-striped table-condensed table-responsive">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Author</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% wishlist.catalog_entries.includes(:book, :catalog).order(["books.title"]).each do |catalog_entry| %>
-            <tr>
-              <td><%= catalog_entry.book.title %></td>
-              <td><%= catalog_entry.book.author %></td>
-            </tr>
-              <% unless catalog_entry.related_entry.nil? %>
-              <tr>
-                <td>&nbsp;</td>
-                <td><%= catalog_entry.related_entry.book.title %></td>
-                <td><%= catalog_entry.related_entry.book.author %></td>
-              </tr>
-              <% end -%>
-            <% end -%>
-          </tbody>
-        </table>
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= @campaign.organization.name %></h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="form-group col-xs-2">
+        <p class="form-control-static">Teacher</p>
+        <label><%= wishlist.teacher %></label>
       </div>
+
+      <div class="form-group col-xs-3">
+        <p class="form-control-static">Reader</p>
+        <label><%= wishlist.reader_name %></label>
+      </div>
+
+
+      <div class="form-group col-xs-2">
+        <p class="form-control-static">Age</p>
+        <label><%= wishlist.reader_age %></label>
+      </div>
+
+
+      <div class="form-group col-xs-2">
+        <p class="form-control-static">Gender</p>
+        <label><%= wishlist.reader_gender %></label>
+      </div>
+
+
+      <div class="form-group col-xs-2">
+        <p class="form-control-static">Grade</p>
+        <label><%= wishlist.grade %></label>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <table id="pick-list" class="table table-striped table-condensed table-responsive">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% wishlist.catalog_entries.includes(:book, :catalog).order(["books.title"]).each do |catalog_entry| %>
+          <tr>
+            <td><%= catalog_entry.book.title %></td>
+            <td><%= catalog_entry.book.author %></td>
+          </tr>
+            <% unless catalog_entry.related_entry.nil? %>
+            <tr>
+              <td>&nbsp;</td>
+              <td><%= catalog_entry.related_entry.book.title %></td>
+              <td><%= catalog_entry.related_entry.book.author %></td>
+            </tr>
+            <% end -%>
+          <% end -%>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
