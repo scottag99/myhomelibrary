@@ -1515,6 +1515,32 @@ ul.right-admin {
   white-space: pre-wrap;
 }
 
+#pick-list {
+  th {
+    font-size: 18px;
+  }
+  td {
+    font-size: 18px;
+  }
+}
+
+.gadget {
+  background-color: white;
+  padding: 1em;
+  box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
+  margin: 1em;
+}
+.gadget h4 {
+
+}
+.gadget p {
+  text-align: center;
+  font-size: 2.5em;
+}
+.dragger {
+  cursor: grab;
+}
+
 @media print {
   .social-media, .links {
     display: none;
@@ -1561,30 +1587,7 @@ ul.right-admin {
    .outer-panel {
      margin-bottom: 10px;
    }
-}
-
-#pick-list {
-  th {
-    font-size: 18px;
-  }
-  td {
-    font-size: 18px;
-  }
-}
-
-.gadget {
-  background-color: white;
-  padding: 1em;
-  box-shadow: 0 1px 6px 1px rgba(0,0,0,.25);
-  margin: 1em;
-}
-.gadget h4 {
-
-}
-.gadget p {
-  text-align: center;
-  font-size: 2.5em;
-}
-.dragger {
-  cursor: grab;
+   #pick-list td {
+     font-size: 14px
+   }
 }
