@@ -63,5 +63,5 @@
   "scripts": {
     "postdeploy": "bundle exec rake db:migrate"
   },
-  "stack": "cedar-18"
+  "stack": "heroku-18"
 }
