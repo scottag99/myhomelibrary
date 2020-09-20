@@ -22,6 +22,11 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'home#index'
     get 'reports', to: 'home#reports', as: 'reports_path'
+    resources :languages do
+      member do
+        put 'is_disabled'
+      end
+    end
     resources :surveys do
       member do
         put 'is_disabled'

@@ -226,7 +226,7 @@ module CommonWishlistActions
 
 private
   def wishlist_params
-    params.require(:wishlist).permit(:reader_name, :reader_age, :reader_gender, :teacher, :grade, :grl, :external_id, :is_delivered, :is_consent_given)
+    params.require(:wishlist).permit(:reader_name, :reader_age, :reader_gender, :teacher, :grade, :language_id, :grl, :external_id, :is_delivered, :is_consent_given)
   end
 
   def survey_response_params

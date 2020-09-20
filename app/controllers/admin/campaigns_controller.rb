@@ -42,7 +42,7 @@ class Admin::CampaignsController < Admin::BaseController
       requests << create_hide_column_request(headers.size)
       requests << create_protect_rows_request(0 , 0 , 0, headers.size)
       requests << create_list_validation_request(1, 4000, headers.index('reader_gender*'), headers.index('reader_gender*')+1, ['M', 'F'])
-      requests << create_list_validation_request(1, 4000, headers.index('language'), headers.index('language')+1, ['BI'])
+      requests << create_list_validation_request(1, 4000, headers.index('language'), headers.index('language')+1, Language.where('is_disabled <> ?', true).pluck(:name))
       requests << create_list_validation_request(1, 4000, headers.index('reading_level*'), headers.index('reading_level*')+1, 'A'..'Z')
       batch_update(ss, requests, auth)
       @campaign.roster_data_reference = ss.spreadsheet_url

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_24_002128) do
+ActiveRecord::Schema.define(version: 2020_09_20_172354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,13 @@ ActiveRecord::Schema.define(version: 2019_11_24_002128) do
     t.index ["wishlist_id"], name: "index_donations_on_wishlist_id"
   end
 
+  create_table "languages", force: :cascade do |t|
+    t.string "name"
+    t.boolean "is_disabled"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "organizations", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -222,7 +229,9 @@ ActiveRecord::Schema.define(version: 2019_11_24_002128) do
     t.integer "wishlist_entry_count"
     t.boolean "is_delivered", default: false
     t.boolean "is_consent_given", default: true
+    t.bigint "language_id"
     t.index ["campaign_id"], name: "index_wishlists_on_campaign_id"
+    t.index ["language_id"], name: "index_wishlists_on_language_id"
     t.index ["reader_name"], name: "index_wishlists_on_reader_name"
     t.index ["teacher"], name: "index_wishlists_on_teacher"
   end
@@ -248,4 +257,5 @@ ActiveRecord::Schema.define(version: 2019_11_24_002128) do
   add_foreign_key "wishlist_entries", "catalog_entries"
   add_foreign_key "wishlist_entries", "wishlists"
   add_foreign_key "wishlists", "campaigns"
+  add_foreign_key "wishlists", "languages"
 end
