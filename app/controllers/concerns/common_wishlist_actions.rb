@@ -167,9 +167,10 @@ module CommonWishlistActions
 
         i = 0
         start_row = valid_rows[i]
+        requests = []
         while i < valid_rows.size
           if i+1 == valid_rows.size || (valid_rows[i+1] - valid_rows[i] != 1)
-            color_rows(ss, start_row, valid_rows[i], 0, header.size, 0.8509804, 0.91764706, 0.827451, 1.0, auth)
+            requests << create_color_rows_request(start_row, valid_rows[i], 0, header.size, 0.8509804, 0.91764706, 0.827451, 1.0)
             start_row = valid_rows[i+1]
           end
           i += 1
@@ -179,11 +180,12 @@ module CommonWishlistActions
         start_row = error_rows[i]
         while i < error_rows.size
           if i+1 == error_rows.size || (error_rows[i+1] - error_rows[i] != 1)
-            color_rows(ss, start_row, error_rows[i], 0, header.size, 0.9019608, 0.72156864, 0.6862745, 1.0, auth)
+            requests << create_color_rows_request(start_row, error_rows[i], 0, header.size, 0.9019608, 0.72156864, 0.6862745, 1.0)
             start_row = error_rows[i+1]
           end
           i += 1
         end
+        batch_update(ss, requests, auth)
       rescue => ex
         Rails.logger.error(ex)
         flash[:notice] = ex.message

@@ -52,7 +52,6 @@ class Admin::CatalogsController < Admin::BaseController
     begin
       auth = login()
       ss = new_sheet("Book Load for #{@catalog.name} (#{@catalog.source})")
-      hide_column(ss, headers.size)
       data = [headers,
               Array.new(headers.size)<<'Instructions',
               Array.new(headers.size)<<"Use the table to the left to enter your book data. Fields with a '*' are required.",
@@ -60,8 +59,10 @@ class Admin::CatalogsController < Admin::BaseController
               Array.new(headers.size)<<'All changes to this sheet are saved automatically. You can stop and return to continue your work at any time.',
               Array.new(headers.size)<<'When ready, close this sheet and return to My Home Library to finish the upload process from the Catalog page.'
       ]
-      range = 'A1:Z15'
-      add_data(ss, range, data, auth)
+      add_data(ss, 'A1:Z15', data, auth)
+      requests = []
+      requests << create_hide_column_request(headers.size)
+      batch_update(ss, requests, auth)
       @catalog.book_data_reference = ss.spreadsheet_url
       @catalog.save
     rescue => ex
@@ -153,9 +154,10 @@ class Admin::CatalogsController < Admin::BaseController
 
         i = 0
         start_row = valid_rows[i]
+        requests = []
         while i < valid_rows.size
           if i+1 == valid_rows.size || (valid_rows[i+1] - valid_rows[i] != 1)
-            color_rows(ss, start_row, valid_rows[i], 0, header.size, 0.8509804, 0.91764706, 0.827451, 1.0, auth)
+            requests << create_color_rows_request(start_row, valid_rows[i], 0, header.size, 0.8509804, 0.91764706, 0.827451, 1.0)
             start_row = valid_rows[i+1]
           end
           i += 1
@@ -165,11 +167,12 @@ class Admin::CatalogsController < Admin::BaseController
         start_row = error_rows[i]
         while i < error_rows.size
           if i+1 == error_rows.size || (error_rows[i+1] - error_rows[i] != 1)
-            color_rows(ss, start_row, error_rows[i], 0, header.size, 0.9019608, 0.72156864, 0.6862745, 1.0, auth)
+            requests << create_color_rows_request(start_row, error_rows[i], 0, header.size, 0.9019608, 0.72156864, 0.6862745, 1.0)
             start_row = error_rows[i+1]
           end
           i += 1
         end
+        batch_update(ss, requests, auth)
       rescue => ex
         Rails.logger.error(ex)
         flash[:notice] = ex.message

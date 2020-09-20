@@ -26,11 +26,10 @@ class Admin::CampaignsController < Admin::BaseController
 
   def create
     @campaign = @organization.campaigns.create!(campaign_params)
-    headers = ['teacher*', 'reader_name*', 'grade*', 'reader_age', 'reader_gender', 'id']
+    headers = ['teacher*', 'reader_name*', 'grade*', 'reader_gender*', 'language', 'reading_level*', 'reader_age', 'id']
     begin
       auth = login()
       ss = new_sheet("Roster Load for #{@organization.name}-#{@campaign.name}")
-      hide_column(ss, headers.size)
       data = [headers,
               Array.new(headers.size)<<'Instructions',
               Array.new(headers.size)<<"Use the table to the left to enter your roster data. Fields with a '*' are required.",
@@ -38,9 +37,14 @@ class Admin::CampaignsController < Admin::BaseController
               Array.new(headers.size)<<'All changes to this sheet are saved automatically. You can stop and return to continue your work at any time.',
               Array.new(headers.size)<<'When ready, close this sheet and return to My Home Library to finish the upload process from the Campaign page.'
       ]
-      range = 'A1:Z15'
-      add_data(ss, range, data, auth)
-	  protect_rows(ss, 0 , 0 , 0, headers.size, auth)
+      add_data(ss, 'A1:Z15', data, auth)
+      requests = []
+      requests << create_hide_column_request(headers.size)
+      requests << create_protect_rows_request(0 , 0 , 0, headers.size)
+      requests << create_list_validation_request(1, 4000, headers.index('reader_gender*'), headers.index('reader_gender*')+1, ['M', 'F'])
+      requests << create_list_validation_request(1, 4000, headers.index('language'), headers.index('language')+1, ['BI'])
+      requests << create_list_validation_request(1, 4000, headers.index('reading_level*'), headers.index('reading_level*')+1, 'A'..'Z')
+      batch_update(ss, requests, auth)
       @campaign.roster_data_reference = ss.spreadsheet_url
       @campaign.save
     rescue => ex
