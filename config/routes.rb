@@ -27,6 +27,11 @@ Rails.application.routes.draw do
         put 'is_disabled'
       end
     end
+    resources :reading_levels do
+      member do
+        put 'is_disabled'
+      end
+    end
     resources :surveys do
       member do
         put 'is_disabled'

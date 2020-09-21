@@ -16,6 +16,8 @@
         <dd><%= @wishlist.grade %></dd>
         <dt>Language</dt>
         <dd><%= @wishlist.language.try(:name) %></dd>
+        <dt>Reading Level</dt>
+        <dd><%= @wishlist.reading_level.try(:name) %></dd>
         <dt>Delivered</dt>
         <dd><input type=checkbox disabled <%= @wishlist.is_delivered ? 'checked' : '' %> /></dd>
         <dt>MHL ID</dt>
