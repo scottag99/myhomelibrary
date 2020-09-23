@@ -1,0 +1,2 @@
+$('#globalModal').modal('hide');
+$("#counts-box").replaceWith($("<%= escape_javascript(render :partial => 'common/campaigns/counts', object: @campaign) %>"));
