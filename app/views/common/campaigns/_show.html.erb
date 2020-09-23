@@ -21,6 +21,10 @@
       <dd><%= h(@campaign.notes).gsub(/\n/, '<br/>').html_safe %></dd>
       <dt>Use Appreciation Notes</dt>
       <dd><input type=checkbox disabled <%= @campaign.use_appreciation_notes ? 'checked' : '' %> /></dd>
+      <dt>PreK &amp; K Book Counts</dt>
+      <dd>
+        <%= render partial: 'common/campaigns/counts' %>
+      </dd>
     </dl>
   </div>
 
@@ -144,15 +148,21 @@ function asMoney(val) {
   return parseFloat(val.value, 10).toFixed(2);
 }
 
+function viewWishlist(val) {
+  return '<a href="' + url.replace("readers", 'wishlists/' + val.data.id) + '" data-remote="true">' + val.data.reader_name +'</a>';
+}
+
 function editButton(val) {
+  return '<a href="' + url.replace("readers", 'wishlists/' + val.data.id + '/edit') + '" data-remote="true">&#9998;</a>'
+}
+
+function actionButtons(val) {
   if (!can_edit_wishlists) {
     return '';
   } else {
     var del = is_admin ? '<a class="btn btn-danger btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id ) + '" data-method="delete" data-confirm="This action cannot be undone. Are you sure?">Delete</a>' : '';
     return '<a class="btn btn-info btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/manage') + '">Pick Books</a> ' +
       '<a class="btn btn-info btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/toggle_delivered') + '" data-method="put">Delivered</a> ' +
-      '<a class="btn btn-warning btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id + '/edit') + '">Edit</a> ' +
-      '<a class="btn btn-default btn-xs" href="' + url.replace("readers", 'wishlists/' + val.data.id) + '">View</a> ' +
       del;
       ;
   }
@@ -161,12 +171,15 @@ function editButton(val) {
 var gridOptions = {
     columnDefs: [
         {headerName: 'Teacher', field: 'teacher', checkboxSelection: true, sort: 'asc', sortAt: 0},
-        {headerName: 'Name', field: 'reader_name', sort: 'asc', sortAt: 1},
+        {headerName: 'Name', field: 'reader_name', cellRenderer: viewWishlist, sort: 'asc', sortAt: 1},
+        {headerName: '&nbsp;', field: 'edit', cellRenderer: editButton},
         <% if admin? %>
         {headerName: 'Age', field: 'reader_age', cellClass: 'mhl-ag-grid-cell'},
         <% end -%>
         {headerName: 'Gender', field: 'reader_gender', cellClass: 'mhl-ag-grid-cell'},
         {headerName: 'Grade', field: 'grade', cellClass: 'mhl-ag-grid-cell'},
+        {headerName: 'Lang', field: 'language.name', cellClass: 'mhl-ag-grid-cell'},
+        {headerName: 'Level', field: 'reading_level.name', cellClass: 'mhl-ag-grid-cell'},
         //{headerName: 'GRL', field: 'grl', width: 75, cellClass: 'mhl-ag-grid-cell'},
         {headerName: 'ID', field: 'external_id', cellClass: 'mhl-ag-grid-cell'},
         {headerName: 'Book Count', field: 'book_count', cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right'},
@@ -178,7 +191,7 @@ var gridOptions = {
         {headerName: 'Donation Total ($)', field: 'donation_total', cellClass: 'text-right mhl-ag-grid-cell', headerClass: 'mhl-ag-grid-header-right', cellFormatter: asMoney}
         <% end -%>
         ,
-        {headerName: '&nbsp;', field: 'actions', cellRenderer: editButton, minWidth: 340 }
+        {headerName: '&nbsp;', field: 'actions', cellRenderer: actionButtons, minWidth: 340 }
 
     ],
 

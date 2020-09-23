@@ -1,0 +1,28 @@
+<%= form_for [:admin, @language], :html => {:class => "form-horizontal"} do |f| %>
+
+  <div class="form-group">
+    <%= f.label :name, class: "col-md-1 control-label" %>
+    <div class="col-md-4">
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-1 col-md-4">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :is_disabled %>
+          Disabled
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-1 col-md-4">
+      <%= f.submit "Submit", class: "btn btn-default btn-primary" %>
+      <%= link_to 'Back', admin_languages_url, :class => "btn btn-default"%>
+    </div>
+  </div>
+
+<% end %>

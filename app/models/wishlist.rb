@@ -5,6 +5,8 @@ class Wishlist < ApplicationRecord
   has_many :catalog_entries, through: :wishlist_entries
   has_many :appreciation_notes, :dependent => :destroy
   has_one :survey_response, :dependent => :destroy
+  belongs_to :language, optional: true
+  belongs_to :reading_level, optional: true
 
   scope :has_books, -> { where('wishlist_entry_count > 0') }
 
@@ -64,5 +66,21 @@ class Wishlist < ApplicationRecord
   def teacher=(value)
     #Removes Mr., Ms., and Mrs. from the start of the teacher name
     super(value.gsub(/^M[rs]{1,2}\./, "").strip)
+  end
+
+  def language=(value)
+    if value && value.is_a?(String) && l = Language.find_by_name(value)
+      super(l)
+    else
+      super(value)
+    end
+  end
+
+  def reading_level=(value)
+    if value && value.is_a?(String) && l = ReadingLevel.find_by_name(value)
+      super(l)
+    else
+      super(value)
+    end
   end
 end

@@ -55,8 +55,19 @@
             <li><%= link_to 'Users', admin_users_url if admin? %></li>
             <li><%= link_to 'Content', admin_contents_url if admin? %></li>
             <li><%= link_to 'Campaigns', '/volunteer' if partner? %></li>
-            <li><%= link_to 'Surveys', admin_surveys_url if admin? %></li>
-            <li><%= link_to 'Report', admin_reports_path_url if admin? %></li>
+            <% if admin? %>
+            <li><%= link_to 'Surveys', admin_surveys_url %></li>
+            <li><%= link_to 'Report', admin_reports_path_url %></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                Metadata <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to 'Languages', admin_languages_url %></li>
+                <li><%= link_to 'Reading Levels', admin_reading_levels_url %></li>
+              </ul>
+            </li>
+            <% end %>
           </ul>
           <ul class="nav navbar-nav navbar-right right-admin">
             <% unless session[:userinfo].nil?  -%>

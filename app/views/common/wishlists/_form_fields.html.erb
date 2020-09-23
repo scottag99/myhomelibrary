@@ -57,6 +57,20 @@
   </div>
 </div>
 
+<div class="form-group">
+  <%= f.label :language_id, class: "col-md-1 control-label" %>
+  <div class="col-md-4">
+    <%= f.collection_select :language_id, Language.all.order(:name), :id, :name, {include_blank: 'Select language preference'} %>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :reading_level_id, class: "col-md-1 control-label" %>
+  <div class="col-md-4">
+    <%= f.collection_select :reading_level_id, ReadingLevel.all.order(:name), :id, :name, {include_blank: 'Select reading level'} %>
+  </div>
+</div>
+
 <!--div class="form-group">
   <%= f.label :grl, class: "col-md-1 control-label" %>
   <div class="col-md-4">
@@ -83,7 +97,7 @@
 </div>
 <% end %>
 
-<div class="form-group">
+<div class="form-group" id="wishlist-form-btns">
   <div class="col-md-offset-1 col-md-4">
     <%= f.submit "Submit", class: "btn btn-default btn-primary" %>
     <%= link_to 'Back', back_url, :class => "btn btn-default"%>

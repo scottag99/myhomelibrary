@@ -22,6 +22,16 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'home#index'
     get 'reports', to: 'home#reports', as: 'reports_path'
+    resources :languages do
+      member do
+        put 'is_disabled'
+      end
+    end
+    resources :reading_levels do
+      member do
+        put 'is_disabled'
+      end
+    end
     resources :surveys do
       member do
         put 'is_disabled'
@@ -68,6 +78,8 @@ Rails.application.routes.draw do
           put 'donations'
           put 'wishlists'
           get 'export_survey'
+          get 'edit_counts'
+          patch 'update_counts'
         end
         resources :campaign_survey_configs
         resources :wishlists do

@@ -1,0 +1,2 @@
+class ReadingLevel < ApplicationRecord
+end

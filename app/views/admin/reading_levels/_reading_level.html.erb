@@ -1,0 +1,13 @@
+<tr>
+  <td><%= link_to reading_level.name, [:admin, reading_level] %></td>
+  <td><%= check_box_tag 'is_disabled', reading_level.id, reading_level.is_disabled,
+            data: {
+              remote: true,
+              url: is_disabled_admin_reading_level_url(reading_level),
+              method: "PUT"
+              } %></td>
+
+  <td>
+    <%= link_to "Edit", edit_admin_reading_level_url(reading_level), class: "btn btn-warning btn-xs" %>
+  </td>
+</tr>

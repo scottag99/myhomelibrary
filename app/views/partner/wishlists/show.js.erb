@@ -1,0 +1,4 @@
+$("#globalModal .modal-title").html('Wishlist Detail');
+$("#globalModal .modal-body").html($("<%= escape_javascript(render :partial => 'common/wishlists/show') %>"));
+$("#globalModalSave").hide();
+$('#globalModal').modal();

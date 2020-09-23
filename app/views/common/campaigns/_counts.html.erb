@@ -1,0 +1,9 @@
+<div id="counts-box">
+  <div><strong>PreK English</strong> <%= @campaign.pre_k_english_qty || 0 %></div>
+  <div><strong>PreK Bilingual</strong> <%= @campaign.pre_k_bilingual_qty || 0 %></div>
+  <div><strong>K English</strong> <%= @campaign.k_english_qty || 0 %></div>
+  <div><strong>K Bilingual</strong> <%= @campaign.k_bilingual_qty || 0 %></div>
+  <% if admin? %>
+  <%= link_to 'Edit Counts', url_for([:edit_counts, get_namespace, @campaign.organization, @campaign]), class: 'btn btn-xs btn-primary', remote: true %>
+  <% end %>
+</div>

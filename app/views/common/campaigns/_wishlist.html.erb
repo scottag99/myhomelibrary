@@ -3,6 +3,7 @@
   <td><%= wishlist.reader_age %></td>
   <td><%= wishlist.reader_gender %></td>
   <td><%= wishlist.grade %></td>
+  <td><%= wishlist.langague.try(:name) %></td>
   <!--td><%= wishlist.grl %></td-->
   <td><%= wishlist[:book_count] %></td><%# These values are coming from a custom query for perf reason %>
   <% if admin? %>

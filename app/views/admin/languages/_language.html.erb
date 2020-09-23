@@ -1,0 +1,13 @@
+<tr>
+  <td><%= link_to language.name, [:admin, language] %></td>
+  <td><%= check_box_tag 'is_disabled', language.id, language.is_disabled,
+            data: {
+              remote: true,
+              url: is_disabled_admin_language_url(language),
+              method: "PUT"
+              } %></td>
+
+  <td>
+    <%= link_to "Edit", edit_admin_language_url(language), class: "btn btn-warning btn-xs" %>
+  </td>
+</tr>
