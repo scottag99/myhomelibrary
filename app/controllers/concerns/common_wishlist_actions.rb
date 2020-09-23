@@ -20,6 +20,7 @@ module CommonWishlistActions
     @wishlist = current_campaign.wishlists.find(params[:id])
     respond_to do |format|
       format.html
+      format.js
       format.json { render json: @wishlist }
     end
   end
