@@ -90,6 +90,7 @@ module CommonWishlistActions
 
     respond_to do |format|
       format.html { render 'common/form', locals: {form_title: 'Edit Wishlist', model: 'wishlists'} }
+      format.js
       format.json { render json: @wishlist }
     end
   end

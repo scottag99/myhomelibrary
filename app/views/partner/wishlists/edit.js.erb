@@ -1,0 +1,4 @@
+$("#globalModal .modal-title").html('Wishlist Edit');
+$("#globalModal .modal-body").html($("<%= escape_javascript(render :partial => 'form') %>"));
+$("#wishlist-form-btns").hide();
+$('#globalModal').modal();
