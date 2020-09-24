@@ -135,7 +135,9 @@ module CommonWishlistActions
         auth = login()
         ss = get_sheet(id, auth)
         rows = get_data(ss, 'A1:Z1', auth)
-        header = rows.values.shift.collect{|v| v.gsub(/\*/, '').strip}
+        columns = rows.values.shift
+        required_fields = columns.reduce([]){|a, c| a.push(c.gsub(/\*/, '').strip.to_sym) if c.ends_with?('*'); a}
+        header = columns.collect{|v| v.gsub(/\*/, '').strip}
         range = "A2:#{('A'..'Z').to_a[header.size-1]}"
         roster = get_data(ss, range, auth)
         idx = 0
@@ -156,6 +158,7 @@ module CommonWishlistActions
             else
               w.update(row.to_hash.except('id'))
             end
+            w.import_required = required_fields
             if w.save
               row_data[header.index('id')] = w.id
               valid_rows << idx
