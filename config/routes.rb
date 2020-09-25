@@ -78,8 +78,6 @@ Rails.application.routes.draw do
           put 'donations'
           put 'wishlists'
           get 'export_survey'
-          get 'edit_counts'
-          patch 'update_counts'
         end
         resources :campaign_survey_configs
         resources :wishlists do
