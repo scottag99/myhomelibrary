@@ -141,30 +141,12 @@ class Admin::CampaignsController < Admin::BaseController
     end
   end
 
-  def edit_counts
-    @campaign = @organization.campaigns.find(params[:id])
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def update_counts
-    @campaign = @organization.campaigns.find(params[:id])
-    @campaign.update_attributes!(campaign_params)
-    respond_to do |format|
-      format.js
-    end
-  end
-
 private
   def set_organization
     @organization = Organization.find(params[:organization_id])
   end
 
   def campaign_params
-    params.require(:campaign).permit(:name, :deadline, :ready_for_donations,
-      :address, :can_edit_wishlists, :book_limit, {:catalog_ids => []}, :notes,
-      :use_appreciation_notes, :k_english_qty, :k_bilingual_qty,
-      :pre_k_english_qty, :pre_k_bilingual_qty)
+    params.require(:campaign).permit(:name, :deadline, :ready_for_donations, :address, :can_edit_wishlists, :book_limit, {:catalog_ids => []}, :notes, :use_appreciation_notes)
   end
 end
