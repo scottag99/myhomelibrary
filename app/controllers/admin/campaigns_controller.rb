@@ -101,6 +101,12 @@ class Admin::CampaignsController < Admin::BaseController
     campaign.save
   end
 
+  def one_order
+    campaign = @organization.campaigns.find(params[:id])
+    campaign.all_one_order = !campaign.all_one_order
+    campaign.save
+  end
+
   def new_grade_sponsorship
     @campaign = @organization.campaigns.find(params[:id])
     @grades = @campaign.wishlists.group(:grade).count.map{|k,v| ["#{k} - Minimum: $#{30.0*v}", k]}
@@ -147,6 +153,8 @@ private
   end
 
   def campaign_params
-    params.require(:campaign).permit(:name, :deadline, :ready_for_donations, :address, :can_edit_wishlists, :book_limit, {:catalog_ids => []}, :notes, :use_appreciation_notes)
+    params.require(:campaign).permit(:name, :deadline, :ready_for_donations,
+      :address, :can_edit_wishlists, :book_limit, {:catalog_ids => []}, :notes,
+      :use_appreciation_notes, :all_one_order)
   end
 end

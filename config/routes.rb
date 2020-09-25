@@ -77,6 +77,7 @@ Rails.application.routes.draw do
           post 'create_external_donation'
           put 'donations'
           put 'wishlists'
+          put 'one_order'
           get 'export_survey'
         end
         resources :campaign_survey_configs
