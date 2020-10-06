@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_25_020738) do
+ActiveRecord::Schema.define(version: 2020_09_25_013819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,6 @@ ActiveRecord::Schema.define(version: 2020_09_25_020738) do
     t.string "roster_data_reference"
     t.string "notes"
     t.boolean "use_appreciation_notes", default: false
-    t.boolean "all_one_order", default: true
     t.index ["organization_id"], name: "index_campaigns_on_organization_id"
   end
 
