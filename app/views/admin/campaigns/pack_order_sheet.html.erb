@@ -17,18 +17,20 @@
   <thead>
     <tr>
       <th>EZ-ID</th>
-      <th>Pack Type</th>
+      <th class="text-right">Unit Price</th>
       <th class="text-right">QTY</th>
+      <th class="text-right">Subtotal</th>
     </tr>
   </thead>
   <tbody>
 <% entry.each do |ezid, pack_data|
-    pack_count += pack_data.count
+    pack_count += pack_data[:count]
 -%>
     <tr>
       <td><%= ezid %></td>
-      <td><%= pack_data[:pack_type] %></td>
+      <td class="text-right">$6.00</td>
       <td class="text-right"><%= pack_data[:count] %></td>
+      <td class="text-right"><%= number_to_currency(6.00*pack_data[:count]) %></td>
     </tr>
 <% end -%>
   </tbody>
@@ -36,6 +38,7 @@
     <tr>
       <td colspan="2" class="text-right"><strong>Totals:</strong></td>
       <td class="text-right"><%= pack_count %></td>
+      <td class="text-right"><%= number_to_currency(6.00*pack_count) %></td>
     </tr>
   </tfoot>
 </table>
