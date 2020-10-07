@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_25_013819) do
+ActiveRecord::Schema.define(version: 2020_10_06_010016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,11 @@ ActiveRecord::Schema.define(version: 2020_09_25_013819) do
     t.string "roster_data_reference"
     t.string "notes"
     t.boolean "use_appreciation_notes", default: false
+    t.bigint "prek_k_source_id"
+    t.bigint "first_fifth_source_id"
+    t.index ["first_fifth_source_id"], name: "index_campaigns_on_first_fifth_source_id"
     t.index ["organization_id"], name: "index_campaigns_on_organization_id"
+    t.index ["prek_k_source_id"], name: "index_campaigns_on_prek_k_source_id"
   end
 
   create_table "catalog_entries", id: :serial, force: :cascade do |t|
@@ -250,6 +254,8 @@ ActiveRecord::Schema.define(version: 2020_09_25_013819) do
   add_foreign_key "campaign_catalogs", "catalogs"
   add_foreign_key "campaign_survey_configs", "campaigns"
   add_foreign_key "campaign_survey_configs", "surveys"
+  add_foreign_key "campaigns", "catalogs", column: "first_fifth_source_id"
+  add_foreign_key "campaigns", "catalogs", column: "prek_k_source_id"
   add_foreign_key "campaigns", "organizations"
   add_foreign_key "catalog_entries", "books"
   add_foreign_key "catalog_entries", "catalog_entries", column: "related_entry_id"

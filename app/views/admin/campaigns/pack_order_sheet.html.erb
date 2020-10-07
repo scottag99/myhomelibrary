@@ -1,0 +1,44 @@
+<%= content_for :breadcrumb do %>
+<%= breadcrumb([
+  @campaign.organization.name,
+    {href: admin_organization_url(@campaign.organization), label: 'Campaigns'}
+  ])
+%>
+<% end %>
+<% @data.each do |key, entry|
+     if entry.size > 0
+     pack_count = 0 %>
+<h2><%= key %></h2>
+<h3><%= @campaign.organization.name %> - <%= @campaign.name %></h3>
+<h4 class="pull-right">Deadline: <%= @campaign.deadline %></h4>
+<h5>Ship to:</h5>
+<address><%= h(@campaign.address).gsub(/\n/, '<br/>').html_safe %></address>
+<table class="table table-striped table-condensed" id="order-sheet">
+  <thead>
+    <tr>
+      <th>EZ-ID</th>
+      <th>Pack Type</th>
+      <th class="text-right">QTY</th>
+    </tr>
+  </thead>
+  <tbody>
+<% entry.each do |ezid, pack_data|
+    pack_count += pack_data.count
+-%>
+    <tr>
+      <td><%= ezid %></td>
+      <td><%= pack_data[:pack_type] %></td>
+      <td class="text-right"><%= pack_data[:count] %></td>
+    </tr>
+<% end -%>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="2" class="text-right"><strong>Totals:</strong></td>
+      <td class="text-right"><%= pack_count %></td>
+    </tr>
+  </tfoot>
+</table>
+<%
+  end
+end -%>

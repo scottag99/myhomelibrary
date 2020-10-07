@@ -28,3 +28,16 @@ five:
   name: Campaign Five
   deadline: 2016-10-21
   organization: three
+
+single_source_campaign:
+  name: Single Source Campaign
+  deadline: 2016-10-30
+  organization: one
+  first_fifth_source: scholastic
+
+multiple_source_campaign:
+  name: Multiple Source Campaign
+  deadline: 2016-10-30
+  organization: one
+  prek_k_source: bbhlf
+  first_fifth_source: bbhlf

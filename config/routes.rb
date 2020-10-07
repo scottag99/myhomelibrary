@@ -66,6 +66,7 @@ Rails.application.routes.draw do
       resources :campaigns do
         member do
           get 'order_sheet'
+          get 'pack_order_sheet'
           get 'pick_list'
           get 'export'
           get 'book_count'
@@ -110,6 +111,7 @@ Rails.application.routes.draw do
       resources :campaigns do
         member do
           get 'order_sheet'
+          get 'get_order_sheet'
           get 'pick_list'
           get 'export'
           get 'book_count'

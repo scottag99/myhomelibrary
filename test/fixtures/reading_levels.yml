@@ -1,0 +1,47 @@
+A:
+  name: A
+  is_disabled: false
+
+F:
+  name: F
+  is_disabled: false
+
+J:
+  name: J
+  is_disabled: false
+
+K:
+  name: K
+  is_disabled: false
+
+L:
+  name: L
+  is_disabled: false
+
+M:
+  name: M
+  is_disabled: false
+
+N:
+  name: N
+  is_disabled: false
+
+O:
+  name: O
+  is_disabled: false
+
+P:
+  name: P
+  is_disabled: false
+
+Q:
+  name: Q
+  is_disabled: false
+
+V:
+  name: V
+  is_disabled: false
+
+Z:
+  name: Z
+  is_disabled: false
