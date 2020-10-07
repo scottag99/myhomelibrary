@@ -9,3 +9,13 @@ two:
   name: Inactive Catalog
   active: false
   source: Scholastic
+
+scholastic:
+  name: Scholastic
+  active: true
+  source: Scholastic
+
+bbhlf:
+  name: BBHLF Warehouse
+  active: true
+  source: BBHLF Warehouse
