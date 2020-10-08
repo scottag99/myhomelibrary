@@ -93,19 +93,7 @@ class Admin::CampaignsController < Admin::BaseController
   end
 
   def pack_order_sheet
-    @campaign = @organization.campaigns.find(params[:id])
-    @data = { 'Scholastic': {}, 'BBHLF': {}, 'Unknown': {} }
-    @campaign.wishlists.find_each(batch_size: 100) do |wishlist|
-      pack = resolve_pack(@campaign, wishlist)
-      entry = case pack[:ezid][0]
-        when 'S' then @data[:Scholastic]
-        when 'R' then @data[:BBHLF]
-        when 'U' then @data[:Unknown]
-      end
-      pack_data = entry[pack[:ezid]] || { pack_type: pack[:pack_type], count: 0 }
-      pack_data[:count] += 1
-      entry[pack[:ezid]] = pack_data
-    end
+    collate_pack_data
   end
 
   def donations
@@ -163,6 +151,22 @@ class Admin::CampaignsController < Admin::BaseController
 private
   def set_organization
     @organization = Organization.find(params[:organization_id])
+  end
+
+  def collate_pack_data
+    @campaign = @organization.campaigns.find(params[:id])
+    @data = { 'Scholastic': {}, 'BBHLF': {}, 'Unknown': {} }
+    @campaign.wishlists.find_each(batch_size: 100) do |wishlist|
+      pack = resolve_pack(@campaign, wishlist)
+      entry = case pack[:ezid][0]
+        when 'S' then @data[:Scholastic]
+        when 'R' then @data[:BBHLF]
+        when 'U' then @data[:Unknown]
+      end
+      pack_data = entry[pack[:ezid]] || { pack_type: pack[:pack_type], count: 0 }
+      pack_data[:count] += 1
+      entry[pack[:ezid]] = pack_data
+    end
   end
 
   def campaign_params

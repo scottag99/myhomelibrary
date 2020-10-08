@@ -45,6 +45,7 @@
     </p>
     <% if user_is_admin? %>
     <p>
+      <%= link_to "Inventory Report", url_for([:inventory, get_namespace, campaign.organization, campaign]), class: "btn btn-success btn-sm" %>
       <%= link_to "Wish List Report", url_for([:export, get_namespace, campaign.organization, campaign]), class: "btn btn-success btn-sm" %>
       <%= link_to "Book Count Report", url_for([:book_count, get_namespace, campaign.organization, campaign]), class: "btn btn-success btn-sm" %>
       <%= link_to "Class Roster Report", url_for([:exportroster, get_namespace, campaign.organization, campaign]), class: "btn btn-success btn-sm" %>

@@ -79,6 +79,7 @@ Rails.application.routes.draw do
           put 'donations'
           put 'wishlists'
           get 'export_survey'
+          get 'inventory'
         end
         resources :campaign_survey_configs
         resources :wishlists do
@@ -119,6 +120,7 @@ Rails.application.routes.draw do
           get 'readers'
           put 'donations'
           put 'wishlists'
+          get 'inventory'
         end
         resources :wishlists do
           member do

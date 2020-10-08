@@ -192,4 +192,8 @@ module CommonCampaignActions
     end
 
   end
+
+  def inventory
+    collate_pack_data
+  end
 end
