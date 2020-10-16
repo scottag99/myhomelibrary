@@ -70,6 +70,33 @@ module CommonCampaignActions
     end
   end
 
+  def distribution
+    # grade sort: grade, teacher, student
+    #       fields: Grade, teacher, student, EZ-ID, Pack Type
+    # teacher sort: teacher, student
+    #         fields: teacher, grade, student, EZ-ID, Pack Type
+    # student sort: student
+    #         fields: Student, teacher, grade, EZ-ID, Pack Type
+    case params[:sort]
+      when 'teacher'
+        @sort = ['teacher', 'reader_name']
+        @fields = ['teacher', 'grade', 'reader_name', 'ezid', 'pack_type']
+        @sort_type = 'teacher'
+      when 'student'
+        @sort = ['reader_name']
+        @fields = ['reader_name', 'teacher', 'grade', 'ezid', 'pack_type']
+        @sort_type = 'student'
+      else
+        @sort = ["case when grade='PreK' then '0PreK' when grade='K' then '1K' else grade end", 'teacher', 'reader_name']
+        @fields = ['grade', 'teacher', 'reader_name', 'ezid', 'pack_type']
+        @sort_type = 'grade'
+    end
+    @campaign = @organization.campaigns.find(params[:id])
+    respond_to do |format|
+      format.html { render 'common/campaigns/distribution' }
+    end
+  end
+
   def export
     campaign = @organization.campaigns.find(params[:id])
     records = WishlistEntry.joins(:wishlist).where('wishlists.campaign_id = ?', campaign)
@@ -195,5 +222,21 @@ module CommonCampaignActions
 
   def inventory
     collate_pack_data
+  end
+
+  def collate_pack_data
+    @campaign = @organization.campaigns.find(params[:id])
+    @data = { 'Scholastic': {}, 'BBHLF': {}, 'Unknown': {} }
+    @campaign.wishlists.find_each(batch_size: 100) do |wishlist|
+      pack = resolve_pack(@campaign, wishlist)
+      entry = case pack[:ezid][0]
+        when 'S' then @data[:Scholastic]
+        when 'R' then @data[:BBHLF]
+        when 'U' then @data[:Unknown]
+      end
+      pack_data = entry[pack[:ezid]] || { pack_type: pack[:pack_type], count: 0 }
+      pack_data[:count] += 1
+      entry[pack[:ezid]] = pack_data
+    end
   end
 end
