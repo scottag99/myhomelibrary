@@ -4,6 +4,7 @@ class Admin::CampaignsController < Admin::BaseController
   include CommonCampaignActions
   include GoogleSpreadsheet
   include PackResolver
+  helper_method PackResolver.instance_methods
   before_action :set_organization
 
   def update
@@ -93,19 +94,7 @@ class Admin::CampaignsController < Admin::BaseController
   end
 
   def pack_order_sheet
-    @campaign = @organization.campaigns.find(params[:id])
-    @data = { 'Scholastic': {}, 'BBHLF': {}, 'Unknown': {} }
-    @campaign.wishlists.find_each(batch_size: 100) do |wishlist|
-      pack = resolve_pack(@campaign, wishlist)
-      entry = case pack[:ezid][0]
-        when 'S' then @data[:Scholastic]
-        when 'R' then @data[:BBHLF]
-        when 'U' then @data[:Unknown]
-      end
-      pack_data = entry[pack[:ezid]] || { pack_type: pack[:pack_type], count: 0 }
-      pack_data[:count] += 1
-      entry[pack[:ezid]] = pack_data
-    end
+    collate_pack_data
   end
 
   def donations

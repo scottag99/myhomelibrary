@@ -68,6 +68,7 @@ Rails.application.routes.draw do
           get 'order_sheet'
           get 'pack_order_sheet'
           get 'pick_list'
+          get 'distribution'
           get 'export'
           get 'book_count'
           get 'exportroster'
@@ -79,6 +80,7 @@ Rails.application.routes.draw do
           put 'donations'
           put 'wishlists'
           get 'export_survey'
+          get 'inventory'
         end
         resources :campaign_survey_configs
         resources :wishlists do
@@ -113,12 +115,14 @@ Rails.application.routes.draw do
           get 'order_sheet'
           get 'get_order_sheet'
           get 'pick_list'
+          get 'distribution'
           get 'export'
           get 'book_count'
           get 'exportroster'
           get 'readers'
           put 'donations'
           put 'wishlists'
+          get 'inventory'
         end
         resources :wishlists do
           member do
