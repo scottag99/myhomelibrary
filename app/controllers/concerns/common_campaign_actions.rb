@@ -162,10 +162,10 @@ module CommonCampaignActions
     temp_csv = Tempfile.new
     begin
       CSV.open(temp_csv.path, mode = "wb", headers: true) do |csv|
-        csv << ['School_Name', 'Campaign_name', 'Campaign_Deadline', 'Teacher', 'Student', 'Gender', 'Age']
+        csv << ['School_Name', 'Campaign_name', 'Campaign_Deadline', 'Teacher', 'Student', 'Gender', 'Age', 'Language', 'Grade']
 
         campaign.wishlists.each do |wishlist|
-          csv << [@organization.name, campaign.name, campaign.deadline, wishlist.teacher, wishlist.reader_name, wishlist.reader_gender, wishlist.reader_age]
+          csv << [@organization.name, campaign.name, campaign.deadline, wishlist.teacher, wishlist.reader_name, wishlist.reader_gender, wishlist.reader_age, wishlist.language.try(:name), wishlist.grade]
         end
       end
       send_file temp_csv, filename: "#{@organization.name}-#{campaign.name}-ClassRosterReport.csv", type: 'application/octet-stream'
