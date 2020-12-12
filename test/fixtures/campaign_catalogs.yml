@@ -1,11 +1,7 @@
 one:
-  campaign: single_source_campaign
+  campaign: edition_one_campaign
   catalog: scholastic
 
 two:
-  campaign: multiple_source_campaign
+  campaign: edition_two_campaign
   catalog: scholastic
-
-three:
-  campaign: multiple_source_campaign
-  catalog: bbhlf

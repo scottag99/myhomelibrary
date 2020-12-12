@@ -29,15 +29,14 @@ five:
   deadline: 2016-10-21
   organization: three
 
-single_source_campaign:
-  name: Single Source Campaign
+edition_one_campaign:
+  name: Edition One Campaign
   deadline: 2016-10-30
   organization: one
-  first_fifth_source: scholastic
+  catalog_edition: 1
 
-multiple_source_campaign:
-  name: Multiple Source Campaign
+edition_two_campaign:
+  name: Edition Two Campaign
   deadline: 2016-10-30
   organization: one
-  prek_k_source: bbhlf
-  first_fifth_source: bbhlf
+  catalog_edition: 2
