@@ -86,6 +86,10 @@ module CommonCampaignActions
         @sort = ['reader_name']
         @fields = ['reader_name', 'teacher', 'grade', 'ezid', 'pack_type']
         @sort_type = 'student'
+      when 'pack'
+        @sort = ['teacher']
+        @fields = ['teacher', 'pack_type', '#Face-To-Face', '#Virtual', 'Total']
+        @sort_type = 'pack'
       else
         @sort = ["case when grade='PreK' then '0PreK' when grade='K' then '1K' else grade end", 'teacher', 'reader_name']
         @fields = ['grade', 'teacher', 'reader_name', 'ezid', 'pack_type']
@@ -233,6 +237,7 @@ module CommonCampaignActions
         when 'S' then @data[:Scholastic]
         when 'R' then @data[:BBHLF]
         when 'U' then @data[:Unknown]
+        else @data[:Scholastic]
       end
       pack_data = entry[pack[:ezid]] || { pack_type: pack[:pack_type], count: 0 }
       pack_data[:count] += 1

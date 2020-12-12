@@ -24,652 +24,304 @@ three:
   campaign: three
   wishlist_entry_count: 0
 
-single_source_lang_en_lvl_a:
+# Edition one campaign *********************************************************
+
+ed1_prek_lang_en:
   teacher: Watson
   reader_name: English Alevel
   reader_age: 12
   reader_gender: M
-  campaign: single_source_campaign
+  campaign: edition_one_campaign
   wishlist_entry_count: 0
   reading_level: A
-
-single_source_lang_en_lvl_f:
-  teacher: Watson
-  reader_name: English Flevel
-  reader_age: 12
-  reader_gender: M
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: F
-
-single_source_lang_en_lvl_j:
-  teacher: Watson
-  reader_name: English Jlevel
-  reader_age: 12
-  reader_gender: M
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: J
-
-single_source_lang_bi_lvl_a:
-  teacher: Watson
-  reader_name: English Alevel
-  reader_age: 12
-  reader_gender: M
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: A
-  language: bilingual
-
-single_source_lang_bi_lvl_f:
-  teacher: Watson
-  reader_name: English Flevel
-  reader_age: 12
-  reader_gender: M
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: F
-  language: bilingual
-
-single_source_lang_bi_lvl_j:
-  teacher: Watson
-  reader_name: English Jlevel
-  reader_age: 12
-  reader_gender: M
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: J
-  language: bilingual
-
-single_source_lang_en_lvl_k:
-  teacher: Watson
-  reader_name: English Alevel
-  reader_age: 12
-  reader_gender: M
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: K
-
-single_source_lang_en_lvl_l:
-  teacher: Watson
-  reader_name: English Flevel
-  reader_age: 12
-  reader_gender: M
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: L
-
-single_source_lang_en_lvl_m:
-  teacher: Watson
-  reader_name: English Jlevel
-  reader_age: 12
-  reader_gender: F
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: M
-
-single_source_lang_bi_lvl_k:
-  teacher: Watson
-  reader_name: English Alevel
-  reader_age: 12
-  reader_gender: M
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: K
-  language: bilingual
-
-single_source_lang_bi_lvl_l:
-  teacher: Watson
-  reader_name: English Flevel
-  reader_age: 12
-  reader_gender: M
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: L
-  language: bilingual
-
-single_source_lang_bi_lvl_m:
-  teacher: Watson
-  reader_name: English Jlevel
-  reader_age: 12
-  reader_gender: F
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: M
-  language: bilingual
-
-single_source_lang_en_lvl_n:
-  teacher: Watson
-  reader_name: English Alevel
-  reader_age: 12
-  reader_gender: M
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: N
-
-single_source_lang_en_lvl_o:
-  teacher: Watson
-  reader_name: English Flevel
-  reader_age: 12
-  reader_gender: M
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: O
-
-single_source_lang_en_lvl_p:
-  teacher: Watson
-  reader_name: English Jlevel
-  reader_age: 12
-  reader_gender: F
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: P
-
-single_source_lang_bi_lvl_n:
-  teacher: Watson
-  reader_name: English Alevel
-  reader_age: 12
-  reader_gender: M
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: N
-  language: bilingual
-
-single_source_lang_bi_lvl_o:
-  teacher: Watson
-  reader_name: English Flevel
-  reader_age: 12
-  reader_gender: M
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: O
-  language: bilingual
-
-single_source_lang_bi_lvl_p:
-  teacher: Watson
-  reader_name: English Jlevel
-  reader_age: 12
-  reader_gender: F
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: P
-  language: bilingual
-
-single_source_lang_en_lvl_q:
-  teacher: Watson
-  reader_name: English Alevel
-  reader_age: 12
-  reader_gender: M
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: Q
-
-single_source_lang_en_lvl_v:
-  teacher: Watson
-  reader_name: English Flevel
-  reader_age: 12
-  reader_gender: M
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: V
-
-single_source_lang_en_lvl_z:
-  teacher: Watson
-  reader_name: English Jlevel
-  reader_age: 12
-  reader_gender: F
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: Z
-
-single_source_lang_bi_lvl_q:
-  teacher: Watson
-  reader_name: English Alevel
-  reader_age: 12
-  reader_gender: M
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: Q
-  language: bilingual
-
-single_source_lang_bi_lvl_v:
-  teacher: Watson
-  reader_name: English Flevel
-  reader_age: 12
-  reader_gender: M
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: V
-  language: bilingual
-
-single_source_lang_bi_lvl_z:
-  teacher: Watson
-  reader_name: English Jlevel
-  reader_age: 12
-  reader_gender: F
-  campaign: single_source_campaign
-  wishlist_entry_count: 0
-  reading_level: Z
-  language: bilingual
-
-multiple_source_lang_en_prek:
-  teacher: Watson
-  reader_name: English PreK
   grade: PreK
+
+ed1_prek_lang_bi:
+  teacher: Watson
+  reader_name: Bilingual Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_one_campaign
   wishlist_entry_count: 0
   reading_level: A
-
-multiple_source_lang_en_kinder:
-  teacher: Watson
-  reader_name: English PK
-  grade: K
-  reader_age: 12
-  reader_gender: M
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: A
-
-multiple_source_lang_bi_prek:
-  teacher: Watson
-  reader_name: English PreK
+  language: bilingual
   grade: PreK
+
+ed1_k_lang_en:
+  teacher: Watson
+  reader_name: English Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_one_campaign
   wishlist_entry_count: 0
   reading_level: A
-  language: bilingual
-
-multiple_source_lang_bi_kinder:
-  teacher: Watson
-  reader_name: English PK
   grade: K
+
+ed1_k_lang_bi:
+  teacher: Watson
+  reader_name: Bilingual Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_one_campaign
   wishlist_entry_count: 0
   reading_level: A
   language: bilingual
+  grade: K
 
-multiple_source_lang_en_lvl_a:
+ed1_1st_lang_en:
   teacher: Watson
   reader_name: English Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_one_campaign
   wishlist_entry_count: 0
   reading_level: A
+  grade: 1st
 
-multiple_source_lang_en_lvl_a_female:
+ed1_1st_lang_bi:
   teacher: Watson
-  reader_name: English Alevel
+  reader_name: Bilingual Alevel
   reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
+  reader_gender: M
+  campaign: edition_one_campaign
   wishlist_entry_count: 0
   reading_level: A
+  language: bilingual
+  grade: 1st
 
-multiple_source_lang_en_lvl_f:
-  teacher: Watson
-  reader_name: English Flevel
-  reader_age: 12
-  reader_gender: M
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: F
-
-multiple_source_lang_en_lvl_f_female:
-  teacher: Watson
-  reader_name: English Flevel
-  reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: F
-
-multiple_source_lang_en_lvl_k:
-  teacher: Watson
-  reader_name: English Klevel
-  reader_age: 12
-  reader_gender: M
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: K
-
-multiple_source_lang_en_lvl_k_female:
-  teacher: Watson
-  reader_name: English Klevel
-  reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: K
-
-multiple_source_lang_bi_lvl_a:
+ed1_2nd_lang_en:
   teacher: Watson
   reader_name: English Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_one_campaign
+  wishlist_entry_count: 0
+  reading_level: A
+  grade: 2nd
+
+ed1_2nd_lang_bi:
+  teacher: Watson
+  reader_name: Bilingual Alevel
+  reader_age: 12
+  reader_gender: M
+  campaign: edition_one_campaign
   wishlist_entry_count: 0
   reading_level: A
   language: bilingual
+  grade: 2nd
 
-multiple_source_lang_bi_lvl_a_female:
+ed1_3rd_lang_en:
   teacher: Watson
   reader_name: English Alevel
   reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
+  reader_gender: M
+  campaign: edition_one_campaign
+  wishlist_entry_count: 0
+  reading_level: A
+  grade: 3rd
+
+ed1_3rd_lang_bi:
+  teacher: Watson
+  reader_name: Bilingual Alevel
+  reader_age: 12
+  reader_gender: M
+  campaign: edition_one_campaign
   wishlist_entry_count: 0
   reading_level: A
   language: bilingual
+  grade: 3rd
 
-multiple_source_lang_bi_lvl_f:
+ed1_4th_lang_en:
   teacher: Watson
-  reader_name: English Flevel
+  reader_name: English Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_one_campaign
   wishlist_entry_count: 0
-  reading_level: F
-  language: bilingual
+  reading_level: A
+  grade: 4th
 
-multiple_source_lang_bi_lvl_f_female:
+ed1_4th_lang_bi:
   teacher: Watson
-  reader_name: English Flevel
-  reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: F
-  language: bilingual
-
-multiple_source_lang_bi_lvl_k:
-  teacher: Watson
-  reader_name: English Klevel
+  reader_name: Bilingual Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_one_campaign
   wishlist_entry_count: 0
-  reading_level: K
+  reading_level: A
   language: bilingual
+  grade: 4th
 
-multiple_source_lang_bi_lvl_k:
+ed1_5th_lang_en:
   teacher: Watson
-  reader_name: English Klevel
-  reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: K
-  language: bilingual
-
-multiple_source_lang_en_lvl_l:
-  teacher: Watson
-  reader_name: English Llevel
+  reader_name: English Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_one_campaign
   wishlist_entry_count: 0
-  reading_level: L
+  reading_level: A
+  grade: 5th
 
-multiple_source_lang_en_lvl_l_female:
+ed1_5th_lang_bi:
   teacher: Watson
-  reader_name: English Llevel
-  reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: L
-
-multiple_source_lang_en_lvl_n:
-  teacher: Watson
-  reader_name: English Nlevel
+  reader_name: Bilingual Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_one_campaign
   wishlist_entry_count: 0
-  reading_level: N
+  reading_level: A
+  language: bilingual
+  grade: 5th
 
-multiple_source_lang_en_lvl_n_female:
-  teacher: Watson
-  reader_name: English Nlevel
-  reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: N
+# ******************************************************************************
 
-multiple_source_lang_en_lvl_p:
+# Edition two campaign *********************************************************
+
+ed2_prek_lang_en:
   teacher: Watson
-  reader_name: English Plevel
+  reader_name: English Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_two_campaign
   wishlist_entry_count: 0
-  reading_level: P
+  reading_level: A
+  grade: PreK
 
-multiple_source_lang_en_lvl_p_female:
+ed2_prek_lang_bi:
   teacher: Watson
-  reader_name: English Plevel
-  reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: P
-
-multiple_source_lang_bi_lvl_k:
-  teacher: Watson
-  reader_name: English klevel
+  reader_name: Bilingual Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_two_campaign
   wishlist_entry_count: 0
-  reading_level: K
+  reading_level: A
   language: bilingual
+  grade: PreK
 
-multiple_source_lang_bi_lvl_k_female:
+ed2_k_lang_en:
   teacher: Watson
-  reader_name: English Klevel
-  reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: K
-  language: bilingual
-
-multiple_source_lang_bi_lvl_l:
-  teacher: Watson
-  reader_name: English Llevel
+  reader_name: English Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_two_campaign
   wishlist_entry_count: 0
-  reading_level: L
-  language: bilingual
+  reading_level: A
+  grade: K
 
-multiple_source_lang_bi_lvl_l_female:
+ed2_k_lang_bi:
   teacher: Watson
-  reader_name: English Llevel
-  reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: L
-  language: bilingual
-
-multiple_source_lang_bi_lvl_n:
-  teacher: Watson
-  reader_name: English Nlevel
+  reader_name: Bilingual Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_two_campaign
   wishlist_entry_count: 0
-  reading_level: N
+  reading_level: A
   language: bilingual
+  grade: K
 
-multiple_source_lang_bi_lvl_n_female:
+ed2_1st_lang_en:
   teacher: Watson
-  reader_name: English Nlevel
-  reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: N
-  language: bilingual
-
-multiple_source_lang_en_lvl_p:
-  teacher: Watson
-  reader_name: English Plevel
+  reader_name: English Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_two_campaign
   wishlist_entry_count: 0
-  reading_level: P
+  reading_level: A
+  grade: 1st
 
-multiple_source_lang_en_lvl_p_female:
+ed2_1st_lang_bi:
   teacher: Watson
-  reader_name: English Plevel
-  reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: P
-
-multiple_source_lang_bi_lvl_p:
-  teacher: Watson
-  reader_name: English Plevel
+  reader_name: Bilingual Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_two_campaign
   wishlist_entry_count: 0
-  reading_level: P
+  reading_level: A
   language: bilingual
+  grade: 1st
 
-multiple_source_lang_bi_lvl_p_female:
+ed2_2nd_lang_en:
   teacher: Watson
-  reader_name: English Plevel
-  reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: P
-  language: bilingual
-
-multiple_source_lang_en_lvl_q:
-  teacher: Watson
-  reader_name: English Qlevel
+  reader_name: English Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_two_campaign
   wishlist_entry_count: 0
-  reading_level: Q
+  reading_level: A
+  grade: 2nd
 
-multiple_source_lang_en_lvl_q_female:
+ed2_2nd_lang_bi:
   teacher: Watson
-  reader_name: English Qlevel
-  reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: Q
-
-multiple_source_lang_en_lvl_v:
-  teacher: Watson
-  reader_name: English Vlevel
+  reader_name: Bilingual Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_two_campaign
   wishlist_entry_count: 0
-  reading_level: V
+  reading_level: A
+  language: bilingual
+  grade: 2nd
 
-multiple_source_lang_en_lvl_v_female:
+ed2_3rd_lang_en:
   teacher: Watson
-  reader_name: English Vlevel
-  reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: V
-
-multiple_source_lang_en_lvl_z:
-  teacher: Watson
-  reader_name: English Jlevel
+  reader_name: English Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_two_campaign
   wishlist_entry_count: 0
-  reading_level: Z
+  reading_level: A
+  grade: 3rd
 
-multiple_source_lang_en_lvl_z_female:
+ed2_3rd_lang_bi:
   teacher: Watson
-  reader_name: English Jlevel
-  reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: Z
-
-multiple_source_lang_bi_lvl_q:
-  teacher: Watson
-  reader_name: English Qlevel
+  reader_name: Bilingual Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_two_campaign
   wishlist_entry_count: 0
-  reading_level: Q
+  reading_level: A
   language: bilingual
+  grade: 3rd
 
-multiple_source_lang_bi_lvl_q_female:
+ed2_4th_lang_en:
   teacher: Watson
-  reader_name: English Qlevel
-  reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: Q
-  language: bilingual
-
-multiple_source_lang_bi_lvl_v:
-  teacher: Watson
-  reader_name: English Vlevel
+  reader_name: English Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_two_campaign
   wishlist_entry_count: 0
-  reading_level: V
-  language: bilingual
+  reading_level: A
+  grade: 4th
 
-multiple_source_lang_bi_lvl_v_female:
+ed2_4th_lang_bi:
   teacher: Watson
-  reader_name: English Vlevel
-  reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
-  wishlist_entry_count: 0
-  reading_level: V
-  language: bilingual
-
-multiple_source_lang_bi_lvl_z:
-  teacher: Watson
-  reader_name: English Jlevel
+  reader_name: Bilingual Alevel
   reader_age: 12
   reader_gender: M
-  campaign: multiple_source_campaign
+  campaign: edition_two_campaign
   wishlist_entry_count: 0
-  reading_level: Z
+  reading_level: A
   language: bilingual
+  grade: 4th
 
-multiple_source_lang_bi_lvl_z_female:
+ed2_5th_lang_en:
   teacher: Watson
-  reader_name: English Zlevel
+  reader_name: English Alevel
   reader_age: 12
-  reader_gender: F
-  campaign: multiple_source_campaign
+  reader_gender: M
+  campaign: edition_two_campaign
   wishlist_entry_count: 0
-  reading_level: Z
+  reading_level: A
+  grade: 5th
+
+ed2_5th_lang_bi:
+  teacher: Watson
+  reader_name: Bilingual Alevel
+  reader_age: 12
+  reader_gender: M
+  campaign: edition_two_campaign
+  wishlist_entry_count: 0
+  reading_level: A
   language: bilingual
+  grade: 5th
+
+# ******************************************************************************

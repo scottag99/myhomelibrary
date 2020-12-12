@@ -157,6 +157,6 @@ private
   def campaign_params
     params.require(:campaign).permit(:name, :deadline, :ready_for_donations,
       :address, :can_edit_wishlists, :book_limit, {:catalog_ids => []}, :notes,
-      :use_appreciation_notes, :prek_k_source_id, :first_fifth_source_id)
+      :use_appreciation_notes, :prek_k_source_id, :first_fifth_source_id, :catalog_edition)
   end
 end
