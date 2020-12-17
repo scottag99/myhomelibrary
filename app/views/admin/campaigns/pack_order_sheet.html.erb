@@ -17,6 +17,7 @@
   <thead>
     <tr>
       <th>EZ-ID</th>
+      <th>Pack Type</th>
       <th class="text-right">Unit Price</th>
       <th class="text-right">QTY</th>
       <th class="text-right">Subtotal</th>
@@ -28,6 +29,7 @@
 -%>
     <tr>
       <td><%= ezid %></td>
+      <td><%= pack_data[:pack_type] %></td>
       <td class="text-right">$6.00</td>
       <td class="text-right"><%= pack_data[:count] %></td>
       <td class="text-right"><%= number_to_currency(6.00*pack_data[:count]) %></td>
@@ -36,7 +38,7 @@
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="2" class="text-right"><strong>Totals:</strong></td>
+      <td colspan="3" class="text-right"><strong>Totals:</strong></td>
       <td class="text-right"><%= pack_count %></td>
       <td class="text-right"><%= number_to_currency(6.00*pack_count) %></td>
     </tr>
