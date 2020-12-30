@@ -87,8 +87,8 @@ module CommonCampaignActions
         @fields = ['reader_name', 'teacher', 'grade', 'ezid', 'pack_type']
         @sort_type = 'student'
       when 'pack'
-        @sort = ['teacher']
-        @fields = ['teacher', 'pack_type', '#Face-To-Face', '#Virtual', 'Total']
+        @sort = ['teacher', "case when grade='PreK' then '0PreK' when grade='K' then '1K' else grade end"]
+        @fields = ['teacher', 'Grade', 'Language', 'pack_type', '#Face-To-Face', '#Virtual', 'Total']
         @sort_type = 'pack'
       else
         @sort = ["case when grade='PreK' then '0PreK' when grade='K' then '1K' else grade end", 'teacher', 'reader_name']
@@ -230,14 +230,16 @@ module CommonCampaignActions
 
   def collate_pack_data
     @campaign = @organization.campaigns.find(params[:id])
-    @data = { 'Scholastic': {}, 'BBHLF': {}, 'Unknown': {} }
+    @data = { 'Unknown': {} }
+    @campaign.catalogs.each{|catalog| @data[catalog.source] = {}}
+    prek_k = (@campaign.prek_k_source_id && @campaign.prek_k_source.source) || 'Unknown'
+    first_5th = (@campaign.first_fifth_source_id && @campaign.first_fifth_source.source) || 'Unknown'
+
     @campaign.wishlists.find_each(batch_size: 100) do |wishlist|
       pack = resolve_pack(@campaign, wishlist)
-      entry = case pack[:ezid][0]
-        when 'S' then @data[:Scholastic]
-        when 'R' then @data[:BBHLF]
-        when 'U' then @data[:Unknown]
-        else @data[:Scholastic]
+      entry = case wishlist.grade
+        when 'PreK', 'K' then @data[prek_k]
+        else @data[first_5th]
       end
       pack_data = entry[pack[:ezid]] || { pack_type: pack[:pack_type], count: 0 }
       pack_data[:count] += 1

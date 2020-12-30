@@ -1,16 +1,16 @@
 <%= form_for [:admin, @campaign.organization, @campaign], :html => {:class => "form-horizontal"} do |f| %>
 
   <div class="form-group">
-    <%= f.label :name, class: "col-md-1 control-label" %> (required)
-    <div class="col-md-4">
+    <%= f.label :name, class: "col-sm-1 control-label" %> (required)
+    <div class="col-sm-4">
       <%= f.text_field :name, class: "form-control", :required => true %>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :deadline, class: "col-md-1 control-label" %> (required)
-    <div class="col-md-4">
-      <%= f.text_field :deadline, :class => 'form-control', :required => true %>
+    <%= f.label :deadline, class: "col-sm-1 control-label" %> (required)
+    <div class="col-sm-4">
+      <%= f.date_field :deadline, :class => 'form-control', :required => true %>
     </div>
   </div>
 
@@ -37,32 +37,32 @@
   </div> -->
 
   <div class="form-group">
-    <%= f.label :address, class: "col-md-1 control-label" %>
-    <div class="col-md-4">
+    <%= f.label :address, class: "col-sm-1 control-label" %>
+    <div class="col-sm-4">
       <%= f.text_area :address, :class => 'form-control', :rows => 3 %>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :book_limit, class: "col-md-1 control-label" %>
-    <div class="col-md-4">
+    <%= f.label :book_limit, class: "col-sm-1 control-label" %>
+    <div class="col-sm-2">
       <%= f.number_field :book_limit, :class => 'form-control' %>
     </div>
   </div>
 
   <div class="form-group">
   <div id="hidelabel">
-    <%= f.label :catalogs, class: "col-md-1 control-label" %>
+    <%= f.label :catalogs, class: "col-sm-1 control-label" %>
 	</div>
-    <div class="col-md-4">
+    <div class="col-sm-4">
     <%= f.collection_select :catalog_ids, Catalog.order('name ASC'), :id, :name, {}, {:style => "height: 110%; width: 45%;" ,:multiple => true} %>
     </div>
   </div>
 
   <div class="form-group">
 
-  	<%= f.label :catalogs, class: "col-md-1 control-label" %>
-  	<div class="col-md-4">
+  	<%= f.label :catalogs, class: "col-sm-1 control-label" %>
+  	<div class="col-sm-4">
   		<div class="subject-info-box-1">
   		  <select multiple="multiple" id='lstBox1' class="form-control">
   			<%= options_from_collection_for_select(Catalog.all,'id','name')%>
@@ -83,21 +83,14 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :catalog_edition, class: "col-md-1 control-label" %>
-    <div class="col-md-4">
-      <%= f.number_field :catalog_edition, :class => 'form-control' %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :notes, class: "col-md-1 control-label" %>
-    <div class="col-md-4">
+    <%= f.label :notes, class: "col-sm-1 control-label" %>
+    <div class="col-sm-4">
       <%= f.text_area :notes, :class => 'form-control', :rows => 3 %>
     </div>
   </div>
 
   <div class="form-group">
-    <div class="col-md-offset-1 col-md-4">
+    <div class="col-sm-offset-1 col-sm-4">
       <div class="checkbox">
         <label>
           <%= f.check_box :use_appreciation_notes %>
@@ -108,21 +101,39 @@
   </div>
 
   <div class="form-group">
-    <%= f.label 'PreK-K Source', class: 'col-md-1 control-label' %>
-    <div class="col-md-4">
+    <div class="col-sm-offset-1 col-sm-4">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :use_packs %>
+          Use Packs
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group use-packs-field">
+    <%= f.label :catalog_edition, class: "col-sm-1 control-label" %>
+    <div class="col-sm-2">
+      <%= f.number_field :catalog_edition, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group use-packs-field">
+    <%= f.label 'PreK-K Source', class: 'col-sm-1 control-label' %>
+    <div class="col-sm-4">
       <%= f.collection_select :prek_k_source_id, Catalog.where(id: @campaign.catalog_ids).order('name ASC'), :id, :name, {include_blank: 'Not specified'}, class: 'form-control' %>
     </div>
   </div>
 
-  <div class="form-group">
-    <%= f.label '1st-5th Source', class: 'col-md-1 control-label' %>
-    <div class="col-md-4">
+  <div class="form-group use-packs-field">
+    <%= f.label '1st-5th Source', class: 'col-sm-1 control-label' %>
+    <div class="col-sm-4">
       <%= f.collection_select :first_fifth_source_id, Catalog.where(id: @campaign.catalog_ids).order('name ASC'), :id, :name, {include_blank: 'Not specified'}, class: 'form-control' %>
     </div>
   </div>
 
   <div class="form-group">
-      <div class="col-md-offset-1 col-md-4 ">
+      <div class="col-sm-offset-1 col-sm-4 ">
           <%= f.submit 'Submit'.html_safe, :class => 'btn btn-primary' %>
           <%= link_to 'Back', admin_organization_url(@campaign.organization), :class => "btn btn-default"%>
       </div>
@@ -134,11 +145,14 @@
   $( "#campaign_catalog_ids" ).hide();
   $('#hidelabel').hide();
 
-  $(function () {
-    $('#campaign_deadline').datetimepicker({defaultDate: "<%= @campaign.deadline %>", format: "YYYY-MM-DD"});
+  $('#campaign_use_packs').on('change', function(){
+      $('.use-packs-field').toggle();
   });
 
-    $(function () {
+  $(function () {
+    if (!$('#campaign_use_packs').prop('checked')) {
+      $('.use-packs-field').toggle();
+    }
      var selected = $('#campaign_catalog_ids option:selected');
       $('#lstBox2').append($(selected).clone());
 	 });

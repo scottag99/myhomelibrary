@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_02_031942) do
+ActiveRecord::Schema.define(version: 2020_12_17_212730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2020_12_02_031942) do
     t.bigint "prek_k_source_id"
     t.bigint "first_fifth_source_id"
     t.string "catalog_edition"
+    t.boolean "use_packs"
     t.index ["first_fifth_source_id"], name: "index_campaigns_on_first_fifth_source_id"
     t.index ["organization_id"], name: "index_campaigns_on_organization_id"
     t.index ["prek_k_source_id"], name: "index_campaigns_on_prek_k_source_id"

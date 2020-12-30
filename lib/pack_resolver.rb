@@ -24,6 +24,6 @@ module PackResolver
     end
 
 
-    return {ezid: "#{campaign.catalog_edition}e#{grade_code+lang_code}", pack_type: packs[(grade_code+lang_code).to_sym]}
+    return {ezid: "#{campaign.catalog_edition}e#{grade_code+lang_code}", pack_type: packs[(grade_code+lang_code).to_sym], lang_code: lang_code}
   end
 end
