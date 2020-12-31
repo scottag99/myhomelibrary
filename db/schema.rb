@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_17_212730) do
+ActiveRecord::Schema.define(version: 2020_12_30_201653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,6 +145,17 @@ ActiveRecord::Schema.define(version: 2020_12_17_212730) do
     t.boolean "is_included", default: true
   end
 
+  create_table "packs", force: :cascade do |t|
+    t.string "ezid"
+    t.string "pack_type"
+    t.decimal "price"
+    t.string "description"
+    t.bigint "catalog_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["catalog_id"], name: "index_packs_on_catalog_id"
+  end
+
   create_table "partners", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -264,6 +275,7 @@ ActiveRecord::Schema.define(version: 2020_12_17_212730) do
   add_foreign_key "catalog_entries", "catalogs"
   add_foreign_key "donations", "campaigns"
   add_foreign_key "donations", "wishlists"
+  add_foreign_key "packs", "catalogs"
   add_foreign_key "partners", "organizations"
   add_foreign_key "survey_answers", "survey_questions"
   add_foreign_key "survey_answers", "survey_responses"

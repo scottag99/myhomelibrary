@@ -30,9 +30,9 @@
     <tr>
       <td><%= ezid %></td>
       <td><%= pack_data[:pack_type] %></td>
-      <td class="text-right">$6.00</td>
+      <td class="text-right"><%= number_to_currency(pack_data[:price]) %></td>
       <td class="text-right"><%= pack_data[:count] %></td>
-      <td class="text-right"><%= number_to_currency(6.00*pack_data[:count]) %></td>
+      <td class="text-right"><%= number_to_currency(pack_data[:price]*pack_data[:count]) %></td>
     </tr>
 <% end -%>
   </tbody>

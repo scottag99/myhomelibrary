@@ -27,7 +27,6 @@
         teachers = {}
         @campaign.wishlists.order(@sort).each do |wishlist|
           pack = resolve_pack(@campaign, wishlist)
-          Rails.logger.info("SJS: #{pack}")
           teacher = teachers[wishlist.teacher] || {}
           grade = teacher[wishlist.grade] || {}
           lang = grade[pack[:lang_code]] || {}

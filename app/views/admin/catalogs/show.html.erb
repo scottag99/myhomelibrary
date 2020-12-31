@@ -16,35 +16,66 @@
         <% end %>
       </dd>
     </dl>
-  </div>
-  <div class="panel panel-default">
-    <!-- Default panel contents -->
-    <div class="panel-heading"><h3 class="panel-title">Books</h3></div>
-    <table class="table table-striped table-condensed">
-      <caption class="toggle-show">
-        <%= link_to '<i class="glyphicon glyphicon-plus"></i> New Book'.html_safe, new_admin_catalog_catalog_entry_url(@catalog), :class => "btn btn-xs btn-primary", :remote => true %>
-      </caption>
-      <thead>
-        <tr class="row-books">
-          <th>Title</th>
-          <th>Author</th>
-          <th class="book-summary">Summary</th>
-          <th>Level</th>
-          <th class="toggle-show">Price</th>
-          <th class="toggle-show">ISBN</th>
-          <th class="toggle-show">AR Level</th>
-          <th class="toggle-show">AR Points</th>
-          <th>GRL</th>
-          <th>DRA</th>
-          <th>Bilingual?</th>
-          <th>Chapters?</th>
-          <th class="toggle-show">Disabled</th>
-          <th class="toggle-show">&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody>
-    <%= render :partial => 'common/catalogs/catalog_entry', :collection => @catalog.catalog_entries.includes(:book).order("books.title"), :locals => {:catalog_actions => true} %>
-      </tbody>
-    </table>
+
+    <div>
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#books" aria-controls="books" role="tab" data-toggle="tab">Books</a></li>
+        <li role="presentation"><a href="#packs" aria-controls="packs" role="tab" data-toggle="tab">Packs</a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="books">
+          <table class="table table-striped table-condensed">
+            <caption class="toggle-show">
+              <%= link_to '<i class="glyphicon glyphicon-plus"></i> New Book'.html_safe, new_admin_catalog_catalog_entry_url(@catalog), :class => "btn btn-xs btn-primary", :remote => true %>
+            </caption>
+            <thead>
+              <tr class="row-books">
+                <th>Title</th>
+                <th>Author</th>
+                <th class="book-summary">Summary</th>
+                <th>Level</th>
+                <th class="toggle-show">Price</th>
+                <th class="toggle-show">ISBN</th>
+                <th class="toggle-show">AR Level</th>
+                <th class="toggle-show">AR Points</th>
+                <th>GRL</th>
+                <th>DRA</th>
+                <th>Bilingual?</th>
+                <th>Chapters?</th>
+                <th class="toggle-show">Disabled</th>
+                <th class="toggle-show">&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+          <%= render :partial => 'common/catalogs/catalog_entry', :collection => @catalog.catalog_entries.includes(:book).order("books.title"), :locals => {:catalog_actions => true} %>
+            </tbody>
+          </table>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="packs">
+          <table class="table table-striped table-condensed">
+            <caption class="toggle-show">
+              <%#= link_to '<i class="glyphicon glyphicon-plus"></i> New Pack'.html_safe, new_admin_catalog_pack_url(@catalog), :class => "btn btn-xs btn-primary", :remote => true %>
+              <%= link_to '<i class="glyphicon glyphicon-plus"></i> Auto Generate Packs'.html_safe, generate_packs_admin_catalog_pack_url(@catalog), method: :post, :class => "btn btn-xs btn-primary" %>
+            </caption>
+            <thead>
+              <tr class="row-packs">
+                <th>EZ-ID</th>
+                <th>Pack Type</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th class="toggle-show">&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+          <%= render :partial => 'common/catalogs/pack', :collection => @catalog.packs.order("ezid"), :locals => {:catalog_actions => true} %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>

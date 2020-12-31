@@ -1,15 +1,11 @@
 module PackResolver
 
   def resolve_pack(campaign, wishlist)
-    packs = {
-      'PkEn': 'Pink',
-      'PkBi': 'Blue',
-      'K1En': 'Orange',
-      'K1Bi': 'Purple',
-      '23En': 'Yellow',
-      '23Bi': 'Green',
-      '45En': 'Red'
-    }
+    unknown = Catalog.new(source: 'Unknown')
+    catalog = case wishlist.grade
+      when 'PreK', 'K' then campaign.prek_k_source || unknown
+      else campaign.first_fifth_source || unknown
+    end
 
     lang_code = wishlist.language.try(:name) == 'BI' ? 'Bi' : 'En'
 
@@ -23,7 +19,15 @@ module PackResolver
       else 'U'
     end
 
+    ezid = "#{campaign.catalog_edition}e#{grade_code+lang_code}"
+    pack = catalog.packs.find_by_ezid(ezid)
 
-    return {ezid: "#{campaign.catalog_edition}e#{grade_code+lang_code}", pack_type: packs[(grade_code+lang_code).to_sym], lang_code: lang_code}
+    return {
+      ezid: ezid,
+      pack_type: pack.try(:pack_type),
+      lang_code: lang_code,
+      source: catalog.source,
+      price: pack.try(:price)
+    }
   end
 end
