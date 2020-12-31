@@ -28,22 +28,32 @@
         @campaign.wishlists.order(@sort).each do |wishlist|
           pack = resolve_pack(@campaign, wishlist)
           teacher = teachers[wishlist.teacher] || {}
-          pack_type = teacher[pack[:pack_type]] || {count: 0}
+          grade = teacher[wishlist.grade] || {}
+          lang = grade[pack[:lang_code]] || {}
+          pack_type = lang[pack[:pack_type]] || {count: 0}
           pack_type[:count] += 1
-          teacher[pack[:pack_type]] = pack_type
+          lang[pack[:pack_type]] = pack_type
+          grade[pack[:lang_code]] = lang
+          teacher[wishlist.grade] = grade
           teachers[wishlist.teacher] = teacher
         end
 
-        teachers.each do |teacher, packs|
-          packs.each do |pack, data| %>
+        teachers.each do |teacher, grades|
+          grades.each do |grade, langs|
+            langs.each do |lang, packs|
+              packs.each do |pack, data| %>
             <tr>
               <td><%= teacher %></td>
+              <td><%= grade %></td>
+              <td><%= lang %></td>
               <td><%= pack %></td>
               <td>&nbsp;</td>
               <td>&nbsp;</td>
               <td><%= data[:count] %></td>
             </tr>
-          <% end
+          <%  end
+            end
+          end
         end %>
       <% else
         @campaign.wishlists.order(@sort).each do |wishlist|

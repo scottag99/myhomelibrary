@@ -1,6 +1,7 @@
 class Catalog < ApplicationRecord
   before_destroy :confirm_no_wishlists #this has to be first
   has_many :catalog_entries, :dependent => :delete_all
+  has_many :packs, :dependent => :delete_all
   has_many :campaign_catalogs
   has_many :campaigns, through: :campaign_catalogs
 

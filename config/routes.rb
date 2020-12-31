@@ -52,6 +52,11 @@ Rails.application.routes.draw do
         post 'upload'
       end
       resources :catalog_entries
+      resources :packs do
+        member do
+          post 'generate_packs'
+        end
+      end
     end
     resources :contents
     resources :organizations do
