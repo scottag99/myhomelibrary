@@ -1,0 +1,93 @@
+blue_1:
+  ezid: 1ePkBi
+  pack_type: Blue
+  catalog: bbhlf
+
+blue_2:
+  ezid: 2ePkBi
+  pack_type: Blue
+  catalog: bbhlf
+
+green_1:
+  ezid: 1e23Bi
+  pack_type: Green
+  catalog: scholastic
+
+green_2:
+  ezid: 2e23Bi
+  pack_type: Green
+  catalog: scholastic
+
+orange_1:
+  ezid: 1eK1En
+  pack_type: Orange
+  catalog: scholastic
+
+orange_1_bbhlf:
+  ezid: 1eK1En
+  pack_type: Orange
+  catalog: bbhlf
+
+orange_2:
+  ezid: 2eK1En
+  pack_type: Orange
+  catalog: scholastic
+
+orange_2_bbhlf:
+  ezid: 2eK1En
+  pack_type: Orange
+  catalog: bbhlf
+
+pink_1:
+  ezid: 1ePkEn
+  pack_type: Pink
+  catalog: bbhlf
+
+pink_2:
+  ezid: 2ePkEn
+  pack_type: Pink
+  catalog: bbhlf
+
+purple_1:
+  ezid: 1eK1Bi
+  pack_type: Purple
+  catalog: scholastic
+
+purple_1_bbhlf:
+  ezid: 1eK1Bi
+  pack_type: Purple
+  catalog: bbhlf
+
+purple_2:
+  ezid: 2eK1Bi
+  pack_type: Purple
+  catalog: scholastic
+
+purple_2_bbhlf:
+  ezid: 2eK1Bi
+  pack_type: Purple
+  catalog: bbhlf
+
+red_1:
+  ezid: 1e45En
+  pack_type: Red
+  catalog: scholastic
+  price: 6.50
+
+red_2:
+  ezid: 2e45En
+  pack_type: Red
+  catalog: scholastic
+  price: 2.50
+
+yellow_1:
+  ezid: 1e23En
+  pack_type: Yellow
+  catalog: scholastic
+  price: 6.50
+
+yellow_2:
+  ezid: 2e23En
+  pack_type: Yellow
+  catalog: scholastic
+  price: 5.50
