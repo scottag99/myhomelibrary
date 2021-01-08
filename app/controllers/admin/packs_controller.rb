@@ -74,13 +74,15 @@ class Admin::PacksController < Admin::BaseController
   end
 
   def generate_packs
-    packs = [['1ePkEn','Pink'],['1ePkBi','Blue'],['1eK1En','Orange'],['1eK1Bi','Purple'],
+    warehouse_packs = [['BbPkEn', 'Black'],['BbPkBi', 'Navy'],['BbKEn', 'Silver'],['BbKBi', 'Brown']]
+    scholastic_packs = [['1ePkEn','Pink'],['1ePkBi','Blue'],['1eK1En','Orange'],['1eK1Bi','Purple'],
       ['1e23En','Yellow'],['1e23Bi','Green'],['1e45En','Red'],['2ePkEn','Pink'],
       ['2ePkBi','Blue'],['2eK1En','Orange'],['2eK1Bi','Purple'],['2e23En','Yellow'],
       ['2e23Bi','Green'],['2e45En','Red'],['3ePkEn','Pink'],['3ePkBi','Blue'],
       ['3eK1En','Orange'],['3eK1Bi','Purple'],['3e23En','Yellow'],['3e23Bi','Green'],
       ['3e45En','Red'],['4ePkEn','Pink'],['4ePkBi','Blue'],['4eK1En','Orange'],
       ['4eK1Bi','Purple'],['4e23En','Yellow'],['4e23Bi','Green'],['4e45En','Red']]
+    packs = params[:source] == 'warehouse' ? warehouse_packs : scholastic_packs
     packs.each do |pack|
       @catalog.packs.create(ezid: pack[0], pack_type: pack[1], price: 5.00)
     end
