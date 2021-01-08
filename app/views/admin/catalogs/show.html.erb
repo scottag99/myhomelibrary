@@ -58,7 +58,8 @@
           <table class="table table-striped table-condensed">
             <caption class="toggle-show">
               <%#= link_to '<i class="glyphicon glyphicon-plus"></i> New Pack'.html_safe, new_admin_catalog_pack_url(@catalog), :class => "btn btn-xs btn-primary", :remote => true %>
-              <%= link_to '<i class="glyphicon glyphicon-plus"></i> Auto Generate Packs'.html_safe, generate_packs_admin_catalog_pack_url(@catalog), method: :post, :class => "btn btn-xs btn-primary" %>
+              <%= link_to '<i class="glyphicon glyphicon-plus"></i> Auto Generate Scholastic Packs'.html_safe, generate_packs_admin_catalog_pack_url(@catalog), method: :post, :class => "btn btn-xs btn-primary" %>
+              <%= link_to '<i class="glyphicon glyphicon-plus"></i> Auto Generate Warehouse Packs'.html_safe, generate_packs_admin_catalog_pack_url(@catalog, source: 'warehouse'), method: :post, :class => "btn btn-xs btn-primary" %>
             </caption>
             <thead>
               <tr class="row-packs">
