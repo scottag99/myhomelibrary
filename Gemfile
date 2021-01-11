@@ -83,8 +83,4 @@ group :development do
   gem 'seed_dump'
 end
 
-group :test do
-  gem 'sqlite3'
-end
-
 ruby "2.6.5"

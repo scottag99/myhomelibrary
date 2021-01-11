@@ -34,11 +34,19 @@ edition_one_campaign:
   deadline: 2016-10-30
   organization: one
   catalog_edition: 1
-  prek_k_source: bbhlf
+  prek_k_source: scholastic
   first_fifth_source: scholastic
 
 edition_two_campaign:
   name: Edition Two Campaign
+  deadline: 2016-10-30
+  organization: one
+  catalog_edition: 2
+  prek_k_source: scholastic
+  first_fifth_source: scholastic
+
+campaign_with_warehouse_source:
+  name: Campaign with warehouse source
   deadline: 2016-10-30
   organization: one
   catalog_edition: 2
