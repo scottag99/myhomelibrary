@@ -325,3 +325,49 @@ ed2_5th_lang_bi:
   grade: 5th
 
 # ******************************************************************************
+
+# Warehouse campaign ***********************************************************
+
+wh_prek_lang_en:
+  teacher: Watson
+  reader_name: English Alevel
+  reader_age: 12
+  reader_gender: M
+  campaign: campaign_with_warehouse_source
+  wishlist_entry_count: 0
+  reading_level: A
+  grade: PreK
+
+wh_prek_lang_bi:
+  teacher: Watson
+  reader_name: Bilingual Alevel
+  reader_age: 12
+  reader_gender: M
+  campaign: campaign_with_warehouse_source
+  wishlist_entry_count: 0
+  reading_level: A
+  language: bilingual
+  grade: PreK
+
+wh_k_lang_en:
+  teacher: Watson
+  reader_name: English Alevel
+  reader_age: 12
+  reader_gender: M
+  campaign: campaign_with_warehouse_source
+  wishlist_entry_count: 0
+  reading_level: A
+  grade: K
+
+wh_k_lang_bi:
+  teacher: Watson
+  reader_name: Bilingual Alevel
+  reader_age: 12
+  reader_gender: M
+  campaign: campaign_with_warehouse_source
+  wishlist_entry_count: 0
+  reading_level: A
+  language: bilingual
+  grade: K
+
+# ******************************************************************************

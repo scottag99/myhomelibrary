@@ -1,12 +1,12 @@
 blue_1:
   ezid: 1ePkBi
   pack_type: Blue
-  catalog: bbhlf
+  catalog: scholastic
 
 blue_2:
   ezid: 2ePkBi
   pack_type: Blue
-  catalog: bbhlf
+  catalog: scholastic
 
 green_1:
   ezid: 1e23Bi
@@ -23,50 +23,30 @@ orange_1:
   pack_type: Orange
   catalog: scholastic
 
-orange_1_bbhlf:
-  ezid: 1eK1En
-  pack_type: Orange
-  catalog: bbhlf
-
 orange_2:
   ezid: 2eK1En
   pack_type: Orange
   catalog: scholastic
 
-orange_2_bbhlf:
-  ezid: 2eK1En
-  pack_type: Orange
-  catalog: bbhlf
-
 pink_1:
   ezid: 1ePkEn
   pack_type: Pink
-  catalog: bbhlf
+  catalog: scholastic
 
 pink_2:
   ezid: 2ePkEn
   pack_type: Pink
-  catalog: bbhlf
+  catalog: scholastic
 
 purple_1:
   ezid: 1eK1Bi
   pack_type: Purple
   catalog: scholastic
 
-purple_1_bbhlf:
-  ezid: 1eK1Bi
-  pack_type: Purple
-  catalog: bbhlf
-
 purple_2:
   ezid: 2eK1Bi
   pack_type: Purple
   catalog: scholastic
-
-purple_2_bbhlf:
-  ezid: 2eK1Bi
-  pack_type: Purple
-  catalog: bbhlf
 
 red_1:
   ezid: 1e45En
@@ -91,3 +71,27 @@ yellow_2:
   pack_type: Yellow
   catalog: scholastic
   price: 5.50
+
+black:
+  ezid: BbPkEn
+  pack_type: Black
+  catalog: bbhlf
+  price: 4.45
+
+navy:
+  ezid: BbPkBi
+  pack_type: Navy
+  catalog: bbhlf
+  price: 5.45
+
+silver:
+  ezid: BbKEn
+  pack_type: Silver
+  catalog: bbhlf
+  price: 4.63
+
+brown:
+  ezid: BbKBi
+  pack_type: Brown
+  catalog: bbhlf
+  price: 7.61

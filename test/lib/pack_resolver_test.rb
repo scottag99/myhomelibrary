@@ -147,4 +147,28 @@ class PackResolverTest < ActiveSupport::TestCase
     assert_equal '2e45En', pack[:ezid]
     assert_equal 'Red', pack[:pack_type]
   end
+
+  test 'should find warehouse pack for K Bilingual reader in campaign with warehouse source' do
+    pack = resolve_pack(campaigns(:campaign_with_warehouse_source), wishlists(:wh_k_lang_bi))
+    assert_equal 'BbKBi', pack[:ezid]
+    assert_equal 'Brown', pack[:pack_type]
+  end
+
+  test 'should find warehouse pack for K English reader in campaign with warehouse source' do
+    pack = resolve_pack(campaigns(:campaign_with_warehouse_source), wishlists(:wh_k_lang_en))
+    assert_equal 'BbKEn', pack[:ezid]
+    assert_equal 'Silver', pack[:pack_type]
+  end
+
+  test 'should find warehouse pack for PreK Bilingual reader in campaign with warehouse source' do
+    pack = resolve_pack(campaigns(:campaign_with_warehouse_source), wishlists(:wh_prek_lang_bi))
+    assert_equal 'BbPkBi', pack[:ezid]
+    assert_equal 'Navy', pack[:pack_type]
+  end
+
+  test 'should find warehouse pack for PreK English reader in campaign with warehouse source' do
+    pack = resolve_pack(campaigns(:campaign_with_warehouse_source), wishlists(:wh_prek_lang_en))
+    assert_equal 'BbPkEn', pack[:ezid]
+    assert_equal 'Black', pack[:pack_type]
+  end
 end

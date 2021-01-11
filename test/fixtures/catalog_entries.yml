@@ -14,3 +14,18 @@ three:
   catalog: two
   book: three
   price: 9.99
+
+four:
+  catalog: two
+  book: four
+  price: 9.99
+
+five:
+  catalog: two
+  book: five
+  price: 9.99
+
+six:
+  catalog: two
+  book: six
+  price: 9.99
