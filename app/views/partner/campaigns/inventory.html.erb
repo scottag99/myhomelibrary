@@ -1,0 +1,8 @@
+<%= content_for :breadcrumb do %>
+<%= breadcrumb([
+  @campaign.organization.name,
+    {href: '/volunteer', label: 'Campaigns'}
+  ])
+%>
+<% end %>
+<%= render partial: 'common/campaigns/inventory.html.erb' %>

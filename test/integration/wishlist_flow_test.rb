@@ -36,7 +36,7 @@ class WishlistFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     post admin_organization_campaign_wishlists_url(organizations(:one), campaigns(:one)),
-      params: { wishlist: { teacher: "Test Wishlist Teacher", reader_name: "Test Reader Create", reader_age: 12, reader_gender: 'M', reader_grade: '5th', external_id: '123SDF' } }
+      params: { wishlist: {teacher: "Test Wishlist Teacher", reader_name: "Test Reader Create", reader_age: 12, reader_gender: 'M', grade: '5th', external_id: '123SDF' } }
     assert_response :redirect
     follow_redirect!
     assert_response :success
@@ -48,7 +48,7 @@ class WishlistFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     post partner_organization_campaign_wishlists_url(organizations(:one), campaigns(:one)),
-      params: { wishlist: { teacher: "Test Wishlist Teacher", reader_name: "Test Reader Create", reader_age: 12, reader_gender: 'M', reader_grade: '5th', external_id: '123SDF' } }
+      params: { wishlist: {teacher: "Test Wishlist Teacher", reader_name: "Test Reader Create 2", reader_age: 12, reader_gender: 'M', grade: '5th', external_id: '123SFF' } }
     assert_response :redirect
     follow_redirect!
     assert_response :success
@@ -60,7 +60,7 @@ class WishlistFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     put admin_organization_campaign_wishlist_url(organizations(:one), campaigns(:one), wishlists(:one)),
-      params: { wishlist: { teacher: "Test Wishlist Teacher", reader_name: "Test Reader Edit", reader_age: 12, reader_gender: 'M', reader_grade: '5th', external_id: '123SDF' } }
+      params: { wishlist: { teacher: "Test Wishlist Teacher", reader_name: "Test Reader Edit", reader_age: 12, reader_gender: 'M', grade: '5th', external_id: '123SGF' } }
     assert_response :redirect
     follow_redirect!
     assert_response :success
@@ -72,7 +72,7 @@ class WishlistFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     put partner_organization_campaign_wishlist_url(organizations(:one), campaigns(:one), wishlists(:one)),
-      params: { wishlist: { teacher: "Test Wishlist Teacher", reader_name: "Test Reader Edit", reader_age: 12, reader_gender: 'M', reader_grade: '5th', external_id: '123SDF' } }
+      params: { wishlist: { teacher: "Test Wishlist Teacher", reader_name: "Test Reader Edit 2", reader_age: 12, reader_gender: 'M', grade: '5th', external_id: '143SDF' } }
     assert_response :redirect
     follow_redirect!
     assert_response :success

@@ -1,0 +1,2 @@
+$('#globalModal').modal('hide');
+$("#pack-<%= @pack.id %>").replaceWith($("<%= escape_javascript(render :partial => 'common/catalogs/pack', object: @pack, :locals => {:catalog_actions => true}) %>"));

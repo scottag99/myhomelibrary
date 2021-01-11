@@ -52,6 +52,11 @@ Rails.application.routes.draw do
         post 'upload'
       end
       resources :catalog_entries
+      resources :packs do
+        member do
+          post 'generate_packs'
+        end
+      end
     end
     resources :contents
     resources :organizations do
@@ -66,7 +71,9 @@ Rails.application.routes.draw do
       resources :campaigns do
         member do
           get 'order_sheet'
+          get 'pack_order_sheet'
           get 'pick_list'
+          get 'distribution'
           get 'export'
           get 'book_count'
           get 'exportroster'
@@ -78,8 +85,7 @@ Rails.application.routes.draw do
           put 'donations'
           put 'wishlists'
           get 'export_survey'
-          get 'edit_counts'
-          patch 'update_counts'
+          get 'inventory'
         end
         resources :campaign_survey_configs
         resources :wishlists do
@@ -112,13 +118,16 @@ Rails.application.routes.draw do
       resources :campaigns do
         member do
           get 'order_sheet'
+          get 'get_order_sheet'
           get 'pick_list'
+          get 'distribution'
           get 'export'
           get 'book_count'
           get 'exportroster'
           get 'readers'
           put 'donations'
           put 'wishlists'
+          get 'inventory'
         end
         resources :wishlists do
           member do

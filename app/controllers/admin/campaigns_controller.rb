@@ -1,16 +1,25 @@
+require 'pack_resolver'
+
 class Admin::CampaignsController < Admin::BaseController
   include CommonCampaignActions
   include GoogleSpreadsheet
+  include PackResolver
+  helper_method PackResolver.instance_methods
   before_action :set_organization
 
   def update
     @campaign = @organization.campaigns.find(params[:id])
-    @campaign.update!(campaign_params)
-    @campaigns = @organization.campaigns
-    flash[:success] = "Thank you! Your Campaign was updated successfully."
-    respond_to do |format|
-      format.html { redirect_to admin_organization_url(@organization) }
-      format.json { render json: @campaign }
+    if @campaign.update_attributes(campaign_params)
+      @campaigns = @organization.campaigns
+      flash[:success] = "Thank you! Your Campaign was updated successfully."
+      respond_to do |format|
+        format.html { redirect_to admin_organization_url(@organization) }
+        format.json { render json: @campaign }
+      end
+    else
+      respond_to do |format|
+        format.html { render 'common/form', locals: {form_title: 'Edit Campaign', model: 'campaigns'} }
+      end
     end
   end
 
@@ -26,7 +35,7 @@ class Admin::CampaignsController < Admin::BaseController
 
   def create
     @campaign = @organization.campaigns.create!(campaign_params)
-    headers = ['teacher*', 'reader_name*', 'grade*', 'reader_gender*', 'language', 'reading_level*', 'reader_age', 'id']
+    headers = ['teacher*', 'reader_name*', 'grade*', 'reader_gender*', 'language', 'reading_level', 'reader_age', 'id']
     begin
       auth = login()
       ss = new_sheet("Roster Load for #{@organization.name}-#{@campaign.name}")
@@ -43,7 +52,7 @@ class Admin::CampaignsController < Admin::BaseController
       requests << create_protect_rows_request(0 , 0 , 0, headers.size)
       requests << create_list_validation_request(1, 4000, headers.index('reader_gender*'), headers.index('reader_gender*')+1, ['M', 'F'])
       requests << create_list_validation_request(1, 4000, headers.index('language'), headers.index('language')+1, Language.where('is_disabled <> ?', true).order(:name).pluck(:name))
-      requests << create_list_validation_request(1, 4000, headers.index('reading_level*'), headers.index('reading_level*')+1, ReadingLevel.where('is_disabled <> ?', true).order(:name).pluck(:name))
+      requests << create_list_validation_request(1, 4000, headers.index('reading_level'), headers.index('reading_level')+1, ReadingLevel.where('is_disabled <> ?', true).order(:name).pluck(:name))
       batch_update(ss, requests, auth)
       @campaign.roster_data_reference = ss.spreadsheet_url
       @campaign.save
@@ -87,6 +96,10 @@ class Admin::CampaignsController < Admin::BaseController
       format.html
       format.json { render json: @campaign }
     end
+  end
+
+  def pack_order_sheet
+    collate_pack_data
   end
 
   def donations
@@ -141,21 +154,6 @@ class Admin::CampaignsController < Admin::BaseController
     end
   end
 
-  def edit_counts
-    @campaign = @organization.campaigns.find(params[:id])
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def update_counts
-    @campaign = @organization.campaigns.find(params[:id])
-    @campaign.update_attributes!(campaign_params)
-    respond_to do |format|
-      format.js
-    end
-  end
-
 private
   def set_organization
     @organization = Organization.find(params[:organization_id])
@@ -164,7 +162,7 @@ private
   def campaign_params
     params.require(:campaign).permit(:name, :deadline, :ready_for_donations,
       :address, :can_edit_wishlists, :book_limit, {:catalog_ids => []}, :notes,
-      :use_appreciation_notes, :k_english_qty, :k_bilingual_qty,
-      :pre_k_english_qty, :pre_k_bilingual_qty)
+      :use_appreciation_notes, :prek_k_source_id, :first_fifth_source_id,
+      :catalog_edition, :use_packs)
   end
 end

@@ -1,0 +1,12 @@
+<tr id="pack-<%= pack.id %>">
+  <td><%= pack.ezid %></td>
+  <td><%= pack.pack_type %></td>
+  <td><%= pack.description %></td>
+  <% if admin? %><td><%= number_to_currency(pack.price) %></td><% end %>
+  <% if local_assigns.has_key?(:catalog_actions) %>
+  <td class="toggle-show">
+    <%= link_to "Edit", edit_admin_catalog_pack_url(pack.catalog, pack), class: "btn btn-warning btn-xs", remote: true %>
+    <%= link_to "Delete", admin_catalog_pack_url(pack.catalog, pack),  method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'This action cannot be undone. Are you sure?'}, remote: true %>
+  </td>
+  <% end -%>
+</tr>

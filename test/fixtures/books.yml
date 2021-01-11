@@ -20,4 +20,16 @@ four:
   title: Book Four
   description: Book Four description
   author: Book Four Author
-  cover_image_url: 
+  cover_image_url:
+
+five:
+  title: Book Five
+  description: Book Five description
+  author: Book Five Author
+  cover_image_url:
+
+six:
+  title: Book Six
+  description: Book Six description
+  author: Book Six Author
+  cover_image_url:

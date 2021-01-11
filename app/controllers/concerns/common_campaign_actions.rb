@@ -70,24 +70,75 @@ module CommonCampaignActions
     end
   end
 
+  def distribution
+    # grade sort: grade, teacher, student
+    #       fields: Grade, teacher, student, EZ-ID, Pack Type
+    # teacher sort: teacher, student
+    #         fields: teacher, grade, student, EZ-ID, Pack Type
+    # student sort: student
+    #         fields: Student, teacher, grade, EZ-ID, Pack Type
+    case params[:sort]
+      when 'teacher'
+        @sort = ['teacher', 'reader_name']
+        @fields = ['teacher', 'grade', 'reader_name', 'ezid', 'pack_type']
+        @sort_type = 'teacher'
+      when 'student'
+        @sort = ['reader_name']
+        @fields = ['reader_name', 'teacher', 'grade', 'ezid', 'pack_type']
+        @sort_type = 'student'
+      when 'pack'
+        @sort = ['teacher', "case when grade='PreK' then '0PreK' when grade='K' then '1K' else grade end"]
+        @fields = ['teacher', 'Grade', 'Language', 'pack_type', '#Face-To-Face', '#Virtual', 'Total']
+        @sort_type = 'pack'
+      else
+        @sort = ["case when grade='PreK' then '0PreK' when grade='K' then '1K' else grade end", 'teacher', 'reader_name']
+        @fields = ['grade', 'teacher', 'reader_name', 'ezid', 'pack_type']
+        @sort_type = 'grade'
+    end
+    @campaign = @organization.campaigns.find(params[:id])
+    respond_to do |format|
+      format.html { render 'common/campaigns/distribution' }
+    end
+  end
+
   def export
     campaign = @organization.campaigns.find(params[:id])
-    records = WishlistEntry.joins(:wishlist).where('wishlists.campaign_id = ?', campaign)
+
 
     temp_csv = Tempfile.new
     begin
       CSV.open(temp_csv.path, mode = "wb", headers: true) do |csv|
-        headers = ['School_Name', 'Campaign_name', 'Teacher', 'Student', 'Grade', 'Age', 'Title', 'Author', 'Catalog', 'ISBN']
+        headers = ['School_Name', 'Campaign_name', 'Teacher', 'Student', 'Grade', 'Age']
+        if campaign.use_packs?
+          headers += ['Language', 'EZ-ID', 'Pack Type', 'Source']
+          records = campaign.wishlists
+        else
+          headers += ['Title', 'Author', 'Catalog', 'ISBN']
+          records = WishlistEntry.joins(:wishlist).where('wishlists.campaign_id = ?', campaign)
+        end
+
         if get_role == 'admin'
           headers << 'Unit_Price'
         end
         csv << headers
 
         records.each do |we|
-          row = [@organization.name, campaign.name, we.wishlist.teacher, we.wishlist.reader_name, we.wishlist.grade, we.wishlist.reader_age, we.catalog_entry.book.title, we.catalog_entry.book.author, we.catalog_entry.catalog.source, we.catalog_entry.book.isbn]
-          if get_role == 'admin'
-            row << we.catalog_entry.price
+          wishlist = campaign.use_packs? ? we : we.wishlist
+          row = [@organization.name, campaign.name, wishlist.teacher, wishlist.reader_name, wishlist.grade, wishlist.reader_age]
+
+          if campaign.use_packs?
+            pack_data = resolve_pack(campaign, wishlist)
+            row += [pack_data[:lang_code], pack_data[:ezid], pack_data[:pack_type], pack_data[:source]]
+            if get_role == 'admin'
+              row << pack_data[:price]
+            end
+          else
+            row += [we.catalog_entry.book.title, we.catalog_entry.book.author, we.catalog_entry.catalog.source, we.catalog_entry.book.isbn]
+            if get_role == 'admin'
+              row << we.catalog_entry.price
+            end
           end
+
           csv << row
         end
       end
@@ -135,10 +186,10 @@ module CommonCampaignActions
     temp_csv = Tempfile.new
     begin
       CSV.open(temp_csv.path, mode = "wb", headers: true) do |csv|
-        csv << ['School_Name', 'Campaign_name', 'Campaign_Deadline', 'Teacher', 'Student', 'Gender', 'Age']
+        csv << ['School_Name', 'Campaign_name', 'Campaign_Deadline', 'Teacher', 'Student', 'Gender', 'Age', 'Language', 'Grade']
 
         campaign.wishlists.each do |wishlist|
-          csv << [@organization.name, campaign.name, campaign.deadline, wishlist.teacher, wishlist.reader_name, wishlist.reader_gender, wishlist.reader_age]
+          csv << [@organization.name, campaign.name, campaign.deadline, wishlist.teacher, wishlist.reader_name, wishlist.reader_gender, wishlist.reader_age, wishlist.language.try(:name), wishlist.grade]
         end
       end
       send_file temp_csv, filename: "#{@organization.name}-#{campaign.name}-ClassRosterReport.csv", type: 'application/octet-stream'
@@ -191,5 +242,23 @@ module CommonCampaignActions
       zip_file.close
     end
 
+  end
+
+  def inventory
+    collate_pack_data
+  end
+
+  def collate_pack_data
+    @campaign = @organization.campaigns.find(params[:id])
+    @data = { 'Unknown': {} }
+    @campaign.catalogs.each{|catalog| @data[catalog.source] = {}}
+
+    @campaign.wishlists.find_each(batch_size: 100) do |wishlist|
+      pack = resolve_pack(@campaign, wishlist)
+      entry = @data[pack[:source]]
+      pack_data = entry[pack[:ezid]] || { pack_type: pack[:pack_type], count: 0, price: pack[:price] || 0.00 }
+      pack_data[:count] += 1
+      entry[pack[:ezid]] = pack_data
+    end
   end
 end

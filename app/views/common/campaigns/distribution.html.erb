@@ -1,0 +1,70 @@
+<%= content_for :breadcrumb do %>
+<%= breadcrumb([
+  @campaign.organization.name,
+    {href: admin_organization_url(@campaign.organization), label: 'Campaigns'}
+  ])
+%>
+<% end %>
+
+<div id="distribution-buttons" class="btn-group btn-group-lg" role="group" aria-label="Distribution Sort">
+  <a href='?sort=grade' type="button" class="btn btn-<%= @sort_type == 'grade' ? 'primary' : 'default' %>">Grade</a>
+  <a href='?sort=teacher' type="button" class="btn btn-<%= @sort_type == 'teacher' ? 'primary' : 'default' %>">Teacher</a>
+  <a href='?sort=student' type="button" class="btn btn-<%= @sort_type == 'student' ? 'primary' : 'default' %>">Student</a>
+  <a href='?sort=pack' type="button" class="btn btn-<%= @sort_type == 'pack' ? 'primary' : 'default' %>">Pack</a>
+</div>
+<br>
+<div class="panel panel-default">
+  <table class="table table-striped table-condensed table-responsive">
+    <thead>
+      <tr>
+        <% @fields.each do |field| %>
+        <th><%= field.titleize %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @sort_type == 'pack'
+        teachers = {}
+        @campaign.wishlists.order(@sort).each do |wishlist|
+          pack = resolve_pack(@campaign, wishlist)
+          teacher = teachers[wishlist.teacher] || {}
+          grade = teacher[wishlist.grade] || {}
+          lang = grade[pack[:lang_code]] || {}
+          pack_type = lang[pack[:pack_type]] || {count: 0}
+          pack_type[:count] += 1
+          lang[pack[:pack_type]] = pack_type
+          grade[pack[:lang_code]] = lang
+          teacher[wishlist.grade] = grade
+          teachers[wishlist.teacher] = teacher
+        end
+
+        teachers.each do |teacher, grades|
+          grades.each do |grade, langs|
+            langs.each do |lang, packs|
+              packs.each do |pack, data| %>
+            <tr>
+              <td><%= teacher %></td>
+              <td><%= grade %></td>
+              <td><%= lang %></td>
+              <td><%= pack %></td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td><%= data[:count] %></td>
+            </tr>
+          <%  end
+            end
+          end
+        end %>
+      <% else
+        @campaign.wishlists.order(@sort).each do |wishlist|
+          pack = resolve_pack(@campaign, wishlist) %>
+          <tr>
+            <% @fields.each do |field| %>
+            <td><%= wishlist[field] || pack[field.to_sym] %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_23_013717) do
+ActiveRecord::Schema.define(version: 2020_12_30_201653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,11 +76,13 @@ ActiveRecord::Schema.define(version: 2020_09_23_013717) do
     t.string "roster_data_reference"
     t.string "notes"
     t.boolean "use_appreciation_notes", default: false
-    t.integer "k_english_qty"
-    t.integer "k_bilingual_qty"
-    t.integer "pre_k_english_qty"
-    t.integer "pre_k_bilingual_qty"
+    t.bigint "prek_k_source_id"
+    t.bigint "first_fifth_source_id"
+    t.string "catalog_edition"
+    t.boolean "use_packs"
+    t.index ["first_fifth_source_id"], name: "index_campaigns_on_first_fifth_source_id"
     t.index ["organization_id"], name: "index_campaigns_on_organization_id"
+    t.index ["prek_k_source_id"], name: "index_campaigns_on_prek_k_source_id"
   end
 
   create_table "catalog_entries", id: :serial, force: :cascade do |t|
@@ -141,6 +143,17 @@ ActiveRecord::Schema.define(version: 2020_09_23_013717) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.boolean "is_included", default: true
+  end
+
+  create_table "packs", force: :cascade do |t|
+    t.string "ezid"
+    t.string "pack_type"
+    t.decimal "price"
+    t.string "description"
+    t.bigint "catalog_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["catalog_id"], name: "index_packs_on_catalog_id"
   end
 
   create_table "partners", id: :serial, force: :cascade do |t|
@@ -254,12 +267,15 @@ ActiveRecord::Schema.define(version: 2020_09_23_013717) do
   add_foreign_key "campaign_catalogs", "catalogs"
   add_foreign_key "campaign_survey_configs", "campaigns"
   add_foreign_key "campaign_survey_configs", "surveys"
+  add_foreign_key "campaigns", "catalogs", column: "first_fifth_source_id"
+  add_foreign_key "campaigns", "catalogs", column: "prek_k_source_id"
   add_foreign_key "campaigns", "organizations"
   add_foreign_key "catalog_entries", "books"
   add_foreign_key "catalog_entries", "catalog_entries", column: "related_entry_id"
   add_foreign_key "catalog_entries", "catalogs"
   add_foreign_key "donations", "campaigns"
   add_foreign_key "donations", "wishlists"
+  add_foreign_key "packs", "catalogs"
   add_foreign_key "partners", "organizations"
   add_foreign_key "survey_answers", "survey_questions"
   add_foreign_key "survey_answers", "survey_responses"

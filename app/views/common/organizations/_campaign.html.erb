@@ -18,6 +18,7 @@
               method: "PUT"
               } %></td>
   <% end %>
+  <td><%= campaign.use_packs %></td>
   <td><%= campaign.wishlists.count %></td>
   <td><%= campaign.book_limit %></td>
   <% if user_is_admin? %>
@@ -33,6 +34,7 @@
       <%= link_to "Delete", admin_organization_campaign_url(campaign.organization, campaign),  method: :delete, class: "btn btn-danger btn-sm", data: {confirm: 'This action cannot be undone. Are you sure?'} %>
     </p>
     <% end %>
+    <% unless campaign.use_packs? %>
     <p>
       <% if user_is_admin? %>
       <%= link_to "Order Sheet", order_sheet_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-info btn-sm" %>
@@ -42,6 +44,20 @@
       <%= link_to "Label Sheet", url_for([:download, get_namespace, campaign.organization, campaign, :wishlists]), class: "btn btn-info btn-sm" %>
       <% end %>
     </p>
+    <% else %>
+    <p>
+      <% if user_is_admin? %>
+      <%= link_to "Pack Order Sheet", pack_order_sheet_admin_organization_campaign_url(campaign.organization, campaign), class: "btn btn-info btn-sm" %>
+      <% end %>
+      <% if user_is_admin? || user_is_coordinator? %>
+        <%= link_to "Inventory Report", url_for([:inventory, get_namespace, campaign.organization, campaign]), class: "btn btn-info btn-sm" %>
+        <%= link_to "Distribution", url_for([:distribution, get_namespace, campaign.organization, campaign]), class: "btn btn-info btn-sm" %>
+        <% if user_is_coordinator? %>
+          <%= link_to "Export CSV", url_for([:export, get_namespace, campaign.organization, campaign]), class: "btn btn-success btn-sm" %>
+        <% end %>
+      <% end %>
+    </p>
+    <% end %>
     <% if user_is_admin? %>
     <p>
       <%= link_to "Wish List Report", url_for([:export, get_namespace, campaign.organization, campaign]), class: "btn btn-success btn-sm" %>

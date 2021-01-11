@@ -1,4 +1,6 @@
 class Wishlist < ApplicationRecord
+  @@import_required = []
+
   belongs_to :campaign
   has_many :wishlist_entries, :dependent => :destroy
   has_many :donations, :dependent => :destroy
@@ -13,6 +15,10 @@ class Wishlist < ApplicationRecord
   validates :teacher, :presence => true
   validates :reader_name, :presence => true
   validates :grade, :presence => true
+  validates :language, presence: true, if: -> { @@import_required.include?(:language) }
+  validates :reading_level, presence: true, if: -> { @@import_required.include?(:reading_level) }
+  validates :reader_gender, presence: true, if: -> { @@import_required.include?(:reader_gender) }
+  validates :reader_age, presence: true, if: -> { @@import_required.include?(:reader_age) }
 
   after_initialize do
     if self.new_record? && self.external_id.blank?
@@ -53,13 +59,17 @@ class Wishlist < ApplicationRecord
   end
 
   def grade=(value)
-    case value
-    when /^k/i
-      super("K")
-    when /^prek/i
-      super("PreK")
+    if value.blank?
+      super(nil)
     else
-      super(value.to_i.ordinalize)
+      case value
+        when /^k/i
+          super("K")
+        when /^prek/i
+          super("PreK")
+        else
+          super(value.to_i.ordinalize)
+      end
     end
   end
 
@@ -69,18 +79,37 @@ class Wishlist < ApplicationRecord
   end
 
   def language=(value)
-    if value && value.is_a?(String) && l = Language.find_by_name(value)
-      super(l)
+    if value.blank?
+      super(nil)
+    elsif value.is_a?(String)
+      super(Language.find_by('LOWER(name) = ?', value.downcase))
     else
       super(value)
     end
   end
 
   def reading_level=(value)
-    if value && value.is_a?(String) && l = ReadingLevel.find_by_name(value)
-      super(l)
+    if value.blank?
+      super(nil)
+    elsif value.is_a?(String)
+      super(ReadingLevel.find_by('LOWER(name) = ?', value.downcase))
     else
       super(value)
     end
+  end
+
+  def reader_gender=(value)
+    case value.downcase.strip
+      when /^(m(ale)?|boy)$/i
+        super("M")
+      when /^(f(emale)?|girl)$/i
+        super("F")
+      else
+        super(nil)
+    end
+  end
+
+  def import_required=(fields)
+    @@import_required = fields
   end
 end

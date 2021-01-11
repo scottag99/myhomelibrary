@@ -70,7 +70,7 @@ class Admin::CatalogsController < Admin::BaseController
     end
 
     respond_to do |format|
-      format.html { render "show" }
+      format.html { redirect_to admin_catalog_url(@catalog) }
       format.json { render json: @catalog }
     end
   end

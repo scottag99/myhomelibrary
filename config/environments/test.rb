@@ -47,4 +47,5 @@ Rails.application.configure do
     config.api_key = 'secret123'
   end
 
+  config.active_record.sqlite3.represent_boolean_as_integer = true
 end

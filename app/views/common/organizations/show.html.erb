@@ -24,6 +24,7 @@
           <th>Ready for Donations</th>
           <th>Can Edit Wish Lists</th>
           <% end %>
+          <th>Use Packs?</th>
           <th>Wishlists</th>
           <th>Book Limit</th>
           <% if user_is_admin? %>
@@ -34,7 +35,7 @@
         </tr>
       </thead>
       <tbody>
-    <%= render :partial => 'common/organizations/campaign', :collection => @organization.campaigns %>
+    <%= render :partial => 'common/organizations/campaign', :collection => @organization.campaigns.order(deadline: :desc) %>
       </tbody>
     </table>
   </div>

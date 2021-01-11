@@ -1,0 +1,2 @@
+$('#globalModal').modal('hide');
+$("#packs tbody").prepend($("<%= escape_javascript(render :partial => 'common/catalogs/pack', object: @pack, :locals => {:catalog_actions => true}) %>"));
