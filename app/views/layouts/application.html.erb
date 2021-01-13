@@ -90,7 +90,7 @@
             <a href="https://twitter.com/BushHoustonLit" class="fa fa-twitter"></a>
           </div>
           <div class="links">
-            <span><%= link_to 'Home', scrivito_path(Obj.find_by_permalink('home')) unless Rals.env.test? %></span>
+            <span><%= link_to 'Home', scrivito_path(Obj.find_by_permalink('home')) unless Rails.env.test? %></span>
             <% get_scrivito_menu_items.each do |obj| %>
               <span><%= link_to obj.menu_text || "*", scrivito_path(obj) %></span>
             <% end %>
