@@ -6,3 +6,12 @@ notifications:
   email:
     on_success: never
     on_failure: always
+services:
+  - postgresql
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - RAILS_ENV=test bundle exec rails db:create
+env:
+  global:
+    - SCRIVITO_TENANT=tenant
+    - SCRIVITO_API_KEY=secret123

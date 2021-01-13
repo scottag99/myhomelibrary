@@ -49,6 +49,10 @@ module ApplicationHelper
   end
 
   def get_scrivito_menu_items
-    Obj.all.select{|obj|obj.permalink}.select{|obj| obj.show_in_menu == 'true' }.sort_by(&:get_menu_order)
+    if Rails.env.test?
+      []
+    else
+      Obj.all.select{|obj|obj.permalink}.select{|obj| obj.show_in_menu == 'true' }.sort_by(&:get_menu_order)
+    end
   end
 end
